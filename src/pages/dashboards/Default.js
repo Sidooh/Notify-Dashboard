@@ -1,12 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import $ from 'jquery';
-import 'datatables.net-bs5';
 import axios from 'axios';
 import {IMAGES} from '../../constants';
 import RecentNotifications from './RecentNotifications';
-import DestinationChips from '../../components/DestinationChips';
-import {Typography} from '@mui/material';
-import moment from 'moment';
 
 const Default = () => {
     const [notifications, setNotifications] = useState(null);
@@ -19,7 +15,7 @@ const Default = () => {
         axios.get('https://hoodis-notify.herokuapp.com/api/dashboard')
              .then(({data}) => {
                  setNotifications(data.notifications);
-                 setTimeout(function () {
+                 setTimeout(() => {
                      $('#table_id').DataTable({
                          columnDefs: [
                              {orderable: false, targets: [0, 5]}

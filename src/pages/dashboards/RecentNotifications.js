@@ -1,8 +1,10 @@
 import React from 'react';
+import 'datatables.net-bs5';
 import {Box, Grid, LinearProgress, Typography} from '@mui/material';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import DestinationChips from '../../components/DestinationChips';
+import {Help} from '../../utils/Helpers';
 
 const RecentNotifications = ({notifications}) => {
     return (
@@ -56,6 +58,15 @@ const RecentNotifications = ({notifications}) => {
                         {
                             notifications
                             ? notifications.map(notification => {
+                                let date;
+                                if (Help.isToday(moment(notification.created_at))) {
+                                    date = "Today";
+                                } else if (Help.isYesterday(moment(notification.created_at))) {
+                                    date = "Yesterday";
+                                } else {
+                                    date = moment(notification.created_at).format("D.M.y");
+                                }
+
                                 return (
                                     <tr key={notification.id} className="btn-reveal-trigger">
                                         <td className="align-middle white-space-nowrap">
@@ -79,7 +90,7 @@ const RecentNotifications = ({notifications}) => {
                                         <td>
                                             <div style={{textAlign: "end"}}>
                                                 {moment(notification.created_at).format("LTS")}<br/>
-                                                <Typography variant={"caption"}>Today</Typography>
+                                                <Typography variant={"caption"}>{date}</Typography>
                                             </div>
                                         </td>
                                         <td className="align-middle white-space-nowrap text-end">
@@ -112,7 +123,9 @@ const RecentNotifications = ({notifications}) => {
                                 <td colSpan={6}>
                                     <Grid container alignItems="center" justifyContent="center">
                                         <Grid item width={'70%'}>
-                                            <Box sx={{width: '100%'}} className={'py-5'}><LinearProgress color={'secondary'}/></Box>
+                                            <Box sx={{width: '100%'}} className={'py-4'}>
+                                                <LinearProgress color={'primary'}/>
+                                            </Box>
                                         </Grid>
                                     </Grid>
                                 </td>
