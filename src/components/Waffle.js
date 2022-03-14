@@ -143,21 +143,10 @@ const Waffle = () => {
                                 </div>
                                 <div className="col-4">
                                     <a className="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none"
-                                       href="#!" target="_blank">
+                                       href="https://github.com/Sidooh" target="_blank">
                                         <img className="rounded" src={IMAGES.navIcons.github_light} alt="" width="40"
                                              height="40"/>
                                         <p className="mb-0 fw-medium text-800 text-truncate fs--2 pt-1">Github</p>
-                                    </a>
-                                </div>
-                                <div className="col-4">
-                                    <a className="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none"
-                                       href="app/events/event-detail.html" target="_blank">
-                                        <div className="avatar avatar-2xl">
-                                            <div className="avatar-name rounded-circle bg-soft-primary text-primary">
-                                                <span className="fs-2">E</span>
-                                            </div>
-                                        </div>
-                                        <p className="mb-0 fw-medium text-800 text-truncate fs--2">Events</p>
                                     </a>
                                 </div>
                                 <div className="col-12">

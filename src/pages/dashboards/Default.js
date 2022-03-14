@@ -1,10 +1,15 @@
 import React, {useEffect, useState} from 'react';
+import $ from 'jquery';
+import 'datatables.net-bs5';
 import axios from 'axios';
 import {IMAGES} from '../../constants';
 import RecentNotifications from './RecentNotifications';
+import DestinationChips from '../../components/DestinationChips';
+import {Typography} from '@mui/material';
+import moment from 'moment';
 
 const Default = () => {
-    const [notifications, setNotifications] = useState([]);
+    const [notifications, setNotifications] = useState(null);
 
     useEffect(() => {
         fetchDashboard();
@@ -13,8 +18,15 @@ const Default = () => {
     const fetchDashboard = () => {
         axios.get('https://hoodis-notify.herokuapp.com/api/dashboard')
              .then(({data}) => {
-                 console.log(data);
                  setNotifications(data.notifications);
+                 setTimeout(function () {
+                     $('#table_id').DataTable({
+                         columnDefs: [
+                             {orderable: false, targets: [0, 5]}
+                         ],
+                         lengthMenu: [[7, 10, -1], [7, 10, "All"]]
+                     });
+                 }, 500);
              }).catch(err => console.log(err));
     };
 
@@ -150,7 +162,9 @@ const Default = () => {
                 </div>
             </div>
             <div className="row g-3 mb-3">
-                <RecentNotifications notifications={notifications}/>
+                <div className="col-xxl-12 col-md-12">
+                    <RecentNotifications notifications={notifications}/>
+                </div>
             </div>
         </>
     );

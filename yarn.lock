@@ -5046,6 +5046,35 @@ __metadata:
   languageName: node
   linkType: hard
 
+"datatables.net-bs5@npm:^1.11.5":
+  version: 1.11.5
+  resolution: "datatables.net-bs5@npm:1.11.5"
+  dependencies:
+    datatables.net: ">=1.11.3"
+    jquery: ">=1.7"
+  checksum: 1dcfad59c32bba7ffa9cfb1fddf3a9827aa060057fb551746d6a283415c41f5a1e8bf3a2ea6123c9cf446baccd67503b5dd15e5f3ae65a3946eb2a1d963e1f73
+  languageName: node
+  linkType: hard
+
+"datatables.net-dt@npm:^1.11.5":
+  version: 1.11.5
+  resolution: "datatables.net-dt@npm:1.11.5"
+  dependencies:
+    datatables.net: ">=1.11.3"
+    jquery: ">=1.7"
+  checksum: b7f4f43a1fe5f0ec076bf7d98ff3a08b0b0e0a91056d0794417d5a90a21d158a7a4632ef5183e0a98028eae2e6de0fbb5886e6343fc4f7321732f8e94cee55ac
+  languageName: node
+  linkType: hard
+
+"datatables.net@npm:>=1.11.3, datatables.net@npm:^1.11.5":
+  version: 1.11.5
+  resolution: "datatables.net@npm:1.11.5"
+  dependencies:
+    jquery: ">=1.7"
+  checksum: b599c894fd07cc0033e0ba869d22df919991b4cb493c37cf84701286bdcd82db9f566d6ee305c8243690599f847141c9338a07bf5630a87966bc46648da9f627
+  languageName: node
+  linkType: hard
+
 "debug@npm:2.6.9, debug@npm:^2.6.0, debug@npm:^2.6.9":
   version: 2.6.9
   resolution: "debug@npm:2.6.9"
@@ -7945,6 +7974,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jquery@npm:>=1.7, jquery@npm:^3.6.0":
+  version: 3.6.0
+  resolution: "jquery@npm:3.6.0"
+  checksum: 8fd5fef4aa48fd374ec716dd1c1df1af407814a228e15c1260ca140de3a697c2a77c30c54ff1d238b6a3ab4ddc445ddeef9adce6c6d28e4869d85eb9d3951c0e
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0, js-tokens@npm:^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -8835,12 +8871,17 @@ __metadata:
     "@testing-library/user-event": ^13.5.0
     axios: ^0.26.1
     bootstrap: ^5.1.3
+    datatables.net: ^1.11.5
+    datatables.net-bs5: ^1.11.5
+    datatables.net-dt: ^1.11.5
+    jquery: ^3.6.0
     moment: ^2.29.1
     prop-types: ^15.8.1
     react: ^17.0.2
     react-dom: ^17.0.2
     react-router-dom: ^6.2.2
     react-scripts: 5.0.0
+    toastify-js: ^1.11.2
     web-vitals: ^2.1.4
   languageName: unknown
   linkType: soft
@@ -11867,6 +11908,13 @@ __metadata:
   dependencies:
     is-number: ^7.0.0
   checksum: f76fa01b3d5be85db6a2a143e24df9f60dd047d151062d0ba3df62953f2f697b16fe5dad9b0ac6191c7efc7b1d9dcaa4b768174b7b29da89d4428e64bc0a20ed
+  languageName: node
+  linkType: hard
+
+"toastify-js@npm:^1.11.2":
+  version: 1.11.2
+  resolution: "toastify-js@npm:1.11.2"
+  checksum: e7d4ddaa1c5acaf3d7b30b90ddac1239327976d99684635b5172fb3abc9c136a81ad1e98217c5e83e9369810d373976f6dd3ea4026e255514882dba806fbc353
   languageName: node
   linkType: hard
 
