@@ -51,7 +51,7 @@ const SMS = () => {
                              <strong>{moment(notification.created_at).format("LTS")}</strong><br/>
                              <Typography variant={"caption"}>{date}</Typography>
                          </div>,
-                         () => <Link to={"/notifications/show"} state={notification}><ReadMore/></Link>
+                         () => <Link to={"/notifications/show"} state={notification}><ReadMore fontSize={'small'}/></Link>
                      ];
                  });
 
