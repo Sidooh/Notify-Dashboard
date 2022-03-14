@@ -240,7 +240,7 @@ const NavbarSearch = () => {
                     <a className="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         <div className="avatar avatar-xl">
-                            <img className="rounded-circle" src={IMAGES.team['3-thumb']} alt=""/>
+                            <img className="rounded-circle" src={IMAGES.team['2-thumb']} alt=""/>
                         </div>
                     </a>
                     <div className="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">

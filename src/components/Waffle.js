@@ -112,7 +112,7 @@ const Waffle = () => {
                                     <a className="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none"
                                        href="pages/user/profile.html" target="_blank">
                                         <div className="avatar avatar-2xl">
-                                            <img className="rounded-circle" src={IMAGES.team['3']} alt=""/>
+                                            <img className="rounded-circle" src={IMAGES.team['2']} alt=""/>
                                         </div>
                                         <p className="mb-0 fw-medium text-800 text-truncate fs--2">Account</p>
                                     </a>
