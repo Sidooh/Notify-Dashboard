@@ -27,4 +27,5 @@ export const Help = {
             className: type,
         }).showToast();
     },
+    isFunction: (v) => typeof v === 'function',
 };

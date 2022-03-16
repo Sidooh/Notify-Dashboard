@@ -1,4 +1,4 @@
-import React, {useEffect, useReducer, useRef} from 'react';
+import {useEffect, useReducer, useRef} from 'react';
 import axios from 'axios';
 
 const useFetch = (url) => {
@@ -56,7 +56,6 @@ const useFetch = (url) => {
     }, [url]);
 
     console.log(state);
-    console.log(CACHE);
 
     return state;
 };

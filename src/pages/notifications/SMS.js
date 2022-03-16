@@ -1,5 +1,4 @@
-import React, {useEffect, useState} from 'react';
-import axios from 'axios';
+import React from 'react';
 import {Box, Grid, LinearProgress, Typography} from '@mui/material';
 import DestinationChips from '../../components/DestinationChips';
 import {Link} from 'react-router-dom';
@@ -8,9 +7,12 @@ import moment from 'moment';
 import {Help} from '../../utils/Helpers';
 import DataTable from '../../components/DataTable';
 import {useFetch} from '../../hooks';
+import ErrorPage from '../../components/ErrorPage';
 
 const SMS = () => {
     let {data: notifications, error} = useFetch('https://hoodis-notify.herokuapp.com/api/notifications');
+
+    if (error) return <ErrorPage/>;
 
     if (notifications) {
         notifications = notifications.map(notification => {

@@ -4757,6 +4757,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"countup.js@npm:^2.0.8":
+  version: 2.1.0
+  resolution: "countup.js@npm:2.1.0"
+  checksum: 735cbd2fcc79473f235f8f4031ee42ce0aaea6ba9e9bb74aa75d27f097969378d5ee61acdae5108dedd1e062bd87c53fe93d073d7502c9602edf0a1c79276d89
+  languageName: node
+  linkType: hard
+
 "cross-spawn@npm:^7.0.2, cross-spawn@npm:^7.0.3":
   version: 7.0.3
   resolution: "cross-spawn@npm:7.0.3"
@@ -5521,6 +5528,16 @@ __metadata:
   version: 0.1.2
   resolution: "duplexer@npm:0.1.2"
   checksum: 62ba61a830c56801db28ff6305c7d289b6dc9f859054e8c982abd8ee0b0a14d2e9a8e7d086ffee12e868d43e2bbe8a964be55ddbd8c8957714c87373c7a4f9b0
+  languageName: node
+  linkType: hard
+
+"echarts@npm:^5.3.1":
+  version: 5.3.1
+  resolution: "echarts@npm:5.3.1"
+  dependencies:
+    tslib: 2.3.0
+    zrender: 5.3.1
+  checksum: e67254f06ce6db6892c8d3a335e418fa0558d6ff7794f930769d8f90c3a4500c5b9595587da4249f62069f74cbb5b2fe6808f018bd7a0a989ed28d97a6179ba3
   languageName: node
   linkType: hard
 
@@ -9015,17 +9032,22 @@ __metadata:
     datatables.net: ^1.11.5
     datatables.net-bs5: ^1.11.5
     datatables.net-dt: ^1.11.5
+    echarts: ^5.3.1
     jquery: ^3.6.0
+    lodash: ^4.17.21
     moment: ^2.29.1
     mui-datatables: ^4.1.2
     node-cache: ^5.1.2
     prop-types: ^15.8.1
     react: ^17.0.2
+    react-countup: ^6.1.1
     react-dom: ^17.0.2
     react-json-pretty: ^2.2.0
     react-router-dom: ^6.2.2
     react-scripts: 5.0.0
+    size-sensor: ^1.0.1
     toastify-js: ^1.11.2
+    weather.js: ^0.1.0
     web-vitals: ^2.1.4
   languageName: unknown
   linkType: soft
@@ -10522,6 +10544,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-countup@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "react-countup@npm:6.1.1"
+  dependencies:
+    countup.js: ^2.0.8
+  peerDependencies:
+    react: ">= 16.3.0"
+  checksum: 5c48c30d51ff03a5c31afe67fa4db4c240910608b78b3929ffe342e6ea09163283cc0eea5a4fd1699f10fcb76de858cc562121d27ff12033a59ef0bbe3a2445f
+  languageName: node
+  linkType: hard
+
 "react-dev-utils@npm:^12.0.0":
   version: 12.0.0
   resolution: "react-dev-utils@npm:12.0.0"
@@ -11490,6 +11523,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"size-sensor@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "size-sensor@npm:1.0.1"
+  checksum: 8af239ea1acac3f9e1fe1b6cc0436b7cd2105c0eee56cebfdc71ec1b6ec9fcb3065bd4214c59aa6615b58f778ac4732056a8d1e909506dacaef476220f27bec3
+  languageName: node
+  linkType: hard
+
 "slash@npm:^3.0.0":
   version: 3.0.0
   resolution: "slash@npm:3.0.0"
@@ -12243,6 +12283,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"tslib@npm:2.3.0":
+  version: 2.3.0
+  resolution: "tslib@npm:2.3.0"
+  checksum: 8869694c26e4a7b56d449662fd54a4f9ba872c889d991202c74462bd99f10e61d5bd63199566c4284c0f742277736292a969642cc7b590f98727a7cae9529122
+  languageName: node
+  linkType: hard
+
 "tslib@npm:^1.8.1":
   version: 1.14.1
   resolution: "tslib@npm:1.14.1"
@@ -12571,6 +12618,13 @@ __metadata:
   dependencies:
     minimalistic-assert: ^1.0.0
   checksum: 2abc306c96930b757972a1c4650eb6b25b5d99f24088714957f88629e137db569368c5de0e57986c89ea70db2f1df9bba11a87cb6d0c8694b6f53a0159fab3bf
+  languageName: node
+  linkType: hard
+
+"weather.js@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "weather.js@npm:0.1.0"
+  checksum: f15949cb3bfa9b6b6b62136318d8920c22c1d9cbcc21371b076c7c38c40a7c6ea133e89e99b76fb6d1fd4a4d071e77e2a9dc218dd3524328ba4872eb6ccf5915
   languageName: node
   linkType: hard
 
@@ -13185,5 +13239,14 @@ __metadata:
   version: 0.1.0
   resolution: "yocto-queue@npm:0.1.0"
   checksum: f77b3d8d00310def622123df93d4ee654fc6a0096182af8bd60679ddcdfb3474c56c6c7190817c84a2785648cdee9d721c0154eb45698c62176c322fb46fc700
+  languageName: node
+  linkType: hard
+
+"zrender@npm:5.3.1":
+  version: 5.3.1
+  resolution: "zrender@npm:5.3.1"
+  dependencies:
+    tslib: 2.3.0
+  checksum: 4dccd7cca6ff946f8e2e73d5563b9f7bfe419733e828d72e7fe8b40125ca0201ce9292d528f0df8c9d1896708ffa61f75276adde33c933c125ca1b7b1355bfc5
   languageName: node
   linkType: hard

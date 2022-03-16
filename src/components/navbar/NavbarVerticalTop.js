@@ -114,6 +114,11 @@ const NavbarVerticalTop = () => {
 
                             <NavMenu menuTitle={'Notifications'} menuItems={[
                                 {
+                                    title: 'Send',
+                                    icon: <span className="fas fa-paper-plane"/>,
+                                    href: '/notifications/create',
+                                },
+                                {
                                     title: 'SMS',
                                     icon: <span className="fas fa-comments"/>,
                                     listItems: [

@@ -1,13 +1,85 @@
-import React from 'react';
+import React, {useState} from 'react';
 import $ from 'jquery';
-import {IMAGES} from '../../constants';
+import _ from 'lodash';
 import RecentNotifications from './RecentNotifications';
 import {useFetch} from '../../hooks';
+import CountUp from 'react-countup';
+import ErrorPage from '../../components/ErrorPage';
+import {CONFIG} from '../../config';
+import {NotificationAdd} from '@mui/icons-material';
+import WeeklyNotifications from '../../components/charts/WeeklyNotifications';
+import Weather from '../../utils/Weather';
+
+const WeatherCard = () => {
+    const [tempInCelsius, setTempInCelsius] = useState(0);
+    const [icon, setIcon] = useState("");
+    const [condition, setCondition] = useState("");
+    const [location, setLocation] = useState("");
+
+    Weather.setApiKey('11ea5528e89c719b6f5832f8bb18faa9');
+    Weather.getCurrent('Nairobi', function (current) {
+        const {name, weather} = current.data;
+
+        setLocation(name);
+        setCondition(current.conditions());
+        setTempInCelsius(Weather.kelvinToCelsius(current.temperature()));
+        setIcon(`https://openweathermap.org/img/wn/${weather[0].icon}@4x.png`);
+
+        // AOS.refreshHard()
+    });
+
+    return (
+        <div className="card h-md-100">
+            <div className="card-header d-flex flex-between-center pb-0">
+                <h6 className="mb-0">Weather</h6>
+                <div className="dropdown font-sans-serif btn-reveal-trigger">
+                    <button
+                        className="btn btn-link text-600 btn-sm dropdown-toggle dropdown-caret-none btn-reveal"
+                        type="button" id="dropdown-weather-update" data-bs-toggle="dropdown"
+                        data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
+                        <span className="fas fa-ellipsis-h fs--2"/>
+                    </button>
+                    <div className="dropdown-menu dropdown-menu-end border py-2"
+                         aria-labelledby="dropdown-weather-update">
+                        <a className="dropdown-item" href="#!">View</a>
+                        <a className="dropdown-item" href="#!">Export</a>
+                        <div className="dropdown-divider"/>
+                        <a className="dropdown-item text-danger" href="#!">Remove</a>
+                    </div>
+                </div>
+            </div>
+            <div className="card-body pt-2">
+                <div className="row g-0 h-100 align-items-center">
+                    <div className="col">
+                        <div className="d-flex align-items-center">
+                            <img className="me-3" src={icon} alt="" height="60"/>
+                            <div>
+                                <h6 className="mb-2">{location}</h6>
+                                <div className="fs--2 fw-semi-bold">
+                                    <div className="text-warning">{condition}</div>
+                                    Precipitation: 50%
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-auto text-center ps-2">
+                        <div className="fs-4 fw-normal font-sans-serif text-primary mb-1 lh-1">
+                            <CountUp end={tempInCelsius} suffix={'&deg;'}/>
+                        </div>
+                        <div className="fs--1 text-800">32&deg; / 25&deg;</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 const Default = () => {
-    const {data:notifications, error} = useFetch('https://hoodis-notify.herokuapp.com/api/dashboard')
+    const {data, error} = useFetch(`${CONFIG.SIDOOH_NOTIFY_URL}/api/dashboard`);
 
-    if(notifications) {
+    if (error) return <ErrorPage error={error}/>;
+
+    if (data?.notifications) {
         setTimeout(() => {
             $('#table_id').DataTable({
                 retrieve: true,
@@ -26,9 +98,9 @@ const Default = () => {
                     <div className="card h-md-100 ecommerce-card-min-width">
                         <div className="card-header pb-0">
                             <h6 className="mb-0 mt-2 d-flex align-items-center">
-                                Weekly Sales
+                                Weekly Notifications
                                 <span className="ms-1 text-400" data-bs-toggle="tooltip" data-bs-placement="top"
-                                      title="Calculated according to last week's sales">
+                                      title="Calculated according to last week's notifications">
                                     <span className="far fa-question-circle" data-fa-transform="shrink-1"/>
                                 </span>
                             </h6>
@@ -36,11 +108,13 @@ const Default = () => {
                         <div className="card-body d-flex flex-column justify-content-end">
                             <div className="row">
                                 <div className="col">
-                                    <p className="font-sans-serif lh-1 mb-1 fs-4">$47K</p><span
-                                    className="badge badge-soft-success rounded-pill fs--2">+3.5%</span>
+                                    <p className="font-sans-serif lh-1 mb-1 fs-4">
+                                        <CountUp end={_.sum(data?.weekly_notifications.datasets)}/>
+                                    </p>
+                                    <span className="badge badge-soft-success rounded-pill fs--2">+3.5%</span>
                                 </div>
                                 <div className="col-auto ps-0">
-                                    <div className="echart-bar-weekly-sales h-100"/>
+                                    <WeeklyNotifications data={data?.weekly_notifications}/>
                                 </div>
                             </div>
                         </div>
@@ -49,19 +123,19 @@ const Default = () => {
                 <div className="col-md-6 col-xxl-3">
                     <div className="card h-md-100">
                         <div className="card-header pb-0">
-                            <h6 className="mb-0 mt-2">Total Order</h6>
+                            <h6 className="mb-0 mt-2">Total Notifications</h6>
                         </div>
                         <div className="card-body d-flex flex-column justify-content-end">
                             <div className="row justify-content-between">
                                 <div className="col-auto align-self-end">
-                                    <div className="fs-4 fw-normal font-sans-serif text-700 lh-1 mb-1">58.4K</div>
+                                    <div className="fs-4 fw-normal font-sans-serif text-700 lh-1 mb-1">
+                                        <CountUp end={Number(data?.count_notifications)}/>
+                                    </div>
                                     <span className="badge rounded-pill fs--2 bg-200 text-primary">
                                         <span className="fas fa-caret-up me-1"/>13.6%</span>
                                 </div>
-                                <div className="col-auto ps-0 mt-n4">
-                                    <div className="echart-default-total-order"
-                                         data-echarts='{"tooltip":{"trigger":"axis","formatter":"{b0} : {c0}"},"xAxis":{"data":["Week 4","Week 5","Week 6","Week 7"]},"series":[{"type":"line","data":[20,40,100,120],"smooth":true,"lineStyle":{"width":3}}],"grid":{"bottom":"2%","top":"2%","right":"10px","left":"10px"}}'
-                                         data-echart-responsive="true"/>
+                                <div className="col-auto">
+                                    <NotificationAdd color={'info'} className={'fs-32'}/>
                                 </div>
                             </div>
                         </div>
@@ -71,36 +145,34 @@ const Default = () => {
                     <div className="card h-md-100">
                         <div className="card-body">
                             <div className="row h-100 justify-content-between g-0">
-                                <div className="col-5 col-sm-6 col-xxl pe-2">
-                                    <h6 className="mt-1">Market Share</h6>
-                                    <div className="fs--2 mt-3">
-                                        <div className="d-flex flex-between-center mb-1">
-                                            <div className="d-flex align-items-center">
-                                                <span className="dot bg-primary"/>
-                                                <span className="fw-semi-bold">Samsung</span>
+                                <div className="col-12">
+                                    <h6 className="mt-1">SMS Providers Credits</h6>
+                                    <div className="mt-3">
+                                        <div className="row">
+                                            <div className="col-6">
+                                                <CountUp end={data?.balances.websms} decimals={2} className={'fs-3'}/>
+                                                <div className="d-flex flex-between-center mb-1">
+                                                    <div className="d-flex align-items-center fs--2">
+                                                        <span
+                                                            className={`dot bg-${data?.default_sms_provider === 'websms'
+                                                                                 ? 'primary' : '300'}`}/>
+                                                        <span className="fw-semi-bold">WEBSMS</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="d-xxl-none">33%</div>
-                                        </div>
-                                        <div className="d-flex flex-between-center mb-1">
-                                            <div className="d-flex align-items-center">
-                                                <span className="dot bg-info"/>
-                                                <span className="fw-semi-bold">Huawei</span>
+                                            <div className="col-6">
+                                                <CountUp end={data?.balances.africastalking} decimals={2}
+                                                         className={'fs-3'}/>
+                                                <div className="d-flex flex-between-center mb-1">
+                                                    <div className="d-flex align-items-center fs--2">
+                                                        <span
+                                                            className={`dot bg-${data?.default_sms_provider === 'africastalking'
+                                                                                 ? 'primary' : '300'}`}/>
+                                                        <span className="fw-semi-bold">AFRICASTALKING</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div className="d-xxl-none">29%</div>
                                         </div>
-                                        <div className="d-flex flex-between-center mb-1">
-                                            <div className="d-flex align-items-center">
-                                                <span className="dot bg-300"/>
-                                                <span className="fw-semi-bold">Apple</span>
-                                            </div>
-                                            <div className="d-xxl-none">20%</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-auto position-relative">
-                                    <div className="echart-market-share"/>
-                                    <div
-                                        className="position-absolute top-50 start-50 translate-middle text-dark fs-2">26M
                                     </div>
                                 </div>
                             </div>
@@ -108,51 +180,12 @@ const Default = () => {
                     </div>
                 </div>
                 <div className="col-md-6 col-xxl-3">
-                    <div className="card h-md-100">
-                        <div className="card-header d-flex flex-between-center pb-0">
-                            <h6 className="mb-0">Weather</h6>
-                            <div className="dropdown font-sans-serif btn-reveal-trigger">
-                                <button
-                                    className="btn btn-link text-600 btn-sm dropdown-toggle dropdown-caret-none btn-reveal"
-                                    type="button" id="dropdown-weather-update" data-bs-toggle="dropdown"
-                                    data-boundary="viewport" aria-haspopup="true" aria-expanded="false">
-                                    <span className="fas fa-ellipsis-h fs--2"/>
-                                </button>
-                                <div className="dropdown-menu dropdown-menu-end border py-2"
-                                     aria-labelledby="dropdown-weather-update">
-                                    <a className="dropdown-item" href="#!">View</a>
-                                    <a className="dropdown-item" href="#!">Export</a>
-                                    <div className="dropdown-divider"/>
-                                    <a className="dropdown-item text-danger" href="#!">Remove</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="card-body pt-2">
-                            <div className="row g-0 h-100 align-items-center">
-                                <div className="col">
-                                    <div className="d-flex align-items-center">
-                                        <img className="me-3" src={IMAGES.icons.weather_icon} alt="" height="60"/>
-                                        <div>
-                                            <h6 className="mb-2">New York City</h6>
-                                            <div className="fs--2 fw-semi-bold">
-                                                <div className="text-warning">Sunny</div>
-                                                Precipitation: 50%
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="col-auto text-center ps-2">
-                                    <div className="fs-4 fw-normal font-sans-serif text-primary mb-1 lh-1">31&deg;</div>
-                                    <div className="fs--1 text-800">32&deg; / 25&deg;</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <WeatherCard/>
                 </div>
             </div>
             <div className="row g-3 mb-3">
                 <div className="col-xxl-12 col-md-12">
-                    <RecentNotifications notifications={notifications?.notifications}/>
+                    <RecentNotifications notifications={data?.notifications}/>
                 </div>
             </div>
         </>

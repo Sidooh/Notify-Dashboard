@@ -1,36 +1,36 @@
 "use strict";
 
-var _excluded = ["endValue"];
+let _excluded = ["endValue"];
 
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-function _createForOfIteratorHelper(o, allowArrayLike) { var it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; var i = 0; var F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } var normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { var step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
+function _createForOfIteratorHelper(o, allowArrayLike) { let it = typeof Symbol !== "undefined" && o[Symbol.iterator] || o["@@iterator"]; if (!it) { if (Array.isArray(o) || (it = _unsupportedIterableToArray(o)) || allowArrayLike && o && typeof o.length === "number") { if (it) o = it; let i = 0; let F = function F() {}; return { s: F, n: function n() { if (i >= o.length) return { done: true }; return { done: false, value: o[i++] }; }, e: function e(_e) { throw _e; }, f: F }; } throw new TypeError("Invalid attempt to iterate non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); } let normalCompletion = true, didErr = false, err; return { s: function s() { it = it.call(o); }, n: function n() { let step = it.next(); normalCompletion = step.done; return step; }, e: function e(_e2) { didErr = true; err = _e2; }, f: function f() { try { if (!normalCompletion && it["return"] != null) it["return"](); } finally { if (didErr) throw err; } } }; }
 
-function _objectWithoutProperties(source, excluded) { if (source == null) return {}; var target = _objectWithoutPropertiesLoose(source, excluded); var key, i; if (Object.getOwnPropertySymbols) { var sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
+function _objectWithoutProperties(source, excluded) { if (source == null) return {}; let target = _objectWithoutPropertiesLoose(source, excluded); let key, i; if (Object.getOwnPropertySymbols) { let sourceSymbolKeys = Object.getOwnPropertySymbols(source); for (i = 0; i < sourceSymbolKeys.length; i++) { key = sourceSymbolKeys[i]; if (excluded.indexOf(key) >= 0) continue; if (!Object.prototype.propertyIsEnumerable.call(source, key)) continue; target[key] = source[key]; } } return target; }
 
-function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; var target = {}; var sourceKeys = Object.keys(source); var key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
+function _objectWithoutPropertiesLoose(source, excluded) { if (source == null) return {}; let target = {}; let sourceKeys = Object.keys(source); let key, i; for (i = 0; i < sourceKeys.length; i++) { key = sourceKeys[i]; if (excluded.indexOf(key) >= 0) continue; target[key] = source[key]; } return target; }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); let n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
 
 function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
 
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (let i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
+function ownKeys(object, enumerableOnly) { let keys = Object.keys(object); if (Object.getOwnPropertySymbols) { let symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+function _objectSpread(target) { for (let i = 1; i < arguments.length; i++) { let source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+function _defineProperties(target, props) { for (let i = 0; i < props.length; i++) { let descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
@@ -39,7 +39,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 /*                                    Utils                                   */
 
 /* -------------------------------------------------------------------------- */
-var docReady = function docReady(fn) {
+let docReady = function docReady(fn) {
   // see if DOM is already available
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', fn);
@@ -48,22 +48,22 @@ var docReady = function docReady(fn) {
   }
 };
 
-var resize = function resize(fn) {
+let resize = function resize(fn) {
   return window.addEventListener('resize', fn);
 };
 
-var isIterableArray = function isIterableArray(array) {
+let isIterableArray = function isIterableArray(array) {
   return Array.isArray(array) && !!array.length;
 };
 
-var camelize = function camelize(str) {
-  var text = str.replace(/[-_\s.]+(.)?/g, function (_, c) {
+let camelize = function camelize(str) {
+  let text = str.replace(/[-_\s.]+(.)?/g, function (_, c) {
     return c ? c.toUpperCase() : '';
   });
   return "".concat(text.substr(0, 1).toLowerCase()).concat(text.substr(1));
 };
 
-var getData = function getData(el, data) {
+let getData = function getData(el, data) {
   try {
     return JSON.parse(el.dataset[camelize(data)]);
   } catch (e) {
@@ -73,31 +73,31 @@ var getData = function getData(el, data) {
 /* ----------------------------- Colors function ---------------------------- */
 
 
-var hexToRgb = function hexToRgb(hexValue) {
-  var hex;
+let hexToRgb = function hexToRgb(hexValue) {
+  let hex;
   hexValue.indexOf('#') === 0 ? hex = hexValue.substring(1) : hex = hexValue; // Expand shorthand form (e.g. "03F") to full form (e.g. "0033FF")
 
-  var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
-  var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex.replace(shorthandRegex, function (m, r, g, b) {
+  let shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
+  let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex.replace(shorthandRegex, function (m, r, g, b) {
     return r + r + g + g + b + b;
   }));
   return result ? [parseInt(result[1], 16), parseInt(result[2], 16), parseInt(result[3], 16)] : null;
 };
 
-var rgbaColor = function rgbaColor() {
-  var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#fff';
-  var alpha = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.5;
+let rgbaColor = function rgbaColor() {
+  let color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '#fff';
+  let alpha = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.5;
   return "rgba(".concat(hexToRgb(color), ", ").concat(alpha, ")");
 };
 /* --------------------------------- Colors --------------------------------- */
 
 
-var getColor = function getColor(name) {
-  var dom = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document.documentElement;
+let getColor = function getColor(name) {
+  let dom = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : document.documentElement;
   return getComputedStyle(dom).getPropertyValue("--falcon-".concat(name)).trim();
 };
 
-var getColors = function getColors(dom) {
+let getColors = function getColors(dom) {
   return {
     primary: getColor('primary', dom),
     secondary: getColor('secondary', dom),
@@ -110,7 +110,7 @@ var getColors = function getColors(dom) {
   };
 };
 
-var getSoftColors = function getSoftColors(dom) {
+let getSoftColors = function getSoftColors(dom) {
   return {
     primary: getColor('soft-primary', dom),
     secondary: getColor('soft-secondary', dom),
@@ -123,7 +123,7 @@ var getSoftColors = function getSoftColors(dom) {
   };
 };
 
-var getGrays = function getGrays(dom) {
+let getGrays = function getGrays(dom) {
   return {
     white: getColor('white', dom),
     100: getColor('100', dom),
@@ -141,19 +141,18 @@ var getGrays = function getGrays(dom) {
   };
 };
 
-var hasClass = function hasClass(el, className) {
-  !el && false;
-  return el.classList.value.includes(className);
+let hasClass = function hasClass(el, className) {
+  return el ? el.classList.value.includes(className) : false
 };
 
-var addClass = function addClass(el, className) {
+let addClass = function addClass(el, className) {
   el.classList.add(className);
 };
 
-var getOffset = function getOffset(el) {
-  var rect = el.getBoundingClientRect();
-  var scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
-  var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+let getOffset = function getOffset(el) {
+  let rect = el.getBoundingClientRect();
+  let scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+  let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
   return {
     top: rect.top + scrollTop,
     left: rect.left + scrollLeft
@@ -161,15 +160,15 @@ var getOffset = function getOffset(el) {
 };
 
 function isScrolledIntoView(el) {
-  var rect = el.getBoundingClientRect();
-  var windowHeight = window.innerHeight || document.documentElement.clientHeight;
-  var windowWidth = window.innerWidth || document.documentElement.clientWidth;
-  var vertInView = rect.top <= windowHeight && rect.top + rect.height >= 0;
-  var horInView = rect.left <= windowWidth && rect.left + rect.width >= 0;
+  let rect = el.getBoundingClientRect();
+  let windowHeight = window.innerHeight || document.documentElement.clientHeight;
+  let windowWidth = window.innerWidth || document.documentElement.clientWidth;
+  let vertInView = rect.top <= windowHeight && rect.top + rect.height >= 0;
+  let horInView = rect.left <= windowWidth && rect.left + rect.width >= 0;
   return vertInView && horInView;
 }
 
-var breakpoints = {
+let breakpoints = {
   xs: 0,
   sm: 576,
   md: 768,
@@ -178,9 +177,9 @@ var breakpoints = {
   xxl: 1540
 };
 
-var getBreakpoint = function getBreakpoint(el) {
-  var classes = el && el.classList.value;
-  var breakpoint;
+let getBreakpoint = function getBreakpoint(el) {
+  let classes = el && el.classList.value;
+  let breakpoint;
 
   if (classes) {
     breakpoint = breakpoints[classes.split(' ').filter(function (cls) {
@@ -193,18 +192,18 @@ var getBreakpoint = function getBreakpoint(el) {
 /* --------------------------------- Cookie --------------------------------- */
 
 
-var setCookie = function setCookie(name, value, expire) {
-  var expires = new Date();
+let setCookie = function setCookie(name, value, expire) {
+  let expires = new Date();
   expires.setTime(expires.getTime() + expire);
   document.cookie = "".concat(name, "=").concat(value, ";expires=").concat(expires.toUTCString());
 };
 
-var getCookie = function getCookie(name) {
-  var keyValue = document.cookie.match("(^|;) ?".concat(name, "=([^;]*)(;|$)"));
+let getCookie = function getCookie(name) {
+  let keyValue = document.cookie.match("(^|;) ?".concat(name, "=([^;]*)(;|$)"));
   return keyValue ? keyValue[2] : keyValue;
 };
 
-var settings = {
+let settings = {
   tinymce: {
     theme: 'oxide'
   },
@@ -214,15 +213,15 @@ var settings = {
 };
 /* -------------------------- Chart Initialization -------------------------- */
 
-var newChart = function newChart(chart, config) {
-  var ctx = chart.getContext('2d');
+let newChart = function newChart(chart, config) {
+  let ctx = chart.getContext('2d');
   return new window.Chart(ctx, config);
 };
 /* ---------------------------------- Store --------------------------------- */
 
 
-var getItemFromStore = function getItemFromStore(key, defaultValue) {
-  var store = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : localStorage;
+let getItemFromStore = function getItemFromStore(key, defaultValue) {
+  let store = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : localStorage;
 
   try {
     return JSON.parse(store.getItem(key)) || defaultValue;
@@ -231,22 +230,22 @@ var getItemFromStore = function getItemFromStore(key, defaultValue) {
   }
 };
 
-var setItemToStore = function setItemToStore(key, payload) {
-  var store = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : localStorage;
+let setItemToStore = function setItemToStore(key, payload) {
+  let store = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : localStorage;
   return store.setItem(key, payload);
 };
 
-var getStoreSpace = function getStoreSpace() {
-  var store = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : localStorage;
+let getStoreSpace = function getStoreSpace() {
+  let store = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : localStorage;
   return parseFloat((escape(encodeURIComponent(JSON.stringify(store))).length / (1024 * 1024)).toFixed(2));
 };
 /* get Dates between */
 
 
-var getDates = function getDates(startDate, endDate) {
-  var interval = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000 * 60 * 60 * 24;
-  var duration = endDate - startDate;
-  var steps = duration / interval;
+let getDates = function getDates(startDate, endDate) {
+  let interval = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1000 * 60 * 60 * 24;
+  let duration = endDate - startDate;
+  let steps = duration / interval;
   return Array.from({
     length: steps + 1
   }, function (v, i) {
@@ -254,8 +253,8 @@ var getDates = function getDates(startDate, endDate) {
   });
 };
 
-var getPastDates = function getPastDates(duration) {
-  var days;
+let getPastDates = function getPastDates(duration) {
+  let days;
 
   switch (duration) {
     case 'week':
@@ -274,19 +273,19 @@ var getPastDates = function getPastDates(duration) {
       days = duration;
   }
 
-  var date = new Date();
-  var endDate = date;
-  var startDate = new Date(new Date().setDate(date.getDate() - (days - 1)));
+  let date = new Date();
+  let endDate = date;
+  let startDate = new Date(new Date().setDate(date.getDate() - (days - 1)));
   return getDates(startDate, endDate);
 };
 /* Get Random Number */
 
 
-var getRandomNumber = function getRandomNumber(min, max) {
+let getRandomNumber = function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 };
 
-var utils = {
+let utils = {
   docReady: docReady,
   resize: resize,
   isIterableArray: isIterableArray,
@@ -320,10 +319,10 @@ var utils = {
 
 /* -------------------------------------------------------------------------- */
 
-var detectorInit = function detectorInit() {
-  var _window = window,
+let detectorInit = function detectorInit() {
+  let _window = window,
       is = _window.is;
-  var html = document.querySelector('html');
+  let html = document.querySelector('html');
   is.opera() && addClass(html, 'opera');
   is.mobile() && addClass(html, 'mobile');
   is.firefox() && addClass(html, 'firefox');
@@ -343,7 +342,7 @@ var detectorInit = function detectorInit() {
 -----------------------------------------------*/
 
 
-var DomNode = /*#__PURE__*/function () {
+let DomNode = /*#__PURE__*/function () {
   function DomNode(node) {
     _classCallCheck(this, DomNode);
 
@@ -417,7 +416,7 @@ var DomNode = /*#__PURE__*/function () {
   }, {
     key: "camelize",
     value: function camelize(str) {
-      var text = str.replace(/[-_\s.]+(.)?/g, function (_, c) {
+      let text = str.replace(/[-_\s.]+(.)?/g, function (_, c) {
         return c ? c.toUpperCase() : '';
       });
       return "".concat(text.substr(0, 1).toLowerCase()).concat(text.substr(1));
@@ -433,7 +432,7 @@ var DomNode = /*#__PURE__*/function () {
 /* -------------------------------------------------------------------------- */
 
 
-var anchors = new window.AnchorJS();
+let anchors = new window.AnchorJS();
 anchors.options = {
   icon: '#'
 };
@@ -442,7 +441,7 @@ anchors.add('[data-anchor]');
 |   Bulk Select
 -----------------------------------------------*/
 
-var BulkSelect = /*#__PURE__*/function () {
+let BulkSelect = /*#__PURE__*/function () {
   function BulkSelect(element, option) {
     _classCallCheck(this, BulkSelect);
 
@@ -462,7 +461,7 @@ var BulkSelect = /*#__PURE__*/function () {
   }, {
     key: "attachNodes",
     value: function attachNodes() {
-      var _this$element$data = this.element.data('bulk-select'),
+      let _this$element$data = this.element.data('bulk-select'),
           body = _this$element$data.body,
           actions = _this$element$data.actions,
           replacedElement = _this$element$data.replacedElement;
@@ -474,7 +473,7 @@ var BulkSelect = /*#__PURE__*/function () {
   }, {
     key: "clickBulkCheckbox",
     value: function clickBulkCheckbox() {
-      var _this = this;
+      let _this = this;
 
       // Handle click event in bulk checkbox
       this.element.on('click', function () {
@@ -486,7 +485,7 @@ var BulkSelect = /*#__PURE__*/function () {
           _this.removeBulkCheck();
 
           _this.bulkSelectRows.forEach(function (el) {
-            var rowCheck = new DomNode(el);
+            let rowCheck = new DomNode(el);
             rowCheck.setProp('checked', false);
             rowCheck.setAttribute('checked', false);
           });
@@ -497,7 +496,7 @@ var BulkSelect = /*#__PURE__*/function () {
         _this.toggleDisplay();
 
         _this.bulkSelectRows.forEach(function (el) {
-          var rowCheck = new DomNode(el);
+          let rowCheck = new DomNode(el);
           rowCheck.setProp('checked', _this.element.attr('checked'));
           rowCheck.setAttribute('checked', _this.element.attr('checked'));
         });
@@ -506,11 +505,11 @@ var BulkSelect = /*#__PURE__*/function () {
   }, {
     key: "clickRowCheckbox",
     value: function clickRowCheckbox() {
-      var _this2 = this;
+      let _this2 = this;
 
       // Handle click event in checkbox of each row
       this.bulkSelectRows.forEach(function (el) {
-        var rowCheck = new DomNode(el);
+        let rowCheck = new DomNode(el);
         rowCheck.on('click', function () {
           if (_this2.element.attr('indeterminate') !== 'indeterminate') {
             _this2.element.setProp('indeterminate', true);
@@ -564,11 +563,11 @@ var BulkSelect = /*#__PURE__*/function () {
 }();
 
 function bulkSelectInit() {
-  var bulkSelects = document.querySelectorAll('[data-bulk-select');
+  let bulkSelects = document.querySelectorAll('[data-bulk-select');
 
   if (bulkSelects.length) {
     bulkSelects.forEach(function (el) {
-      var bulkSelect = new BulkSelect(el);
+      let bulkSelect = new BulkSelect(el);
       bulkSelect.init();
     });
   }
@@ -578,14 +577,14 @@ function bulkSelectInit() {
 -----------------------------------------------*/
 
 
-var chatInit = function chatInit() {
-  var Events = {
+let chatInit = function chatInit() {
+  let Events = {
     CLICK: 'click',
     SHOWN_BS_TAB: 'shown.bs.tab',
     KEYUP: 'keyup',
     EMOJI: 'emoji'
   };
-  var Selector = {
+  let Selector = {
     CHAT_SIDEBAR: '.chat-sidebar',
     CHAT_CONTACT: '.chat-contact',
     CHAT_CONTENT_SCROLL_AREA: '.chat-content-scroll-area',
@@ -597,23 +596,23 @@ var chatInit = function chatInit() {
     CONVERSATION_INFO: '.conversation-info',
     CONTACTS_LIST_SHOW: '.contacts-list-show'
   };
-  var ClassName = {
+  let ClassName = {
     UNREAD_MESSAGE: 'unread-message',
     TEXT_PRIMARY: 'text-primary',
     SHOW: 'show'
   };
-  var DATA_KEY = {
+  let DATA_KEY = {
     INDEX: 'index'
   };
-  var $chatSidebar = document.querySelector(Selector.CHAT_SIDEBAR);
-  var $chatContact = document.querySelectorAll(Selector.CHAT_CONTACT);
-  var $chatEmojiarea = document.querySelector(Selector.CHAT_EMOJIAREA);
-  var $btnSend = document.querySelector(Selector.BTN_SEND);
-  var $currentChatArea = document.querySelector(Selector.CHAT_CONTENT_SCROLL_AREA); // Set scrollbar position
+  let $chatSidebar = document.querySelector(Selector.CHAT_SIDEBAR);
+  let $chatContact = document.querySelectorAll(Selector.CHAT_CONTACT);
+  let $chatEmojiarea = document.querySelector(Selector.CHAT_EMOJIAREA);
+  let $btnSend = document.querySelector(Selector.BTN_SEND);
+  let $currentChatArea = document.querySelector(Selector.CHAT_CONTENT_SCROLL_AREA); // Set scrollbar position
 
-  var setScrollbarPosition = function setScrollbarPosition($chatArea) {
+  let setScrollbarPosition = function setScrollbarPosition($chatArea) {
     if ($chatArea) {
-      var scrollArea = $chatArea;
+      let scrollArea = $chatArea;
       scrollArea.scrollTop = $chatArea.scrollHeight;
     }
   };
@@ -623,7 +622,7 @@ var chatInit = function chatInit() {
   }, 700);
   document.querySelectorAll(Selector.CHAT_CONTACT).forEach(function (el) {
     el.addEventListener(Events.CLICK, function (e) {
-      var $this = e.currentTarget;
+      let $this = e.currentTarget;
       $this.classList.add('active'); // Hide contact list sidebar on responsive
 
       window.innerWidth < 768 && !e.target.classList.contains('hover-actions') && ($chatSidebar.style.left = '-100%'); // Remove unread-message class when read
@@ -635,7 +634,7 @@ var chatInit = function chatInit() {
     el.addEventListener(Events.SHOWN_BS_TAB, function () {
       $chatEmojiarea.innerHTML = '';
       $btnSend.classList.remove(ClassName.TEXT_PRIMARY);
-      var TargetChatArea = document.querySelector(Selector.CHAT_CONTENT_SCROLL_AREA_ACTIVE);
+      let TargetChatArea = document.querySelector(Selector.CHAT_CONTENT_SCROLL_AREA_ACTIVE);
       setScrollbarPosition(TargetChatArea);
     });
   }); // change send button color on
@@ -653,7 +652,7 @@ var chatInit = function chatInit() {
         $btnSend.classList.add(ClassName.TEXT_PRIMARY);
       }
 
-      var TargetChatArea = document.querySelector(Selector.CHAT_CONTENT_SCROLL_AREA_ACTIVE);
+      let TargetChatArea = document.querySelector(Selector.CHAT_CONTENT_SCROLL_AREA_ACTIVE);
       setScrollbarPosition(TargetChatArea);
     });
   } // Open conversation info sidebar
@@ -661,9 +660,9 @@ var chatInit = function chatInit() {
 
   $chatEmojiarea && document.querySelectorAll(Selector.BTN_INFO).forEach(function (el) {
     el.addEventListener(Events.CLICK, function (e) {
-      var $this = e.currentTarget;
-      var dataIndex = utils.getData($this, DATA_KEY.INDEX);
-      var $info = document.querySelector("".concat(Selector.CONVERSATION_INFO, "[data-").concat(DATA_KEY.INDEX, "='").concat(dataIndex, "']"));
+      let $this = e.currentTarget;
+      let dataIndex = utils.getData($this, DATA_KEY.INDEX);
+      let $info = document.querySelector("".concat(Selector.CONVERSATION_INFO, "[data-").concat(DATA_KEY.INDEX, "='").concat(dataIndex, "']"));
       $info.classList.toggle(ClassName.SHOW);
     });
   }); // Show contact list sidebar on responsive
@@ -675,7 +674,7 @@ var chatInit = function chatInit() {
   }); // Set scrollbar area height on resize
 
   utils.resize(function () {
-    var TargetChatArea = document.querySelector(Selector.CHAT_CONTENT_SCROLL_AREA_ACTIVE);
+    let TargetChatArea = document.querySelector(Selector.CHAT_CONTENT_SCROLL_AREA_ACTIVE);
     setScrollbarPosition(TargetChatArea);
   }); // Emoji append in message text
 
@@ -690,12 +689,12 @@ var chatInit = function chatInit() {
 /* -------------------------------------------------------------------------- */
 
 
-var choicesInit = function choicesInit() {
+let choicesInit = function choicesInit() {
   if (window.Choices) {
-    var elements = document.querySelectorAll('.js-choice');
+    let elements = document.querySelectorAll('.js-choice');
     elements.forEach(function (item) {
-      var userOptions = utils.getData(item, 'options');
-      var choices = new window.Choices(item, _objectSpread({
+      let userOptions = utils.getData(item, 'options');
+      let choices = new window.Choices(item, _objectSpread({
         itemSelectText: ''
       }, userOptions));
       return choices;
@@ -707,39 +706,39 @@ var choicesInit = function choicesInit() {
 -----------------------------------------------*/
 
 
-var cookieNoticeInit = function cookieNoticeInit() {
-  var Selector = {
+let cookieNoticeInit = function cookieNoticeInit() {
+  let Selector = {
     NOTICE: '.notice',
     DATA_TOGGLE_Notice: '[data-bs-toggle="notice"]'
   };
-  var Events = {
+  let Events = {
     CLICK: 'click',
     HIDDEN_BS_TOAST: 'hidden.bs.toast'
   };
-  var DataKeys = {
+  let DataKeys = {
     OPTIONS: 'options'
   };
-  var ClassNames = {
+  let ClassNames = {
     HIDE: 'hide'
   };
-  var notices = document.querySelectorAll(Selector.NOTICE);
-  var showNotice = true;
+  let notices = document.querySelectorAll(Selector.NOTICE);
+  let showNotice = true;
   notices.forEach(function (item) {
-    var notice = new window.bootstrap.Toast(item);
+    let notice = new window.bootstrap.Toast(item);
 
-    var options = _objectSpread({
+    let options = _objectSpread({
       autoShow: false,
       autoShowDelay: 0,
       showOnce: false,
       cookieExpireTime: 3600000
     }, utils.getData(item, DataKeys.OPTIONS));
 
-    var showOnce = options.showOnce,
+    let showOnce = options.showOnce,
         autoShow = options.autoShow,
         autoShowDelay = options.autoShowDelay;
 
     if (showOnce) {
-      var hasNotice = utils.getCookie('notice');
+      let hasNotice = utils.getCookie('notice');
       showNotice = hasNotice === null;
     }
 
@@ -750,9 +749,9 @@ var cookieNoticeInit = function cookieNoticeInit() {
     }
 
     item.addEventListener(Events.HIDDEN_BS_TOAST, function (e) {
-      var el = e.currentTarget;
+      let el = e.currentTarget;
 
-      var toastOptions = _objectSpread({
+      let toastOptions = _objectSpread({
         cookieExpireTime: 3600000,
         showOnce: false
       }, utils.getData(el, DataKeys.OPTIONS));
@@ -760,14 +759,14 @@ var cookieNoticeInit = function cookieNoticeInit() {
       toastOptions.showOnce && utils.setCookie('notice', false, toastOptions.cookieExpireTime);
     });
   });
-  var btnNoticeToggle = document.querySelector(Selector.DATA_TOGGLE_Notice);
+  let btnNoticeToggle = document.querySelector(Selector.DATA_TOGGLE_Notice);
   btnNoticeToggle && btnNoticeToggle.addEventListener(Events.CLICK, function (_ref) {
-    var currentTarget = _ref.currentTarget;
-    var id = currentTarget.getAttribute('href');
-    var notice = new window.bootstrap.Toast(document.querySelector(id));
+    let currentTarget = _ref.currentTarget;
+    let id = currentTarget.getAttribute('href');
+    let notice = new window.bootstrap.Toast(document.querySelector(id));
     /*eslint-disable-next-line*/
 
-    var el = notice._element;
+    let el = notice._element;
     utils.hasClass(el, ClassNames.HIDE) ? notice.show() : notice.hide();
   });
 };
@@ -778,15 +777,15 @@ var cookieNoticeInit = function cookieNoticeInit() {
 /* -------------------------------------------------------------------------- */
 
 
-var copyLink = function copyLink() {
-  var copyLinkModal = document.getElementById('copyLinkModal');
+let copyLink = function copyLink() {
+  let copyLinkModal = document.getElementById('copyLinkModal');
   copyLinkModal && copyLinkModal.addEventListener('shown.bs.modal', function () {
-    var invitationLink = document.querySelector('.invitation-link');
+    let invitationLink = document.querySelector('.invitation-link');
     invitationLink.select();
   });
-  var copyButtons = document.querySelectorAll('[data-copy]');
+  let copyButtons = document.querySelectorAll('[data-copy]');
   copyButtons && copyButtons.forEach(function (button) {
-    var tooltip = new window.bootstrap.Tooltip(button);
+    let tooltip = new window.bootstrap.Tooltip(button);
     button.addEventListener('mouseover', function () {
       return tooltip.show();
     });
@@ -795,13 +794,13 @@ var copyLink = function copyLink() {
     });
     button.addEventListener('click', function (e) {
       e.stopPropagation();
-      var el = e.target;
+      let el = e.target;
       el.setAttribute('data-original-title', 'Copied');
       tooltip.show();
       el.setAttribute('data-original-title', 'Copy to clipboard');
       tooltip.update();
-      var inputID = utils.getData(el, 'copy');
-      var input = document.querySelector(inputID);
+      let inputID = utils.getData(el, 'copy');
+      let input = document.querySelector(inputID);
       input.select();
       document.execCommand('copy');
     });
@@ -814,15 +813,15 @@ var copyLink = function copyLink() {
 /* -------------------------------------------------------------------------- */
 
 
-var countupInit = function countupInit() {
+let countupInit = function countupInit() {
   if (window.countUp) {
-    var countups = document.querySelectorAll('[data-countup]');
+    let countups = document.querySelectorAll('[data-countup]');
     countups.forEach(function (node) {
-      var _utils$getData = utils.getData(node, 'countup'),
+      let _utils$getData = utils.getData(node, 'countup'),
           endValue = _utils$getData.endValue,
           options = _objectWithoutProperties(_utils$getData, _excluded);
 
-      var countUp = new window.countUp.CountUp(node, endValue, _objectSpread({
+      let countUp = new window.countUp.CountUp(node, endValue, _objectSpread({
         duration: 5
       }, options));
 
@@ -841,8 +840,8 @@ var countupInit = function countupInit() {
 /* -------------------------------------------------------------------------- */
 
 
-var draggableInit = function draggableInit() {
-  var Selectors = {
+let draggableInit = function draggableInit() {
+  let Selectors = {
     BODY: 'body',
     KANBAN_CONTAINER: '.kanban-container',
     KABNBAN_COLUMN: '.kanban-column',
@@ -850,20 +849,20 @@ var draggableInit = function draggableInit() {
     KANBAN_ITEM: '.kanban-item',
     ADD_CARD_FORM: '.add-card-form'
   };
-  var Events = {
+  let Events = {
     DRAG_START: 'drag:start',
     DRAG_STOP: 'drag:stop'
   };
-  var ClassNames = {
+  let ClassNames = {
     FORM_ADDED: 'form-added'
   };
-  var columns = document.querySelectorAll(Selectors.KABNBAN_COLUMN);
-  var columnContainers = document.querySelectorAll(Selectors.KANBAN_ITEMS_CONTAINER);
-  var container = document.querySelector(Selectors.KANBAN_CONTAINER);
+  let columns = document.querySelectorAll(Selectors.KABNBAN_COLUMN);
+  let columnContainers = document.querySelectorAll(Selectors.KANBAN_ITEMS_CONTAINER);
+  let container = document.querySelector(Selectors.KANBAN_CONTAINER);
 
   if (columnContainers.length) {
     // Initialize Sortable
-    var sortable = new window.Draggable.Sortable(columnContainers, {
+    let sortable = new window.Draggable.Sortable(columnContainers, {
       draggable: Selectors.KANBAN_ITEM,
       delay: 200,
       mirror: {
@@ -883,9 +882,9 @@ var draggableInit = function draggableInit() {
     }); // Place forms and other contents bottom of the sortable container
 
     sortable.on(Events.DRAG_STOP, function (_ref2) {
-      var el = _ref2.data.source;
-      var columnContainer = el.closest(Selectors.KANBAN_ITEMS_CONTAINER);
-      var form = columnContainer.querySelector(Selectors.ADD_CARD_FORM);
+      let el = _ref2.data.source;
+      let columnContainer = el.closest(Selectors.KANBAN_ITEMS_CONTAINER);
+      let form = columnContainer.querySelector(Selectors.ADD_CARD_FORM);
       !el.nextElementSibling && columnContainer.appendChild(form);
     });
   }
@@ -895,20 +894,20 @@ var draggableInit = function draggableInit() {
 -----------------------------------------------*/
 
 
-var dropdownMenuInit = function dropdownMenuInit() {
+let dropdownMenuInit = function dropdownMenuInit() {
   // Only for ios
   if (window.is.ios()) {
-    var Event = {
+    let Event = {
       SHOWN_BS_DROPDOWN: 'shown.bs.dropdown',
       HIDDEN_BS_DROPDOWN: 'hidden.bs.dropdown'
     };
-    var Selector = {
+    let Selector = {
       TABLE_RESPONSIVE: '.table-responsive',
       DROPDOWN_MENU: '.dropdown-menu'
     };
     document.querySelectorAll(Selector.TABLE_RESPONSIVE).forEach(function (table) {
       table.addEventListener(Event.SHOWN_BS_DROPDOWN, function (e) {
-        var t = e.currentTarget;
+        let t = e.currentTarget;
 
         if (t.scrollWidth > t.clientWidth) {
           t.style.paddingBottom = "".concat(e.target.nextElementSibling.clientHeight, "px");
@@ -929,13 +928,13 @@ var dropdownMenuInit = function dropdownMenuInit() {
 /* -------------------------------------------------------------------------- */
 
 
-var dropdownOnHover = function dropdownOnHover() {
-  var navbarArea = document.querySelector('[data-top-nav-dropdowns]');
+let dropdownOnHover = function dropdownOnHover() {
+  let navbarArea = document.querySelector('[data-top-nav-dropdowns]');
 
   if (navbarArea) {
     navbarArea.addEventListener('mouseover', function (e) {
       if (e.target.className.includes('dropdown-toggle') && window.innerWidth > 992) {
-        var dropdownInstance = new window.bootstrap.Dropdown(e.target);
+        let dropdownInstance = new window.bootstrap.Dropdown(e.target);
         /* eslint-disable no-underscore-dangle */
 
         dropdownInstance._element.classList.add('show');
@@ -960,35 +959,35 @@ var dropdownOnHover = function dropdownOnHover() {
 
 window.Dropzone ? window.Dropzone.autoDiscover = false : '';
 
-var dropzoneInit = function dropzoneInit() {
-  var merge = window._.merge;
-  var Selector = {
+let dropzoneInit = function dropzoneInit() {
+  let merge = window._.merge;
+  let Selector = {
     DROPZONE: '[data-dropzone]',
     DZ_ERROR_MESSAGE: '.dz-error-message',
     DZ_PREVIEW: '.dz-preview',
     DZ_PROGRESS: '.dz-preview .dz-preview-cover .dz-progress',
     DZ_PREVIEW_COVER: '.dz-preview .dz-preview-cover'
   };
-  var ClassName = {
+  let ClassName = {
     DZ_FILE_PROCESSING: 'dz-file-processing',
     DZ_FILE_COMPLETE: 'dz-file-complete',
     DZ_COMPLETE: 'dz-complete',
     DZ_PROCESSING: 'dz-processing'
   };
-  var DATA_KEY = {
+  let DATA_KEY = {
     OPTIONS: 'options'
   };
-  var Events = {
+  let Events = {
     ADDED_FILE: 'addedfile',
     REMOVED_FILE: 'removedfile',
     COMPLETE: 'complete'
   };
-  var dropzones = document.querySelectorAll(Selector.DROPZONE);
+  let dropzones = document.querySelectorAll(Selector.DROPZONE);
   !!dropzones.length && dropzones.forEach(function (item) {
-    var userOptions = utils.getData(item, DATA_KEY.OPTIONS);
+    let userOptions = utils.getData(item, DATA_KEY.OPTIONS);
     userOptions = userOptions ? userOptions : {};
-    var data = userOptions.data ? userOptions.data : {};
-    var options = merge({
+    let data = userOptions.data ? userOptions.data : {};
+    let options = merge({
       url: '/assets/php/',
       addRemoveLinks: false,
       previewsContainer: item.querySelector(Selector.DZ_PREVIEW),
@@ -999,11 +998,11 @@ var dropzoneInit = function dropzoneInit() {
       autoProcessQueue: false,
       filesizeBase: 1000,
       init: function init() {
-        var thisDropzone = this;
+        let thisDropzone = this;
 
         if (data.length) {
           data.forEach(function (v) {
-            var mockFile = {
+            let mockFile = {
               name: v.name,
               size: v.size
             };
@@ -1032,12 +1031,12 @@ var dropzoneInit = function dropzoneInit() {
             message = message.error;
           }
 
-          var _iterator = _createForOfIteratorHelper(file.previewElement.querySelectorAll('[data-dz-errormessage]')),
+          let _iterator = _createForOfIteratorHelper(file.previewElement.querySelectorAll('[data-dz-errormessage]')),
               _step;
 
           try {
             for (_iterator.s(); !(_step = _iterator.n()).done;) {
-              var node = _step.value;
+              let node = _step.value;
               node.textContent = message;
             }
           } catch (err) {
@@ -1050,7 +1049,7 @@ var dropzoneInit = function dropzoneInit() {
     }, userOptions); // eslint-disable-next-line
 
     item.querySelector(Selector.DZ_PREVIEW).innerHTML = '';
-    var dropzone = new window.Dropzone(item, options);
+    let dropzone = new window.Dropzone(item, options);
     dropzone.on(Events.ADDED_FILE, function () {
       if (item.querySelector(Selector.DZ_PREVIEW_COVER)) {
         item.querySelector(Selector.DZ_PREVIEW_COVER).classList.remove(ClassName.DZ_FILE_COMPLETE);
@@ -1081,10 +1080,10 @@ var dropzoneInit = function dropzoneInit() {
 /* -------------------------------------------------------------------------- */
 
 
-var formValidationInit = function formValidationInit() {
+let formValidationInit = function formValidationInit() {
   // Example starter JavaScript for disabling form submissions if there are invalid fields
   // Fetch all the forms we want to apply custom Bootstrap validation styles to
-  var forms = document.querySelectorAll('.needs-validation'); // Loop over them and prevent submission
+  let forms = document.querySelectorAll('.needs-validation'); // Loop over them and prevent submission
 
   Array.prototype.slice.call(forms).forEach(function (form) {
     form.addEventListener('submit', function (event) {
@@ -1104,12 +1103,12 @@ var formValidationInit = function formValidationInit() {
 /* -------------------------------------------------------------------------- */
 
 
-var merge = window._.merge;
+let merge = window._.merge;
 
-var renderCalendar = function renderCalendar(el, option) {
-  var _document$querySelect;
+let renderCalendar = function renderCalendar(el, option) {
+  let _document$querySelect;
 
-  var options = merge({
+  let options = merge({
     initialView: 'dayGridMonth',
     editable: true,
     direction: document.querySelector('html').getAttribute('dir'),
@@ -1124,7 +1123,7 @@ var renderCalendar = function renderCalendar(el, option) {
       day: 'Day'
     }
   }, option);
-  var calendar = new window.FullCalendar.Calendar(el, options);
+  let calendar = new window.FullCalendar.Calendar(el, options);
   calendar.render();
   (_document$querySelect = document.querySelector('.navbar-vertical-toggle')) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener('navbar.vertical.toggle', function () {
     return calendar.updateSize();
@@ -1132,15 +1131,15 @@ var renderCalendar = function renderCalendar(el, option) {
   return calendar;
 };
 
-var fullCalendarInit = function fullCalendarInit() {
-  var calendars = document.querySelectorAll('[data-calendar]');
+let fullCalendarInit = function fullCalendarInit() {
+  let calendars = document.querySelectorAll('[data-calendar]');
   calendars.forEach(function (item) {
-    var options = utils.getData(item, 'calendar');
+    let options = utils.getData(item, 'calendar');
     renderCalendar(item, options);
   });
 };
 
-var fullCalendar = {
+let fullCalendar = {
   renderCalendar: renderCalendar,
   fullCalendarInit: fullCalendarInit
 };
@@ -1150,7 +1149,7 @@ var fullCalendar = {
 
 /* -------------------------------------------------------------------------- */
 
-var glightboxInit = function glightboxInit() {
+let glightboxInit = function glightboxInit() {
   if (window.GLightbox) {
     window.GLightbox({
       selector: '[data-gallery]'
@@ -1163,12 +1162,12 @@ var glightboxInit = function glightboxInit() {
 
 
 function initMap() {
-  var themeController = document.body;
-  var $googlemaps = document.querySelectorAll('.googlemap');
+  let themeController = document.body;
+  let $googlemaps = document.querySelectorAll('.googlemap');
 
   if ($googlemaps.length && window.google) {
     // Visit https://snazzymaps.com/ for more themes
-    var mapStyles = {
+    let mapStyles = {
       Default: [{
         featureType: 'water',
         elementType: 'geometry',
@@ -2077,16 +2076,16 @@ function initMap() {
       }]
     };
     $googlemaps.forEach(function (itm) {
-      var latLng = utils.getData(itm, 'latlng').split(',');
-      var markerPopup = itm.innerHTML;
-      var icon = utils.getData(itm, 'icon') ? utils.getData(itm, 'icon') : 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi.png';
-      var zoom = utils.getData(itm, 'zoom');
-      var mapElement = itm;
-      var mapStyle = utils.getData(itm, 'theme');
+      let latLng = utils.getData(itm, 'latlng').split(',');
+      let markerPopup = itm.innerHTML;
+      let icon = utils.getData(itm, 'icon') ? utils.getData(itm, 'icon') : 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi.png';
+      let zoom = utils.getData(itm, 'zoom');
+      let mapElement = itm;
+      let mapStyle = utils.getData(itm, 'theme');
 
       if (utils.getData(itm, 'theme') === 'streetview') {
-        var pov = utils.getData(itm, 'pov');
-        var _mapOptions = {
+        let pov = utils.getData(itm, 'pov');
+        let _mapOptions = {
           position: {
             lat: Number(latLng[0]),
             lng: Number(latLng[1])
@@ -2099,17 +2098,17 @@ function initMap() {
         return new window.google.maps.StreetViewPanorama(mapElement, _mapOptions);
       }
 
-      var mapOptions = {
+      let mapOptions = {
         zoom: zoom,
         scrollwheel: utils.getData(itm, 'scrollwheel'),
         center: new window.google.maps.LatLng(latLng[0], latLng[1]),
         styles: localStorage.getItem('theme') === 'dark' ? mapStyles.Cobalt : mapStyles[mapStyle]
       };
-      var map = new window.google.maps.Map(mapElement, mapOptions);
-      var infowindow = new window.google.maps.InfoWindow({
+      let map = new window.google.maps.Map(mapElement, mapOptions);
+      let infowindow = new window.google.maps.InfoWindow({
         content: markerPopup
       });
-      var marker = new window.google.maps.Marker({
+      let marker = new window.google.maps.Marker({
         position: new window.google.maps.LatLng(latLng[0], latLng[1]),
         icon: icon,
         map: map
@@ -2118,7 +2117,7 @@ function initMap() {
         infowindow.open(map, marker);
       });
       themeController && themeController.addEventListener('clickControl', function (_ref3) {
-        var _ref3$detail = _ref3.detail,
+        let _ref3$detail = _ref3.detail,
             control = _ref3$detail.control,
             value = _ref3$detail.value;
 
@@ -2137,9 +2136,9 @@ function initMap() {
 /* -------------------------------------------------------------------------- */
 
 
-var iconCopiedInit = function iconCopiedInit() {
-  var iconList = document.getElementById('icon-list');
-  var iconCopiedToast = document.getElementById('icon-copied-toast');
+let iconCopiedInit = function iconCopiedInit() {
+  let iconList = document.getElementById('icon-list');
+  let iconCopiedToast = document.getElementById('icon-copied-toast');
   var iconCopiedToastInstance = new window.bootstrap.Toast(iconCopiedToast);
 
   if (iconList) {

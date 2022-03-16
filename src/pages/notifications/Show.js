@@ -1,6 +1,5 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {useParams} from 'react-router-dom';
-import axios from 'axios';
 import {IMAGES} from '../../constants';
 import moment from 'moment';
 import PageLoader from '../../components/PageLoader';
@@ -8,12 +7,13 @@ import DestinationChips from '../../components/DestinationChips';
 import JSONPretty from 'react-json-pretty';
 import 'react-json-pretty/themes/monikai.css';
 import {useFetch} from '../../hooks';
+import ErrorPage from '../../components/ErrorPage';
 
 const Show = () => {
     const {id} = useParams();
     let {data: notification, loading, error} = useFetch(`https://hoodis-notify.herokuapp.com/api/notifications/${id}`);
 
-    if (error) return <p>There is an error.</p>;
+    if (error) return <ErrorPage/>;
 
     let hasError;
     if (notification) {
@@ -25,8 +25,8 @@ const Show = () => {
     return (
         <>
             {
-                notification
-                ? (
+                loading
+                ? <PageLoader/> : (
                     <>
                         <div className="card mb-3">
                             <div className="bg-holder d-none d-lg-block bg-card"
@@ -94,7 +94,6 @@ const Show = () => {
                         </div>
                     </>
                 )
-                : <PageLoader/>
             }
         </>
     );

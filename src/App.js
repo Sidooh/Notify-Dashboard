@@ -16,6 +16,7 @@ function App() {
                 <Routes>
                     <Route path={'/dashboard/default'} element={<Dashboard.Default/>}/>
                     <Route path={'/dashboard/analytics'} element={<Dashboard.Analytics/>}/>
+                    <Route path={'/notifications/create'} element={<Notifications.Create/>}/>
                     <Route path={'/notifications/sms'} element={<Notifications.SMS/>}/>
                     <Route path={'/notifications/:id'} element={<Notifications.Show/>}/>
                     <Route path={'/settings'} element={<Settings.Index/>}/>
