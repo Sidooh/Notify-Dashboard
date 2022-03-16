@@ -8,6 +8,7 @@ import {Help} from '../../utils/Helpers';
 import DataTable from '../../components/DataTable';
 import {useFetch} from '../../hooks';
 import ErrorPage from '../../components/ErrorPage';
+import Master from '../../layouts/Master';
 
 const SMS = () => {
     let {data: notifications, error} = useFetch('https://hoodis-notify.herokuapp.com/api/notifications');
@@ -53,31 +54,32 @@ const SMS = () => {
     }
 
     return (
-        <div className="row g-3 mb-3">
-            <div className="col-xxl-12 col-md-12">
-                {/*<RecentNotifications notifications={notifications}/>*/}
-                <Grid container spacing={2}>
-                    <Grid item xs={12}>
-                        {!notifications
-                         ? <Grid container alignItems="center" justifyContent="center">
-                             <Grid item width={'70%'}>
-                                 <Box sx={{width: '100%'}} className={'mt-5'}>
-                                     <LinearProgress color={'secondary'}/>
-                                 </Box>
+        <>
+            <div className="row g-3 mb-3">
+                <div className="col-xxl-12 col-md-12">
+                    <Grid container spacing={2}>
+                        <Grid item xs={12}>
+                            {!notifications
+                             ? <Grid container alignItems="center" justifyContent="center">
+                                 <Grid item width={'70%'}>
+                                     <Box sx={{width: '100%'}} className={'mt-5'}>
+                                         <LinearProgress color={'secondary'}/>
+                                     </Box>
+                                 </Grid>
                              </Grid>
-                         </Grid>
-                         : <DataTable data={notifications} columns={[
-                                {name: <strong>Provider</strong>},
-                                {name: <strong>Destination(s)</strong>},
-                                {name: <strong>Message</strong>},
-                                {name: <strong>Date</strong>},
-                                {name: <strong>Actions</strong>},
-                            ]}/>
-                        }
+                             : <DataTable data={notifications} columns={[
+                                    {name: <strong>Provider</strong>},
+                                    {name: <strong>Destination(s)</strong>},
+                                    {name: <strong>Message</strong>},
+                                    {name: <strong>Date</strong>},
+                                    {name: <strong>Actions</strong>},
+                                ]}/>
+                            }
+                        </Grid>
                     </Grid>
-                </Grid>
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

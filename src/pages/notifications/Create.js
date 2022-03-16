@@ -1,10 +1,11 @@
 import React from 'react';
+import Master from '../../layouts/Master';
 
 const Create = () => {
     return (
-        <div>
+        <>
             Create Notification
-        </div>
+        </>
     );
 };
 

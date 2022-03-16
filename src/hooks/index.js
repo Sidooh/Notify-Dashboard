@@ -3,5 +3,5 @@ import useRequest from './useRequest'
 
 export {
     useFetch,
-    useRequest
+    useRequest,
 }

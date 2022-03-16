@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 let Weather = {Utils: {}};
 
 Weather.LANGUAGE = "en";    // default language is English
@@ -86,7 +88,7 @@ Weather._getJSON = async (url, callback) => {
         console.log('WARNING: You must provide an OpenWeatherMap API key.');
     }
 
-    jsonp(url).then(callback);
+    axios.get(url).then(({data}) => callback(data)).catch(err => console.log(err))
 };
 
 let maxBy = Weather.Utils.maxBy = function (list, iterator) {

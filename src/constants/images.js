@@ -16,8 +16,10 @@ export const IMAGES = {
 
         spotIllustrations: {
             47: require('../assets/images/icons/spot-illustrations/47.png'),
-            falcon: require('../assets/images/icons/spot-illustrations/falcon.png'),
+            bg_shape: require('../assets/images/icons/spot-illustrations/bg-shape.png'),
             corner_4: require('../assets/images/icons/spot-illustrations/corner-4.png'),
+            falcon: require('../assets/images/icons/spot-illustrations/falcon.png'),
+            shape_1: require('../assets/images/icons/spot-illustrations/shape-1.png'),
         }
     },
     navIcons: {

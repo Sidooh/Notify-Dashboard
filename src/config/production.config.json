@@ -1,3 +1,4 @@
 {
-  "SIDOOH_NOTIFY_URL":"https://hoodis-notify.herokuapp.com"
+  "SIDOOH_NOTIFY_URL":"https://hoodis-notify.herokuapp.com",
+  "SIDOOH_ACCOUNTS_URL":"https://hoodis-notify.herokuapp.com"
 }
