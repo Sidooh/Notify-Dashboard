@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import moment from 'moment';
 import DestinationChips from '../../components/DestinationChips';
 import {Help} from '../../utils/Helpers';
+import {Link} from 'react-router-dom';
 
 const RecentNotifications = ({notifications}) => {
     return (
@@ -105,7 +106,7 @@ const RecentNotifications = ({notifications}) => {
                                                 </button>
                                                 <div className="dropdown-menu dropdown-menu-end border py-2"
                                                      aria-labelledby="dropdown0">
-                                                    <a className="dropdown-item" href="#!">View</a>
+                                                    <Link to={`/notifications/${notification.id}`} className="dropdown-item" href="#!">View</Link>
                                                     <a className="dropdown-item" href="#!">Edit</a>
                                                     <a className="dropdown-item" href="#!">Refund</a>
                                                     <div className="dropdown-divider"/>

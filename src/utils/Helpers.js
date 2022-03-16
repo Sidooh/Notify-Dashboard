@@ -15,8 +15,8 @@ export const Help = {
 
     toast: data => {
         let duration = (data.duration ?? 7) * 1000,
-            type = data.type ?? 'success',
-            close = data.close ?? 'true'
+            type     = data.type ?? 'success',
+            close    = data.close ?? 'true';
 
         Toastify({
             text: data.msg,
@@ -26,5 +26,5 @@ export const Help = {
             position: data.position ?? 'right',
             className: type,
         }).showToast();
-    }
+    },
 };

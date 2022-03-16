@@ -1,30 +1,23 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import $ from 'jquery';
-import axios from 'axios';
 import {IMAGES} from '../../constants';
 import RecentNotifications from './RecentNotifications';
+import {useFetch} from '../../hooks';
 
 const Default = () => {
-    const [notifications, setNotifications] = useState(null);
+    const {data:notifications, error} = useFetch('https://hoodis-notify.herokuapp.com/api/dashboard')
 
-    useEffect(() => {
-        fetchDashboard();
-    }, []);
-
-    const fetchDashboard = () => {
-        axios.get('https://hoodis-notify.herokuapp.com/api/dashboard')
-             .then(({data}) => {
-                 setNotifications(data.notifications);
-                 setTimeout(() => {
-                     $('#table_id').DataTable({
-                         columnDefs: [
-                             {orderable: false, targets: [0, 5]}
-                         ],
-                         lengthMenu: [[7, 10, -1], [7, 10, "All"]]
-                     });
-                 }, 500);
-             }).catch(err => console.log(err));
-    };
+    if(notifications) {
+        setTimeout(() => {
+            $('#table_id').DataTable({
+                retrieve: true,
+                columnDefs: [
+                    {orderable: false, targets: [0, 5]}
+                ],
+                lengthMenu: [[7, 10, -1], [7, 10, "All"]]
+            });
+        }, 500);
+    }
 
     return (
         <>
@@ -159,7 +152,7 @@ const Default = () => {
             </div>
             <div className="row g-3 mb-3">
                 <div className="col-xxl-12 col-md-12">
-                    <RecentNotifications notifications={notifications}/>
+                    <RecentNotifications notifications={notifications?.notifications}/>
                 </div>
             </div>
         </>
