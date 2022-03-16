@@ -118,8 +118,6 @@ const NavbarVerticalTop = () => {
                                     icon: <span className="fas fa-comments"/>,
                                     listItems: [
                                         {title: 'All messages', href: '/notifications/sms'},
-                                        {title: 'Analytics', href: '/dashboard/analytics'},
-                                        {title: 'CRM', href: '/dashboard/crm'},
                                     ],
                                     showListItems: true
                                 },

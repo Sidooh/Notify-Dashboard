@@ -4,7 +4,7 @@ import CircularProgress, {circularProgressClasses} from '@mui/material/CircularP
 
 const PageLoader = () => {
     return (
-        <Box sx={{flexGrow: 1}} className={'d-flex justify-content-center align-items-center h-100'}>
+        <Box className={'d-flex justify-content-center align-items-center py-5 mt-5'}>
             <Box sx={{position: 'relative'}}>
                 <CircularProgress
                     variant="determinate"
@@ -21,7 +21,7 @@ const PageLoader = () => {
                     disableShrink
                     sx={{
                         color: (theme) => (theme.palette.mode === 'light' ? '#1a90ff' : '#308fe8'),
-                        animationDuration: '550ms',
+                        animationDuration: '700ms',
                         position: 'absolute',
                         left: 0,
                         [`& .${circularProgressClasses.circle}`]: {

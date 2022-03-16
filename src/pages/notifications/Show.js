@@ -22,8 +22,6 @@ const Show = () => {
                    : notification.status !== "success";
     }
 
-    notification = null
-
     return (
         <>
             {
