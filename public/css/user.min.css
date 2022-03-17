@@ -4,6 +4,14 @@
     --falcon-body-font-family: 'Varela Round', cursive !important;
 }
 
+.modal-footer > * {
+    margin: .25rem !important;
+}
+
+td {
+    vertical-align: middle;
+}
+
 
 .fs-9 {
     font-size: 9pt !important
@@ -126,4 +134,28 @@ table td.actions .btn {
 .css-d75lg9-MuiTablePagination-displayedRows,
 .css-1x560ra-MuiTablePagination-selectLabel {
     margin: 0;
+}
+
+
+/*________   ________ - ________ - TOASTIFY   ________ - ________ - _________*/
+
+.toastify {
+    font-weight: bolder;
+}
+
+.toastify.success {
+    background: linear-gradient(30deg, rgb(10, 170, 30), rgba(10, 170, 100, .8), #73a5ff);
+}
+
+.toastify.info {
+    background: linear-gradient(30deg, rgb(37, 157, 138), rgba(37, 157, 138, .8), #73a5ff);
+}
+
+.toastify.warning {
+    background: linear-gradient(30deg, rgb(235, 166, 18), rgba(235, 166, 18, .8), #73a5ff);
+    color: rgb(30, 30, 30);
+}
+
+.toastify.danger {
+    background: linear-gradient(30deg, rgb(200, 20, 10), rgba(1200, 20, 10, .8), #73a5ff);
 }

@@ -1,40 +1,60 @@
-import React from 'react';
+import React, {useState} from 'react';
 import 'datatables.net-bs5';
-import {Box, Grid, LinearProgress, Typography} from '@mui/material';
+import {Box, Button, Grid, IconButton, LinearProgress} from '@mui/material';
 import PropTypes from 'prop-types';
-import moment from 'moment';
-import DestinationChips from '../../components/DestinationChips';
+import TableToolbar from '../../components/TableToolbar';
+import {Delete, Edit, Save} from '@mui/icons-material';
+import Modal from '../../components/Modal';
+import {useFormik} from "formik";
+import * as yup from "yup";
+import {useRequest} from '../../hooks';
+import {CONFIG} from '../../config';
 import {Help} from '../../utils/Helpers';
-import {Link} from 'react-router-dom';
+import {LoadingButton} from '@mui/lab';
+
+const validationSchema = yup.object({
+    value: yup.string()
+});
 
 const SettingsTable = ({settings}) => {
+    const [settingToEdit, setSettingToEdit] = useState(null);
+
+    const openInPopup = setting => {
+        setSettingToEdit(setting);
+        formik.setValues(setting, true);
+
+        window.settingsModal = new window.bootstrap.Modal(document.getElementById('error-modal'));
+        window.settingsModal.show();
+    };
+
+    const {sendRequest, loading, errors} = useRequest({
+        url: `${CONFIG.SIDOOH_NOTIFY_URL}/api/settings`,
+        onSuccess: data => {
+            const index = settings.findIndex(item => item.id === data.id)
+            settings[index] = data
+
+            window.settingsModal.hide()
+            Help.toast({msg: "Setting Updated!", type: "success"})
+        },
+    });
+
+    const formik = useFormik({
+        initialValues: {
+            type: settingToEdit?.type,
+            value: settingToEdit?.value
+        },
+        validationSchema: validationSchema,
+        onSubmit: values => sendRequest(values),
+    });
+
     return (
         <div className="card" id="recentPurchaseTable">
-            <div className="card-header">
-                <div className="row flex-between-center">
-                    <div className="col-6 col-sm-auto d-flex align-items-center pe-0">
-                        <h5 className="fs-0 mb-0 text-nowrap py-2 py-xl-0">Settings</h5>
-                    </div>
-                    <div className="col-6 col-sm-auto ms-auto text-end ps-0">
-                        <div className="d-none" id="table-purchases-actions">
-                            <div className="d-flex">
-                                <select className="form-select form-select-sm" aria-label="Bulk actions">
-                                    <option>Bulk actions</option>
-                                    <option value="Refund">Refund</option>
-                                    <option value="Delete">Delete</option>
-                                    <option value="Archive">Archive</option>
-                                </select>
-                                <button className="btn btn-falcon-default btn-sm ms-2" type="button">Apply</button>
-                            </div>
-                        </div>
-                        <div id="table-purchases-replace-element">
-                            <button className="btn btn-falcon-default btn-sm" type="button"><span
-                                className="fas fa-plus" data-fa-transform="shrink-3 down-2"/><span
-                                className="d-none d-sm-inline-block ms-1">New</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <TableToolbar title={'Settings'} actionsId={'table-settings-actions'} toolbarIcons={[
+                <button className="btn btn-falcon-default btn-sm" type="button">
+                    <span className="fas fa-plus" data-fa-transform="shrink-3 down-2"/>
+                    <span className="d-none d-sm-inline-block ms-1">New</span>
+                </button>
+            ]}/>
             <div className="card-body px-0 pt-0">
                 <div className="table-responsive scrollbar">
                     <table className="table table-sm fs--1 mb-0 overflow-hidden" id={'table_id'}>
@@ -42,69 +62,39 @@ const SettingsTable = ({settings}) => {
                         <tr>
                             <th className="white-space-nowrap">
                                 <div className="form-check mb-0 d-flex align-items-center">
-                                    <input className="form-check-input" id="checkbox-bulk-purchases-select" type="checkbox"
-                                           data-bulk-select='{"body":"table-purchase-body","actions":"table-purchases-actions","replacedElement":"table-purchases-replace-element"}'/>
+                                    <input className="form-check-input" id="checkbox-bulk-purchases-select"
+                                           type="checkbox"
+                                           data-bulk-select='{"body":"table-purchase-body","actions":"table-settings-actions","replacedElement":"table-purchases-replace-element"}'/>
                                 </div>
                             </th>
-                            <th>Provider</th>
-                            <th>Destination(s)</th>
-                            <th>Message</th>
-                            <th>Date</th>
+                            <th>Type</th>
+                            <th>Value</th>
                             <th className="pe-1 align-middle data-table-row-action"/>
                         </tr>
                         </thead>
                         <tbody className="list" id="table-purchase-body">
                         {
                             settings
-                            ? settings.map(settings => {
+                            ? settings.map(row => {
                                 return (
-                                    <tr key={settings.id} className="btn-reveal-trigger">
+                                    <tr key={row.id} className="btn-reveal-trigger">
                                         <td className="align-middle white-space-nowrap">
                                             <div className="form-check mb-0">
                                                 <input className="form-check-input" type="checkbox" id="sa-1"
                                                        data-bulk-select-row="data-bulk-select-row"/>
                                             </div>
                                         </td>
-                                        <td>{notification.provider}</td>
-                                        <td><DestinationChips notification={notification}/></td>
-                                        <td>
-                                            <Typography variant={"body2"} title={notification.content} style={{
-                                                display: "-webkit-box",
-                                                overflow: "hidden",
-                                                WebkitBoxOrient: "vertical",
-                                                WebkitLineClamp: 2,
-                                                cursor: "context-menu",
-                                                maxWidth: '35rem',
-                                            }}>{notification.content}</Typography>
-                                        </td>
-                                        <td>
-                                            <div style={{textAlign: "end"}}>
-                                                {moment(notification.created_at).format("LTS")}<br/>
-                                                <Typography variant={"caption"}>{date}</Typography>
-                                            </div>
-                                        </td>
+                                        <td>{(row.type.replaceAll('_', ' ')).toUpperCase()}</td>
+                                        <td>{row.value}</td>
                                         <td className="align-middle white-space-nowrap text-end">
-                                            <div className="dropstart font-sans-serif position-static d-inline-block">
-                                                <button
-                                                    className="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal float-end"
-                                                    type="button" id="dropdown0" data-bs-toggle="dropdown"
-                                                    data-boundary="window" aria-haspopup="true"
-                                                    aria-expanded="false"
-                                                    data-bs-reference="parent"><span
-                                                    className="fas fa-ellipsis-h fs--1"/>
-                                                </button>
-                                                <div className="dropdown-menu dropdown-menu-end border py-2"
-                                                     aria-labelledby="dropdown0">
-                                                    <Link to={`/notifications/${notification.id}`} className="dropdown-item" href="#!">View</Link>
-                                                    <a className="dropdown-item" href="#!">Edit</a>
-                                                    <a className="dropdown-item" href="#!">Refund</a>
-                                                    <div className="dropdown-divider"/>
-                                                    <a className="dropdown-item text-warning"
-                                                       href="#!">Archive</a>
-                                                    <a className="dropdown-item text-danger"
-                                                       href="#!">Delete</a>
-                                                </div>
-                                            </div>
+                                            <IconButton onClick={() => openInPopup(row)} aria-label="delete"
+                                                        size={"small"}
+                                                        color={"primary"}>
+                                                <Edit fontSize={'small'}/>
+                                            </IconButton>
+                                            <IconButton aria-label="delete" size={"small"} color={"error"}>
+                                                <Delete fontSize={'small'}/>
+                                            </IconButton>
                                         </td>
                                     </tr>
                                 );
@@ -125,6 +115,33 @@ const SettingsTable = ({settings}) => {
                     </table>
                 </div>
             </div>
+
+            <Modal id={'error-modal'} title={(settingToEdit ? "Update" : "New") + " Setting"}
+                   body={
+                       <form onSubmit={formik.handleSubmit}>
+                           {errors}
+
+                           <div className="mb-3">
+                               <label className="col-form-label" htmlFor="recipient-name">
+                                   Type: {(formik.values.type ?? "").replaceAll('_', ' ').toUpperCase()}
+                               </label>
+                           </div>
+                           <div className="mb-3">
+                               <label className="col-form-label" htmlFor="message-text">Value:</label>
+                               <input className="form-control" id="value" name={'value'} type="text"
+                                      value={formik.values.value} onChange={formik.handleChange}/>
+                               <small className={'text-danger'}>{formik.touched.value && formik.errors.value}</small>
+                           </div>
+                       </form>
+                   }
+                   footer={
+                       <>
+                           <Button size={'small'} variant={'outlined'} color={'inherit'} data-bs-dismiss="modal">Cancel</Button>
+                           <LoadingButton size="small" color="primary" loading={loading} loadingPosition="end"
+                                          onClick={() => formik.submitForm()}
+                                          endIcon={<Save/>} variant="contained">Update</LoadingButton>
+                       </>
+                   }/>
         </div>
     );
 };

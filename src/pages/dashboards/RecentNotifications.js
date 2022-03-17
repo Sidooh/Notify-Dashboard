@@ -6,36 +6,17 @@ import moment from 'moment';
 import DestinationChips from '../../components/DestinationChips';
 import {Help} from '../../utils/Helpers';
 import {Link} from 'react-router-dom';
+import TableToolbar from '../../components/TableToolbar';
 
 const RecentNotifications = ({notifications}) => {
     return (
         <div className="card" id="recentPurchaseTable">
-            <div className="card-header">
-                <div className="row flex-between-center">
-                    <div className="col-6 col-sm-auto d-flex align-items-center pe-0">
-                        <h5 className="fs-0 mb-0 text-nowrap py-2 py-xl-0">Recent Notifications </h5>
-                    </div>
-                    <div className="col-6 col-sm-auto ms-auto text-end ps-0">
-                        <div className="d-none" id="table-purchases-actions">
-                            <div className="d-flex">
-                                <select className="form-select form-select-sm" aria-label="Bulk actions">
-                                    <option>Bulk actions</option>
-                                    <option value="Refund">Refund</option>
-                                    <option value="Delete">Delete</option>
-                                    <option value="Archive">Archive</option>
-                                </select>
-                                <button className="btn btn-falcon-default btn-sm ms-2" type="button">Apply
-                                </button>
-                            </div>
-                        </div>
-                        <div id="table-purchases-replace-element">
-                            <button className="btn btn-falcon-default btn-sm" type="button"><span
-                                className="fas fa-plus" data-fa-transform="shrink-3 down-2"/><span
-                                className="d-none d-sm-inline-block ms-1">New</span></button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <TableToolbar title={'Recent Notifications'} actionsId={'table-notification-actions'} toolbarIcons={[
+                <button className="btn btn-falcon-default btn-sm" type="button">
+                    <span className="fas fa-plus" data-fa-transform="shrink-3 down-2"/>
+                    <span className="d-none d-sm-inline-block ms-1">New</span>
+                </button>
+            ]}/>
             <div className="card-body px-0 pt-0">
                 <div className="table-responsive scrollbar">
                     <table className="table table-sm fs--1 mb-0 overflow-hidden" id={'table_id'}>
@@ -45,7 +26,7 @@ const RecentNotifications = ({notifications}) => {
                                 <div className="form-check mb-0 d-flex align-items-center">
                                     <input className="form-check-input" id="checkbox-bulk-purchases-select"
                                            type="checkbox"
-                                           data-bulk-select='{"body":"table-purchase-body","actions":"table-purchases-actions","replacedElement":"table-purchases-replace-element"}'/>
+                                           data-bulk-select='{"body":"table-purchase-body","actions":"table-notification-actions","replacedElement":"table-purchases-replace-element"}'/>
                                 </div>
                             </th>
                             <th>Provider</th>
