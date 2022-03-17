@@ -86,7 +86,7 @@ const Default = () => {
                                     <div className="mt-3">
                                         <div className="row">
                                             <div className="col-6">
-                                                <CountUp end={data?.balances.websms} decimals={2} className={'fs-3'}/>
+                                                <CountUp end={data?.balances.websms} decimals={2} className={'fs-2'}/>
                                                 <div className="d-flex flex-between-center mb-1">
                                                     <div className="d-flex align-items-center fs--2">
                                                         <span
@@ -98,7 +98,7 @@ const Default = () => {
                                             </div>
                                             <div className="col-6">
                                                 <CountUp end={data?.balances.africastalking} decimals={2}
-                                                         className={'fs-3'}/>
+                                                         className={'fs-2'}/>
                                                 <div className="d-flex flex-between-center mb-1">
                                                     <div className="d-flex align-items-center fs--2">
                                                         <span
