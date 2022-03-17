@@ -22,7 +22,7 @@ function App() {
                         <Route path={'/notifications/create'} element={<Notifications.Create/>}/>
                         <Route path={'/notifications/sms'} element={<Notifications.SMS/>}/>
                         <Route path={'/notifications/:id'} element={<Notifications.Show/>}/>
-                        <Route path={'/settings'} element={<Settings.Index/>}/>
+                        <Route path={'/settings'} element={<Settings/>}/>
                         <Route path={'*'} element={<Dashboard.Default/>}/>
                     </Routes>
                 </Master>

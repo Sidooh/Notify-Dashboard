@@ -4,7 +4,7 @@ import {IMAGES} from '../constants';
 const Waffle = () => {
     return (
         <li className="nav-item dropdown">
-            <a className="nav-link fa-icon-wait nine-dots p-1" id="navbarDropdownMenu" role="button"
+            <span className="nav-link fa-icon-wait nine-dots p-1" id="navbarDropdownMenu" role="button"
                data-hide-on-body-scroll="data-hide-on-body-scroll" data-bs-toggle="dropdown"
                aria-haspopup="true" aria-expanded="false">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="43" viewBox="0 0 16 16"
@@ -19,7 +19,7 @@ const Waffle = () => {
                     <circle cx="8" cy="2" r="2" fill="#6C6E71"/>
                     <circle cx="14" cy="2" r="2" fill="#6C6E71"/>
                 </svg>
-            </a>
+            </span>
             <div className="dropdown-menu dropdown-menu-end dropdown-menu-card dropdown-caret-bg"
                  aria-labelledby="navbarDropdownMenu">
                 <div className="card shadow-none">
@@ -143,7 +143,7 @@ const Waffle = () => {
                                 </div>
                                 <div className="col-4">
                                     <a className="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none"
-                                       href="https://github.com/Sidooh" target="_blank">
+                                       href="https://github.com/Sidooh" target="_blank" rel="noopener noreferrer">
                                         <img className="rounded" src={IMAGES.navIcons.github_light} alt="" width="40"
                                              height="40"/>
                                         <p className="mb-0 fw-medium text-800 text-truncate fs--2 pt-1">Github</p>

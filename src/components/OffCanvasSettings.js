@@ -147,8 +147,8 @@ const OffCanvasSettings = () => {
                         <img className="mb-4" src={IMAGES.icons.spotIllustrations['47']} alt="" width="120"/>
                         <h5>Like What You See?</h5>
                         <p className="fs--1">Get Falcon now and create beautiful dashboards with hundreds of
-                            widgets.</p><a
-                            className="mb-3 btn btn-primary"
+                            widgets.</p>
+                        <a className="mb-3 btn btn-primary" rel="noopener noreferrer"
                             href="https://themes.getbootstrap.com/product/falcon-admin-dashboard-webapp-template/"
                             target="_blank">Purchase</a>
                     </div>

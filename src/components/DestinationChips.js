@@ -21,8 +21,9 @@ const DestinationChips = ({notification}) => {
         <>
             {data.map((data, i) => {
                 return (
-                    <span key={i} className={`badge badge rounded-pill badge-soft-${data.status === "success" ? "success" : "error"}`}>
-                        {icon}{data.recipient}<span className="ms-1 fas fa-check" data-fa-transform="shrink-2"/>
+                    <span key={i} className={`badge badge rounded-pill badge-soft-${data.status === "success" ? "success" : "danger"}`}>
+                        {icon}{data.recipient}
+                        {<span className={`ms-1 fas fa-${data.status === "success" ? "check" : "xmark"}`}/>}
                     </span>
                 );
             })}

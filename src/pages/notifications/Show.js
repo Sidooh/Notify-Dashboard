@@ -23,6 +23,8 @@ const Show = () => {
                    : notification.status !== "success";
     }
 
+    console.log(loading);
+
     return (
         <>
             {

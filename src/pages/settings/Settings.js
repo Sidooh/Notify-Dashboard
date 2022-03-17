@@ -1,7 +1,7 @@
 import React from 'react';
 import Master from '../../layouts/Master';
 
-const Index = () => {
+const Settings = () => {
     return (
         <>
             Settings
@@ -9,4 +9,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default Settings;

@@ -7,18 +7,18 @@ const useFetch = (url) => {
 
     const initialState = {
         data: null,
-        loading: false,
+        loading: true,
         error: null,
     };
 
     const [state, dispatch] = useReducer((state, action) => {
         switch (action.type) {
             case 'FETCHING':
-                return {...initialState, loading: true};
+                return {...initialState};
             case 'FETCHED':
-                return {...initialState, data: action.payload};
+                return {...initialState, loading: false, data: action.payload};
             case 'FETCH_ERROR':
-                return {...initialState, error: action.payload};
+                return {...initialState, loading: false, error: action.payload};
             default:
                 return state;
         }

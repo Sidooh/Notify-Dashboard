@@ -1,5 +1,5 @@
-import Index from './Index';
+import Settings from './Settings';
 
-export const Settings = {
-    Index,
-}
+export {
+    Settings,
+};

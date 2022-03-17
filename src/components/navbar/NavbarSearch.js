@@ -1,6 +1,7 @@
 import React from 'react';
 import {IMAGES} from '../../constants';
 import Waffle from '../Waffle';
+import {Link} from 'react-router-dom';
 
 const NavbarSearch = () => {
     return (
@@ -108,11 +109,11 @@ const NavbarSearch = () => {
                     </div>
                 </li>
                 <li className="nav-item dropdown">
-                    <a className="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait"
+                    <span className="nav-link notification-indicator notification-indicator-primary px-0 fa-icon-wait"
                        id="navbarDropdownNotification" role="button" data-bs-toggle="dropdown" aria-haspopup="true"
                        aria-expanded="false" data-hide-on-body-scroll="data-hide-on-body-scroll">
                         <span className="fas fa-bell" data-fa-transform="shrink-6" style={{fontSize: '33px'}}/>
-                    </a>
+                    </span>
                     <div
                         className="dropdown-menu dropdown-menu-end dropdown-menu-card dropdown-menu-notification dropdown-caret-bg"
                         aria-labelledby="navbarDropdownNotification">
@@ -123,7 +124,7 @@ const NavbarSearch = () => {
                                         <h6 className="card-header-title mb-0">Notifications</h6>
                                     </div>
                                     <div className="col-auto ps-0 ps-sm-3">
-                                        <a className="card-link fw-normal" href="#">Mark all as read</a>
+                                        <span className="card-link fw-normal">Mark all as read</span>
                                     </div>
                                 </div>
                             </div>
@@ -237,12 +238,12 @@ const NavbarSearch = () => {
                 <Waffle/>
 
                 <li className="nav-item dropdown">
-                    <a className="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown"
+                    <span className="nav-link pe-0 ps-2" id="navbarDropdownUser" role="button" data-bs-toggle="dropdown"
                        aria-haspopup="true" aria-expanded="false">
                         <div className="avatar avatar-xl">
                             <img className="rounded-circle" src={IMAGES.team['2-thumb']} alt=""/>
                         </div>
-                    </a>
+                    </span>
                     <div className="dropdown-menu dropdown-menu-end py-0" aria-labelledby="navbarDropdownUser">
                         <div className="bg-white dark__bg-1000 rounded-2 py-2">
                             <a className="dropdown-item fw-bold text-warning" href="#!">
@@ -252,7 +253,7 @@ const NavbarSearch = () => {
                             <a className="dropdown-item" href="pages/user/profile.html">Profile &amp; account</a>
                             <a className="dropdown-item" href="#!">Feedback</a>
                             <div className="dropdown-divider"/>
-                            <a className="dropdown-item" href="pages/user/settings.html">Settings</a>
+                            <Link className="dropdown-item" to="/settings">Settings</Link>
                             <a className="dropdown-item" href="pages/authentication/card/logout.html">Logout</a>
                         </div>
                     </div>

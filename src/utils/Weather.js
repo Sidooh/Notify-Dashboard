@@ -4,28 +4,6 @@ let Weather = {Utils: {}};
 
 Weather.LANGUAGE = "en";    // default language is English
 
-let jsonp = Weather.Utils.jsonp = function (uri) {
-    return new Promise(function (resolve, reject) {
-        let id = '_' + Math.round(10000 * Math.random());
-        let callbackName = 'jsonp_callback_' + id;
-        let el = (document.getElementsByTagName('head')[0] || document.body || document.documentElement);
-        let script = document.createElement('script');
-        let src = uri + '&callback=' + callbackName;
-
-        window[callbackName] = function (data) {
-            delete window[callbackName];
-            let ele = document.getElementById(id);
-            ele.parentNode.removeChild(ele);
-            resolve(data);
-        };
-
-        script.src = src;
-        script.id = id;
-        script.addEventListener('error', reject);
-        el.appendChild(script);
-    });
-};
-
 Weather.getApiKey = () => Weather.APIKEY;
 
 Weather.setApiKey = function (apiKey) {
@@ -165,10 +143,12 @@ Weather.Forecast.prototype.high = function () {
 
 Weather.Forecast.prototype._filter = function (date) {
     return {
-        list: this.data.list.filter(function (range) {
+        list: this.data.list.filter(range => {
             let dateTimestamp = (range.dt * 1000);
 
             if (isOnDate(new Date(dateTimestamp), date)) return range;
+
+            return null
         })
     };
 };
