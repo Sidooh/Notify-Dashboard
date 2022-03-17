@@ -12,10 +12,14 @@ export const IMAGES = {
         arrowsH: require('../assets/images/icons/arrows-h.svg'),
         paragraph: require('../assets/images/icons/paragraph.svg'),
         weather_sm: require('../assets/images/icons/weather-sm.jpg'),
+        weather_icon: require('../assets/images/icons/weather-icon.png'),
 
         spotIllustrations: {
             47: require('../assets/images/icons/spot-illustrations/47.png'),
+            bg_shape: require('../assets/images/icons/spot-illustrations/bg-shape.png'),
+            corner_4: require('../assets/images/icons/spot-illustrations/corner-4.png'),
             falcon: require('../assets/images/icons/spot-illustrations/falcon.png'),
+            shape_1: require('../assets/images/icons/spot-illustrations/shape-1.png'),
         }
     },
     navIcons: {
@@ -25,9 +29,11 @@ export const IMAGES = {
         trello: require('../assets/images/nav-icons/trello.png'),
     },
     team: {
+        2: require('../assets/images/team/2.jpg'),
         3: require('../assets/images/team/3.jpg'),
         10: require('../assets/images/team/10.jpg'),
         "1-thumb": require('../assets/images/team/1-thumb.png'),
+        "2-thumb": require('../assets/images/team/2-thumb.png'),
         "3-thumb": require('../assets/images/team/3-thumb.png'),
     },
     logos: {

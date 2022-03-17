@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
+
+:root {
+    --falcon-body-font-family: 'Varela Round', cursive !important;
+}
+
+.modal-footer > * {
+    margin: .25rem !important;
+}
+
+td {
+    vertical-align: middle;
+}
+
+
+.fs-9 {
+    font-size: 9pt !important
+}
+
+.fs-10 {
+    font-size: 10pt !important
+}
+
+.fs-11 {
+    font-size: 11pt !important
+}
+
+.fs-12 {
+    font-size: 12pt !important
+}
+
+.fs-13 {
+    font-size: 13pt !important
+}
+
+.fs-14 {
+    font-size: 14pt !important
+}
+
+.fs-15 {
+    font-size: 15pt !important
+}
+
+.fs-16 {
+    font-size: 16pt !important
+}
+
+.fs-17 {
+    font-size: 17pt !important
+}
+
+.fs-18 {
+    font-size: 18pt !important
+}
+
+.fs-20 {
+    font-size: 20pt !important
+}
+
+.fs-22 {
+    font-size: 22pt !important
+}
+
+.fs-24 {
+    font-size: 24pt !important
+}
+
+.fs-32 {
+    font-size: 32pt !important
+}
+
+.fs-48 {
+    font-size: 48pt !important
+}
+
+
+/*________   ________ - ________ - DATATABLES   ________ - ________ - _________*/
+
+.table > :not(caption) > * > * {
+    padding: .4rem .5rem;
+    font-size: 10pt;
+}
+
+#table_id_filter input[type="search"] {
+    min-height: calc(1.5em + (0.5rem + 2px));
+    padding: 0.25rem 0.5rem;
+    font-size: 0.875rem;
+    border-radius: 0.2rem;
+}
+
+table td.actions .btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 9pt;
+    width: 1.7rem;
+    height: 1.7rem;
+    padding: 4px;
+}
+
+.paginate_button a {
+    padding: .1875rem .75rem;
+    font-size: 0.875rem;
+    display: inline-block;
+    font-weight: 500;
+    line-height: 1.5;
+    color: #5e6e82;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    background-color: transparent;
+    border: 1px solid transparent !important;
+    border-radius: .25rem;
+    margin-right: .3rem;
+    margin-left: .3rem;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .15), 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+    -o-transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out, -webkit-box-shadow .15s ease-in-out;
+}
+
+.dataTables_info {
+    font-size: .8333333333rem !important;
+}
+
+.dataTables_wrapper .row:first-child {
+    padding: 0 1rem;
+}
+
+.dataTables_wrapper .row:last-child {
+    padding: 0 1rem;
+}
+
+.css-d75lg9-MuiTablePagination-displayedRows,
+.css-1x560ra-MuiTablePagination-selectLabel {
+    margin: 0;
+}
+
+
+/*________   ________ - ________ - TOASTIFY   ________ - ________ - _________*/
+
+.toastify {
+    font-weight: bolder;
+}
+
+.toastify.success {
+    background: linear-gradient(30deg, rgb(10, 170, 30), rgba(10, 170, 100, .8), #73a5ff);
+}
+
+.toastify.info {
+    background: linear-gradient(30deg, rgb(37, 157, 138), rgba(37, 157, 138, .8), #73a5ff);
+}
+
+.toastify.warning {
+    background: linear-gradient(30deg, rgb(235, 166, 18), rgba(235, 166, 18, .8), #73a5ff);
+    color: rgb(30, 30, 30);
+}
+
+.toastify.danger {
+    background: linear-gradient(30deg, rgb(200, 20, 10), rgba(1200, 20, 10, .8), #73a5ff);
+}

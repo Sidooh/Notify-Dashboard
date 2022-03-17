@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
 import {IMAGES} from '../../constants';
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom';
+import CustomNavLink from '../CustomNavLink';
 
 const NavMenu = ({menuTitle, menuItems}) => {
     return (
@@ -30,25 +32,25 @@ const NavMenu = ({menuTitle, menuItems}) => {
 
                                <ul className={`nav collapse ${item.showListItems && 'show'}`} id={item.title.trim()}>
                                    {
-                                       item.listItems.map((item, i) => (
-                                           <li key={i} className="nav-item">
-                                               <a className={`nav-link ${item.active && 'active'}`} href={item.href}
-                                                  data-bs-toggle="" aria-expanded="false">
-                                                   <div className="d-flex align-items-center"><span
-                                                       className="nav-link-text ps-1">{item.title}</span></div>
-                                               </a>
-                                           </li>
-                                       ))
+                                       item.listItems.map((item, i) => {
+                                           return (
+                                               <li key={i} className="nav-item">
+                                                   <CustomNavLink to={item.href} data-bs-toggle="" aria-expanded="false">
+                                                       <div className="d-flex align-items-center"><span
+                                                           className="nav-link-text ps-1">{item.title}</span></div>
+                                                   </CustomNavLink>
+                                               </li>
+                                           );
+                                       })
                                    }
                                </ul>
                            </span>
-                           : <a key={i} className="nav-link" href={item.href} role="button" data-bs-toggle=""
-                                aria-expanded="false">
+                           : <CustomNavLink key={i} to={item.href} role="button" aria-expanded="false">
                                <div className="d-flex align-items-center">
                                    <span className="nav-link-icon">{item.icon}</span>
                                    <span className="nav-link-text ps-1">{item.title}</span>
                                </div>
-                           </a>;
+                           </CustomNavLink>;
                 })
             }
         </li>
@@ -88,11 +90,11 @@ const NavbarVerticalTop = () => {
                             <span className="navbar-toggle-icon"><span className="toggle-line"/></span>
                         </button>
                     </div>
-                    <a className="navbar-brand" href="/">
+                    <Link className="navbar-brand" to="/">
                         <div className="d-flex align-items-center py-3">
-                            <img className="me-2" src={IMAGES.logos.sidooh} alt="" width="100%"/>
+                            <img className="me-2" src={IMAGES.logos.sidooh} alt="" width="100"/>
                         </div>
-                    </a>
+                    </Link>
                 </div>
 
                 <div className="collapse navbar-collapse" id="navbarVerticalCollapse">
@@ -103,9 +105,8 @@ const NavbarVerticalTop = () => {
                                     title: 'Dashboards',
                                     icon: <span className="fas fa-chart-pie"/>,
                                     listItems: [
-                                        {title: 'Default', href: '/dashboard/default', active: true},
+                                        {title: 'Default', href: '/dashboard/default'},
                                         {title: 'Analytics', href: '/dashboard/analytics'},
-                                        {title: 'Management', href: '/dashboard/project-management'},
                                     ],
                                     showListItems: true
                                 },
@@ -113,13 +114,17 @@ const NavbarVerticalTop = () => {
 
                             <NavMenu menuTitle={'Notifications'} menuItems={[
                                 {
+                                    title: 'Send',
+                                    icon: <span className="fas fa-paper-plane"/>,
+                                    href: '/notifications/create',
+                                },
+                                {
                                     title: 'SMS',
                                     icon: <span className="fas fa-comments"/>,
                                     listItems: [
-                                        {title: 'Default', href: '/dashboard/default'},
-                                        {title: 'Analytics', href: '/dashboard/analytics'},
-                                        {title: 'CRM', href: '/dashboard/crm'},
-                                    ]
+                                        {title: 'All messages', href: '/notifications/sms'},
+                                    ],
+                                    showListItems: true
                                 },
                                 {
                                     title: 'Email',

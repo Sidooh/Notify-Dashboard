@@ -4,6 +4,7 @@ import Footer from '../components/Footer';
 import NavbarVerticalTop from '../components/navbar/NavbarVerticalTop';
 import NavbarSearch from '../components/navbar/NavbarSearch';
 import NavbarCombo from '../components/navbar/NavbarCombo';
+import RequireAuth from '../components/RequireAuth';
 
 const Master = ({children}) => {
     useEffect(() => {
