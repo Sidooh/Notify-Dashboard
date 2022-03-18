@@ -28,7 +28,7 @@ const SettingsTable = ({settings}) => {
     };
 
     const {sendRequest, loading, errors} = useRequest({
-        url: `${CONFIG.SIDOOH_NOTIFY_URL}/api/settings`,
+        url: `${CONFIG.sidooh.services.notify.api.url}/api/settings`,
         onSuccess: data => {
             const index = settings.findIndex(item => item.id === data.id)
             settings[index] = data

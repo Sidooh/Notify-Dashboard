@@ -17,7 +17,7 @@ const Login = () => {
     let from = location.state?.from?.pathname || "/";
 
     const {sendRequest, errors} = useRequest({
-        url: `${CONFIG.sidooh.accounts.api.url}/api/users/signin`,
+        url: `${CONFIG.sidooh.services.accounts.api.url}/api/users/signin`,
         method: 'post',
         body: {email, password},
         onSuccess: data => auth.handleSignIn(data, () => navigate(from, {replace: true}))
