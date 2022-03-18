@@ -1,4 +1,24 @@
 {
-  "SIDOOH_NOTIFY_URL":"https://hoodis-notify.herokuapp.com",
-  "SIDOOH_ACCOUNTS_URL":"https://hoodis-notify.herokuapp.com"
+  "sidooh": {
+    "services": {
+      "accounts": {
+        "api": {
+          "url": "http://localhost:3000"
+        }
+      },
+      "notify": {
+        "api": {
+          "url": "https://notify-cnwsrirpua-uc.a.run.app"
+        },
+        "dashboard": {
+          "url": "https://notify-dashboard-cnwsrirpua-uc.a.run.app"
+        }
+      },
+      "legacy": {
+        "dashboard": {
+          "url": "https://sidooh-admin-dashboard-okctxaztla-uc.a.run.app/admin"
+        }
+      }
+    }
+  }
 }

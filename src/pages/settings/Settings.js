@@ -6,7 +6,7 @@ import ErrorPage from '../../components/ErrorPage';
 import $ from 'jquery';
 
 const Settings = () => {
-    const {data, error} = useFetch(`${CONFIG.SIDOOH_NOTIFY_URL}/api/settings`);
+    const {data, error} = useFetch(`${CONFIG.sidooh.services.notify.api.url}/api/settings`);
 
     if (error) return <ErrorPage error={error}/>;
 

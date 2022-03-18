@@ -1,5 +1,6 @@
 import React from 'react';
 import {IMAGES} from '../constants';
+import {CONFIG} from '../config';
 
 const Waffle = () => {
     return (
@@ -28,13 +29,13 @@ const Waffle = () => {
                             <div className="row text-center gx-0 gy-0">
                                 <div className="col-4">
                                     <a className="d-block hover-bg-200 px-2 py-3 rounded-3 text-center text-decoration-none"
-                                       href="app/events/event-detail.html" target="_blank">
+                                       href={CONFIG.sidooh.services.legacy.dashboard.url} target="_blank">
                                         <div className="avatar avatar-2xl">
                                             <div className="avatar-name rounded-circle bg-soft-light text-primary">
-                                                <span className="fs-2">A</span>
+                                                <span className="fs-2">L</span>
                                             </div>
                                         </div>
-                                        <p className="mb-0 fw-medium text-800 text-truncate fs--2">Accounts</p>
+                                        <p className="mb-0 fw-medium text-800 text-truncate fs--2">Legacy</p>
                                     </a>
                                 </div>
                                 <div className="col-4">
@@ -42,10 +43,10 @@ const Waffle = () => {
                                        href="app/events/event-detail.html" target="_blank">
                                         <div className="avatar avatar-2xl">
                                             <div className="avatar-name rounded-circle bg-soft-primary text-primary">
-                                                <span className="fs-2">N</span>
+                                                <span className="fs-2">A</span>
                                             </div>
                                         </div>
-                                        <p className="mb-0 fw-medium text-800 text-truncate fs--2">Notify</p>
+                                        <p className="mb-0 fw-medium text-800 text-truncate fs--2">Accounts</p>
                                     </a>
                                 </div>
                                 <div className="col-4">
