@@ -11,7 +11,7 @@ import WeeklyNotifications from '../../components/charts/WeeklyNotifications';
 import WeatherCard from '../../components/WeatherCard';
 
 const Default = () => {
-    const {data, error} = useFetch(`${CONFIG.SIDOOH_NOTIFY_URL}/api/dashboard`);
+    const {data, error} = useFetch(`${CONFIG.sidooh.services.notify.api.url}/api/dashboard`);
 
     if (error) return <ErrorPage error={error}/>;
 
