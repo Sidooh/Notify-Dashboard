@@ -8,7 +8,7 @@ import ErrorPage from '../../components/ErrorPage';
 import {CONFIG} from '../../config';
 import {NotificationAdd} from '@mui/icons-material';
 import WeeklyNotifications from '../../components/charts/WeeklyNotifications';
-import WeatherCard from '../../components/WeatherCard';
+import SMSBalances from './cards/SMSBalances';
 
 const Default = () => {
     const {data, error} = useFetch(`${CONFIG.sidooh.services.notify.api.url}/api/dashboard`);
@@ -22,7 +22,7 @@ const Default = () => {
                 columnDefs: [
                     {orderable: false, targets: [0, 5]}
                 ],
-                lengthMenu: [[7, 10, -1], [7, 10, "All"]]
+                lengthMenu: [[10, 20, -1], [10, 20, "All"]]
             });
         }, 500);
     }
@@ -30,14 +30,14 @@ const Default = () => {
     return (
         <>
             <div className="row g-3 mb-3">
-                <div className="col-md-6 col-xxl-3">
+                <div className="col-sm-12 col-md-4">
                     <div className="card h-md-100 ecommerce-card-min-width">
                         <div className="card-header pb-0">
                             <h6 className="mb-0 mt-2 d-flex align-items-center">
                                 Weekly Notifications
                                 <span className="ms-1 text-400" data-bs-toggle="tooltip" data-bs-placement="top"
-                                      title="Calculated according to last week's notifications">
-                                    <span className="far fa-question-circle" data-fa-transform="shrink-1"/>
+                                      title="Calculated according to current week's notifications">
+                                    <span className="fas fa-info-circle" data-fa-transform="shrink-1"/>
                                 </span>
                             </h6>
                         </div>
@@ -56,7 +56,7 @@ const Default = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-6 col-xxl-3">
+                <div className="col-sm-12 col-md-4">
                     <div className="card h-md-100">
                         <div className="card-header pb-0">
                             <h6 className="mb-0 mt-2">Total Notifications</h6>
@@ -77,46 +77,8 @@ const Default = () => {
                         </div>
                     </div>
                 </div>
-                <div className="col-md-6 col-xxl-3">
-                    <div className="card h-md-100">
-                        <div className="card-body">
-                            <div className="row h-100 justify-content-between g-0">
-                                <div className="col-12">
-                                    <h6 className="mt-1">SMS Providers Credits</h6>
-                                    <div className="mt-3">
-                                        <div className="row">
-                                            <div className="col-6">
-                                                <CountUp end={data?.balances.websms} decimals={2} className={'fs-2'}/>
-                                                <div className="d-flex flex-between-center mb-1">
-                                                    <div className="d-flex align-items-center fs--2">
-                                                        <span
-                                                            className={`dot bg-${data?.default_sms_provider === 'websms'
-                                                                                 ? 'primary' : '300'}`}/>
-                                                        <span className="fw-semi-bold">WEBSMS</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-6">
-                                                <CountUp end={data?.balances.africastalking} decimals={2}
-                                                         className={'fs-2'}/>
-                                                <div className="d-flex flex-between-center mb-1">
-                                                    <div className="d-flex align-items-center fs--2">
-                                                        <span
-                                                            className={`dot bg-${data?.default_sms_provider === 'africastalking'
-                                                                                 ? 'primary' : '300'}`}/>
-                                                        <span className="fw-semi-bold">AFRICASTALKING</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="col-md-6 col-xxl-3">
-                    <WeatherCard/>
+                <div className="col-sm-12 col-md-4">
+                    <SMSBalances balances={data?.balances} default_sms_provider={data?.default_sms_provider}/>
                 </div>
             </div>
             <div className="row g-3 mb-3">
