@@ -6,8 +6,18 @@ import {AuthProvider} from './components/AuthProvider';
 
 const theme = createTheme({
     typography: {
-        fontFamily: ['"Varela Round"', 'cursive',].join(','),
+        fontFamily: `${['"Varela Round"', 'cursive',].join(',')}!important`,
     },
+    components: {
+        MuiOutlinedInput: {
+            styleOverrides: {
+                root: {
+                    boxShadow: 'var(--falcon-box-shadow-inset)!important',
+                    padding: 'padding: .3125rem 1rem;!important'
+                }
+            }
+        }
+    }
 });
 
 function App() {

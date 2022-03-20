@@ -9,6 +9,7 @@ import {CONFIG} from '../../config';
 import {NotificationAdd} from '@mui/icons-material';
 import WeeklyNotifications from '../../components/charts/WeeklyNotifications';
 import SMSBalances from './cards/SMSBalances';
+import {IMAGES} from '../../constants';
 
 const Default = () => {
     const {data, error} = useFetch(`${CONFIG.sidooh.services.notify.api.url}/api/dashboard`);
@@ -31,7 +32,9 @@ const Default = () => {
         <>
             <div className="row g-3 mb-3">
                 <div className="col-sm-12 col-md-4">
-                    <div className="card h-md-100 ecommerce-card-min-width">
+                    <div className="card h-md-100">
+                        <div className="bg-holder bg-card"
+                             style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_1})`}}/>
                         <div className="card-header pb-0">
                             <h6 className="mb-0 mt-2 d-flex align-items-center">
                                 Weekly Notifications
@@ -58,6 +61,8 @@ const Default = () => {
                 </div>
                 <div className="col-sm-12 col-md-4">
                     <div className="card h-md-100">
+                        <div className="bg-holder bg-card"
+                             style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_4})`}}/>
                         <div className="card-header pb-0">
                             <h6 className="mb-0 mt-2">Total Notifications</h6>
                         </div>
@@ -78,7 +83,7 @@ const Default = () => {
                     </div>
                 </div>
                 <div className="col-sm-12 col-md-4">
-                    <SMSBalances balances={data?.balances} default_sms_provider={data?.default_sms_provider}/>
+                    <SMSBalances credits={data?.sms_credits} default_sms_provider={data?.default_sms_provider}/>
                 </div>
             </div>
             <div className="row g-3 mb-3">

@@ -17,7 +17,11 @@ export const IMAGES = {
         spotIllustrations: {
             47: require('../assets/images/icons/spot-illustrations/47.png'),
             bg_shape: require('../assets/images/icons/spot-illustrations/bg-shape.png'),
+            corner_1: require('../assets/images/icons/spot-illustrations/corner-1.png'),
+            corner_2: require('../assets/images/icons/spot-illustrations/corner-2.png'),
+            corner_3: require('../assets/images/icons/spot-illustrations/corner-3.png'),
             corner_4: require('../assets/images/icons/spot-illustrations/corner-4.png'),
+            corner_5: require('../assets/images/icons/spot-illustrations/corner-5.png'),
             falcon: require('../assets/images/icons/spot-illustrations/falcon.png'),
             shape_1: require('../assets/images/icons/spot-illustrations/shape-1.png'),
         }

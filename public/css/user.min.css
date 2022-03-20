@@ -12,6 +12,10 @@ td {
     vertical-align: middle;
 }
 
+.ts-control {
+    box-shadow: var(--falcon-box-shadow-inset)!important;
+}
+
 
 .fs-8 {
     font-size: 8pt !important

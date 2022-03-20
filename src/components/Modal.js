@@ -10,27 +10,10 @@ import {
 } from "@mui/material";
 import {Close} from "@mui/icons-material";
 
-const theme = createTheme({
-    typography: {
-        fontFamily: 'Varela Round',
-    },
-    components: {
-        MuiDialog: {
-            styleOverrides: {
-                paper: {
-                    backgroundColor: "rgba( 255,255,255,0.99)",
-                    borderRadius: "5px",
-                    padding: '1rem',
-                }
-            }
-        }
-    }
-});
-
 const Modal = ({id, title, body, footer}) => {
     return (
         <div className={`modal fade`} id={id} tabIndex="-1" role="dialog" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-centered" role="document" style={{maxWidth: '500px'}}>
+            <div className="modal-dialog" role="document" style={{maxWidth: '500px'}}>
                 <div className="modal-content position-relative">
                     <div className="position-absolute top-0 end-0 mt-2 me-2 z-index-1">
                         <button className="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"

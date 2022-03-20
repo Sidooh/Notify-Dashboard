@@ -1,5 +1,6 @@
 import React from 'react';
 import {Mail, Telegram} from '@mui/icons-material';
+import PropTypes from 'prop-types';
 
 const DestinationChips = ({notification}) => {
     let data, icon;
@@ -10,11 +11,11 @@ const DestinationChips = ({notification}) => {
     }
 
     if (notification.channel === "mail") {
-        icon = <Mail fontSize={"small"} style={{paddingLeft: "7px"}}/>;
+        icon = <Mail fontSize={"small"} className={'pe-2'}/>;
     } else if (notification.channel === "sms") {
         icon = <Telegram fontSize={"small"} className={'pe-2'}/>;
     } else {
-        icon = <i className={'fab fa-slack'} style={{paddingLeft: "7px"}}/>;
+        icon = <i className={'fab fa-slack pe-2'}/>;
     }
 
     return (
@@ -30,5 +31,9 @@ const DestinationChips = ({notification}) => {
         </>
     );
 };
+
+DestinationChips.propTypes = {
+    notification: PropTypes.object.isRequired,
+}
 
 export default DestinationChips;

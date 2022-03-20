@@ -1,11 +1,14 @@
 import React from 'react';
 import CountUp from 'react-countup';
 import PropTypes from 'prop-types';
+import {IMAGES} from '../../../constants';
 
-const SMSBalances = ({balances, default_sms_provider}) => {
+const SMSBalances = ({credits, default_sms_provider}) => {
     return (
         <div className="card h-md-100">
-            <div className="card-body">
+            <div className="bg-holder bg-card"
+                 style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_3})`}}/>
+            <div className="card-body position-relative">
                 <div className="row h-100 justify-content-between g-0">
                     <div className="col-12">
                         <h6 className="mt-1">SMS Credits</h6>
@@ -13,9 +16,9 @@ const SMSBalances = ({balances, default_sms_provider}) => {
                             <div className="row">
                                 <div className="col-6">
                                     <div>
-                                        <CountUp end={balances?.websms} className={'fs-2'}/>
+                                        <CountUp end={credits?.websms} className={'fs-2'}/>
                                         <span className="ms-1 text-400"
-                                              title={`${balances?.websms} / 0.3 ≈ KSH${(balances?.websms / 0.3).toFixed(2)}`}>
+                                              title={`${credits?.websms} * 0.3 ≈ KSH${(credits?.websms * .3).toFixed(2)}`}>
                                             <span className="fas fa-info-circle fs-9" data-fa-transform="shrink-1"/>
                                         </span>
                                     </div>
@@ -29,9 +32,9 @@ const SMSBalances = ({balances, default_sms_provider}) => {
                                 </div>
                                 <div className="col-6 ps-1">
                                     <div>
-                                        <CountUp end={balances?.africastalking / .8} className={'fs-2'}/>
+                                        <CountUp end={credits?.africastalking} className={'fs-2'}/>
                                         <span className="ms-1 text-400"
-                                              title={`${balances?.africastalking} * 0.8 ≈ KSH${balances?.africastalking.toFixed(2)}`}>
+                                              title={`${credits?.africastalking} * 0.8 ≈ KSH${(credits?.africastalking * .8).toFixed(2)}`}>
                                             <span className="fas fa-info-circle fs-9" data-fa-transform="shrink-1"/>
                                         </span>
                                     </div>
