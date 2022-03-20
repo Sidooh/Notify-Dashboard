@@ -8,10 +8,10 @@ import {Help} from '../../utils/Helpers';
 import DataTable from '../../components/DataTable';
 import {useFetch} from '../../hooks';
 import ErrorPage from '../../components/ErrorPage';
-import Master from '../../layouts/Master';
+import {CONFIG} from '../../config';
 
 const SMS = () => {
-    let {data: notifications, error} = useFetch('https://hoodis-notify.herokuapp.com/api/notifications');
+    let {data: notifications, error} = useFetch(`${CONFIG.sidooh.services.notify.api.url}/api/notifications`);
 
     if (error) return <ErrorPage/>;
 
@@ -68,11 +68,11 @@ const SMS = () => {
                                  </Grid>
                              </Grid>
                              : <DataTable data={notifications} columns={[
-                                    {name: <strong>Provider</strong>},
-                                    {name: <strong>Destination(s)</strong>},
-                                    {name: <strong>Message</strong>},
-                                    {name: <strong>Date</strong>},
-                                    {name: <strong>Actions</strong>},
+                                    {name: 'Provider'},
+                                    {name: 'Destination(s)'},
+                                    {name: 'Message'},
+                                    {name: 'Date'},
+                                    {name: 'Actions'},
                                 ]}/>
                             }
                         </Grid>

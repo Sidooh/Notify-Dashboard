@@ -13,6 +13,7 @@ const MySwal = withReactContent(Swal);
 const Settings = () => {
     const [settings, setSettings] = useState(null);
     let {data, error} = useFetch(`${CONFIG.sidooh.services.notify.api.url}/api/settings`);
+
     let {sendRequest, loading, errors} = useRequest({
         method: 'delete',
         onSuccess: data => {
@@ -39,7 +40,6 @@ const Settings = () => {
     }, [data]);
 
     if (error) return <ErrorPage error={error}/>;
-
 
     const handleDelete = setting => {
         MySwal.fire({

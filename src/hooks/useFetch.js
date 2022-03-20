@@ -1,8 +1,19 @@
 import {useEffect, useReducer, useRef} from 'react';
+import useSWR from 'swr';
 import axios from 'axios';
 
+const fetcher = url => axios(url).then(res => res.data);
+
 const useFetch = (url) => {
-    const CACHE = useRef({});
+    const {data, error} = useSWR(url, fetcher);
+
+    return {
+        data,
+        loading: !error && !data,
+        error
+    };
+
+    /*const CACHE = useRef({});
     const cancelRequest = useRef(false);
 
     const initialState = {
@@ -36,6 +47,8 @@ const useFetch = (url) => {
                 dispatch({type: 'FETCHED', payload: CACHE.current[url]});
             }
 
+            const { data, error } = useSWR('/api/user/123', fetcher)
+
             axios.get(url)
                  .then(({data}) => {
                      CACHE.current[url] = data;
@@ -57,7 +70,7 @@ const useFetch = (url) => {
 
     console.log(state);
 
-    return state;
+    return state;*/
 };
 
 export default useFetch;

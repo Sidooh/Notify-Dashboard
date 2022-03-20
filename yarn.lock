@@ -9285,6 +9285,7 @@ __metadata:
     size-sensor: ^1.0.1
     sweetalert2: ^11.4.6
     sweetalert2-react-content: ^4.2.0
+    swr: ^1.2.2
     toastify-js: ^1.11.2
     tom-select: ^2.0.1
     web-vitals: ^2.1.4
@@ -12302,6 +12303,15 @@ __metadata:
   version: 11.4.6
   resolution: "sweetalert2@npm:11.4.6"
   checksum: f532b3b60e2ce1aa0a05032a447ba622e70575e0fe7d977c21feec55c803f2e83dae634ea2c647f0047f6525345301e18d5889ac07da7d8bce22062c9c9cdcb8
+  languageName: node
+  linkType: hard
+
+"swr@npm:^1.2.2":
+  version: 1.2.2
+  resolution: "swr@npm:1.2.2"
+  peerDependencies:
+    react: ^16.11.0 || ^17.0.0 || ^18.0.0
+  checksum: 723747c7c263536d8c9ee8b38039462395ba09a7925508f22c8fc940a1ae72e1f05ef678767b2197ce337e170f4812563281bc4b5f9ad7e4eec895cd7139fb8e
   languageName: node
   linkType: hard
 

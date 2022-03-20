@@ -8,11 +8,15 @@ import JSONPretty from 'react-json-pretty';
 import 'react-json-pretty/themes/monikai.css';
 import {useFetch} from '../../hooks';
 import ErrorPage from '../../components/ErrorPage';
-import Master from '../../layouts/Master';
+import {CONFIG} from '../../config';
 
 const Show = () => {
     const {id} = useParams();
-    let {data: notification, loading, error} = useFetch(`https://hoodis-notify.herokuapp.com/api/notifications/${id}`);
+    let {
+            data: notification,
+            loading,
+            error
+        } = useFetch(`${CONFIG.sidooh.services.notify.api.url}/api/notifications/${id}`);
 
     if (error) return <ErrorPage/>;
 
@@ -22,8 +26,6 @@ const Show = () => {
                    ? notification.notifiable_id.data.some(recipient => recipient.status !== "success")
                    : notification.status !== "success";
     }
-
-    console.log(loading);
 
     return (
         <>
@@ -82,7 +84,8 @@ const Show = () => {
                                             </div>
                                             <div className="col-md-6 mb-4 mb-lg-0">
                                                 <h5 className="mb-3 fs-0">Callback</h5>
-                                                <JSONPretty id="json-pretty" data={notification.notifiable_id.data}
+                                                <JSONPretty id="json-pretty"
+                                                            data={notification.notifiable_id?.data ?? {message: 'No callback :('}}
                                                             theme={{
                                                                 main: 'background-color:rgb(39, 46, 72);max-height:20rem',
                                                                 key: 'color:red',

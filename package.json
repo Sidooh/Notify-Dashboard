@@ -39,6 +39,7 @@
     "size-sensor": "^1.0.1",
     "sweetalert2": "^11.4.6",
     "sweetalert2-react-content": "^4.2.0",
+    "swr": "^1.2.2",
     "toastify-js": "^1.11.2",
     "tom-select": "^2.0.1",
     "web-vitals": "^2.1.4",
