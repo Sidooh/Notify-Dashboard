@@ -63,7 +63,7 @@ const SMS = () => {
                              ? <Grid container alignItems="center" justifyContent="center">
                                  <Grid item width={'70%'}>
                                      <Box sx={{width: '100%'}} className={'mt-5'}>
-                                         <LinearProgress color={'secondary'}/>
+                                         <LinearProgress color={'primary'}/>
                                      </Box>
                                  </Grid>
                              </Grid>
