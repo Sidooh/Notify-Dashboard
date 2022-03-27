@@ -2,8 +2,11 @@ import React from 'react';
 import {IMAGES} from '../../constants';
 import Waffle from '../Waffle';
 import {Link} from 'react-router-dom';
+import {useAuth} from '../AuthProvider';
 
 const NavbarSearch = () => {
+    const { onSignOut } = useAuth();
+
     return (
         <nav className="navbar navbar-light navbar-glass navbar-top navbar-expand" style={{display: 'none'}}>
             <button className="btn navbar-toggler-humburger-icon navbar-toggler me-1 me-sm-3" type="button"
@@ -254,7 +257,7 @@ const NavbarSearch = () => {
                             <a className="dropdown-item" href="#!">Feedback</a>
                             <div className="dropdown-divider"/>
                             <Link className="dropdown-item" to="/settings">Settings</Link>
-                            <a className="dropdown-item" href="pages/authentication/card/logout.html">Logout</a>
+                            <button className="dropdown-item" onClick={onSignOut}>Logout</button>
                         </div>
                     </div>
                 </li>

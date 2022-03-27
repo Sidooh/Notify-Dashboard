@@ -9,6 +9,7 @@ import DataTable from '../../components/DataTable';
 import {useFetch} from '../../hooks';
 import ErrorPage from '../../components/ErrorPage';
 import {CONFIG} from '../../config';
+import Master from '../../layouts/Master';
 
 const SMS = () => {
     let {data: notifications, error} = useFetch(`${CONFIG.sidooh.services.notify.api.url}/api/notifications`);
@@ -54,7 +55,7 @@ const SMS = () => {
     }
 
     return (
-        <>
+        <Master>
             <div className="row g-3 mb-3">
                 <div className="col-xxl-12 col-md-12">
                     <Grid container spacing={2}>
@@ -79,7 +80,7 @@ const SMS = () => {
                     </Grid>
                 </div>
             </div>
-        </>
+        </Master>
     );
 };
 

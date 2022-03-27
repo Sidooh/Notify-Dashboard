@@ -9,6 +9,7 @@ import 'react-json-pretty/themes/monikai.css';
 import {useFetch} from '../../hooks';
 import ErrorPage from '../../components/ErrorPage';
 import {CONFIG} from '../../config';
+import Master from '../../layouts/Master';
 
 const Show = () => {
     const {id} = useParams();
@@ -28,7 +29,7 @@ const Show = () => {
     }
 
     return (
-        <>
+        <Master>
             {
                 loading
                 ? <PageLoader/> : (
@@ -101,7 +102,7 @@ const Show = () => {
                     </>
                 )
             }
-        </>
+        </Master>
     );
 };
 

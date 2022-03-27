@@ -7,26 +7,22 @@ import {useRequest} from '../../hooks';
 import {CONFIG} from '../../config';
 
 const Login = () => {
-    let auth = useAuth();
-    let navigate = useNavigate();
-    let location = useLocation();
+    let {onSignIn, user} = useAuth();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-
-    let from = location.state?.from?.pathname || "/";
 
     const {sendRequest, errors} = useRequest({
         url: `${CONFIG.sidooh.services.accounts.api.url}/api/users/signin`,
         method: 'post',
         body: {email, password},
-        onSuccess: data => auth.handleSignIn(data, () => navigate(from, {replace: true}))
+        onSuccess: data => onSignIn(data)
     });
 
-    const onSubmit = async event => {
-        event.preventDefault();
+    const onSubmit = async e => {
+        e.preventDefault();
 
-        await sendRequest();
+        onSignIn();
     };
 
     return (
@@ -88,14 +84,12 @@ const Login = () => {
                                 <div className="col-sm-6">
                                     <Link className="btn btn-outline-google-plus btn-sm d-block w-100"
                                           to="/login">
-                                                <span className="fab fa-google-plus-g me-2"
-                                                      data-fa-transform="grow-8"/> google
+                                        <span className="fab fa-google-plus-g me-2" data-fa-transform="grow-8"/> google
                                     </Link>
                                 </div>
                                 <div className="col-sm-6">
                                     <Link className="btn btn-outline-facebook btn-sm d-block w-100" to="/login">
-                                                <span className="fab fa-facebook-square me-2"
-                                                      data-fa-transform="grow-8"/>
+                                        <span className="fab fa-facebook-square me-2" data-fa-transform="grow-8"/>
                                         facebook
                                     </Link>
                                 </div>

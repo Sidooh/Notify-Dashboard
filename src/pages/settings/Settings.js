@@ -7,6 +7,7 @@ import $ from 'jquery';
 import {Help} from '../../utils/Helpers';
 import withReactContent from 'sweetalert2-react-content';
 import Swal from 'sweetalert2';
+import Master from '../../layouts/Master';
 
 const MySwal = withReactContent(Swal);
 
@@ -61,14 +62,14 @@ const Settings = () => {
     };
 
     return (
-        <>
+        <Master>
             <div className="row g-3 mb-3">
                 <div className="col-xxl-12 col-md-12">
                     {errors}
                     <SettingsTable settings={settings} onDeleteRow={handleDelete} setSettings={setSettings}/>
                 </div>
             </div>
-        </>
+        </Master>
     );
 };
 

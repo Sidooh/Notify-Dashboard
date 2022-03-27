@@ -69,7 +69,7 @@ const WeeklyNotifications = ({data}) => {
                     },
                     barWidth: '5px',
                     itemStyle: {
-                        barBorderRadius: 10,
+                        borderRadius: 10,
                         color: utils.getColors().primary
                     },
                     data: data?.datasets,

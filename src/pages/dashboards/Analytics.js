@@ -1,10 +1,11 @@
 import React from 'react';
+import Master from '../../layouts/Master';
 
 const Analytics = () => {
     return (
-        <div>
+        <Master>
             analytics
-        </div>
+        </Master>
     );
 };
 

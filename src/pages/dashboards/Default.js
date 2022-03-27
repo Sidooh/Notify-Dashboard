@@ -10,8 +10,14 @@ import {NotificationAdd} from '@mui/icons-material';
 import WeeklyNotifications from '../../components/charts/WeeklyNotifications';
 import SMSBalances from './cards/SMSBalances';
 import {IMAGES} from '../../constants';
+import Master from '../../layouts/Master';
+import {useAuth} from '../../components/AuthProvider';
 
 const Default = () => {
+    const { user } = useAuth();
+
+    console.log(user);
+
     const {data, error} = useFetch(`${CONFIG.sidooh.services.notify.api.url}/api/dashboard`);
 
     if (error) return <ErrorPage error={error}/>;
@@ -29,7 +35,7 @@ const Default = () => {
     }
 
     return (
-        <>
+        <Master>
             <div className="row g-3 mb-3">
                 <div className="col-sm-12 col-md-4">
                     <div className="card h-md-100">
@@ -91,7 +97,7 @@ const Default = () => {
                     <RecentNotifications notifications={data?.notifications}/>
                 </div>
             </div>
-        </>
+        </Master>
     );
 };
 

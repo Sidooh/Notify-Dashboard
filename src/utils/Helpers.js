@@ -28,4 +28,7 @@ export const Help = {
         }).showToast();
     },
     isFunction: (v) => typeof v === 'function',
+    fakeAuth: () => new Promise((resolve) => {
+        setTimeout(() => resolve('2342f2f1d131rf12'), 250);
+    })
 };
