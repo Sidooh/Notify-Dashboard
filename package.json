@@ -15,7 +15,6 @@
     "@types/jest": "^24.9.1",
     "@types/node": "^12.20.47",
     "@types/react": "^16.14.24",
-    "@types/react-countup": "^4.3.1",
     "@types/react-dom": "^16.9.14",
     "@types/react-redux": "^7.1.23",
     "@types/react-router-dom": "^5.3.3",
