@@ -75,4 +75,4 @@ web_modules/
 .pnp.*
 
 y.hide
-build
+build/
