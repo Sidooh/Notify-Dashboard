@@ -9622,9 +9622,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"notify-dashboard-ts@workspace:.":
+"notify-dashboard@workspace:.":
   version: 0.0.0-use.local
-  resolution: "notify-dashboard-ts@workspace:."
+  resolution: "notify-dashboard@workspace:."
   dependencies:
     "@emotion/react": ^11.8.2
     "@emotion/styled": ^11.8.1
