@@ -5,7 +5,7 @@ import NavbarVerticalTop from '../components/navbars/VerticalTop';
 import NavbarSearch from '../components/navbars/Search';
 import NavbarCombo from '../components/navbars/Combo';
 import {SectionLoader} from '../components/Loader';
-import ComponentError from '../components/ComponentError';
+import {SectionError} from '../components/Error';
 import {ErrorBoundary} from 'react-error-boundary';
 import OverlayScrollbars from 'overlayscrollbars';
 
@@ -54,8 +54,8 @@ const Master = ({children, error}: MasterType) => {
 
                         {
                             error
-                                ? <ComponentError error={error}/>
-                                : <ErrorBoundary FallbackComponent={ComponentError}
+                                ? <SectionError error={error}/>
+                                : <ErrorBoundary FallbackComponent={SectionError}
                                                  onReset={() => window.location.reload()}>
                                     <Suspense fallback={<SectionLoader/>}>
                                         {children}

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {CONFIG} from '../../config';
 
-const API_URL = `${CONFIG.sidooh.services.accounts.api.url}/api/users/signin`;
+const API_URL = `${CONFIG.sidooh.services.accounts.api.url}/users/signin`;
 
 export type LoginRequest = {
     email: string

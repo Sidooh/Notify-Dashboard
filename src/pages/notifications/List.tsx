@@ -6,16 +6,21 @@ import {ReadMore} from '@mui/icons-material';
 import moment from 'moment';
 import {Helpers} from '../../utils/helpers';
 import DataTable from '../../components/DataTable';
-import {useFetch} from '../../hooks';
-import {CONFIG} from '../../config';
 import Master from '../../layouts/Master';
 import {Notification} from '../../utils/types';
+import {useNotificationsQuery} from '../../features/notifications/notificationsAPI';
 
 const List = () => {
-    let {data: notifications, error} = useFetch(`${CONFIG.sidooh.services.notify.api.url}/api/notifications`);
+    let {data: notifications, error, isLoading, isFetching, isSuccess} = useNotificationsQuery();
 
+    if (isLoading) console.log('loading', isLoading);
+    if (isFetching) console.log('fetching', isFetching);
+    if (error) console.log('error', error);
+    if (isSuccess) console.log('success', notifications);
+
+    let rows;
     if (notifications) {
-        notifications = notifications.map((notification: Notification) => {
+        rows = notifications.map((notification: Notification) => {
             let date;
             if (Helpers.isToday(moment(notification.created_at))) {
                 date = "Today";
@@ -58,7 +63,7 @@ const List = () => {
                 <div className="col-xxl-12 col-md-12">
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            {!notifications
+                            {!rows
                                 ? <Grid container alignItems="center" justifyContent="center">
                                     <Grid item width={'70%'}>
                                         <Box sx={{width: '100%'}} className={'mt-5'}>
@@ -66,7 +71,7 @@ const List = () => {
                                         </Box>
                                     </Grid>
                                 </Grid>
-                                : <DataTable data={notifications} columns={[
+                                : <DataTable data={rows} columns={[
                                     {name: 'Provider'},
                                     {name: 'Destination(s)'},
                                     {name: 'Message'},

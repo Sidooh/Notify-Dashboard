@@ -3,7 +3,7 @@ import {createTheme, ThemeProvider} from '@mui/material/styles';
 import {Route, Routes} from "react-router-dom";
 import {Auth, Dashboards, Notifications, Settings} from './pages';
 import Middleware from './middleware';
-import ErrorFallback from './components/ErrorFallback';
+import {ErrorFallback} from './components/Error';
 import {ErrorBoundary} from 'react-error-boundary';
 
 const theme = createTheme({

@@ -3,12 +3,12 @@
     "services": {
       "accounts": {
         "api": {
-          "url": "http://localhost:8000"
+          "url": "http://localhost:8000/api"
         }
       },
       "notify": {
         "api": {
-          "url": "http://localhost:8003"
+          "url": "http://localhost:8003/api"
         },
         "dashboard": {
           "url": "http://localhost:3000"

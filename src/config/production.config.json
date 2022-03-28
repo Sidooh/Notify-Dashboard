@@ -3,12 +3,12 @@
     "services": {
       "accounts": {
         "api": {
-          "url": "https://accounts-cnwsrirpua-uc.a.run.app"
+          "url": "https://accounts-cnwsrirpua-uc.a.run.app/api"
         }
       },
       "notify": {
         "api": {
-          "url": "https://notify-cnwsrirpua-uc.a.run.app"
+          "url": "https://notify-cnwsrirpua-uc.a.run.app/api"
         },
         "dashboard": {
           "url": "https://notify-dashboard-cnwsrirpua-uc.a.run.app"

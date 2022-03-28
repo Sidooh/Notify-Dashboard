@@ -5,7 +5,7 @@ import {Telegram} from '@mui/icons-material';
 import {LoadingButton} from '@mui/lab';
 import {useFormik} from 'formik';
 import * as yup from 'yup';
-import {useRequest} from '../../hooks';
+import {useFetch, useRequest} from '../../hooks';
 import {CONFIG} from '../../config';
 import {Helpers} from '../../utils/helpers';
 import Master from '../../layouts/Master';
@@ -41,6 +41,8 @@ const validationSchema = yup.object({
 });
 
 const Create = () => {
+    const {data, error} = useFetch(`${CONFIG.sidooh.services.accounts.api.url}/accounts`)
+
     const [destinationSelectEl, setDestinationSelectEl] = useState<any>(null);
     const [isTomSelectInstance, setIsTomSelectInstance] = useState(false);
 
