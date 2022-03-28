@@ -58,6 +58,10 @@ const Settings = () => {
         validationSchema: validationSchema,
         onSubmit: async values => {
             await upsertSetting(values)
+            
+            if(result.isSuccess) {
+                setShowModal(false);
+            }
         },
     });
 

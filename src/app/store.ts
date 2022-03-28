@@ -1,7 +1,7 @@
 import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import authReducer from '../features/auth/authSlice';
-import {accountsApi} from '../features/accounts/accountsAPI';
+import {accountsApi} from './services/accountsAPI';
 import {notificationsApi} from '../features/notifications/notificationsAPI';
 
 export const store = configureStore({

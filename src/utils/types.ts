@@ -5,9 +5,8 @@ export type Children = {
 }
 
 export type NotificationType = {
-    id: string;
+    id?: string;
     channel: string;
-    channel_id: bigint;
     destination: string[];
     content: string;
     event_type: string,

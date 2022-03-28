@@ -2,12 +2,10 @@ import {Navigate, useLocation} from 'react-router-dom';
 import {useAuth} from '../hooks/useAuth';
 
 const Guest = ({component}: { component: JSX.Element }) => {
-    const {user} = useAuth();
+    const {auth} = useAuth();
     const location = useLocation();
 
-    if (user) {
-        console.log(user);
-
+    if (auth) {
         // Redirect them to the /home page.
 
         // @ts-ignore

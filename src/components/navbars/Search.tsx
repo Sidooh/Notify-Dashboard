@@ -13,8 +13,6 @@ const Search = () => {
         dispatch(logout())
         dispatch(reset())
         navigate('/login')
-
-        console.log('sign out');
     }
 
     return (

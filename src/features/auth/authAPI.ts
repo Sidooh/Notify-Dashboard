@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {CONFIG} from '../../config';
+import { CONFIG } from '../../config';
 
 const API_URL = `${CONFIG.sidooh.services.accounts.api.url}/users/signin`;
 
@@ -10,11 +10,18 @@ export type LoginRequest = {
 
 export const authAPI = {
     login: async (userData: LoginRequest) => {
-        const response = await axios.post(API_URL, userData);
+        const {data} = await axios.post(API_URL, userData, {withCredentials: true});
 
-        if (response.data) localStorage.setItem('user', JSON.stringify(response.data));
+        const userCredentials = {
+            token: data.token,
+            user: data.token,
+        }
 
-        return response.data;
+        console.log(userCredentials);
+
+        if (data) localStorage.setItem('auth', JSON.stringify(userCredentials));
+
+        return userCredentials;
     },
-    logout: () => localStorage.removeItem('user')
+    logout: () => localStorage.removeItem('auth')
 };

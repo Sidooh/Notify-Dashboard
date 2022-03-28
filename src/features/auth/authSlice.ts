@@ -1,11 +1,14 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
 import {authAPI, LoginRequest} from './authAPI';
 
-//  Get user from localstorage
-const user = JSON.parse(String(localStorage.getItem('user')));
+//  Get user data from localstorage
+const auth = JSON.parse(String(localStorage.getItem('auth')));
 
-export interface AuthState {
-    user: string | null;
+export type AuthState = {
+    auth: {
+        user: string | null
+        token: string | null
+    } | null;
     isError: boolean;
     isSuccess: boolean;
     isLoading: boolean;
@@ -13,7 +16,10 @@ export interface AuthState {
 }
 
 const initialState: AuthState = {
-    user: user || null,
+    auth: {
+        user: auth?.user || null,
+        token: auth?.token || null,
+    },
     isError: false,
     isSuccess: false,
     isLoading: false,
@@ -55,16 +61,16 @@ export const authSlice = createSlice({
             .addCase(login.fulfilled, (state, action) => {
                 state.isLoading = false;
                 state.isSuccess = true;
-                state.user = action.payload;
+                state.auth = action.payload;
             })
             .addCase(login.rejected, (state, action) => {
                 state.isLoading = false;
                 state.isError = true;
                 state.message = String(action.payload);
-                state.user = null;
+                state.auth = null;
             })
             .addCase(logout.fulfilled, (state) => {
-                state.user = null;
+                state.auth = null;
             });
     }
 });

@@ -9,6 +9,7 @@ import { IMAGES } from '../../constants';
 import { useStoreNotificationMutation } from '../../features/notifications/notificationsAPI';
 import Master from '../../layouts/Master';
 import { Helpers } from '../../utils/helpers';
+import {useGetAllAccountsQuery} from '../../app/services/accountsAPI';
 
 const CHANNELS = ['slack', 'sms', 'mail', 'app'];
 
@@ -46,6 +47,8 @@ const Create = () => {
     const [destinationSelectEl, setDestinationSelectEl] = useState<any>(null);
     const [isTomSelectInstance, setIsTomSelectInstance] = useState(false);
 
+    const {data, error} = useGetAllAccountsQuery()
+    console.log(data);
     const [storeNotification, result] = useStoreNotificationMutation()
 
     useEffect(() => {

@@ -21,7 +21,7 @@ const Login = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
-    const {user, isLoading, isError, isSuccess, message} = useAuth();
+    const {auth, isLoading, isError, isSuccess, message} = useAuth();
 
     const formik = useFormik({
         initialValues: {email: "", password: ""},
@@ -31,11 +31,11 @@ const Login = () => {
 
     useEffect(() => {
         if (isError) Helpers.toast({msg: message, type: 'danger'});
-        if (isSuccess || user) navigate('/');
+        if (isSuccess || auth) navigate('/');
 
         dispatch(reset());
 
-    }, [user, isError, isSuccess, message, navigate, dispatch]);
+    }, [auth, isError, isSuccess, message, navigate, dispatch]);
 
     return (
         <Guest>
