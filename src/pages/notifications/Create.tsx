@@ -1,14 +1,14 @@
-import React, {memo, useEffect, useState} from 'react';
-import {IMAGES} from '../../constants';
+import { Telegram } from '@mui/icons-material';
+import { LoadingButton } from '@mui/lab';
+import { useFormik } from 'formik';
+import React, { memo, useEffect, useState } from 'react';
 import TomSelect from 'tom-select';
-import {Telegram} from '@mui/icons-material';
-import {LoadingButton} from '@mui/lab';
-import {useFormik} from 'formik';
 import * as yup from 'yup';
-import {useFetch, useRequest} from '../../hooks';
-import {CONFIG} from '../../config';
-import {Helpers} from '../../utils/helpers';
+import AlertError from '../../components/AlertError';
+import { IMAGES } from '../../constants';
+import { useStoreNotificationMutation } from '../../features/notifications/notificationsAPI';
 import Master from '../../layouts/Master';
+import { Helpers } from '../../utils/helpers';
 
 const CHANNELS = ['slack', 'sms', 'mail', 'app'];
 
@@ -41,27 +41,29 @@ const validationSchema = yup.object({
 });
 
 const Create = () => {
-    const {data, error} = useFetch(`${CONFIG.sidooh.services.accounts.api.url}/accounts`)
+    // const {data, error} = useFetch(`${CONFIG.sidooh.services.accounts.api.url}/accounts`)
 
     const [destinationSelectEl, setDestinationSelectEl] = useState<any>(null);
     const [isTomSelectInstance, setIsTomSelectInstance] = useState(false);
+
+    const [storeNotification, result] = useStoreNotificationMutation()
 
     useEffect(() => {
         if (destinationSelectEl) {
             if (!isTomSelectInstance) {
                 new TomSelect(destinationSelectEl, {
                     options: [
-                        {value: '254110039317', text: '254110039317'},
-                        {value: '254715270660', text: '254715270660'},
-                        {value: '254714611696', text: '254714611696'},
-                        {value: '254736388405', text: '254736388405'},
+                        { value: '254110039317', text: '254110039317' },
+                        { value: '254715270660', text: '254715270660' },
+                        { value: '254714611696', text: '254714611696' },
+                        { value: '254736388405', text: '254736388405' },
                     ],
                     persist: true,
                     create: true,
                     createOnBlur: true,
                     selectOnTab: true,
                     placeholder: 'Select destination...',
-                    plugins: {remove_button: {title: 'Remove this destination',}},
+                    plugins: { remove_button: { title: 'Remove this destination', } },
                     onInitialize: () => setIsTomSelectInstance(true)
                 });
             }
@@ -76,32 +78,33 @@ const Create = () => {
             content: "",
         },
         validationSchema: validationSchema,
-        onSubmit: values => sendRequest(values),
-    });
+        onSubmit: async values => {
+            const notification = await storeNotification(values).unwrap()
 
-    const {sendRequest, loading, errors} = useRequest({
-        url: `${CONFIG.sidooh.services.notify.api.url}/api/notifications`,
-        onSuccess: data => {
-            formik.resetForm();
+            if (result.isSuccess) {
+                formik.resetForm();
 
-            if (destinationSelectEl) destinationSelectEl.tomselect.clear();
+                if (destinationSelectEl) destinationSelectEl.tomselect.clear();
 
-            Helpers.toast({msg: `${data.channel} notification sent!`, type: "success"});
+                Helpers.toast({ msg: `${notification.channel.toUpperCase()} notification sent!`, type: "success" });
+            }
         },
     });
 
     return (
         <Master>
             <form onSubmit={formik.handleSubmit} className="row g-3 mb-3 justify-content-center">
-                {errors}
+
+                {result.isError && <AlertError error={result.error} />}
+
                 <div className="col-md-5 ps-lg-2">
                     <div className="card h-lg-100">
                         <div className="bg-holder bg-card"
-                             style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})`}}/>
+                            style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})` }} />
                         <div className="card-body position-relative">
                             <label className="form-label" htmlFor="exampleFormControlInput1">Channel</label>
                             <select className="form-select" name={'channel'} value={formik.values.channel}
-                                    onChange={formik.handleChange}>
+                                onChange={formik.handleChange}>
                                 {window._.sortBy(CHANNELS).map((channel, i) => (
                                     <option key={i} value={String(channel)}>{channel.toUpperCase()}</option>)
                                 )}
@@ -113,11 +116,11 @@ const Create = () => {
                 <div className="col-md-5 ps-lg-2">
                     <div className="card h-lg-100">
                         <div className="bg-holder bg-card"
-                             style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})`}}/>
+                            style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})` }} />
                         <div className="card-body position-relative">
                             <label className="form-label" htmlFor="exampleFormControlInput1">Event Type</label>
                             <select className="form-select" value={formik.values.event_type} name={'event_type'}
-                                    onChange={formik.handleChange}>
+                                onChange={formik.handleChange}>
                                 {window._.sortBy(EVENT_TYPES)
                                     .map((type, i) => <option key={i} value={String(type)}>{type}</option>)}
                             </select>
@@ -129,29 +132,29 @@ const Create = () => {
                 <div className="col-md-10 mb-3 ps-lg-2">
                     <div className="card h-lg-100">
                         <div className="bg-holder bg-card"
-                             style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_1})`}}/>
+                            style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_1})` }} />
                         <div className="card-body position-relative">
                             <div className="mb-3">
                                 <label className="form-label" htmlFor="exampleFormControlInput1">Destination(s)</label>
                                 <select className="form-select" multiple ref={el => setDestinationSelectEl(el)} size={1}
-                                        name="destination"
-                                        value={formik.values.destination} onChange={formik.handleChange}/>
+                                    name="destination"
+                                    value={formik.values.destination} onChange={formik.handleChange} />
                                 <small
                                     className={'text-danger'}>{formik.touched.destination && formik.errors.destination}</small>
                             </div>
                             <div className="mb-3">
                                 <label className="form-label" htmlFor="exampleFormControlInput1">Message</label>
                                 <textarea className={'form-control'} name="content" id="content" cols={30} rows={10}
-                                          value={formik.values.content} placeholder={'Compose your message...'}
-                                          onChange={formik.handleChange}/>
+                                    value={formik.values.content} placeholder={'Compose your message...'}
+                                    onChange={formik.handleChange} />
                                 <small
                                     className={'text-danger'}>{formik.touched.content && formik.errors.content}</small>
                             </div>
 
                             <div className="text-end">
-                                <LoadingButton size="small" color="primary" loading={loading} loadingPosition="end"
-                                               onClick={() => formik.submitForm()}
-                                               endIcon={<Telegram/>} variant="contained">Send</LoadingButton>
+                                <LoadingButton size="small" color="primary" loading={result.isLoading} loadingPosition="end"
+                                    onClick={() => formik.submitForm()}
+                                    endIcon={<Telegram />} variant="contained">Send</LoadingButton>
                             </div>
                         </div>
                     </div>
