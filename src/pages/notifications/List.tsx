@@ -7,7 +7,7 @@ import moment from 'moment';
 import {Helpers} from '../../utils/helpers';
 import DataTable from '../../components/DataTable';
 import Master from '../../layouts/Master';
-import {Notification} from '../../utils/types';
+import {NotificationType} from '../../utils/types';
 import {useNotificationsQuery} from '../../features/notifications/notificationsAPI';
 
 const List = () => {
@@ -20,7 +20,7 @@ const List = () => {
 
     let rows;
     if (notifications) {
-        rows = notifications.map((notification: Notification) => {
+        rows = notifications.map((notification: NotificationType) => {
             let date;
             if (Helpers.isToday(moment(notification.created_at))) {
                 date = "Today";

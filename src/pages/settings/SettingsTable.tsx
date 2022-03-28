@@ -1,44 +1,23 @@
-import React, {Dispatch, SetStateAction, useState} from 'react';
-import {Autocomplete, Box, Button, Grid, IconButton, LinearProgress, TextField} from '@mui/material';
+import React, {Dispatch, SetStateAction} from 'react';
+import {Box, Grid, IconButton, LinearProgress} from '@mui/material';
 import TableToolbar from '../../components/TableToolbar';
-import {Delete, Edit, Save} from '@mui/icons-material';
-import {useFormik} from "formik";
-import * as yup from "yup";
+import {Delete, Edit} from '@mui/icons-material';
 import {useRequest} from '../../hooks';
 import {CONFIG} from '../../config';
 import {Helpers} from '../../utils/helpers';
-import {LoadingButton} from '@mui/lab';
-import {settingOptions} from '../../constants';
-import {Setting} from '../../utils/types';
-import {Modal} from 'react-bootstrap';
+import {SettingType} from '../../utils/types';
 
 
 type SettingsTableType = {
-    settings: Setting[],
-    onDeleteRow: (setting: Setting) => void
-    setSettings: Dispatch<SetStateAction<Setting[]>>
+    settings: SettingType[],
+    setSettings: Dispatch<SetStateAction<SettingType[]>>
+    onCreateRow: () => void
+    onUpdateRow: (setting: SettingType) => void
+    onDeleteRow: (setting: SettingType) => void
 };
 
-const validationSchema = yup.object({
-    type: yup.string().required(),
-    value: yup.string().required()
-});
 
-const SettingsTable = ({settings, setSettings, onDeleteRow}: SettingsTableType) => {
-    const [settingValues, setSettingValues] = useState<string[]>([]);
-    const [modalAction, setModalAction] = useState("CREATE");
-    const [showModal, setShowModal] = useState(false);
-
-    const handleClose = () => setShowModal(false);
-
-    const handleUpdate = (setting: Setting) => {
-        setModalAction('update');
-        setSettingValues(getSettingValuesByName(setting.type));
-        formik.setValues(setting, true);
-
-        setShowModal(true);
-    };
-
+const SettingsTable = ({settings, setSettings, onCreateRow, onUpdateRow, onDeleteRow}: SettingsTableType) => {
     let {sendRequest: sendPostReq, loading, errors} = useRequest({
         url: `${CONFIG.sidooh.services.notify.api.url}/api/settings`,
         onSuccess: data => {
@@ -51,32 +30,15 @@ const SettingsTable = ({settings, setSettings, onDeleteRow}: SettingsTableType) 
                 setSettings(newSettings);
             }
 
-            setShowModal(false);
-
-            Helpers.toast({msg: `Setting ${modalAction === 'create' ? 'Created' : 'Updated'}!`, type: "success"});
+            Helpers.toast({msg: `Setting Created or updated!`, type: "success"});
         },
     });
 
-    const formik = useFormik({
-        initialValues: {type: "", value: ""},
-        validationSchema: validationSchema,
-        onSubmit: values => sendPostReq(values),
-    });
-
-    const getSettingValuesByName = (type: string) => {
-        let setting = settingOptions.filter(a => a.type === type);
-
-        return setting[0].values ?? [];
-    };
 
     return (
         <div className="card" id="recentPurchaseTable">
             <TableToolbar title={'Settings'} actionsId={'table-settings-actions'} toolbarIcons={[
-                <button className="btn btn-falcon-default btn-sm" type="button" data-bs-toggle={'modal'}
-                        data-bs-target={'#settings-modal'} onClick={() => {
-                    setModalAction('create');
-                    formik.resetForm();
-                }}>
+                <button className="btn btn-falcon-default btn-sm" type="button" onClick={onCreateRow}>
                     <span className="fas fa-plus" data-fa-transform="shrink-3 down-2"/>
                     <span className="d-none d-sm-inline-block ms-1">New</span>
                 </button>
@@ -113,7 +75,7 @@ const SettingsTable = ({settings, setSettings, onDeleteRow}: SettingsTableType) 
                                             <td>{(row.type.replaceAll('_', ' ')).toUpperCase()}</td>
                                             <td>{row.value}</td>
                                             <td className="align-middle white-space-nowrap text-end">
-                                                <IconButton onClick={() => handleUpdate(row)} size={"small"}
+                                                <IconButton onClick={() => onUpdateRow(row)} size={"small"}
                                                             color={"primary"}>
                                                     <Edit fontSize={'small'}/>
                                                 </IconButton>
@@ -142,64 +104,7 @@ const SettingsTable = ({settings, setSettings, onDeleteRow}: SettingsTableType) 
                 </div>
             </div>
 
-            <Modal show={showModal} onHide={handleClose} contentClassName={'position-relative'}>
-                <div className="position-absolute top-0 end-0 mt-2 me-2 z-index-1">
-                    <button className="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
-                            data-bs-dismiss="modal" aria-label="Close" onClick={() => setShowModal(false)}/>
-                </div>
-                <Modal.Body className={'modal-body p-0'}>
-                    <div className="rounded-top-lg py-3 ps-4 pe-6 bg-light">
-                        <h4 className="mb-1" id="modalExampleDemoLabel">
-                            {(modalAction === 'update' ? "Update" : "New") + " Setting"}
-                        </h4>
-                    </div>
 
-                    <div className="p-4 pb-0">
-                        <form onSubmit={formik.handleSubmit}>
-                            {errors}
-                            <div className="mb-3">
-                                <Autocomplete options={settingOptions.map(opt => opt.type)} freeSolo
-                                              value={formik.values.type}
-                                              onChange={(event, newValue) => {
-                                                  const settingValues = getSettingValuesByName(String(newValue));
-                                                  setSettingValues(settingValues);
-                                                  formik.setFieldValue("type", newValue, true);
-                                              }}
-                                              renderInput={(params) => (
-                                                  <TextField{...params} size={"small"} label="Type"
-                                                            placeholder="Setting type..." value={formik.values.type}
-                                                            error={formik.touched.type && Boolean(formik.errors.type)}
-                                                            helperText={formik.touched.type && formik.errors.type}/>
-                                              )}
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <Autocomplete options={settingValues} freeSolo value={formik.values.value}
-                                              onChange={(event, newValue) => {
-                                                  formik.setFieldValue("value", newValue, true);
-                                              }}
-                                              renderInput={(params) => (
-                                                  <TextField{...params} size={"small"} label="Value"
-                                                            placeholder="Setting value..."
-                                                            value={formik.values.value}
-                                                            error={formik.touched.value && Boolean(formik.errors.value)}
-                                                            helperText={formik.touched.value && formik.errors.value}/>
-                                              )}
-                                />
-                            </div>
-                        </form>
-                    </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button size={'small'} variant={'outlined'} onClick={() => setShowModal(false)} color={'inherit'}
-                            data-bs-dismiss="modal">Cancel</Button>
-                    <LoadingButton size="small" color="primary" loading={loading} loadingPosition="end"
-                                   onClick={() => formik.submitForm()}
-                                   endIcon={<Save/>} variant="contained">
-                        {modalAction === 'update' ? "Update" : "Create"}
-                    </LoadingButton>
-                </Modal.Footer>
-            </Modal>
         </div>
     );
 };

@@ -6,9 +6,9 @@ import DestinationChips from '../../../components/DestinationChips';
 import {Helpers} from '../../../utils/helpers';
 import {Link} from 'react-router-dom';
 import TableToolbar from '../../../components/TableToolbar';
-import {Notification} from '../../../utils/types';
+import {NotificationType} from '../../../utils/types';
 
-const RecentNotifications = ({notifications}: { notifications: Notification[] }) => {
+const RecentNotifications = ({notifications}: { notifications: NotificationType[] }) => {
     return (
         <div className="card" id="recentPurchaseTable">
             <TableToolbar title={'Recent Notifications'} actionsId={'table-notification-actions'} toolbarIcons={[

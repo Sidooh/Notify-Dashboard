@@ -4,7 +4,7 @@ export type Children = {
     children: ReactNode
 }
 
-export type Notification = {
+export type NotificationType = {
     id: string;
     channel: string;
     channel_id: bigint;
@@ -26,8 +26,8 @@ export type Notification = {
     }
 }
 
-export type Setting = {
-    id: string
+export type SettingType = {
+    id?: string
     type: string
     value: string
 }

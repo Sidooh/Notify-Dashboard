@@ -1,10 +1,10 @@
 import React from 'react';
 import {Mail, Telegram} from '@mui/icons-material';
-import {Notification} from '../utils/types';
+import {NotificationType} from '../utils/types';
 
 type DestinationItem = { recipient: string | number, status: string }
 
-const DestinationChips = ({notification}: { notification: Notification }) => {
+const DestinationChips = ({notification}: { notification: NotificationType }) => {
     let data: DestinationItem[], icon: JSX.Element;
 
     if (notification.channel === "sms" && notification.notifiable_id) {
