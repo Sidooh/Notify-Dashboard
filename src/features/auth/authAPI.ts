@@ -11,17 +11,19 @@ export type LoginRequest = {
 
 export const authAPI = {
     login: async (userData: LoginRequest) => {
-        const {data} = await axios.post(API_URL, userData, {withCredentials: true});
+        let {data} = await axios.post(API_URL, userData, {withCredentials: true});
 
-        const userCredentials = {
-            token: data.token,
-            user: Helpers.JWT.decode(data.token),
-            credentials: userData
-        };
+        if (data) {
+            data = {
+                token: data.token,
+                user: Helpers.JWT.decode(data.token),
+                credentials: userData
+            };
 
-        if (data) localStorage.setItem('auth', JSON.stringify(userCredentials));
+            localStorage.setItem('auth', JSON.stringify(data));
+        }
 
-        return userCredentials;
+        return data;
     },
     logout: () => localStorage.removeItem('auth')
 };
