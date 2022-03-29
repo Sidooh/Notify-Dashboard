@@ -21,7 +21,7 @@ const Auth = ({component}: { component: JSX.Element }) => {
     const expiresIn = moment.unix(auth.user.exp).diff(moment(), 'minutes');
     console.log(`Session expires in: ${expiresIn}minutes`);
 
-    if (expiresIn < 2) dispatch(login(auth.credentials));
+    if (expiresIn < 1) dispatch(login(auth.credentials));
 
     return component;
 };

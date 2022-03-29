@@ -70,9 +70,15 @@ const Create = () => {
                     plugins: {remove_button: {title: 'Remove this destination',}},
                     onInitialize: () => setIsTomSelectInstance(true),
                 });
+            } else if (accIsSuccess && accounts) {
+                const instance = destinationSelectEl.tomselect;
+
+                instance.clear();
+                instance.clearOptions();
+                instance.addOptions(accounts.map(account => ({value: account.phone, text: account.phone})));
             }
         }
-    }, [destinationSelectEl, isTomSelectInstance]);
+    }, [accIsSuccess, accounts, destinationSelectEl, isTomSelectInstance]);
 
     const formik = useFormik({
         initialValues: {
@@ -114,8 +120,6 @@ const Create = () => {
             }
         }
     };
-
-    if(destinationSelectEl && isTomSelectInstance) updateDestinations()
 
     const handleChannelChange = (e: ChangeEvent<HTMLSelectElement>) => {
         formik.setFieldValue("channel", e.target.value, true);
@@ -170,8 +174,7 @@ const Create = () => {
                             <div className="mb-3">
                                 <label className="form-label" htmlFor="exampleFormControlInput1">Destination(s)</label>
                                 <select className="form-select" multiple ref={ el => setDestinationSelectEl(el) }
-                                        size={ 1 }
-                                        name="destination"
+                                        size={ 1 } name="destination"
                                         value={ formik.values.destination } onChange={ formik.handleChange }/>
                                 <small
                                     className={ 'text-danger' }>{ formik.touched.destination && formik.errors.destination }</small>

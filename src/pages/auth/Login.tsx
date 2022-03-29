@@ -51,11 +51,7 @@ const Login = () => {
                     <div className="card">
                         <div className="card-body p-4 p-sm-5">
                             <div className="row flex-between-center mb-2">
-                                <div className="col-auto"><h5>Sign in</h5></div>
-                                <div className="col-auto fs--1 text-600">
-                                    <span className="mb-0 undefined">or </span>
-                                    <span><Link to="/register">Create an account</Link></span>
-                                </div>
+                                <div className="col-auto"><h5>Sign In</h5></div>
                             </div>
                             <form onSubmit={formik.handleSubmit}>
                                 <div className="mb-3">
