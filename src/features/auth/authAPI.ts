@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { CONFIG } from '../../config';
+import { Helpers } from '../../utils/helpers';
 
-const API_URL = `${CONFIG.sidooh.services.accounts.api.url}/users/signin`;
+const API_URL = `${ CONFIG.sidooh.services.accounts.api.url }/users/signin`;
 
 export type LoginRequest = {
     email: string
@@ -14,10 +15,9 @@ export const authAPI = {
 
         const userCredentials = {
             token: data.token,
-            user: data.token,
-        }
-
-        console.log(userCredentials);
+            user: Helpers.JWT.decode(data.token),
+            credentials: userData
+        };
 
         if (data) localStorage.setItem('auth', JSON.stringify(userCredentials));
 

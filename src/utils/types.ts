@@ -30,3 +30,15 @@ export type SettingType = {
     type: string
     value: string
 }
+
+export type AccountType = {
+    id: number
+    phone: string
+    active: boolean
+}
+
+export type UserType = {
+    id: number
+    email: string
+    name: string
+}

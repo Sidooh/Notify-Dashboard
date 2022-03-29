@@ -1,13 +1,14 @@
-import {createAsyncThunk, createSlice} from '@reduxjs/toolkit';
-import {authAPI, LoginRequest} from './authAPI';
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { authAPI, LoginRequest } from './authAPI';
 
 //  Get user data from localstorage
 const auth = JSON.parse(String(localStorage.getItem('auth')));
 
 export type AuthState = {
     auth: {
-        user: string | null
-        token: string | null
+        user: { id: number, exp: number, name: string, email: string }
+        token: string
+        credentials: LoginRequest
     } | null;
     isError: boolean;
     isSuccess: boolean;
@@ -16,10 +17,7 @@ export type AuthState = {
 }
 
 const initialState: AuthState = {
-    auth: {
-        user: auth?.user || null,
-        token: auth?.token || null,
-    },
+    auth: auth || null,
     isError: false,
     isSuccess: false,
     isLoading: false,

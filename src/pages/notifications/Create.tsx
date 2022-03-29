@@ -1,7 +1,7 @@
 import { Telegram } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { useFormik } from 'formik';
-import React, { memo, useEffect, useState } from 'react';
+import React, { ChangeEvent, memo, useEffect, useState } from 'react';
 import TomSelect from 'tom-select';
 import * as yup from 'yup';
 import AlertError from '../../components/AlertError';
@@ -9,7 +9,9 @@ import { IMAGES } from '../../constants';
 import { useStoreNotificationMutation } from '../../features/notifications/notificationsAPI';
 import Master from '../../layouts/Master';
 import { Helpers } from '../../utils/helpers';
-import {useGetAllAccountsQuery} from '../../app/services/accountsAPI';
+import { useGetAllAccountsQuery, useGetAllUsersQuery } from '../../app/services/accountsAPI';
+
+type DestinationOptionsType = { value: string, text: string }
 
 const CHANNELS = ['slack', 'sms', 'mail', 'app'];
 
@@ -42,32 +44,31 @@ const validationSchema = yup.object({
 });
 
 const Create = () => {
-    // const {data, error} = useFetch(`${CONFIG.sidooh.services.accounts.api.url}/accounts`)
-
     const [destinationSelectEl, setDestinationSelectEl] = useState<any>(null);
     const [isTomSelectInstance, setIsTomSelectInstance] = useState(false);
 
-    const {data, error} = useGetAllAccountsQuery()
-    console.log(data);
-    const [storeNotification, result] = useStoreNotificationMutation()
+    const {data: accounts, isSuccess: accIsSuccess} = useGetAllAccountsQuery();
+    const {data: users, isSuccess: usersIsSuccess} = useGetAllUsersQuery();
+
+    const [storeNotification, result] = useStoreNotificationMutation();
 
     useEffect(() => {
         if (destinationSelectEl) {
             if (!isTomSelectInstance) {
                 new TomSelect(destinationSelectEl, {
                     options: [
-                        { value: '254110039317', text: '254110039317' },
-                        { value: '254715270660', text: '254715270660' },
-                        { value: '254714611696', text: '254714611696' },
-                        { value: '254736388405', text: '254736388405' },
+                        {value: '254110039317', text: '254110039317'},
+                        {value: '254715270660', text: '254715270660'},
+                        {value: '254714611696', text: '254714611696'},
+                        {value: '254736388405', text: '254736388405'},
                     ],
                     persist: true,
                     create: true,
                     createOnBlur: true,
                     selectOnTab: true,
                     placeholder: 'Select destination...',
-                    plugins: { remove_button: { title: 'Remove this destination', } },
-                    onInitialize: () => setIsTomSelectInstance(true)
+                    plugins: {remove_button: {title: 'Remove this destination',}},
+                    onInitialize: () => setIsTomSelectInstance(true),
                 });
             }
         }
@@ -82,82 +83,114 @@ const Create = () => {
         },
         validationSchema: validationSchema,
         onSubmit: async values => {
-            const notification = await storeNotification(values).unwrap()
+            const notification = await storeNotification(values).unwrap();
 
             if (result.isSuccess) {
                 formik.resetForm();
 
                 if (destinationSelectEl) destinationSelectEl.tomselect.clear();
 
-                Helpers.toast({ msg: `${notification.channel.toUpperCase()} notification sent!`, type: "success" });
+                Helpers.toast({msg: `${ notification.channel.toUpperCase() } notification sent!`, type: "success"});
             }
         },
     });
 
+    const updateDestinations = () => {
+        const updateDestinationsOptions = (newOptions: DestinationOptionsType[]) => {
+            const instance = destinationSelectEl.tomselect;
+
+            instance.clear();
+            instance.clearOptions();
+            instance.addOptions(newOptions);
+        };
+
+        if (formik.values.channel === 'sms') {
+            if (accIsSuccess && accounts) {
+                updateDestinationsOptions(accounts.map(account => ({value: account.phone, text: account.phone})));
+            }
+        } else {
+            if (usersIsSuccess && users) {
+                updateDestinationsOptions(users.map(user => ({value: user.email, text: user.email})));
+            }
+        }
+    };
+
+    if(destinationSelectEl && isTomSelectInstance) updateDestinations()
+
+    const handleChannelChange = (e: ChangeEvent<HTMLSelectElement>) => {
+        formik.setFieldValue("channel", e.target.value, true);
+
+        if(destinationSelectEl && isTomSelectInstance) updateDestinations()
+    };
+
     return (
         <Master>
-            <form onSubmit={formik.handleSubmit} className="row g-3 mb-3 justify-content-center">
+            <form onSubmit={ formik.handleSubmit } className="row g-3 mb-3 justify-content-center">
 
-                {result.isError && <AlertError error={result.error} />}
+                { result.isError && <AlertError error={ result.error }/> }
 
                 <div className="col-md-5 ps-lg-2">
                     <div className="card h-lg-100">
                         <div className="bg-holder bg-card"
-                            style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})` }} />
+                             style={ {backgroundImage: `url(${ IMAGES.icons.spotIllustrations.corner_5 })`} }/>
                         <div className="card-body position-relative">
                             <label className="form-label" htmlFor="exampleFormControlInput1">Channel</label>
-                            <select className="form-select" name={'channel'} value={formik.values.channel}
-                                onChange={formik.handleChange}>
-                                {window._.sortBy(CHANNELS).map((channel, i) => (
-                                    <option key={i} value={String(channel)}>{channel.toUpperCase()}</option>)
-                                )}
+                            <select className="form-select" name={ 'channel' } value={ formik.values.channel }
+                                    onChange={ handleChannelChange }>
+                                { window._.sortBy(CHANNELS).map((channel, i) => (
+                                    <option key={ i } value={ String(channel) }>{ channel.toUpperCase() }</option>)
+                                ) }
                             </select>
-                            <small className={'text-danger'}>{formik.touched.channel && formik.errors.channel}</small>
+                            <small
+                                className={ 'text-danger' }>{ formik.touched.channel && formik.errors.channel }</small>
                         </div>
                     </div>
                 </div>
                 <div className="col-md-5 ps-lg-2">
                     <div className="card h-lg-100">
                         <div className="bg-holder bg-card"
-                            style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})` }} />
+                             style={ {backgroundImage: `url(${ IMAGES.icons.spotIllustrations.corner_5 })`} }/>
                         <div className="card-body position-relative">
                             <label className="form-label" htmlFor="exampleFormControlInput1">Event Type</label>
-                            <select className="form-select" value={formik.values.event_type} name={'event_type'}
-                                onChange={formik.handleChange}>
-                                {window._.sortBy(EVENT_TYPES)
-                                    .map((type, i) => <option key={i} value={String(type)}>{type}</option>)}
+                            <select className="form-select" value={ formik.values.event_type } name={ 'event_type' }
+                                    onChange={ formik.handleChange }>
+                                { window._.sortBy(EVENT_TYPES)
+                                    .map((type, i) => <option key={ i } value={ String(type) }>{ type }</option>) }
                             </select>
                             <small
-                                className={'text-danger'}>{formik.touched.event_type && formik.errors.event_type}</small>
+                                className={ 'text-danger' }>{ formik.touched.event_type && formik.errors.event_type }</small>
                         </div>
                     </div>
                 </div>
                 <div className="col-md-10 mb-3 ps-lg-2">
                     <div className="card h-lg-100">
                         <div className="bg-holder bg-card"
-                            style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_1})` }} />
+                             style={ {backgroundImage: `url(${ IMAGES.icons.spotIllustrations.corner_1 })`} }/>
                         <div className="card-body position-relative">
                             <div className="mb-3">
                                 <label className="form-label" htmlFor="exampleFormControlInput1">Destination(s)</label>
-                                <select className="form-select" multiple ref={el => setDestinationSelectEl(el)} size={1}
-                                    name="destination"
-                                    value={formik.values.destination} onChange={formik.handleChange} />
+                                <select className="form-select" multiple ref={ el => setDestinationSelectEl(el) }
+                                        size={ 1 }
+                                        name="destination"
+                                        value={ formik.values.destination } onChange={ formik.handleChange }/>
                                 <small
-                                    className={'text-danger'}>{formik.touched.destination && formik.errors.destination}</small>
+                                    className={ 'text-danger' }>{ formik.touched.destination && formik.errors.destination }</small>
                             </div>
                             <div className="mb-3">
                                 <label className="form-label" htmlFor="exampleFormControlInput1">Message</label>
-                                <textarea className={'form-control'} name="content" id="content" cols={30} rows={10}
-                                    value={formik.values.content} placeholder={'Compose your message...'}
-                                    onChange={formik.handleChange} />
+                                <textarea className={ 'form-control' } name="content" id="content" cols={ 30 }
+                                          rows={ 10 }
+                                          value={ formik.values.content } placeholder={ 'Compose your message...' }
+                                          onChange={ formik.handleChange }/>
                                 <small
-                                    className={'text-danger'}>{formik.touched.content && formik.errors.content}</small>
+                                    className={ 'text-danger' }>{ formik.touched.content && formik.errors.content }</small>
                             </div>
 
                             <div className="text-end">
-                                <LoadingButton size="small" color="primary" loading={result.isLoading} loadingPosition="end"
-                                    onClick={() => formik.submitForm()}
-                                    endIcon={<Telegram />} variant="contained">Send</LoadingButton>
+                                <LoadingButton size="small" color="primary" loading={ result.isLoading }
+                                               loadingPosition="end"
+                                               onClick={ () => formik.submitForm() }
+                                               endIcon={ <Telegram/> } variant="contained">Send</LoadingButton>
                             </div>
                         </div>
                     </div>
