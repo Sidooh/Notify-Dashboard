@@ -8,7 +8,6 @@ import { SectionLoader } from '../components/Loader';
 import { SectionError } from '../components/Error';
 import { ErrorBoundary } from 'react-error-boundary';
 import OverlayScrollbars from 'overlayscrollbars';
-import { Tooltip } from 'bootstrap';
 
 type MasterType = {
     children: ReactNode,
@@ -31,7 +30,7 @@ const Master = ({children, error}: MasterType) => {
         const tooltipInit = function tooltipInit() {
             const tooltipTriggerList = [].slice.call(document.querySelectorAll('[title]'));
 
-            tooltipTriggerList.map((tooltipTriggerEl) => new Tooltip(tooltipTriggerEl, {trigger: 'hover'}));
+            tooltipTriggerList.map((tooltipTriggerEl) => new window.bootstrap.Tooltip(tooltipTriggerEl, {trigger: 'hover'}));
         };
 
         scrollbarInit();
