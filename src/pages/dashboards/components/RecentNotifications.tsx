@@ -1,12 +1,15 @@
 import React from 'react';
-import {Box, Grid, LinearProgress, Typography} from '@mui/material';
+import { Box, Grid, LinearProgress, Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import DestinationChips from '../../../components/DestinationChips';
-import {Helpers} from '../../../utils/helpers';
-import {Link} from 'react-router-dom';
+import { Helpers } from '../../../utils/helpers';
+import { Link } from 'react-router-dom';
 import TableToolbar from '../../../components/TableToolbar';
-import {NotificationType} from '../../../utils/types';
+import { NotificationType } from '../../../utils/types';
+import { Dropdown } from 'react-bootstrap';
+import { DeleteOutline, ReadMore } from '@mui/icons-material';
+
 
 const RecentNotifications = ({notifications}: { notifications: NotificationType[] }) => {
     return (
@@ -76,28 +79,22 @@ const RecentNotifications = ({notifications}: { notifications: NotificationType[
                                                 </div>
                                             </td>
                                             <td className="align-middle white-space-nowrap text-end">
-                                                <div className="dropstart font-sans-serif position-static d-inline-block">
-                                                    <button
-                                                        className="btn btn-link text-600 btn-sm dropdown-toggle btn-reveal float-end"
-                                                        type="button" id="dropdown0" data-bs-toggle="dropdown"
-                                                        data-boundary="window" aria-haspopup="true"
-                                                        aria-expanded="false"
-                                                        data-bs-reference="parent"><span
-                                                        className="fas fa-ellipsis-h fs--1"/>
-                                                    </button>
-                                                    <div className="dropdown-menu dropdown-menu-end border py-2"
-                                                         aria-labelledby="dropdown0">
-                                                        <Link to={`/notifications/${notification.id}`}
-                                                              className="dropdown-item">View</Link>
-                                                        <a className="dropdown-item" href="#!">Edit</a>
-                                                        <a className="dropdown-item" href="#!">Refund</a>
-                                                        <div className="dropdown-divider"/>
-                                                        <a className="dropdown-item text-warning"
-                                                           href="#!">Archive</a>
-                                                        <a className="dropdown-item text-danger"
-                                                           href="#!">Delete</a>
-                                                    </div>
-                                                </div>
+                                                <Dropdown>
+                                                    <Dropdown.Toggle size={'sm'} variant={'link'}
+                                                                     className={'text-600 btn-reveal float-end'}>
+                                                        <span className="fas fa-ellipsis-h fs--1"/>
+                                                    </Dropdown.Toggle>
+                                                    <Dropdown.Menu>
+                                                        <Dropdown.Item as={Link}
+                                                                       to={`/notifications/${notification.id}`}>
+                                                            <ReadMore fontSize={'small'} className={'me-2'}/>View
+                                                        </Dropdown.Item>
+                                                        <Dropdown.Item className={'text-danger'}>
+                                                            <DeleteOutline fontSize={'small'} className={'me-2'}/>
+                                                            Delete
+                                                        </Dropdown.Item>
+                                                    </Dropdown.Menu>
+                                                </Dropdown>
                                             </td>
                                         </tr>
                                     );

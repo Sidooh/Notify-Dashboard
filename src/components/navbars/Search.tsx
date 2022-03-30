@@ -1,9 +1,9 @@
 import React from 'react';
-import {IMAGES} from '../../constants';
+import { IMAGES } from '../../constants';
 import Waffle from '../Waffle';
-import {Link, useNavigate} from 'react-router-dom';
-import {useAppDispatch} from '../../app/hooks';
-import {logout, reset} from '../../features/auth/authSlice';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../app/hooks';
+import { logout, reset } from '../../features/auth/authSlice';
 
 const Search = () => {
     const navigate = useNavigate()
