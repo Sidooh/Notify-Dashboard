@@ -157,7 +157,7 @@ const NavbarVerticalTop = () => {
                                     icon: <span className="fas fa-chart-pie"/>,
                                     listItems: [
                                         {title: 'Default', href: '/dashboard'},
-                                        {title: 'Analytics', href: '/dashboard/analytics'},
+                                        // {title: 'Analytics', href: '/dashboard/analytics'},
                                     ],
                                     showListItems: true
                                 },
