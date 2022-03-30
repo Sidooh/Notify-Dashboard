@@ -1,13 +1,14 @@
-import React, {ReactNode, Suspense, useEffect} from 'react';
+import React, { ReactNode, Suspense, useEffect } from 'react';
 import OffCanvasSettings from '../components/ThemeSettings';
 import Footer from '../components/Footer';
 import NavbarVerticalTop from '../components/navbars/VerticalTop';
 import NavbarSearch from '../components/navbars/Search';
 import NavbarCombo from '../components/navbars/Combo';
-import {SectionLoader} from '../components/Loader';
-import {SectionError} from '../components/Error';
-import {ErrorBoundary} from 'react-error-boundary';
+import { SectionLoader } from '../components/Loader';
+import { SectionError } from '../components/Error';
+import { ErrorBoundary } from 'react-error-boundary';
 import OverlayScrollbars from 'overlayscrollbars';
+import { Tooltip } from 'bootstrap';
 
 type MasterType = {
     children: ReactNode,
@@ -27,8 +28,15 @@ const Master = ({children, error}: MasterType) => {
             });
         };
 
-        scrollbarInit()
-    }
+        const tooltipInit = function tooltipInit() {
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[title]'));
+
+            tooltipTriggerList.map((tooltipTriggerEl) => new Tooltip(tooltipTriggerEl, {trigger: 'hover'}));
+        };
+
+        scrollbarInit();
+        tooltipInit();
+    };
 
     useEffect(() => {
         let isFluid = JSON.parse(String(localStorage.getItem('isFluid')));
@@ -39,7 +47,7 @@ const Master = ({children, error}: MasterType) => {
             container.classList.add('container-fluid');
         }
 
-        initTheme()
+        initTheme();
     }, [children]);
 
     return (

@@ -10579,7 +10579,7 @@ docReady(marketShareInit);
 docReady(totalSalesInit);
 docReady(topProductsInit);
 docReady(navbarTopDropShadow);
-docReady(tooltipInit);
+// docReady(tooltipInit);
 docReady(popoverInit);
 docReady(toastInit);
 docReady(progressAnimationToggle);
