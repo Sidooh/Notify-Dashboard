@@ -30,6 +30,7 @@ export const IMAGES = {
         google: require('../assets/images/nav-icons/google.png'),
         slack: require('../assets/images/nav-icons/slack.png'),
         trello: require('../assets/images/nav-icons/trello.png'),
+        click_up: require('../assets/images/nav-icons/click-up.jpeg'),
     },
     team: {
         2: require('../assets/images/team/2.jpg'),

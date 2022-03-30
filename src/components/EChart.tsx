@@ -1,9 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {Helpers} from '../utils/helpers';
-import {bind, clear} from 'size-sensor';
+import React, { useEffect, useState } from 'react';
+import { Helpers } from '../utils/helpers';
+import { bind, clear } from 'size-sensor';
 import * as echarts from 'echarts';
-import PropTypes from 'prop-types';
-import {EChartsType} from 'echarts/types/dist/echarts';
+import { EChartsType } from 'echarts/types/dist/echarts';
 
 const EChart = ({
                     options,
@@ -158,10 +157,6 @@ const EChart = ({
             className={`echarts-for-react ${className}`}
         />
     );
-};
-
-EChart.propTypes = {
-    options: PropTypes.object.isRequired
 };
 
 export default EChart;
