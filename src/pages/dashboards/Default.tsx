@@ -35,7 +35,7 @@ const Default = () => {
                         <div className="bg-holder bg-card"
                              style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_1})`}}/>
                         <div className="card-header pb-0">
-                            <h6 className="mb-0 mt-2 d-flex align-items-center">
+                            <h6 className="mb-0 mt-2 d-flex align-items-center position-relative">
                                 Weekly Notifications
                                 <span className="ms-1 text-400" data-bs-toggle="tooltip" data-bs-placement="top"
                                       title="Calculated according to current week's notifications">

@@ -1,5 +1,4 @@
 import React, { ReactNode } from 'react';
-import { IMAGES } from '../constants';
 import { CONFIG } from '../config';
 
 type WaffleItemType = {
