@@ -3,7 +3,7 @@ import { Typography } from '@mui/material';
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import DestinationChips from '../../../components/DestinationChips';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { NotificationType } from 'helpers/types';
 import { ReadMore } from '@mui/icons-material';
 import { isToday, isYesterday } from '../../../helpers/utils';
@@ -12,11 +12,14 @@ import { SectionLoader } from '../../../components/Loader';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
 
 const RecentNotifications = ({notifications}: { notifications: NotificationType[] }) => {
+    const navigate = useNavigate();
+
     return (
         <>
             {
                 notifications
-                    ? <DataTable title={'Recent Notifications'} columns={[
+                    ? <DataTable bulkActions onCreateRow={() => navigate('/notifications/create')}
+                                 title={'Recent Notifications'} columns={[
                         {
                             accessor: 'provider',
                             Header: 'Provider'
