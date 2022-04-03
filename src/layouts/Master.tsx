@@ -1,9 +1,6 @@
 import React, { ReactNode, Suspense, useEffect } from 'react';
 import OffCanvasSettings from '../components/ThemeSettings';
 import Footer from '../components/Footer';
-import NavbarVerticalTop from '../components/navbars/VerticalTop';
-import NavbarSearch from '../components/navbars/Search';
-import NavbarCombo from '../components/navbars/Combo';
 import { SectionLoader } from '../components/Loader';
 import { SectionError } from '../components/Error';
 import { ErrorBoundary } from 'react-error-boundary';
@@ -15,7 +12,15 @@ type MasterType = {
 }
 
 const Master = ({children, error}: MasterType) => {
-    const initTheme = () => {
+    useEffect(() => {
+        let isFluid = JSON.parse(String(localStorage.getItem('isFluid')));
+
+        if (isFluid) {
+            let container = document.querySelector('[data-layout]') as HTMLElement;
+            container.classList.remove('container');
+            container.classList.add('container-fluid');
+        }
+
         const scrollbarInit = function scrollbarInit() {
             Array.prototype.forEach.call(document.querySelectorAll('.scrollbar-overlay'), function (el) {
                 return OverlayScrollbars(el, {
@@ -27,37 +32,15 @@ const Master = ({children, error}: MasterType) => {
             });
         };
 
-        const tooltipInit = function tooltipInit() {
-            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[title]'));
-
-            tooltipTriggerList.map((tooltipTriggerEl) => new window.bootstrap.Tooltip(tooltipTriggerEl, {trigger: 'hover'}));
-        };
-
         scrollbarInit();
-        tooltipInit();
-    };
-
-    useEffect(() => {
-        let isFluid = JSON.parse(String(localStorage.getItem('isFluid')));
-
-        if (isFluid) {
-            let container = document.querySelector('[data-layout]') as HTMLElement;
-            container.classList.remove('container');
-            container.classList.add('container-fluid');
-        }
-
-        initTheme();
     }, [children]);
 
     return (
         <>
             <main className="main" id="top">
                 <div className="container" data-layout="container">
-                    <NavbarVerticalTop/>
 
                     <div className="content">
-                        <NavbarSearch/>
-                        <NavbarCombo/>
 
                         {
                             error

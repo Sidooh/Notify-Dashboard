@@ -1,13 +1,12 @@
 import React from 'react';
-import {useParams} from 'react-router-dom';
-import {IMAGES} from '../../constants';
+import { useParams } from 'react-router-dom';
+import { IMAGES } from '../../constants';
 import moment from 'moment';
 import DestinationChips from '../../components/DestinationChips';
 import JSONPretty from 'react-json-pretty';
 import 'react-json-pretty/themes/monikai.css';
-import Master from '../../layouts/Master';
-import {SectionLoader} from '../../components/Loader';
-import {useNotificationQuery} from '../../features/notifications/notificationsAPI';
+import { SectionLoader } from '../../components/Loader';
+import { useNotificationQuery } from '../../features/notifications/notificationsAPI';
 
 const Show = () => {
     const {id} = useParams();
@@ -18,7 +17,7 @@ const Show = () => {
     if (data) hasError = data && data.status !== "success";
 
     return (
-        <Master error={error}>
+        <>
             {isLoading && <SectionLoader/>}
             {
                 isSuccess && (
@@ -92,7 +91,7 @@ const Show = () => {
                     </>
                 )
             }
-        </Master>
+        </>
     );
 };
 

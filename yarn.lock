@@ -1817,6 +1817,34 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@fortawesome/fontawesome-common-types@npm:6.1.1":
+  version: 6.1.1
+  resolution: "@fortawesome/fontawesome-common-types@npm:6.1.1"
+  checksum: 4db285557dd9d178e313a9596ad1c4ba84e9d47efb53dea3206de1bf98252574e0d95c3a0b114cc3cb5f162e2622a2cf8f037011fc98818ccade7bfb6c0c335b
+  languageName: node
+  linkType: hard
+
+"@fortawesome/fontawesome-svg-core@npm:^6.1.1":
+  version: 6.1.1
+  resolution: "@fortawesome/fontawesome-svg-core@npm:6.1.1"
+  dependencies:
+    "@fortawesome/fontawesome-common-types": 6.1.1
+  checksum: bf3b09a1ec3c5d6be30ea04c83dffb921c5a457c547fb1b99b814591489efabf939f669878cc5b48deb9771ef705209a1bb1b3088e66f6873cc9b34cbf4c781c
+  languageName: node
+  linkType: hard
+
+"@fortawesome/react-fontawesome@npm:latest":
+  version: 0.1.18
+  resolution: "@fortawesome/react-fontawesome@npm:0.1.18"
+  dependencies:
+    prop-types: ^15.8.1
+  peerDependencies:
+    "@fortawesome/fontawesome-svg-core": ~1 || ~6
+    react: ">=16.x"
+  checksum: eba711234541928e1877435905bcd94ab6aea1cf228833a55fc7c6a2fc18dd08d3f7f327ca4af0f3ba365188ad0869d7ecd31be5940d27f4e2bbe7e12cbcf520
+  languageName: node
+  linkType: hard
+
 "@gar/promisify@npm:^1.1.3":
   version: 1.1.3
   resolution: "@gar/promisify@npm:1.1.3"
@@ -2107,6 +2135,13 @@ __metadata:
     "@jridgewell/resolve-uri": ^3.0.3
     "@jridgewell/sourcemap-codec": ^1.4.10
   checksum: ab8bce84bbbc8c34f3ba8325ed926f8f2d3098983c10442a80c55764c4eb6e47d5b92d8ff20a0dd868c3e76a3535651fd8a0138182c290dbfc8396195685c37b
+  languageName: node
+  linkType: hard
+
+"@juggle/resize-observer@npm:^3.3.1":
+  version: 3.3.1
+  resolution: "@juggle/resize-observer@npm:3.3.1"
+  checksum: ddabc4044276a2cb57d469c4917206c7e39f2463aa8e3430e33e4eda554412afe29c22afa40e6708b49dad5d56768dc83acd68a704b1dcd49a0906bb96b991b2
   languageName: node
   linkType: hard
 
@@ -2998,6 +3033,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/echarts@npm:^4.9.13":
+  version: 4.9.13
+  resolution: "@types/echarts@npm:4.9.13"
+  dependencies:
+    "@types/zrender": "*"
+  checksum: 19e9d6098cab817a58f949541c5f9642f77dd535ca1413128f33045db631c8ea95fe4fa2c1ff2d3f679a9b4f68d52da70c47ce59338b336dffbe468ac3b79c03
+  languageName: node
+  linkType: hard
+
 "@types/eslint-scope@npm:^3.7.3":
   version: 3.7.3
   resolution: "@types/eslint-scope@npm:3.7.3"
@@ -3181,7 +3225,32 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash@npm:^4, @types/lodash@npm:^4.14.175":
+"@types/lodash.merge@npm:^4":
+  version: 4.6.6
+  resolution: "@types/lodash.merge@npm:4.6.6"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: 62ec56f14b3077f7174497856e9b277db811943cd11b1d67d2a8e51a1803bd49319e8aaf62e745c696af972354a575dbb8a85d3aecf4ae774caf062dc31ac46e
+  languageName: node
+  linkType: hard
+
+"@types/lodash.sortby@npm:^4":
+  version: 4.7.6
+  resolution: "@types/lodash.sortby@npm:4.7.6"
+  dependencies:
+    "@types/lodash": "*"
+  checksum: d7ec1aad2de3cf839c2572f331859e229b6aae25da198bf8452c544aae4c8756e1aa5af293e878e6ff4d7504a336b0ccf208cab7ff0ef6fd6fc236a101370b09
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:*":
+  version: 4.14.181
+  resolution: "@types/lodash@npm:4.14.181"
+  checksum: 0d1863d8383fd2f8bb42e9e3fc1d6255bb88ff034d6df848941063698944313dae944fc1270315613e3d303fae7c7a9a86085ad3235ed6204c56c4b0b3699aa9
+  languageName: node
+  linkType: hard
+
+"@types/lodash@npm:^4.14.175":
   version: 4.14.180
   resolution: "@types/lodash@npm:4.14.180"
   checksum: fc42ae3473695cac6e91553f832fef8eb51a31c1c0381cafa81b00dc3efe18e279786bdda77caf0b90a8340ba2ba7aa46ae6541d69870565f775d04c89128bc1
@@ -3269,15 +3338,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-countup@npm:^4.3.1":
-  version: 4.3.1
-  resolution: "@types/react-countup@npm:4.3.1"
-  dependencies:
-    react-countup: "*"
-  checksum: 325a3171b147530d3a2b611d6818f7e1ed3e555254dd91cb1a6d8e869d9a130a85cf6259ec2cfc37d2be295f8cdc3a803fbd1934a50bee2b5ab977b6dcbc23db
-  languageName: node
-  linkType: hard
-
 "@types/react-dom@npm:*":
   version: 17.0.14
   resolution: "@types/react-dom@npm:17.0.14"
@@ -3335,6 +3395,15 @@ __metadata:
     "@types/history": ^4.7.11
     "@types/react": "*"
   checksum: f08b37ee822f9f9ff904ffd0778fe2bb7c717ed3ee311610382ee024d02a35169bd3301ecde863cac21aae8fdee919501e8ea22bad0260c02c10cfbdba5c71be
+  languageName: node
+  linkType: hard
+
+"@types/react-table@npm:^7":
+  version: 7.7.10
+  resolution: "@types/react-table@npm:7.7.10"
+  dependencies:
+    "@types/react": "*"
+  checksum: 840f845c226c37c3f13f023974c37b4e941b7588c42dc5fcd5165463fd25005a9504a2c0d48df3325c0a63c2dc99c60fe1dfee4654b501b781ec2df3a4abfa64
   languageName: node
   linkType: hard
 
@@ -3531,6 +3600,13 @@ __metadata:
   version: 0.29.13
   resolution: "@types/yup@npm:0.29.13"
   checksum: 042eb51becd38559d0d7c86a40e0118d84d2b071c926999ec7721cbef759673be290d69b35ca7985db1bbb6d97544a2db20bb7cacbdaf827391bdd199e3789f9
+  languageName: node
+  linkType: hard
+
+"@types/zrender@npm:*":
+  version: 4.0.1
+  resolution: "@types/zrender@npm:4.0.1"
+  checksum: 2d18f65241a10232d1600359821ff6ace09afee75e52d6b44f4ddc7244af6915c5b944857cd580955ae213f67f8d07187326a8bc94ef1ebd2807cc23921c548c
   languageName: node
   linkType: hard
 
@@ -4747,6 +4823,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"can-use-dom@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "can-use-dom@npm:0.1.0"
+  checksum: 488fc94c40f2fcce46ebd41abf17ef0449acf0d6b145116036cd592a8e977e5729918d4b3b7c642ce7b1f5b83d330ade39a172cf6b6ef91093785991a868b308
+  languageName: node
+  linkType: hard
+
 "caniuse-api@npm:^3.0.0":
   version: 3.0.0
   resolution: "caniuse-api@npm:3.0.0"
@@ -5159,7 +5242,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"core-js@npm:^3.19.2":
+"core-js@npm:^3.0.1, core-js@npm:^3.19.2":
   version: 3.21.1
   resolution: "core-js@npm:3.21.1"
   checksum: d68eddd831340ad5b24ac29c72fda022a43b17f194c4278b6b875a843283d316502cb4abd07f28631d6ebc4387f66aa06e2b1b3c8fd7e08096a751b5c63f6889
@@ -7023,6 +7106,13 @@ __metadata:
   version: 1.0.1
   resolution: "functional-red-black-tree@npm:1.0.1"
   checksum: ca6c170f37640e2d94297da8bb4bf27a1d12bea3e00e6a3e007fd7aa32e37e000f5772acf941b4e4f3cf1c95c3752033d0c509af157ad8f526e7f00723b9eb9f
+  languageName: node
+  linkType: hard
+
+"fuse.js@npm:^6.5.3":
+  version: 6.5.3
+  resolution: "fuse.js@npm:6.5.3"
+  checksum: f7c14f4422000e7f7e3515c66f7cefdfc38adec4cf380097f4146a201ea438af60b67dc5849b3c0de0115ce3f9bc5afad6fc6570c08dcfcef5bf6e95eb8e6d6f
   languageName: node
   linkType: hard
 
@@ -9073,7 +9163,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash.throttle@npm:^4.0.1":
+"lodash.throttle@npm:^4.0.1, lodash.throttle@npm:^4.1.1":
   version: 4.1.1
   resolution: "lodash.throttle@npm:4.1.1"
   checksum: 129c0a28cee48b348aef146f638ef8a8b197944d4e9ec26c1890c19d9bf5a5690fe11b655c77a4551268819b32d27f4206343e30c78961f60b561b8608c8c805
@@ -9628,6 +9718,8 @@ __metadata:
   dependencies:
     "@emotion/react": ^11.8.2
     "@emotion/styled": ^11.8.1
+    "@fortawesome/fontawesome-svg-core": ^6.1.1
+    "@fortawesome/react-fontawesome": latest
     "@mui/icons-material": ^5.5.1
     "@mui/lab": ^5.0.0-alpha.74
     "@mui/material": ^5.5.2
@@ -9636,27 +9728,32 @@ __metadata:
     "@testing-library/react": ^9.5.0
     "@testing-library/user-event": ^7.2.1
     "@types/bootstrap": ^5
+    "@types/echarts": ^4.9.13
     "@types/jest": ^24.9.1
     "@types/jquery": ^3
-    "@types/lodash": ^4
+    "@types/lodash.merge": ^4
+    "@types/lodash.sortby": ^4
     "@types/mui-datatables": ^3.7.8
     "@types/node": ^12.20.47
     "@types/overlayscrollbars": ^1
     "@types/react": ^16.14.24
-    "@types/react-countup": ^4.3.1
     "@types/react-dom": ^16.9.14
     "@types/react-redux": ^7.1.23
     "@types/react-router-dom": ^5.3.3
+    "@types/react-table": ^7
     "@types/toastify-js": ^1.11.0
     "@types/yup": ^0
     axios: ^0.26.1
     bootstrap: ^5.1.3
+    classnames: ^2.3.1
     datatables.net: ^1.11.5
     datatables.net-bs5: ^1.11.5
     echarts: ^5.3.1
     formik: ^2.2.9
+    fuse.js: ^6.5.3
     jquery: ^3.6.0
-    lodash: ^4.17.21
+    lodash.merge: ^4.6.2
+    lodash.sortby: ^4.7.0
     moment: ^2.29.1
     mui-datatables: ^4.1.2
     overlayscrollbars: ^1.13.1
@@ -9669,6 +9766,8 @@ __metadata:
     react-redux: ^7.2.6
     react-router-dom: ^6.2.2
     react-scripts: 5.0.0
+    react-table: ^7.7.0
+    simplebar-react: ^2.3.6
     size-sensor: ^1.0.1
     sweetalert2: ^11.4.7
     sweetalert2-react-content: ^4.2.0
@@ -11268,7 +11367,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-countup@npm:*, react-countup@npm:^6.1.1":
+"react-countup@npm:^6.1.1":
   version: 6.1.1
   resolution: "react-countup@npm:6.1.1"
   dependencies:
@@ -11567,6 +11666,15 @@ __metadata:
     react-dnd: ^11.1.3
     react-dom: ^17.0.0
   checksum: d8090d29d09443b4371e0c6a4070f5de426f40201882e8734b07d86b16ee521bffb6d6763e10c75a11f16f1eeed88f0fd31b5fc97e7ad4668bba2ccb082dc6f1
+  languageName: node
+  linkType: hard
+
+"react-table@npm:^7.7.0":
+  version: 7.7.0
+  resolution: "react-table@npm:7.7.0"
+  peerDependencies:
+    react: ^16.8.3 || ^17.0.0-0
+  checksum: a679edecc76d3e51311b095528395b38ac85a1ffa371716bea01559a5fdc75af9a6abb9bb907c63190c8e77da22b11f7b05065b3a45d190d8f43cb83e4366206
   languageName: node
   linkType: hard
 
@@ -12308,6 +12416,33 @@ __metadata:
   version: 3.0.7
   resolution: "signal-exit@npm:3.0.7"
   checksum: a2f098f247adc367dffc27845853e9959b9e88b01cb301658cfe4194352d8d2bb32e18467c786a7fe15f1d44b233ea35633d076d5e737870b7139949d1ab6318
+  languageName: node
+  linkType: hard
+
+"simplebar-react@npm:^2.3.6":
+  version: 2.3.6
+  resolution: "simplebar-react@npm:2.3.6"
+  dependencies:
+    prop-types: ^15.6.1
+    simplebar: ^5.3.6
+  peerDependencies:
+    react: ^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0 || ^17.0
+    react-dom: ^0.14.9 || ^15.3.0 || ^16.0.0-rc || ^16.0 || ^17.0
+  checksum: 5487200fefd8f9f7aba349637b6f5f777aab4470239bc4f3fcb4e86ff4fa5d12dea68684df80e6cea644d9dffb062fbde7d9504762d9d82f7e5083cc260cf0c1
+  languageName: node
+  linkType: hard
+
+"simplebar@npm:^5.3.6":
+  version: 5.3.6
+  resolution: "simplebar@npm:5.3.6"
+  dependencies:
+    "@juggle/resize-observer": ^3.3.1
+    can-use-dom: ^0.1.0
+    core-js: ^3.0.1
+    lodash.debounce: ^4.0.8
+    lodash.memoize: ^4.1.2
+    lodash.throttle: ^4.1.1
+  checksum: 2372119965345fe68895a0a3c747eead19ce9938a64971938bd0fd3371e63f8394518fac667cfb30dd8870c80ab5a8519e2018e20c6eb95f8f340340e3bd65ce
   languageName: node
   linkType: hard
 

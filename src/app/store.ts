@@ -1,6 +1,7 @@
 import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
 import counterReducer from '../features/counter/counterSlice';
 import authReducer from '../features/auth/authSlice';
+import themeReducer from '../features/theme/themeSlice';
 import {accountsApi} from './services/accountsAPI';
 import {notificationsApi} from '../features/notifications/notificationsAPI';
 
@@ -8,6 +9,7 @@ export const store = configureStore({
     reducer: {
         counter: counterReducer,
         auth: authReducer,
+        theme: themeReducer,
 
         [accountsApi.reducerPath]: accountsApi.reducer,
         [notificationsApi.reducerPath]: notificationsApi.reducer,

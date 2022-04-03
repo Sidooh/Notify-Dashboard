@@ -1,11 +1,8 @@
-import React, {Dispatch, SetStateAction} from 'react';
-import {Box, Grid, IconButton, LinearProgress} from '@mui/material';
+import React, { Dispatch, SetStateAction } from 'react';
+import { Box, Grid, IconButton, LinearProgress } from '@mui/material';
 import TableToolbar from '../../components/TableToolbar';
-import {Delete, Edit} from '@mui/icons-material';
-import {useRequest} from '../../hooks';
-import {CONFIG} from '../../config';
-import {Helpers} from '../../utils/helpers';
-import {SettingType} from '../../utils/types';
+import { Delete, Edit } from '@mui/icons-material';
+import { SettingType } from 'helpers/types';
 
 
 type SettingsTableType = {
@@ -17,24 +14,7 @@ type SettingsTableType = {
 };
 
 
-const SettingsTable = ({settings, setSettings, onCreateRow, onUpdateRow, onDeleteRow}: SettingsTableType) => {
-    let {sendRequest: sendPostReq, loading, errors} = useRequest({
-        url: `${CONFIG.sidooh.services.notify.api.url}/api/settings`,
-        onSuccess: data => {
-            const index = settings.findIndex(item => item.id === data.id);
-            if (index > -1) {
-                settings[index] = data;
-            } else {
-                const newSettings = settings;
-                newSettings.push(data);
-                setSettings(newSettings);
-            }
-
-            Helpers.toast({msg: `Setting Created or updated!`, type: "success"});
-        },
-    });
-
-
+const SettingsTable = ({settings, onCreateRow, onUpdateRow, onDeleteRow}: SettingsTableType) => {
     return (
         <div className="card" id="recentPurchaseTable">
             <TableToolbar title={'Settings'} actionsId={'table-settings-actions'} toolbarIcons={[

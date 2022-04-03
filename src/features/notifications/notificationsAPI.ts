@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { CONFIG } from '../../config';
-import { NotificationType, SettingType } from '../../utils/types';
+import { CONFIG } from 'env';
+import { NotificationType, SettingType } from 'helpers/types';
 
 export const notificationsApi = createApi({
     reducerPath: 'notificationsApi',
@@ -10,6 +10,11 @@ export const notificationsApi = createApi({
         baseUrl: `${CONFIG.sidooh.services.notify.api.url}`,
     }),
     endpoints: (builder) => ({
+        //  Dashboard Endpoints
+        getDashboard: builder.query<any, void>({
+            query:() => '/dashboard',
+        }),
+
         //  Notification Endpoints
         notifications: builder.query<NotificationType[], void>({
             query: () => '/notifications',
@@ -34,7 +39,7 @@ export const notificationsApi = createApi({
             query: () => '/settings',
             providesTags: ['Setting']
         }),
-        upsertSetting: builder.mutation<void, SettingType>({
+        upsertSetting: builder.mutation<SettingType, SettingType>({
             query: setting => ({
                 url: '/settings',
                 method: 'POST',
@@ -53,6 +58,8 @@ export const notificationsApi = createApi({
 });
 
 export const {
+    useGetDashboardQuery,
+
     useNotificationsQuery,
     useNotificationQuery,
     useStoreNotificationMutation,

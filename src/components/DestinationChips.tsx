@@ -1,6 +1,6 @@
 import React from 'react';
 import {Mail, Telegram} from '@mui/icons-material';
-import {NotificationType} from '../utils/types';
+import {NotificationType} from 'helpers/types';
 
 type DestinationItem = { recipient: string | number, status: string }
 
