@@ -1,8 +1,8 @@
 import ProductionConfig from './production.config.json';
 import DevelopmentConfig from './development.config.json';
 
-const defaultConfig =  process.env.NODE_ENV === 'production' ? ProductionConfig : DevelopmentConfig;
-// const defaultConfig =  process.env.NODE_ENV === 'development' ? ProductionConfig : DevelopmentConfig;
+// const defaultConfig =  process.env.NODE_ENV === 'production' ? ProductionConfig : DevelopmentConfig;
+const defaultConfig =  process.env.NODE_ENV === 'development' ? ProductionConfig : DevelopmentConfig;
 
 export const CONFIG = {
     sidooh: {

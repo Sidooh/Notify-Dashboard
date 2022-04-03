@@ -1,5 +1,4 @@
-/* eslint-disable react/prop-types */
-import React from 'react';
+import { Children, cloneElement, forwardRef, memo, useEffect, useRef } from 'react';
 import { Form } from 'react-bootstrap';
 import {
     useTable,
@@ -9,13 +8,13 @@ import {
     useGlobalFilter,
 } from 'react-table';
 
-const IndeterminateCheckbox = React.forwardRef(
+const IndeterminateCheckbox = forwardRef(
     ({ indeterminate, ...rest }, ref) => {
-        const defaultRef = React.useRef();
+        const defaultRef = useRef();
 
         const resolvedRef = ref || defaultRef;
 
-        React.useEffect(() => {
+        useEffect(() => {
             resolvedRef.current.indeterminate = indeterminate;
         }, [resolvedRef, indeterminate]);
 
@@ -96,14 +95,14 @@ const AdvanceTableWrapper = ({
     );
 
     const recursiveMap = children => {
-        return React.Children.map(children, child => {
+        return Children.map(children, child => {
             if (child.props?.children) {
-                return React.cloneElement(child, {
+                return cloneElement(child, {
                     children: recursiveMap(child.props.children)
                 });
             } else {
                 if (child.props?.table) {
-                    return React.cloneElement(child, {
+                    return cloneElement(child, {
                         ...child.props,
                         getTableProps,
                         headers,
@@ -131,9 +130,9 @@ const AdvanceTableWrapper = ({
 
     return (
         // <>
-        //   {React.Children.map(children, child => {
+        //   {Children.map(children, child => {
         //     if (child.props.table) {
-        //       return React.cloneElement(child, {
+        //       return cloneElement(child, {
         //         ...child.props,
         //         getTableProps,
         //         headers,
@@ -159,4 +158,4 @@ const AdvanceTableWrapper = ({
     );
 };
 
-export default AdvanceTableWrapper;
+export default memo(AdvanceTableWrapper);

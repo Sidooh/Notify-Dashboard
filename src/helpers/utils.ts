@@ -152,7 +152,7 @@ function compareVersion(version: any, range?: string) {
     let op: string = string.match(/^[<>]=?|/) ? string.match(/^[<>]=?|/)![0] : "";
 
     // @ts-ignore
-    return comparator[op] ? comparator[op](version, n) : (version === n || n !== n);
+    return comparator[op] ? comparator[op](version, n) : (version === n);
 }
 
 // is current operating system windows?

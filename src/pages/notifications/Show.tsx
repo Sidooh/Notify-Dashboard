@@ -7,6 +7,7 @@ import JSONPretty from 'react-json-pretty';
 import 'react-json-pretty/themes/monikai.css';
 import { SectionLoader } from '../../components/Loader';
 import { useNotificationQuery } from '../../features/notifications/notificationsAPI';
+import { SectionError } from '../../components/Error';
 
 const Show = () => {
     const {id} = useParams();
@@ -18,6 +19,7 @@ const Show = () => {
 
     return (
         <>
+            {error && <SectionError error={error}/>}
             {isLoading && <SectionLoader/>}
             {
                 isSuccess && (

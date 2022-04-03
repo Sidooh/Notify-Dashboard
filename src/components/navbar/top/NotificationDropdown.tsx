@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,7 @@ import Notification from 'components/Notification';
 
 const NotificationDropdown = () => {
     const [isOpen, setIsOpen] = useState(false);
-    const [isAllRead, setIsAllRead] = useState(false);
+    const [isAllRead] = useState(false);
 
     // Handler
     const handleToggle = () => {

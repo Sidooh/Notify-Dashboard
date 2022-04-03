@@ -1,4 +1,4 @@
-import React, { CSSProperties } from 'react';
+import { CSSProperties, memo } from 'react';
 import classNames from 'classnames';
 
 type BackgroundType = {
@@ -50,4 +50,4 @@ const Background = ({image, overlay, position, video, className, style}: Backgro
     );
 };
 
-export default Background;
+export default memo(Background);

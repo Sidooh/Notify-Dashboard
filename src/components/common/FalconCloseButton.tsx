@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { CloseButton } from 'react-bootstrap';
 import classNames from 'classnames';
 import { useAppSelector } from '../../app/hooks';
@@ -34,4 +34,4 @@ const FalconCloseButton = ({
     );
 };
 
-export default FalconCloseButton;
+export default memo(FalconCloseButton);

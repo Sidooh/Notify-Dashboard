@@ -27,7 +27,7 @@ const useToggleStylesheet = (isDark: boolean) => {
         document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
 
         dispatch(refreshTheme());
-    }, [isDark]);
+    }, [dispatch, isDark]);
 
     return {isLoaded};
 };

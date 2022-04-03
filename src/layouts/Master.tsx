@@ -1,5 +1,4 @@
-import React, { ReactNode, Suspense, useEffect } from 'react';
-import OffCanvasSettings from '../components/ThemeSettings';
+import { ReactNode, Suspense, useEffect } from 'react';
 import Footer from '../components/Footer';
 import { SectionLoader } from '../components/Loader';
 import { SectionError } from '../components/Error';
@@ -57,7 +56,6 @@ const Master = ({children, error}: MasterType) => {
                     </div>
                 </div>
             </main>
-            <OffCanvasSettings/>
         </>
     );
 };

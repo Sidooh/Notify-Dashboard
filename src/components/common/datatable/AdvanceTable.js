@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 import SimpleBarReact from 'simplebar-react';
 import { Table } from 'react-bootstrap';
@@ -76,4 +76,4 @@ AdvanceTable.propTypes = {
     tableProps: PropTypes.object
 };
 
-export default AdvanceTable;
+export default memo(AdvanceTable);

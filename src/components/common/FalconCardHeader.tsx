@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { memo, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import classNames from 'classnames';
 
@@ -65,4 +65,4 @@ const FalconCardHeader = ({
     </Card.Header>
 );
 
-export default FalconCardHeader;
+export default memo(FalconCardHeader);

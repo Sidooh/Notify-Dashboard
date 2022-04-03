@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { memo, ReactNode } from 'react';
 import { isIterableArray } from 'helpers/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Flex from './Flex';
@@ -102,4 +102,4 @@ export const AvatarGroup = ({children, dense, className}: AvatarGroupType) => {
     );
 };
 
-export default Avatar;
+export default memo(Avatar);

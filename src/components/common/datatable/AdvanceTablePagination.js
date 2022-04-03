@@ -1,7 +1,6 @@
-/* eslint-disable react/prop-types */
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import React from 'react';
+import React, { memo } from 'react';
 import { Button } from 'react-bootstrap';
 import Flex from '../Flex';
 
@@ -52,4 +51,4 @@ export const AdvanceTablePagination = ({
     );
 };
 
-export default AdvanceTablePagination;
+export default memo(AdvanceTablePagination);

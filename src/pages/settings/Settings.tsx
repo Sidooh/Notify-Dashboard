@@ -1,8 +1,8 @@
+import { lazy, memo, useState } from 'react';
 import { Delete, Edit, Save } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { Autocomplete, Button, IconButton, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import React, { lazy, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
@@ -155,10 +155,10 @@ const Settings = () => {
                             <div className="mb-3">
                                 <Autocomplete options={settingOptions.map(opt => opt.type)} freeSolo
                                               value={formik.values.type}
-                                              onChange={(event, newValue) => {
-                                                  const settingValues = getSettingValuesByName(String(newValue));
+                                              onChange={(...args) => {
+                                                  const settingValues = getSettingValuesByName(String(args[1]));
                                                   setSettingValues(settingValues);
-                                                  formik.setFieldValue("type", newValue, true);
+                                                  formik.setFieldValue("type", args[1], true);
                                               }}
                                               renderInput={(params) => (
                                                   <TextField{...params} size={"small"} label="Type"
@@ -170,8 +170,8 @@ const Settings = () => {
                             </div>
                             <div className="mb-3">
                                 <Autocomplete options={settingValues} freeSolo value={formik.values.value}
-                                              onChange={(event, newValue) => {
-                                                  formik.setFieldValue("value", newValue, true);
+                                              onChange={(...args) => {
+                                                  formik.setFieldValue("value", args[1], true);
                                               }}
                                               renderInput={(params) => (
                                                   <TextField{...params} size={"small"} label="Value"
@@ -199,4 +199,4 @@ const Settings = () => {
     );
 };
 
-export default Settings;
+export default memo(Settings);
