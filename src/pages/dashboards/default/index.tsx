@@ -1,6 +1,5 @@
 import React from 'react';
 import { IMAGES } from '../../../constants';
-import $ from 'jquery';
 import 'datatables.net';
 import CountUp from 'react-countup';
 import WeeklyNotifications from './WeeklyNotifications';
@@ -11,19 +10,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useGetDashboardQuery } from '../../../features/notifications/notificationsAPI';
 
 const Index = () => {
-    const {data, error} = useGetDashboardQuery();
-
-    if (data?.notifications) {
-        setTimeout(() => {
-            $('#table_id').DataTable({
-                retrieve: true,
-                columnDefs: [
-                    {orderable: false, targets: [0, 5]}
-                ],
-                lengthMenu: [[10, 20, -1], [10, 20, "All"]]
-            });
-        }, 500);
-    }
+    const {data} = useGetDashboardQuery();
 
     return (
         <>

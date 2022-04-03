@@ -18,7 +18,7 @@ export const AdvanceTableFooter = ({
     rowInfo = true,
     rowsPerPageSelection = true,
     navButtons = true,
-    rowsPerPageOptions = [5, 10, 15],
+    rowsPerPageOptions = [5, 10, 20, 50],
     className = null
 }) => {
     return (
