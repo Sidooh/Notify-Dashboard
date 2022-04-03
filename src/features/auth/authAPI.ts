@@ -1,6 +1,6 @@
 import axios from 'axios';
-import { CONFIG } from '../../config';
-import { Helpers } from '../../utils/helpers';
+import { CONFIG } from 'env';
+import { JWT } from '../../helpers/utils';
 
 const API_URL = `${ CONFIG.sidooh.services.accounts.api.url }/users/signin`;
 
@@ -16,7 +16,7 @@ export const authAPI = {
         if (data) {
             data = {
                 token: data.token,
-                user: Helpers.JWT.decode(data.token),
+                user: JWT.decode(data.token),
                 credentials: userData
             };
 

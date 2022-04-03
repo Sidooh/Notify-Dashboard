@@ -7,9 +7,9 @@ import * as yup from 'yup';
 import AlertError from '../../components/AlertError';
 import { IMAGES } from '../../constants';
 import { useStoreNotificationMutation } from '../../features/notifications/notificationsAPI';
-import Master from '../../layouts/Master';
-import { Helpers } from '../../utils/helpers';
 import { useGetAllAccountsQuery, useGetAllUsersQuery } from '../../app/services/accountsAPI';
+import { toast } from '../../helpers/utils';
+import sortBy from 'lodash.sortby';
 
 type DestinationOptionsType = { value: string, text: string }
 
@@ -99,7 +99,7 @@ const Create = () => {
 
                 if (destinationSelectEl) destinationSelectEl.tomselect.clear();
 
-                Helpers.toast({msg: `${ notification.channel.toUpperCase() } notification sent!`, type: "success"});
+                toast({msg: `${notification.channel.toUpperCase()} notification sent!`, type: "success"});
             }
         },
     });
@@ -127,82 +127,80 @@ const Create = () => {
     const handleChannelChange = (e: ChangeEvent<HTMLSelectElement>) => {
         formik.setFieldValue("channel", e.target.value, true);
 
-        if(destinationSelectEl && isTomSelectInstance) updateDestinations()
+        if (destinationSelectEl && isTomSelectInstance) updateDestinations();
     };
 
     return (
-        <Master>
-            <form onSubmit={ formik.handleSubmit } className="row g-3 mb-3 justify-content-center">
+        <form onSubmit={formik.handleSubmit} className="row g-3 mb-3 justify-content-center">
 
-                { result.isError && <AlertError error={ result.error }/> }
+            {result.isError && <AlertError error={result.error}/>}
 
-                <div className="col-md-5 ps-lg-2">
-                    <div className="card h-lg-100">
-                        <div className="bg-holder bg-card"
-                             style={ {backgroundImage: `url(${ IMAGES.icons.spotIllustrations.corner_5 })`} }/>
-                        <div className="card-body position-relative">
-                            <label className="form-label" htmlFor="exampleFormControlInput1">Channel</label>
-                            <select className="form-select" name={ 'channel' } value={ formik.values.channel }
-                                    onChange={ handleChannelChange }>
-                                { window._.sortBy(CHANNELS).map((channel, i) => (
-                                    <option key={ i } value={ String(channel) }>{ channel.toUpperCase() }</option>)
-                                ) }
-                            </select>
+            <div className="col-md-5 ps-lg-2">
+                <div className="card h-lg-100">
+                    <div className="bg-holder bg-card"
+                         style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})`}}/>
+                    <div className="card-body position-relative">
+                        <label className="form-label" htmlFor="exampleFormControlInput1">Channel</label>
+                        <select className="form-select" name={'channel'} value={formik.values.channel}
+                                onChange={handleChannelChange}>
+                            {sortBy(CHANNELS).map((channel, i) => (
+                                <option key={i} value={String(channel)}>{channel.toUpperCase()}</option>)
+                            )}
+                        </select>
+                        <small
+                            className={'text-danger'}>{formik.touched.channel && formik.errors.channel}</small>
+                    </div>
+                </div>
+            </div>
+            <div className="col-md-5 ps-lg-2">
+                <div className="card h-lg-100">
+                    <div className="bg-holder bg-card"
+                         style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})`}}/>
+                    <div className="card-body position-relative">
+                        <label className="form-label" htmlFor="exampleFormControlInput1">Event Type</label>
+                        <select className="form-select" value={formik.values.event_type} name={'event_type'}
+                                onChange={formik.handleChange}>
+                            {sortBy(EVENT_TYPES)
+                                .map((type, i) => <option key={i} value={String(type)}>{type}</option>)}
+                        </select>
+                        <small
+                            className={'text-danger'}>{formik.touched.event_type && formik.errors.event_type}</small>
+                    </div>
+                </div>
+            </div>
+            <div className="col-md-10 mb-3 ps-lg-2">
+                <div className="card h-lg-100">
+                    <div className="bg-holder bg-card"
+                         style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_1})`}}/>
+                    <div className="card-body position-relative">
+                        <div className="mb-3">
+                            <label className="form-label" htmlFor="exampleFormControlInput1">Destination(s)</label>
+                            <select className="form-select" multiple ref={el => setDestinationSelectEl(el)}
+                                    size={1} name="destination"
+                                    value={formik.values.destination} onChange={formik.handleChange}/>
                             <small
-                                className={ 'text-danger' }>{ formik.touched.channel && formik.errors.channel }</small>
+                                className={'text-danger'}>{formik.touched.destination && formik.errors.destination}</small>
                         </div>
-                    </div>
-                </div>
-                <div className="col-md-5 ps-lg-2">
-                    <div className="card h-lg-100">
-                        <div className="bg-holder bg-card"
-                             style={ {backgroundImage: `url(${ IMAGES.icons.spotIllustrations.corner_5 })`} }/>
-                        <div className="card-body position-relative">
-                            <label className="form-label" htmlFor="exampleFormControlInput1">Event Type</label>
-                            <select className="form-select" value={ formik.values.event_type } name={ 'event_type' }
-                                    onChange={ formik.handleChange }>
-                                { window._.sortBy(EVENT_TYPES)
-                                    .map((type, i) => <option key={ i } value={ String(type) }>{ type }</option>) }
-                            </select>
+                        <div className="mb-3">
+                            <label className="form-label" htmlFor="exampleFormControlInput1">Message</label>
+                            <textarea className={'form-control'} name="content" id="content" cols={30}
+                                      rows={10}
+                                      value={formik.values.content} placeholder={'Compose your message...'}
+                                      onChange={formik.handleChange}/>
                             <small
-                                className={ 'text-danger' }>{ formik.touched.event_type && formik.errors.event_type }</small>
+                                className={'text-danger'}>{formik.touched.content && formik.errors.content}</small>
                         </div>
-                    </div>
-                </div>
-                <div className="col-md-10 mb-3 ps-lg-2">
-                    <div className="card h-lg-100">
-                        <div className="bg-holder bg-card"
-                             style={ {backgroundImage: `url(${ IMAGES.icons.spotIllustrations.corner_1 })`} }/>
-                        <div className="card-body position-relative">
-                            <div className="mb-3">
-                                <label className="form-label" htmlFor="exampleFormControlInput1">Destination(s)</label>
-                                <select className="form-select" multiple ref={ el => setDestinationSelectEl(el) }
-                                        size={ 1 } name="destination"
-                                        value={ formik.values.destination } onChange={ formik.handleChange }/>
-                                <small
-                                    className={ 'text-danger' }>{ formik.touched.destination && formik.errors.destination }</small>
-                            </div>
-                            <div className="mb-3">
-                                <label className="form-label" htmlFor="exampleFormControlInput1">Message</label>
-                                <textarea className={ 'form-control' } name="content" id="content" cols={ 30 }
-                                          rows={ 10 }
-                                          value={ formik.values.content } placeholder={ 'Compose your message...' }
-                                          onChange={ formik.handleChange }/>
-                                <small
-                                    className={ 'text-danger' }>{ formik.touched.content && formik.errors.content }</small>
-                            </div>
 
-                            <div className="text-end">
-                                <LoadingButton size="small" color="primary" loading={ result.isLoading }
-                                               loadingPosition="end"
-                                               onClick={ () => formik.submitForm() }
-                                               endIcon={ <Telegram/> } variant="contained">Send</LoadingButton>
-                            </div>
+                        <div className="text-end">
+                            <LoadingButton size="small" color="primary" loading={result.isLoading}
+                                           loadingPosition="end"
+                                           onClick={() => formik.submitForm()}
+                                           endIcon={<Telegram/>} variant="contained">Send</LoadingButton>
                         </div>
                     </div>
                 </div>
-            </form>
-        </Master>
+            </div>
+        </form>
     );
 };
 

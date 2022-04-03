@@ -1,6 +1,9 @@
 import React from 'react';
 import JSONPretty from 'react-json-pretty';
-import {styled} from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+import Section from './common/Section';
+import { Col, Row } from 'react-bootstrap';
+import Logo from './common/Logo';
 
 /** ____________________________________________________    PAGE ERROR
  * */
@@ -11,21 +14,26 @@ type ErrorFallbackType = {
 
 export const ErrorFallback = ({error, resetErrorBoundary}: ErrorFallbackType) => {
     return (
-        <div className={'row g-3 flex-center min-vh-100'}>
-            <div className="col-md-10 col-xl-7">
-                <div className="card p-3 bg-soft-danger text-danger fw-bolder">
-                    <h3>Oops! An Error Occurred!</h3>
+        <Section className="py-0">
+            <Row className="flex-center min-vh-100 py-6">
+                <Col sm={11} md={9} lg={7} xl={6} className="col-xxl-5">
+                    <Logo/>
+                    <div className="card p-3 text-danger fw-bolder">
+                        <h3>Oops! An Error Occurred!</h3>
 
-                    <pre>{error.message}</pre>
+                        <pre>{error.message}</pre>
 
-                    <div>
-                        <JSONPretty data={error}/>
+                        <div>
+                            <JSONPretty data={error}/>
+                        </div>
+
+                        <button className={'btn btn btn-falcon-primary'} onClick={resetErrorBoundary}>
+                            Try again
+                        </button>
                     </div>
-
-                    <button className={'btn btn-sm btn-falcon-primary'} onClick={resetErrorBoundary}>Try again</button>
-                </div>
-            </div>
-        </div>
+                </Col>
+            </Row>
+        </Section>
     );
 };
 
