@@ -1,4 +1,4 @@
-import React, { Suspense } from 'react';
+import React, { memo, Suspense } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import Logo from 'components/common/Logo';
 import Section from 'components/common/Section';
@@ -29,4 +29,4 @@ const GuestLayout = () => {
     );
 };
 
-export default GuestLayout;
+export default memo(GuestLayout);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { IMAGES } from '../../constants';
 import moment from 'moment';
@@ -97,4 +97,4 @@ const Show = () => {
     );
 };
 
-export default Show;
+export default memo(Show);

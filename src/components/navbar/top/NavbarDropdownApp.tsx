@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Col, Nav, Row } from 'react-bootstrap';
 import { getFlatRoutes } from 'helpers/utils';
 import NavbarNavLink from './NavbarNavLink';
@@ -42,4 +42,4 @@ const NavbarDropdownApp = ({items}: NavbarDropdownAppType) => {
     );
 };
 
-export default NavbarDropdownApp;
+export default memo(NavbarDropdownApp);

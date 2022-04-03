@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { memo, ReactNode } from 'react';
 import classNames from 'classnames';
 import Background from './Background';
 import { Container } from 'react-bootstrap';
@@ -41,4 +41,4 @@ const Section = ({
     );
 };
 
-export default Section;
+export default memo(Section);

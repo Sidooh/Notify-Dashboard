@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect } from 'react';
+import React, { memo, Suspense, useEffect } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import NavbarTop from 'components/navbar/top/NavbarTop';
 import NavbarVertical from 'components/navbar/vertical/NavbarVertical';
@@ -53,4 +53,4 @@ const MainLayout = () => {
     );
 };
 
-export default MainLayout;
+export default memo(MainLayout);

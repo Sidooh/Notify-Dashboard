@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 import classNames from 'classnames';
 
 type SoftBadgeType = {
@@ -16,4 +16,4 @@ const SoftBadge = ({bg = 'primary', pill, children, className}: SoftBadgeType) =
     );
 };
 
-export default SoftBadge;
+export default memo(SoftBadge);

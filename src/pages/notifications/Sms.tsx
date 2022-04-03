@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Typography } from '@mui/material';
 import DestinationChips from '../../components/DestinationChips';
 import { Link, useNavigate } from 'react-router-dom';
@@ -89,4 +89,4 @@ const Sms = () => {
     );
 };
 
-export default Sms;
+export default memo(Sms);

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { memo, ReactNode } from 'react';
 import classNames from 'classnames';
 import { Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -36,4 +36,4 @@ const IconButton = ({
     </Button>
 );
 
-export default IconButton;
+export default memo(IconButton);

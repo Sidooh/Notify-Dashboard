@@ -1,4 +1,4 @@
-import React, { ReactNode, useState } from 'react';
+import React, { memo, ReactNode, useState } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Card, Dropdown } from 'react-bootstrap';
@@ -60,4 +60,4 @@ const NavbarDropdown = ({title, children}: NavbarDropdownType) => {
     );
 };
 
-export default NavbarDropdown;
+export default memo(NavbarDropdown);

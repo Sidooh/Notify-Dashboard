@@ -1,4 +1,4 @@
-import React, { lazy, useEffect } from 'react';
+import React, { lazy, memo, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login, reset } from '../../features/auth/authSlice';
 import { useAuth } from '../../hooks/useAuth';
@@ -91,4 +91,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default memo(Login);
