@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
@@ -127,4 +127,4 @@ const WeeklyNotifications = ({data, width, amountClassName}: WeeklyNotifications
     );
 };
 
-export default WeeklyNotifications;
+export default memo(WeeklyNotifications);

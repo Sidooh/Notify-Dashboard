@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Card, Col, Dropdown, Row } from 'react-bootstrap';
@@ -91,4 +91,4 @@ const WaffleLinkItem = ({avatar, avatarText, img, title, link, hr, disabled = fa
     );
 };
 
-export default Waffle;
+export default memo(Waffle);

@@ -11,6 +11,9 @@
 td {
     vertical-align: middle;
 }
+.table-sm tfoot>tr>th:first-child, .table-sm thead>tr>th:first-child, .table-sm tr th:first-child, .table-sm tr td:first-child {
+    padding-left: .7rem;
+}
 
 .ts-control {
     box-shadow: var(--falcon-box-shadow-inset)!important;

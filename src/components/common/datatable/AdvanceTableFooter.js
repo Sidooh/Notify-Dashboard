@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
+import React, { memo } from 'react';
 import classNames from 'classnames';
-import React from 'react';
 import { Button, Form } from 'react-bootstrap';
 import Flex from '../Flex';
 
@@ -81,4 +80,4 @@ export const AdvanceTableFooter = ({
     );
 };
 
-export default AdvanceTableFooter;
+export default memo(AdvanceTableFooter);

@@ -107,8 +107,10 @@ export const appRoutes: RouteType = {
     ]
 };
 
-export default [
+const routes = [
     dashboardRoutes,
     notificationRoutes,
     appRoutes
 ];
+
+export default routes

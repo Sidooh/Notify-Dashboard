@@ -1,6 +1,5 @@
-/* eslint-disable react/prop-types */
+import React, { memo, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
 import { FormControl, InputGroup } from 'react-bootstrap';
 import { useAsyncDebounce } from 'react-table';
 
@@ -37,4 +36,4 @@ const AdvanceTableSearchBox = ({
     );
 };
 
-export default AdvanceTableSearchBox;
+export default memo(AdvanceTableSearchBox);

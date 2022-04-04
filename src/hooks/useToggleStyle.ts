@@ -10,24 +10,14 @@ const useToggleStylesheet = (isDark: boolean) => {
     useEffect(() => {
         setIsLoaded(false);
 
-        Array.from(document.getElementsByClassName('theme-stylesheet')).forEach(link => link.remove());
-
-        const link = document.createElement('link');
-
-        link.href = `${process.env.PUBLIC_URL}/css/theme.min.css`;
-        link.type = 'text/css';
-        link.rel = 'stylesheet';
-        link.className = 'theme-stylesheet';
-        link.onload = () => setIsLoaded(true);
-
-        document.getElementsByTagName('head')[0].appendChild(link);
+        if(document.getElementById('user-style-default')) setIsLoaded(true)
     }, []);
 
     useEffect(() => {
         document.documentElement.classList[isDark ? 'add' : 'remove']('dark');
 
         dispatch(refreshTheme());
-    }, [isDark]);
+    }, [dispatch, isDark]);
 
     return {isLoaded};
 };

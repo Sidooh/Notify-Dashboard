@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { IMAGES } from '../../constants';
@@ -33,4 +33,4 @@ const Logo = ({at = 'auth', width = 78, className, textClass, ...rest}: LogoType
     );
 };
 
-export default Logo;
+export default memo(Logo);

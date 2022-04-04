@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Nav } from 'react-bootstrap';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
@@ -40,4 +40,4 @@ const NavbarNavLink = ({title, route}: NavbarNavLinkType) => {
     );
 };
 
-export default NavbarNavLink;
+export default memo(NavbarNavLink);

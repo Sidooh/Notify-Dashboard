@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 import classNames from 'classnames';
 
 type FlexType = {
@@ -46,4 +46,4 @@ const Flex = ({
     );
 };
 
-export default Flex;
+export default memo(Flex);

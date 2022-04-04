@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { memo } from 'react';
 import { Typography } from '@mui/material';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import DestinationChips from '../../../components/DestinationChips';
 import { Link, useNavigate } from 'react-router-dom';
@@ -84,8 +83,4 @@ const RecentNotifications = ({notifications}: { notifications: NotificationType[
     );
 };
 
-RecentNotifications.propTypes = {
-    notifications: PropTypes.array
-};
-
-export default RecentNotifications;
+export default memo(RecentNotifications);

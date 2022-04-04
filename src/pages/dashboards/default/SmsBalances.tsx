@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import CountUp from 'react-countup';
 import {IMAGES} from '../../../constants';
 
@@ -60,4 +60,4 @@ const SmsBalances = ({credits, default_sms_provider}: SmsBalancesType) => {
     );
 };
 
-export default SmsBalances;
+export default memo(SmsBalances);

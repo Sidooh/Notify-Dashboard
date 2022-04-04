@@ -1,5 +1,3 @@
-import React from 'react'
-
 export default function AlertError({ error }: any) {
     console.log(error)
     

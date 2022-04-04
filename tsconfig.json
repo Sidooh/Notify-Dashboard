@@ -19,9 +19,22 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
+    "sourceMap": true,
+    // Generate corresponding .map file
+    "declaration": true,
+    // Generate corresponding .d.ts file
+    "noUnusedLocals": true,
+    // Report errors on unused locals
+    "noUnusedParameters": true,
+    // Report errors on unused parameters
     "baseUrl": "src"
   },
   "include": [
     "src"
+  ],
+  "exclude": [
+    "node_modules",
+    "build"
   ]
+  // *** The files to not type check ***
 }

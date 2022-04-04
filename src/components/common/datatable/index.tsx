@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { memo } from 'react';
 import AdvanceTableWrapper from './AdvanceTableWrapper';
 import AdvanceTable from 'components/common/datatable/AdvanceTable';
 import AdvanceTableFooter from './AdvanceTableFooter';
@@ -14,7 +14,7 @@ type BulkActionType = {
     bulkActions?: boolean
 }
 
-function BulkAction({title, onCreateRow, selectedRowIds = [], table = true, bulkActions}: BulkActionType) {
+function BulkAction({title, onCreateRow, selectedRowIds = [], bulkActions}: BulkActionType) {
     return (
         <Row className="flex-between-center mb-3">
             <Col xs={4} sm="auto" className="d-flex align-items-center pe-0">
@@ -109,4 +109,4 @@ const DataTable = ({
     );
 };
 
-export default DataTable;
+export default memo(DataTable);

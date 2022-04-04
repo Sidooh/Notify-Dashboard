@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { memo, useEffect, useState } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import classNames from 'classnames';
 import Logo from '../../common/Logo';
@@ -95,4 +95,4 @@ const NavbarTop = () => {
     );
 };
 
-export default NavbarTop;
+export default memo(NavbarTop);
