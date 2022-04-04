@@ -1,6 +1,5 @@
 import React from 'react';
 import { IMAGES } from '../../../constants';
-import 'datatables.net';
 import CountUp from 'react-countup';
 import WeeklyNotifications from './WeeklyNotifications';
 import RecentNotifications from './RecentNotifications';

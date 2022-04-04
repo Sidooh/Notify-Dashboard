@@ -19,10 +19,7 @@ const IndeterminateCheckbox = forwardRef(
         }, [resolvedRef, indeterminate]);
 
         return (
-            <Form.Check
-                type="checkbox"
-                className="form-check fs-0 mb-0 d-flex align-items-center"
-            >
+            <Form.Check type="checkbox" className="form-check fs-0 mb-0 me-2 d-flex align-items-center">
                 <Form.Check.Input type="checkbox" ref={resolvedRef} {...rest} />
             </Form.Check>
         );

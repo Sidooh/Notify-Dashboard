@@ -1,22 +1,10 @@
 ### Node template
 
-# Compiled binary addons (https://nodejs.org/api/addons.html)
-build/Release
-
 # Dependency directories
 node_modules/
 
-# Snowpack dependency directory (https://snowpack.dev/)
-web_modules/
-
-# TypeScript cache
-*.tsbuildinfo
-
 # Optional npm cache directory
 .npm
-
-# Optional eslint cache
-.eslintcache
 
 # Microbundle cache
 .rpt2_cache/
@@ -71,4 +59,7 @@ web_modules/
 .yarn/*
 
 y.hide
-build/
+build
+.dockerignore
+Dockerfile
+Dockerfile.prod
