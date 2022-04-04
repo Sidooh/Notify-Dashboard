@@ -29,11 +29,10 @@ const Login = () => {
     });
 
     useEffect(() => {
-        if (isError) toast({msg: message, type: 'danger', duration: 50});
+        if (isError) toast({msg: message, type: 'danger'});
         if (isSuccess || auth) navigate('/');
 
         dispatch(reset());
-
     }, [auth, isError, isSuccess, message, navigate, dispatch]);
 
     return (
