@@ -29,7 +29,7 @@ export const dashboardRoutes: RouteType = {
             icon: 'chart-pie',
             children: [
                 {
-                    name: 'Default',
+                    name: 'Home',
                     to: '/',
                     exact: true,
                     active: true
