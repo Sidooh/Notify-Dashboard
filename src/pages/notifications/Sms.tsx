@@ -1,6 +1,5 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Typography } from '@mui/material';
-import DestinationChips from '../../components/DestinationChips';
 import { Link, useNavigate } from 'react-router-dom';
 import { ReadMore } from '@mui/icons-material';
 import moment from 'moment';
@@ -10,6 +9,7 @@ import { SectionLoader } from '../../components/Loader';
 import { Col, Row } from 'react-bootstrap';
 import DataTable from '../../components/common/datatable';
 import { SectionError } from '../../components/Error';
+import Destination from './Destination';
 
 const Sms = () => {
     const navigate = useNavigate();
@@ -26,14 +26,9 @@ const Sms = () => {
                                      onCreateRow={() => navigate('/notifications/create')} title={'SMS Notifications'}
                                      columns={[
                                          {
-                                             accessor: 'provider',
-                                             Header: 'Provider'
-                                         },
-                                         {
-                                             accessor: 'destinations',
-                                             Header: 'Destination(s)',
-                                             Cell: (rowData: any) => <DestinationChips
-                                                 notification={rowData.row.original}/>
+                                             accessor: 'destination',
+                                             Header: 'Destination',
+                                             Cell: (rowData: any) => <Destination notification={rowData.row.original}/>
                                          },
                                          {
                                              accessor: 'message',

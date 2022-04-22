@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { setTheme } from '../../../features/theme/themeSlice';

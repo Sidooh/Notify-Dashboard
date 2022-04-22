@@ -7,26 +7,23 @@ export type Children = {
 export type NotificationType = {
     id?: string;
     channel: string;
-    destination: string[];
+    destination: string;
     content: string;
     event_type: string,
-    provider: string,
     status: string
     created_at: string;
-    notifiable_type: string,
-    notifiable_id: {
-        data: [{
-            message_id: string,
-            phone: string,
-            description: string,
-            status_code: Number,
-            status: string
-        }]
-    }
+    notifiables: {
+        message_id: string,
+        phone: string,
+        description: string,
+        status_code: Number,
+        status: string
+        provider: string
+    }[]
 }
 
 export type SettingType = {
-    id?: string
+    id?: number|string
     type: string
     value: string
 }

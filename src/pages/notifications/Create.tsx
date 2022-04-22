@@ -1,7 +1,7 @@
+import { ChangeEvent, memo, useEffect, useState } from 'react';
 import { Telegram } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { useFormik } from 'formik';
-import React, { ChangeEvent, memo, useEffect, useState } from 'react';
 import TomSelect from 'tom-select';
 import * as yup from 'yup';
 import AlertError from '../../components/AlertError';

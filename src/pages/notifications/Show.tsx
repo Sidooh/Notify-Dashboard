@@ -1,13 +1,14 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { IMAGES } from '../../constants';
 import moment from 'moment';
-import DestinationChips from '../../components/DestinationChips';
 import JSONPretty from 'react-json-pretty';
 import 'react-json-pretty/themes/monikai.css';
 import { SectionLoader } from '../../components/Loader';
 import { useNotificationQuery } from '../../features/notifications/notificationsAPI';
 import { SectionError } from '../../components/Error';
+import Destination from './Destination';
+import { Status } from '../../helpers/enums';
 
 const Show = () => {
     const {id} = useParams();
@@ -15,7 +16,7 @@ const Show = () => {
     const {data, error, isLoading, isSuccess} = useNotificationQuery(String(id));
 
     let hasError;
-    if (data) hasError = data && data.status !== "success";
+    if (data) hasError = data && data.status !== Status.COMPLETED;
 
     return (
         <>
@@ -51,39 +52,54 @@ const Show = () => {
                             </div>
                         </div>
                         <div className="row g-3">
-                            <div className="col-lg-4">
+                            <div className="col-lg-7">
                                 <div className="card h-lg-100 mb-3">
                                     <div className="card-body">
                                         <div className="row">
-                                            <div className="col-md-12 mb-4 mb-lg-0">
-                                                <h5 className="mb-3 fs-0">Provider</h5>
-                                                <p className="mb-1 fs--1">{data?.provider}</p>
+                                            <div className="col-6 mb-4">
+                                                <h5 className="mb-3 fs-0">Destination</h5>
+                                                <Destination notification={data}/>
+                                            </div>
+                                            <div className="col-6 mb-4">
+                                                <h5 className="mb-3 fs-0">Event Type</h5>
+                                                <p className="mb-0 fs--1">{data.event_type}</p>
+                                            </div>
+
+                                            <div className="col-12 mb-4">
                                                 <hr/>
-                                                <h5 className="mb-3 fs-0">Destination(s)</h5>
-                                                <DestinationChips notification={data!}/>
+                                                <h5 className="mb-3 fs-0">Message</h5>
+                                                <p className="mb-0 fs--1">{data.content}</p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-lg-8">
+                            <div className="col-lg-5">
                                 <div className="card h-lg-100 mb-3">
                                     <div className="card-body">
                                         <div className="row">
-                                            <div className="col-md-6 mb-4 mb-lg-0">
-                                                <h5 className="mb-3 fs-0">Message</h5>
-                                                <p className="mb-0 fs--1">{data?.content}</p>
-                                            </div>
-                                            <div className="col-md-6 mb-4 mb-lg-0">
-                                                <h5 className="mb-3 fs-0">Callback</h5>
-                                                <JSONPretty id="json-pretty"
-                                                            data={data?.notifiable_id?.data ?? {message: 'No callback :('}}
-                                                            theme={{
-                                                                main: 'background-color:rgb(39, 46, 72);max-height:20rem',
-                                                                key: 'color:red',
-                                                                string: 'color: rgb(188, 208, 247);',
-                                                                boolean: 'color:rgb(180, 200, 24);',
-                                                            }}/>
+                                            <div className="col-md-12 mb-4 mb-lg-0">
+                                                <h5 className="mb-3 fs-0">Callbacks</h5>
+                                                {
+                                                    data.notifiables.length ? data.notifiables.map((cb, i) => {
+                                                        return (
+                                                            <div key={`cb-${i}`}>
+                                                                <JSONPretty id="json-pretty" data={cb} theme={{
+                                                                    main: 'background-color:rgb(39, 46, 72);max-height:20rem',
+                                                                    key: 'color:red',
+                                                                    string: 'color: rgb(188, 208, 247);',
+                                                                    boolean: 'color:rgb(180, 200, 24);',
+                                                                }}/>
+                                                            </div>
+                                                        );
+                                                    }) : <JSONPretty id="json-pretty" data={{message: 'No callback :('}}
+                                                                     theme={{
+                                                                         main: 'background-color:rgb(39, 46, 72);max-height:20rem',
+                                                                         key: 'color:red',
+                                                                         string: 'color: rgb(188, 208, 247);',
+                                                                         boolean: 'color:rgb(180, 200, 24);',
+                                                                     }}/>
+                                                }
                                             </div>
                                         </div>
                                     </div>
