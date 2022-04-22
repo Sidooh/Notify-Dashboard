@@ -1,4 +1,4 @@
-import React, { memo, ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 import classNames from 'classnames';
 import Background from './Background';
 import { Container } from 'react-bootstrap';

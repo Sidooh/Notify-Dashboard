@@ -49,7 +49,7 @@ const Settings = () => {
 
             setShowModal(false);
 
-            if(setting?.id) toast({
+            if (setting?.id) toast({
                 msg: `Setting ${formik.dirty ? "Updated" : "Created"}!`,
                 type: "success"
             });
@@ -151,7 +151,7 @@ const Settings = () => {
 
                     <div className="p-4 pb-0">
                         <form onSubmit={formik.handleSubmit}>
-                            {result.error}
+                            <div>{JSON.stringify(result.error)}</div>
                             <div className="mb-3">
                                 <Autocomplete options={settingOptions.map(opt => opt.type)} freeSolo
                                               value={formik.values.type}

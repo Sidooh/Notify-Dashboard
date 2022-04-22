@@ -1,4 +1,3 @@
-import React from 'react';
 import { IMAGES } from '../../../constants';
 import CountUp from 'react-countup';
 import WeeklyNotifications from './WeeklyNotifications';
@@ -8,7 +7,7 @@ import SmsBalances from './SmsBalances';
 import { Col, Row } from 'react-bootstrap';
 import { useGetDashboardQuery } from '../../../features/notifications/notificationsAPI';
 
-const Index = () => {
+const Dashboard = () => {
     const {data} = useGetDashboardQuery();
 
     return (
@@ -51,4 +50,4 @@ const Index = () => {
     );
 };
 
-export default Index;
+export default Dashboard;

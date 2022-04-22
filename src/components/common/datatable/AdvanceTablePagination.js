@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames';
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Button } from 'react-bootstrap';
 import Flex from '../Flex';
 

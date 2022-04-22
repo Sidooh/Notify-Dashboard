@@ -1,4 +1,3 @@
-import React from 'react';
 import { Nav, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ProfileDropdown from 'components/navbar/top/ProfileDropdown';
 import NotificationDropdown from 'components/navbar/top/NotificationDropdown';

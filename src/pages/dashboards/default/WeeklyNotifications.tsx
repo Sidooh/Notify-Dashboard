@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
@@ -11,7 +11,7 @@ import BasicECharts from 'components/common/BasicEChart';
 import SoftBadge from 'components/common/SoftBadge';
 import classNames from 'classnames';
 import { IMAGES } from '../../../constants';
-import _ from 'lodash';
+import sum from 'lodash.sum';
 import CountUp from 'react-countup';
 
 echarts.use([
@@ -109,7 +109,7 @@ const WeeklyNotifications = ({data, width, amountClassName}: WeeklyNotifications
                             'mb-1 text-700 fw-normal lh-1'
                         )}
                     >
-                        <CountUp end={_.sum(data?.datasets)}/>
+                        <CountUp end={sum(data?.datasets)}/>
                     </h2>
                     <SoftBadge pill bg="success" className="me-2 fs--2">
                         +3.5%

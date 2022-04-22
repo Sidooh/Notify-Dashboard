@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Nav } from 'react-bootstrap';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';

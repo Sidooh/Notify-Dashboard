@@ -1,7 +1,6 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 import { Typography } from '@mui/material';
 import moment from 'moment';
-import DestinationChips from '../../../components/DestinationChips';
 import { Link, useNavigate } from 'react-router-dom';
 import { NotificationType } from 'helpers/types';
 import { ReadMore } from '@mui/icons-material';
@@ -9,6 +8,7 @@ import { isToday, isYesterday } from '../../../helpers/utils';
 import DataTable from '../../../components/common/datatable';
 import { SectionLoader } from '../../../components/Loader';
 import { OverlayTrigger, Tooltip } from 'react-bootstrap';
+import Destination from '../../notifications/Destination';
 
 const RecentNotifications = ({notifications}: { notifications: NotificationType[] }) => {
     const navigate = useNavigate();
@@ -20,13 +20,9 @@ const RecentNotifications = ({notifications}: { notifications: NotificationType[
                     ? <DataTable bulkActions onCreateRow={() => navigate('/notifications/create')}
                                  title={'Recent Notifications'} columns={[
                         {
-                            accessor: 'provider',
-                            Header: 'Provider'
-                        },
-                        {
-                            accessor: 'destinations',
-                            Header: 'Destination(s)',
-                            Cell: (rowData: any) => <DestinationChips notification={rowData.row.original}/>
+                            accessor: 'destination',
+                            Header: 'Destination',
+                            Cell: (rowData: any) => <Destination notification={rowData.row.original}/>
                         },
                         {
                             accessor: 'message',

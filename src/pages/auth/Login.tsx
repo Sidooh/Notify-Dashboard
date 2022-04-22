@@ -1,4 +1,4 @@
-import React, { lazy, memo, useEffect } from 'react';
+import { lazy, memo, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login, reset } from '../../features/auth/authSlice';
 import { useAuth } from '../../hooks/useAuth';
@@ -29,11 +29,10 @@ const Login = () => {
     });
 
     useEffect(() => {
-        if (isError) toast({msg: message, type: 'danger', duration: 50});
+        if (isError) toast({msg: message, type: 'danger'});
         if (isSuccess || auth) navigate('/');
 
         dispatch(reset());
-
     }, [auth, isError, isSuccess, message, navigate, dispatch]);
 
     return (

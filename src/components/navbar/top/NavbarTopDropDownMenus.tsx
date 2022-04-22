@@ -1,4 +1,3 @@
-import React from 'react';
 import NavbarDropdown from './NavbarDropdown';
 import { appRoutes, dashboardRoutes } from 'routes';
 import { Dropdown } from 'react-bootstrap';
