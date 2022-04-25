@@ -81,7 +81,7 @@ const Show = () => {
                                             <div className="col-md-12 mb-4 mb-lg-0">
                                                 <h5 className="mb-3 fs-0">Callbacks</h5>
                                                 {
-                                                    data.notifiables.length ? data.notifiables.map((cb, i) => {
+                                                    data.notifiables?.length ? data.notifiables.map((cb, i) => {
                                                         return (
                                                             <div key={`cb-${i}`}>
                                                                 <JSONPretty id="json-pretty" data={cb} theme={{

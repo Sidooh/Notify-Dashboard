@@ -21,7 +21,7 @@ export const notificationsApi = createApi({
             providesTags: ['Notification']
         }),
         notification: builder.query<NotificationType, string>({
-            query: id => `/notifications/${id}`,
+            query: id => `/notifications/${id}?with_notifiables=true`,
             providesTags: ['Notification']
         }),
         storeNotification: builder.mutation<NotificationType, {
