@@ -3,7 +3,7 @@
     "services": {
       "accounts": {
         "api": {
-          "url": "https://accounts-cnwsrirpua-uc.a.run.app/api"
+          "url": "https://accounts-cnwsrirpua-uc.a.run.app/api/v1"
         }
       },
       "notify": {
