@@ -9,7 +9,7 @@ COPY package.json .
 COPY yarn.lock .
 COPY .yarnrc.yml .
 
-RUN yarn install
+RUN yarn install --only=production
 
 COPY . .
 
