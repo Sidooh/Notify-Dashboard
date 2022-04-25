@@ -3,12 +3,12 @@ export const ProductionConfig = {
         "services": {
             "accounts": {
                 "api": {
-                    "url": "https://accounts-cnwsrirpua-uc.a.run.app/api"
+                    "url": "https://accounts-cnwsrirpua-uc.a.run.app/api/v1"
                 }
             },
             "notify": {
                 "api": {
-                    "url": "https://notify-cnwsrirpua-uc.a.run.app/api"
+                    "url": "https://notify-cnwsrirpua-uc.a.run.app/api/v1"
                 },
                 "dashboard": {
                     "url": "https://notify-dashboard-cnwsrirpua-uc.a.run.app"
