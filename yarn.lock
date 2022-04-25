@@ -3145,15 +3145,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/lodash.merge@npm:^4":
-  version: 4.6.6
-  resolution: "@types/lodash.merge@npm:4.6.6"
-  dependencies:
-    "@types/lodash": "*"
-  checksum: 62ec56f14b3077f7174497856e9b277db811943cd11b1d67d2a8e51a1803bd49319e8aaf62e745c696af972354a575dbb8a85d3aecf4ae774caf062dc31ac46e
-  languageName: node
-  linkType: hard
-
 "@types/lodash.sortby@npm:^4":
   version: 4.7.6
   resolution: "@types/lodash.sortby@npm:4.7.6"
@@ -9450,7 +9441,6 @@ __metadata:
     "@types/bootstrap": ^5
     "@types/echarts": ^4.9.14
     "@types/jest": ^27.4.1
-    "@types/lodash.merge": ^4
     "@types/lodash.sortby": ^4
     "@types/lodash.sum": ^4
     "@types/node": ^17.0.25
@@ -9467,6 +9457,7 @@ __metadata:
     echarts: ^5.3.2
     formik: ^2.2.9
     fuse.js: ^6.5.3
+    lodash.sortby: ^4.7.0
     lodash.sum: ^4.0.2
     moment: ^2.29.3
     react: ^18.0.0
