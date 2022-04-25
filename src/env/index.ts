@@ -7,6 +7,7 @@ const defaultConfig =  process.env.NODE_ENV === 'production' ? ProductionConfig 
 export const CONFIG = {
     sidooh: {
         ...defaultConfig.sidooh,
+
         tagline: 'Sidooh, Makes You Money with Every Purchase!',
         version: '2.0'
     }
