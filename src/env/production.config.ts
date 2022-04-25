@@ -8,10 +8,10 @@ export const ProductionConfig = {
             },
             "notify": {
                 "api": {
-                    "url": "https://notify-cnwsrirpua-uc.a.run.app/api/v1"
+                    "url": "https://notify-v2-cnwsrirpua-uc.a.run.app/api/v1"
                 },
                 "dashboard": {
-                    "url": "https://notify-dashboard-cnwsrirpua-uc.a.run.app"
+                    "url": "https://notify-dashboard-v2-cnwsrirpua-uc.a.run.app"
                 }
             },
             "legacy": {
