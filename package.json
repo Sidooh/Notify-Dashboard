@@ -15,7 +15,6 @@
     "@mui/icons-material": "^5.5.1",
     "@mui/lab": "^5.0.0-alpha.74",
     "@mui/material": "^5.5.2",
-    "@popperjs/core": "^2.11.5",
     "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -45,7 +44,7 @@
     "sweetalert2-react-content": "^4.2.0",
     "toastify-js": "^1.11.2",
     "tom-select": "^2.0.1",
-    "typescript": "^4.6.3",
+    "typescript": "~4.1.5",
     "yup": "^0.32.11"
   },
   "scripts": {
@@ -69,8 +68,11 @@
       "last 1 safari version"
     ]
   },
+  "resolutions": {
+    "@types/react": "17.0.2",
+    "@types/react-dom": "17.0.2"
+  },
   "devDependencies": {
-    "@testing-library/dom": "^8.13.0",
     "@types/bootstrap": "^5",
     "@types/echarts": "^4.9.13",
     "@types/jest": "^24.9.1",
@@ -83,6 +85,6 @@
     "@types/react-router-dom": "^5.3.3",
     "@types/react-table": "^7",
     "@types/toastify-js": "^1.11.0",
-    "@types/yup": "^0.29.13"
+    "@types/yup": "^0"
   }
 }
