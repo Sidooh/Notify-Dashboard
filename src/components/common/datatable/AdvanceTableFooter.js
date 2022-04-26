@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import  { memo } from 'react';
 import classNames from 'classnames';
 import { Button, Form } from 'react-bootstrap';
 import Flex from '../Flex';

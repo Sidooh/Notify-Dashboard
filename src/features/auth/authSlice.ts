@@ -27,7 +27,7 @@ const initialState: AuthState = {
 export const login = createAsyncThunk('auth/login', async (user: LoginRequest, thunkAPI) => {
     try {
         return await authAPI.login(user);
-    } catch (err) {
+    } catch (err:any) {
         const message = err.response?.data.errors[0].message ||
             (err.response && err.response.data && err.response.data.message) ||
             err.message || err.toString();

@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import  { ReactNode } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import createMarkup from 'helpers/createMarkup';

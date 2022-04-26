@@ -1,4 +1,4 @@
-import React, { memo, ReactNode } from 'react';
+import  { memo, ReactNode } from 'react';
 import { isIterableArray } from 'helpers/utils';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Flex from './Flex';

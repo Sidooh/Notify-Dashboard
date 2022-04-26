@@ -1,4 +1,4 @@
-import React, { CSSProperties, memo } from 'react';
+import  { CSSProperties, memo } from 'react';
 import _ from 'lodash';
 import { getColor } from 'helpers/utils';
 import ECharts from '../ECharts';

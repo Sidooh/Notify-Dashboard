@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from 'react';
+import  { memo, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Middleware from '../middleware';
 import { Auth, Dashboards, Notifications, Settings } from '../pages';

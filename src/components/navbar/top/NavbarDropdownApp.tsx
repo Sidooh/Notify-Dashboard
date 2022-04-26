@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import  { memo } from 'react';
 import { Col, Nav, Row } from 'react-bootstrap';
 import { getFlatRoutes } from 'helpers/utils';
 import NavbarNavLink from './NavbarNavLink';

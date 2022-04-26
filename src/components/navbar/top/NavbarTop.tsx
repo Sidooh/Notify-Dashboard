@@ -1,4 +1,4 @@
-import React, { memo, useEffect, useState } from 'react';
+import  { memo, useEffect, useState } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import classNames from 'classnames';
 import Logo from '../../common/Logo';

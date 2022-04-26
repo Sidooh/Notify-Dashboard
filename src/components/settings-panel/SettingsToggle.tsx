@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card } from 'react-bootstrap';
 import { setTheme } from '../../features/theme/themeSlice';
 import { useAppDispatch } from '../../app/hooks';

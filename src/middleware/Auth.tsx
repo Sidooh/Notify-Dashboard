@@ -1,6 +1,5 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
-import React from 'react';
 import moment from 'moment';
 import { login } from '../features/auth/authSlice';
 import { useAppDispatch } from '../app/hooks';

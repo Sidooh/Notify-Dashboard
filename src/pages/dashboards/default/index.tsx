@@ -1,4 +1,3 @@
-import React from 'react';
 import { IMAGES } from '../../../constants';
 import CountUp from 'react-countup';
 import WeeklyNotifications from './WeeklyNotifications';

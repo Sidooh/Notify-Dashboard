@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { Button, ButtonGroup, Col, Form, Offcanvas, Row } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
 import SoftBadge from 'components/common/SoftBadge';

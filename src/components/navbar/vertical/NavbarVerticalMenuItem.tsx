@@ -1,4 +1,4 @@
-import React from 'react';
+import {memo} from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Flex from 'components/common/Flex';
 import SoftBadge from 'components/common/SoftBadge';
@@ -26,4 +26,4 @@ const NavbarVerticalMenuItem = ({route}: NavbarVerticalMenuItemType) => {
     );
 };
 
-export default React.memo(NavbarVerticalMenuItem);
+export default memo(NavbarVerticalMenuItem);

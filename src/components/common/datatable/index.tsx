@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import  { memo } from 'react';
 import AdvanceTableWrapper from './AdvanceTableWrapper';
 import AdvanceTable from 'components/common/datatable/AdvanceTable';
 import AdvanceTableFooter from './AdvanceTableFooter';

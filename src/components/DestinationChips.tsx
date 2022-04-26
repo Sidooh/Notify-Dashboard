@@ -1,4 +1,3 @@
-import React from 'react';
 import {Mail, Telegram} from '@mui/icons-material';
 import {NotificationType} from 'helpers/types';
 

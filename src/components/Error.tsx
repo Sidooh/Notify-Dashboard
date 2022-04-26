@@ -1,4 +1,3 @@
-import React from 'react';
 import JSONPretty from 'react-json-pretty';
 import { styled } from '@mui/material/styles';
 import Section from './common/Section';

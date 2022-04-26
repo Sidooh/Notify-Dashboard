@@ -151,7 +151,7 @@ const Settings = () => {
 
                     <div className="p-4 pb-0">
                         <form onSubmit={formik.handleSubmit}>
-                            {result.error}
+                            <div>{JSON.stringify(result.error)}</div>
                             <div className="mb-3">
                                 <Autocomplete options={settingOptions.map(opt => opt.type)} freeSolo
                                               value={formik.values.type}

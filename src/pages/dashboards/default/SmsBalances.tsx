@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import  { memo } from 'react';
 import CountUp from 'react-countup';
 import {IMAGES} from '../../../constants';
 
