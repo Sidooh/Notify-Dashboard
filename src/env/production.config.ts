@@ -3,15 +3,15 @@ export const ProductionConfig = {
         "services": {
             "accounts": {
                 "api": {
-                    "url": "https://accounts-cnwsrirpua-uc.a.run.app/api/v1"
+                    "url": "https://accounts-7yvno4vidq-uc.a.run.app/api/v1"
                 }
             },
             "notify": {
                 "api": {
-                    "url": "https://notify-v2-cnwsrirpua-uc.a.run.app/api/v1"
+                    "url": "https://notify-v2-7yvno4vidq-uc.a.run.app/api/v1"
                 },
                 "dashboard": {
-                    "url": "https://notify-dashboard-v2-cnwsrirpua-uc.a.run.app"
+                    "url": "https://notify-dashboard-v2-7yvno4vidq-uc.a.run.app"
                 }
             },
             "legacy": {
