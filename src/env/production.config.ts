@@ -11,7 +11,7 @@ export const ProductionConfig = {
                     "url": "https://notify-iw4itjwa5a-uc.a.run.app/api/v1"
                 },
                 "dashboard": {
-                    "url": "https://notify-dashboard-v2-7yvno4vidq-uc.a.run.app"
+                    "url": "https://notify-dashboard-iw4itjwa5a-uc.a.run.app"
                 }
             },
             "legacy": {
