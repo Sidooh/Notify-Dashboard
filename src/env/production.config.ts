@@ -8,7 +8,7 @@ export const ProductionConfig = {
             },
             "notify": {
                 "api": {
-                    "url": "https://notify-v2-7yvno4vidq-uc.a.run.app/api/v1"
+                    "url": "https://notify-iw4itjwa5a-uc.a.run.app/api/v1"
                 },
                 "dashboard": {
                     "url": "https://notify-dashboard-v2-7yvno4vidq-uc.a.run.app"
