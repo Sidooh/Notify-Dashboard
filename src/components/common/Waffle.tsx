@@ -38,7 +38,7 @@ const Waffle = () => {
                         <Card.Body className={'px-3'}>
                             <Row className="text-center g-0">
                                 {waffleLinks.map((item, index) => (
-                                    <WaffleLinkItem key={index} {...item} {...index} />
+                                    <WaffleLinkItem key={index} {...item} />
                                 ))}
                                 <Col xs={12}>
                                     <Link to="#!" className="btn btn-outline-primary btn-sm mt-4">Show more</Link>
