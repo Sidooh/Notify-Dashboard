@@ -8,7 +8,7 @@ import AlertError from '../../components/AlertError';
 import { IMAGES } from '../../constants';
 import { useStoreNotificationMutation } from '../../features/notifications/notificationsAPI';
 import { useGetAllAccountsQuery, useGetAllUsersQuery } from '../../app/services/accountsAPI';
-import { toast } from '../../helpers/utils';
+import { toast } from 'utils/helpers';
 import sortBy from 'lodash.sortby';
 
 type DestinationOptionsType = { value: string, text: string }

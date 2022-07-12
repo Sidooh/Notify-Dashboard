@@ -4,11 +4,11 @@ import { IMAGES } from '../../constants';
 import moment from 'moment';
 import JSONPretty from 'react-json-pretty';
 import 'react-json-pretty/themes/monikai.css';
-import { SectionLoader } from '../../components/Loader';
-import { useNotificationQuery } from '../../features/notifications/notificationsAPI';
-import { SectionError } from '../../components/Error';
+import { SectionLoader } from 'components/Loader';
+import { useNotificationQuery } from 'features/notifications/notificationsAPI';
+import { SectionError } from 'components/Error';
 import Destination from './Destination';
-import { Status } from '../../helpers/enums';
+import { Status } from 'utils/enums';
 
 const Show = () => {
     const {id} = useParams();
@@ -81,7 +81,7 @@ const Show = () => {
                                             <div className="col-md-12 mb-4 mb-lg-0">
                                                 <h5 className="mb-3 fs-0">Callbacks</h5>
                                                 {
-                                                    data.notifiables?.length ? data.notifiables.map((cb, i) => {
+                                                    data.notifiables?.length ? data.notifiables.map((cb: any, i: number) => {
                                                         return (
                                                             <div key={`cb-${i}`}>
                                                                 <JSONPretty id="json-pretty" data={cb} theme={{

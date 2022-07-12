@@ -1,22 +1,19 @@
 import React from 'react';
-import App from './App';
-import { store } from './app/store';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import * as serviceWorker from './serviceWorker';
+import { store } from 'app/store';
+import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import 'toastify-js/src/toastify.css';
+import * as serviceWorker from './serviceWorker';
 
-import { createRoot } from 'react-dom/client';
-
-const container = document.getElementById('app');
-const root = createRoot(container!); // createRoot(container!) if you use TypeScript
+const container = document.getElementById('root')!;
+const root = createRoot(container);
 
 root.render(
     <React.StrictMode>
         <BrowserRouter>
-            <Provider store={store}>
-                <App/>
-            </Provider>
+            <Provider store={store}><App/></Provider>
         </BrowserRouter>
     </React.StrictMode>
 );

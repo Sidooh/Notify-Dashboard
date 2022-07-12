@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { CONFIG } from 'env';
+import { CONFIG } from 'config';
 import {RootState} from '../store';
 import { AccountType, UserType } from 'helpers/types';
 

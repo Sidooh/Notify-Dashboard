@@ -1,4 +1,4 @@
-import { CONFIG } from '../env';
+import { CONFIG } from '../config';
 
 export type WaffleLinkType = {
     avatar?: string

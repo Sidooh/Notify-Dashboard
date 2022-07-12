@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import createMarkup from 'helpers/createMarkup';
+import { createMarkup } from 'utils/helpers';
 import Avatar, { AvatarType } from 'components/common/Avatar';
 
 export type NotificationType = {

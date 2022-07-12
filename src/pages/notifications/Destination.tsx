@@ -1,6 +1,6 @@
-import { NotificationType } from '../../helpers/types';
+import { NotificationType } from 'utils/types';
 import { Mail, Telegram } from '@mui/icons-material';
-import { Status } from '../../helpers/enums';
+import { Status } from 'utils/enums';
 
 export const Destination = ({notification}: { notification: NotificationType }) => {
     let icon: JSX.Element

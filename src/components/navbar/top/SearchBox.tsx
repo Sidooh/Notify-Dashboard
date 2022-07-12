@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Fuse from 'fuse.js';
 import { Link } from 'react-router-dom';
 import Avatar from 'components/common/Avatar';
-import { isIterableArray } from 'helpers/utils';
+import { isIterableArray } from 'utils/helpers';
 import Flex from 'components/common/Flex';
 import FalconCloseButton from 'components/common/FalconCloseButton';
 import SoftBadge from 'components/common/SoftBadge';

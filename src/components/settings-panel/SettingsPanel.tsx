@@ -7,7 +7,7 @@ import { IMAGES } from '../../constants';
 import { useAppDispatch, useAppSelector } from '../../app/hooks';
 import { RootState } from '../../app/store';
 import { resetTheme, setTheme } from '../../features/theme/themeSlice';
-import { CONFIG } from '../../env';
+import { CONFIG } from 'config';
 
 const SettingsPanel = () => {
     const {

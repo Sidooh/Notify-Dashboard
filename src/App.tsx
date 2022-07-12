@@ -4,7 +4,12 @@ import { ErrorBoundary } from 'react-error-boundary';
 import Layout from './layouts/Layout';
 import { useAppSelector } from './app/hooks';
 import useToggleStyle from './hooks/useToggleStyle';
-import { getColor } from './helpers/utils';
+import { getColor } from 'utils/helpers';
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faQuestionCircle, fas } from '@fortawesome/free-solid-svg-icons'
+import { far } from '@fortawesome/free-regular-svg-icons'
+
+library.add(fas, far, faQuestionCircle)
 
 const theme = createTheme({
     typography: {
