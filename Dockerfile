@@ -1,14 +1,21 @@
-FROM node:16.14.0 as build
+FROM node:16.14.2 as build
 
 WORKDIR /app
 
-COPY package.json .
+RUN yarn set version berry
+RUN yarn plugin import typescript
 
-RUN npm install
+COPY package.json .
+COPY yarn.lock .
+COPY .yarnrc.yml .
+
+RUN yarn install
 
 COPY . .
 
-RUN npm run build
+RUN yarn run build
+
+
 
 FROM nginx
 
