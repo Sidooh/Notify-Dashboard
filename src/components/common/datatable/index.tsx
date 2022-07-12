@@ -21,12 +21,13 @@ import IndeterminateCheckbox from 'components/common/datatable/IndeterminateChec
 import Header from 'components/common/datatable/Header';
 import Footer from 'components/common/datatable/Footer';
 
-interface DataTable {
+interface IDataTable {
     title: string;
     data: any[];
     columns: ColumnDef<any>[];
     onCreateRow?: () => void;
     viewAllLink?: string;
+    perPage?: 5 | 10 | 20;
 }
 
 const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
@@ -40,7 +41,7 @@ const fuzzyFilter: FilterFn<any> = (row, columnId, value, addMeta) => {
     return itemRank.passed;
 };
 
-const DataTable = ({title, data, columns, onCreateRow, viewAllLink = ''}: DataTable) => {
+const DataTable = ({title, data, columns, perPage = 10, onCreateRow, viewAllLink = ''}: IDataTable) => {
     const [columnVisibility, setColumnVisibility] = useState({});
     const [rowSelection, setRowSelection] = useState({});
     const [globalFilter, setGlobalFilter] = useState('');
@@ -71,7 +72,7 @@ const DataTable = ({title, data, columns, onCreateRow, viewAllLink = ''}: DataTa
                 ),
             },
             ...columns,
-        ], []),
+        ], [columns]),
         state: {
             columnVisibility,
             globalFilter,
@@ -115,7 +116,7 @@ const DataTable = ({title, data, columns, onCreateRow, viewAllLink = ''}: DataTa
                     </div>
                 </Col>
             </Row>
-            <Table>
+            <Table size={'sm'}>
                 <thead>
                 {table.getHeaderGroups().map(headerGroup => (
                     <tr key={headerGroup.id}>

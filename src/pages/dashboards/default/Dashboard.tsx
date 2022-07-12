@@ -1,11 +1,13 @@
-import { IMAGES } from '../../../constants';
+import { IMAGES } from 'constants/images';
 import CountUp from 'react-countup';
-import WeeklyNotifications from './WeeklyNotifications';
-import RecentNotifications from './RecentNotifications';
 import { NotificationAdd } from '@mui/icons-material';
 import SmsBalances from './SmsBalances';
 import { Col, Row } from 'react-bootstrap';
-import { useGetDashboardQuery } from '../../../features/notifications/notificationsAPI';
+import { useGetDashboardQuery } from 'features/notifications/notificationsAPI';
+import { lazy } from 'react';
+
+const WeeklyNotifications = lazy(() => import('./WeeklyNotifications'))
+const RecentNotifications = lazy(() => import('./RecentNotifications'))
 
 const Dashboard = () => {
     const {data} = useGetDashboardQuery();

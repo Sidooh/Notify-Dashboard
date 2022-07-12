@@ -10,7 +10,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 import BasicECharts from 'components/common/BasicEChart';
 import SoftBadge from 'components/common/SoftBadge';
 import classNames from 'classnames';
-import { IMAGES } from '../../../constants';
+import { IMAGES } from 'constants/images';
 import sum from 'lodash.sum';
 import CountUp from 'react-countup';
 import { Tooltip } from '@mui/material';

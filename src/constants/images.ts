@@ -10,7 +10,6 @@ import falconModeDark from 'assets/images/generic/falcon-mode-dark.jpg';
 
 //  icons
 import arrowsH from 'assets/images/icons/arrows-h.svg';
-import cash from 'assets/images/icons/cash.png';
 import paragraph from 'assets/images/icons/paragraph.svg';
 import weather_sm from 'assets/images/icons/weather-sm.jpg';
 //  spot illustrations
@@ -28,6 +27,9 @@ import threeThumb from 'assets/images/products/3-thumb.png';
 
 //  team
 import one from 'assets/images/team/1.jpg';
+import two from 'assets/images/team/2.jpg';
+import three from 'assets/images/team/3.jpg';
+import ten from 'assets/images/team/10.jpg';
 
 export const IMAGES = {
     generic: {
@@ -41,7 +43,6 @@ export const IMAGES = {
     },
     icons: {
         arrowsH,
-        cash,
         paragraph,
         weather_sm,
 
@@ -64,5 +65,8 @@ export const IMAGES = {
     },
     team: {
         1: one,
+        2: two,
+        3: three,
+        10: ten,
     }
 };

@@ -72,18 +72,6 @@ const autoCompleteInitialItems: AutoCompleteItem[] = [
         time: '<span class="fw-semi-bold">Antony</span><span class="fw-medium text-600 ms-2">27 Sep at 10:30 AM</span>'
     },
     {
-        id: 7,
-        categories: 'suggestionFiles',
-        url: '#!',
-        img: IMAGES.icons.zip,
-        file: true,
-        title: 'Falcon v1.8.2',
-        imgAttrs: {
-            class: 'img-fluid'
-        },
-        time: '<span class="fw-semi-bold">John</span><span class="fw-medium text-600 ms-2">30 Sep at 12:30 PM</span>'
-    },
-    {
         id: 8,
         url: '/user/profile',
         categories: 'suggestionMembers',

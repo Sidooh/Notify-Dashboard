@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { useParams } from 'react-router-dom';
-import { IMAGES } from '../../constants';
+import { IMAGES } from 'constants/images';
 import moment from 'moment';
 import JSONPretty from 'react-json-pretty';
 import 'react-json-pretty/themes/monikai.css';

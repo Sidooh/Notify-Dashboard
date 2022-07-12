@@ -4,7 +4,7 @@ import Logo from 'components/common/Logo';
 import Section from 'components/common/Section';
 import { Outlet } from 'react-router-dom';
 import { PageLoader } from '../components/Loader';
-import { IMAGES } from '../constants';
+import { IMAGES } from 'constants/images';
 
 const GuestLayout = () => {
     return (

@@ -7,7 +7,7 @@ import { ReadMore } from '@mui/icons-material';
 import { isToday, isYesterday } from 'utils/helpers';
 import DataTable from '../../../components/common/datatable';
 import { SectionLoader } from '../../../components/Loader';
-import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Card, Tooltip } from 'react-bootstrap';
 import Destination from '../../notifications/Destination';
 
 const RecentNotifications = ({notifications}: { notifications: NotificationType[] }) => {
@@ -23,23 +23,24 @@ const RecentNotifications = ({notifications}: { notifications: NotificationType[
                             {
                                 accessorKey: 'destination',
                                 header: 'Destination',
-                                cell: (rowData: any) => <Destination notification={rowData.row.original}/>
+                                cell: ({row}: any) => <Destination notification={row.original}/>
                             },
                             {
                                 accessorKey: 'message',
                                 header: 'Message',
-                                cell: (rowData: any) => {
-                                    const {message} = rowData.row.original;
-                                    return <OverlayTrigger overlay={<Tooltip>{message}</Tooltip>}>
-                                        <Typography variant={"body2"} title={message} style={{
-                                            display: "-webkit-box",
-                                            overflow: "hidden",
-                                            WebkitBoxOrient: "vertical",
-                                            WebkitLineClamp: 2,
-                                            cursor: "context-menu",
-                                            maxWidth: '30rem'
-                                        }}>{message}</Typography>
-                                    </OverlayTrigger>;
+                                cell: ({row}: any) => {
+                                    return (
+                                        <Tooltip title={row.original}>
+                                            <Typography variant={"body2"} style={{
+                                                display: "-webkit-box",
+                                                overflow: "hidden",
+                                                WebkitBoxOrient: "vertical",
+                                                WebkitLineClamp: 2,
+                                                cursor: "context-menu",
+                                                maxWidth: '30rem'
+                                            }}>{row.original.message}</Typography>
+                                        </Tooltip>
+                                    );
                                 }
                             },
                             {

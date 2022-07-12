@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Card, Dropdown } from 'react-bootstrap';
 import { capitalize } from 'utils/helpers';
-import { IMAGES } from '../../../constants';
+import { IMAGES } from 'constants/images';
 import breakpoints, { topNavbarBreakpoint } from '../../../constants/breakpoints';
 
 type NavbarDropdownType = {

@@ -114,20 +114,6 @@ export const rawEarlierNotifications = [
         to: '#!'
     },
     {
-        id: 2,
-        avatar: {
-            src: IMAGES.logos.oxford,
-            size: 'xl'
-        },
-        children:
-            '<strong>University of Oxford</strong> created an event : "Causal Inference Hilary 2019"',
-        time: '1W',
-        emoji: '✌️',
-        className:
-            'rounded-0 border-x-0 border-300 border-bottom-0 notification-unread',
-        to: '#!'
-    },
-    {
         id: 3,
         avatar: {
             src: IMAGES.team['10'],
