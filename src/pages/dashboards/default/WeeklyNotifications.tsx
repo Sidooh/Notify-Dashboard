@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { lazy, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
@@ -7,13 +7,14 @@ import * as echarts from 'echarts/core';
 import { BarChart } from 'echarts/charts';
 import { GridComponent, TitleComponent, TooltipComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import BasicECharts from 'components/common/BasicEChart';
 import SoftBadge from 'components/common/SoftBadge';
 import classNames from 'classnames';
 import { IMAGES } from 'constants/images';
 import sum from 'lodash.sum';
 import CountUp from 'react-countup';
 import { Tooltip } from '@mui/material';
+
+const BasicECharts = lazy(() => import('components/common/BasicEChart'))
 
 echarts.use([
     TitleComponent,
