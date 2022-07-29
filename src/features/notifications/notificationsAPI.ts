@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CONFIG } from 'config';
 import { NotificationType, SettingType } from 'utils/types';
+import { RootState } from '../../app/store';
 
 export const notificationsApi = createApi({
     reducerPath: 'notificationsApi',
@@ -8,6 +9,13 @@ export const notificationsApi = createApi({
     tagTypes: ['Notification', 'Setting'],
     baseQuery: fetchBaseQuery({
         baseUrl: `${CONFIG.sidooh.services.notify.api.url}`,
+        prepareHeaders: (headers, {getState}) => {
+            const token = (getState() as RootState).auth.auth?.token;
+
+            if (token) headers.set('authorization', `Bearer ${token}`);
+
+            return headers;
+        }
     }),
     endpoints: (builder) => ({
         //  Dashboard Endpoints
