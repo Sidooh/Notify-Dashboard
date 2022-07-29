@@ -1,6 +1,9 @@
 # build stage
 FROM node:lts-alpine as build-stage
 
+ARG VITE_ACCOUNTS_API_URL
+ARG VITE_NOTIFY_API_URL
+
 WORKDIR /app
 
 COPY ["package.json", "yarn.lock", "./"]
