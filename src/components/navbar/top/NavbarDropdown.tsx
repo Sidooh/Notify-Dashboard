@@ -2,9 +2,9 @@ import { memo, ReactNode, useState } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
 import { Card, Dropdown } from 'react-bootstrap';
-import { breakpoints, capitalize } from 'helpers/utils';
-import { topNavbarBreakpoint } from 'config';
-import { IMAGES } from '../../../constants';
+import { capitalize } from 'utils/helpers';
+import { IMAGES } from 'constants/images';
+import breakpoints, { topNavbarBreakpoint } from '../../../constants/breakpoints';
 
 type NavbarDropdownType = {
     title: string,

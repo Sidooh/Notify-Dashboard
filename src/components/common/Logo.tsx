@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { IMAGES } from '../../constants';
+import { IMAGES } from 'constants/images';
 
 type LogoType = {
     at?: 'navbar-vertical' | 'navbar-top' | 'auth',

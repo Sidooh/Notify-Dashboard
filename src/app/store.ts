@@ -1,13 +1,11 @@
-import {Action, configureStore, ThunkAction} from '@reduxjs/toolkit';
-import counterReducer from '../features/counter/counterSlice';
+import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import authReducer from '../features/auth/authSlice';
 import themeReducer from '../features/theme/themeSlice';
-import {accountsApi} from './services/accountsAPI';
-import {notificationsApi} from '../features/notifications/notificationsAPI';
+import { accountsApi } from './services/accountsAPI';
+import { notificationsApi } from '../features/notifications/notificationsAPI';
 
 export const store = configureStore({
     reducer: {
-        counter: counterReducer,
         auth: authReducer,
         theme: themeReducer,
 

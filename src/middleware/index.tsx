@@ -3,7 +3,7 @@ import { useAppDispatch } from '../app/hooks';
 import moment from 'moment';
 import { useAuth } from 'hooks/useAuth';
 import { logout } from 'features/auth/authSlice';
-import { JWT } from 'helpers/utils';
+import { JWT } from 'utils/helpers';
 
 export const Middleware = {
     Guest: ({component}: { component: JSX.Element }) => {

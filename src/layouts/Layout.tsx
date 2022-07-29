@@ -1,10 +1,10 @@
 import { memo, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { Middleware } from 'middleware';
+import { Middleware } from '../middleware';
 import { Auth, Dashboards, Notifications, Settings } from '../pages';
 import MainLayout from './MainLayout';
 import GuestLayout from './GuestLayout';
-import { is } from '../helpers/utils';
+import { is } from 'utils/helpers';
 import SettingsToggle from 'components/settings-panel/SettingsToggle';
 import SettingsPanel from 'components/settings-panel/SettingsPanel';
 

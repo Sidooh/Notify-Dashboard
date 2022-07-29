@@ -1,4 +1,4 @@
-import { CONFIG } from 'env';
+import { CONFIG } from 'config';
 
 const API_URL = `${ CONFIG.sidooh.services.accounts.api.url }/users/signin`;
 

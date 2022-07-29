@@ -1,18 +1,20 @@
-import { memo } from 'react';
+import { lazy, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Card, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
-import { getColor } from 'helpers/utils';
+import { getColor } from 'utils/helpers';
 import * as echarts from 'echarts/core';
 import { BarChart } from 'echarts/charts';
 import { GridComponent, TitleComponent, TooltipComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import BasicECharts from 'components/common/BasicEChart';
 import SoftBadge from 'components/common/SoftBadge';
 import classNames from 'classnames';
-import { IMAGES } from '../../../constants';
+import { IMAGES } from 'constants/images';
 import sum from 'lodash.sum';
 import CountUp from 'react-countup';
+import { Tooltip } from '@mui/material';
+
+const BasicECharts = lazy(() => import('components/common/BasicEChart'))
 
 echarts.use([
     TitleComponent,
@@ -91,13 +93,12 @@ const WeeklyNotifications = ({data, width, amountClassName}: WeeklyNotifications
             <Card.Header className="pb-0 position-relative">
                 <h6 className="mb-0 mt-2">
                     Weekly Notifications
-                    <OverlayTrigger placement="top"
-                                    overlay={<Tooltip>Calculated according to current week's notifications</Tooltip>}>
+                    <Tooltip placement="top" title={'Calculated according to current week\'s notifications'}>
                         <span>
-                              <FontAwesomeIcon icon={['far', 'question-circle']} transform="shrink-1"
-                                               className="ms-1 text-400" id="weeklySalesTooltip"/>
+                            <FontAwesomeIcon icon={['far', 'question-circle']} transform="shrink-1"
+                                             className="ms-1 text-400" id="weeklySalesTooltip"/>
                         </span>
-                    </OverlayTrigger>
+                    </Tooltip>
                 </h6>
             </Card.Header>
 

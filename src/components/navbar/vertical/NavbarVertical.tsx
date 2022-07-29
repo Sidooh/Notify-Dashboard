@@ -1,17 +1,17 @@
 import { Fragment, useEffect } from 'react';
 import classNames from 'classnames';
 import { Col, Nav, Navbar, Row } from 'react-bootstrap';
-import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
 import Flex from 'components/common/Flex';
 import Logo from 'components/common/Logo';
 import NavbarVerticalMenu from './NavbarVerticalMenu';
 import ToggleButton from './ToggleButton';
 import routes from 'routes';
-import { capitalize } from 'helpers/utils';
+import { capitalize } from 'utils/helpers';
 import NavbarTopDropDownMenus from 'components/navbar/top/NavbarTopDropDownMenus';
-import { IMAGES } from '../../../constants';
-import { useAppSelector } from '../../../app/hooks';
-import { RootState } from '../../../app/store';
+import { IMAGES } from 'constants/images';
+import { useAppSelector } from 'app/hooks';
+import { RootState } from 'app/store';
+import { navbarBreakPoint, topNavbarBreakpoint } from '../../../constants/breakpoints';
 
 const NavbarVertical = () => {
     const {

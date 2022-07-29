@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import CountUp from 'react-countup';
-import {IMAGES} from '../../../constants';
+import {IMAGES} from 'constants/images';
 
 type SmsBalancesType = {
     credits: { africastalking: number, websms: number },

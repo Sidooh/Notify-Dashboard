@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { bind, clear } from 'size-sensor';
 import * as echarts from 'echarts';
 import { EChartsType } from 'echarts/types/dist/echarts';
-import { isFunction } from '../helpers/utils';
+import { isFunction } from 'utils/helpers';
 
 const ECharts = ({
                     options,

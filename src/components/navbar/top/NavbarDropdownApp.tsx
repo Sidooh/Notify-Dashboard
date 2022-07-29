@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Col, Nav, Row } from 'react-bootstrap';
-import { getFlatRoutes } from 'helpers/utils';
+import { getFlatRoutes } from 'utils/helpers';
 import NavbarNavLink from './NavbarNavLink';
 import { RouteChildType } from 'routes';
 

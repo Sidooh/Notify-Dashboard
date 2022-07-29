@@ -7,20 +7,38 @@ import { Modal } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import withReactContent from 'sweetalert2-react-content';
 import * as yup from 'yup';
-import { settingOptions } from '../../constants';
 import {
     useDeleteSettingMutation,
     useSettingsQuery,
     useUpsertSettingMutation
 } from '../../features/notifications/notificationsAPI';
-import { SettingType } from 'helpers/types';
+import { SettingType } from 'utils/types';
 import { SectionLoader } from '../../components/Loader';
-import { toast } from '../../helpers/utils';
+import { toast } from 'utils/helpers';
 import { SectionError } from '../../components/Error';
 
 const DataTable = lazy(() => import('components/common/datatable'));
 
 const MySwal = withReactContent(Swal);
+
+const settingOptions = [
+    {
+        type: 'default_sms_provider',
+        values: ['africastalking', 'websms']
+    },
+    {
+        type: 'default_mail_provider',
+        values: ['gmail', 'yahoo', 'mailgun', 'postmark', 'sendgrid']
+    },
+    {
+        type: 'websms_env',
+        values: ["development", "production"]
+    },
+    {
+        type: 'africastalking_env',
+        values: ["development", "production"]
+    }
+];
 
 const getSettingValuesByName = (type: string) => {
     let setting = settingOptions.filter(a => a.type === type);
@@ -95,25 +113,23 @@ const Settings = () => {
                 !isLoading && isSuccess && settings
                     ? <div className="row g-3 mb-3">
                         <div className="col-xxl-12 col-md-12">
-                            <DataTable tableClassName={'table-sm'} perPage={5} columns={[
+                            <DataTable perPage={5} columns={[
                                 {
-                                    accessor: 'type',
-                                    Header: 'Name',
-                                    Cell: (rowData: any) => {
+                                    accessorKey: 'type',
+                                    header: 'Name',
+                                    cell: (rowData: any) => {
                                         const {type} = rowData.row.original;
 
                                         return <span>{(type.replaceAll('_', ' ')).toUpperCase()}</span>;
                                     }
                                 },
                                 {
-                                    accessor: 'value',
-                                    Header: 'Value'
+                                    accessorKey: 'value',
+                                    header: 'Value'
                                 },
                                 {
-                                    accessor: 'actions',
-                                    disableSortBy: true,
-                                    className: 'text-end',
-                                    Cell: (rowData: any) => {
+                                    id: 'actions',
+                                    cell: (rowData: any) => {
                                         return (
                                             <div className={'text-end'}>
                                                 <IconButton onClick={() => handleUpdate(rowData.row.original)}
@@ -130,8 +146,7 @@ const Settings = () => {
                                         );
                                     }
                                 }
-                            ]} data={settings.map(setting => setting)} title={'Settings'} bulkActions
-                                       onCreateRow={handleCreate}/>
+                            ]} data={settings.map(setting => setting)} title={'Settings'} onCreateRow={handleCreate}/>
                         </div>
                     </div>
                     : <SectionLoader/>

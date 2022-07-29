@@ -122,18 +122,6 @@ export const fakeAuth = () => new Promise((resolve) => {
 
 export const capitalize = (str: string) => (str.charAt(0).toUpperCase() + str.slice(1)).replace(/-/g, ' ');
 
-
-/** ----------------------------------------    Break Points
- * */
-export const breakpoints = {
-    xs: 0,
-    sm: 576,
-    md: 768,
-    lg: 992,
-    xl: 1200,
-    xxl: 1540
-};
-
 const vendor = ((navigator && navigator.vendor) || '').toLowerCase();
 const userAgent = ((navigator && navigator.userAgent) || '').toLowerCase();
 
@@ -171,5 +159,22 @@ export const is = {
     firefox: (range?: string): boolean => {
         let match = userAgent.match(/(?:firefox|fxios)\/(\d+)/);
         return match !== null && compareVersion(match[1], range);
+    }
+};
+
+export const createMarkup = (html: any) => ({ __html: html });
+
+export const Str = {
+    headline: (str: string) => {
+        if (!str) return "";
+
+        str = str.replaceAll('_', ' ').replaceAll('-', ' ');
+
+        return str.replaceAll(/\w\S*/g, (t) => t.charAt(0).toUpperCase() + t.substring(1).toLowerCase());
+    },
+    ucFirst: (str: string) => {
+        str = str.toLowerCase();
+
+        return str.charAt(0).toUpperCase() + str.slice(1);
     }
 };

@@ -4,13 +4,13 @@ import classNames from 'classnames';
 import Logo from '../../common/Logo';
 import SearchBox from './SearchBox';
 import NavbarTopDropDownMenus from './NavbarTopDropDownMenus';
-import { navbarBreakPoint, topNavbarBreakpoint } from 'config';
 import autoCompleteInitialItems from '../../../constants/autocomplete';
 import TopNavRightSideNavItem from './TopNavRightSideNavItem';
 import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../../app/hooks';
 import { RootState } from '../../../app/store';
 import { setTheme } from '../../../features/theme/themeSlice';
+import { navbarBreakPoint, topNavbarBreakpoint } from 'constants/breakpoints';
 
 const NavbarTop = () => {
     const dispatch = useAppDispatch();

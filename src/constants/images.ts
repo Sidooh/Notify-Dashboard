@@ -1,56 +1,72 @@
+//  generic
+import bg_navbar from 'assets/images/generic/bg-navbar.png';
+import sidooh from 'assets/images/logos/sidooh.png';
+import card from 'assets/images/generic/card.png';
+import genericDefault from 'assets/images/generic/default.png';
+import inverted from 'assets/images/generic/inverted.png';
+import vibrant from 'assets/images/generic/vibrant.png';
+import falconModeDefault from 'assets/images/generic/falcon-mode-default.jpg';
+import falconModeDark from 'assets/images/generic/falcon-mode-dark.jpg';
+
+//  icons
+import arrowsH from 'assets/images/icons/arrows-h.svg';
+import paragraph from 'assets/images/icons/paragraph.svg';
+import weather_sm from 'assets/images/icons/weather-sm.jpg';
+//  spot illustrations
+import auth_corner from 'assets/images/icons/spot-illustrations/authentication-corner.png';
+import bg_shape from 'assets/images/icons/spot-illustrations/bg-shape.png';
+import corner_1 from 'assets/images/icons/spot-illustrations/corner-1.png';
+import corner_2 from 'assets/images/icons/spot-illustrations/corner-2.png';
+import corner_3 from 'assets/images/icons/spot-illustrations/corner-3.png';
+import corner_4 from 'assets/images/icons/spot-illustrations/corner-4.png';
+import corner_5 from 'assets/images/icons/spot-illustrations/corner-5.png';
+import shape_1 from 'assets/images/icons/spot-illustrations/shape-1.png';
+
+//  products
+import threeThumb from 'assets/images/products/3-thumb.png';
+
+//  team
+import one from 'assets/images/team/1.jpg';
+import two from 'assets/images/team/2.jpg';
+import three from 'assets/images/team/3.jpg';
+import ten from 'assets/images/team/10.jpg';
+
 export const IMAGES = {
     generic: {
-        card: require('../assets/images/generic/card.png'),
-        default: require('../assets/images/generic/default.png'),
-        falconModeDefault: require('../assets/images/generic/falcon-mode-default.jpg'),
-        falconModeDark: require('../assets/images/generic/falcon-mode-dark.jpg'),
-        inverted: require('../assets/images/generic/inverted.png'),
-        vibrant: require('../assets/images/generic/vibrant.png'),
-        bg_navbar: require('../assets/images/generic/bg-navbar.png'),
+        bg_navbar,
+        card,
+        default: genericDefault,
+        inverted,
+        vibrant,
+        falconModeDefault,
+        falconModeDark,
     },
     icons: {
-        arrowsH: require('../assets/images/icons/arrows-h.svg').default,
-        leftArrowFromLeft: require('../assets/images/icons/left-arrow-from-left.svg').default,
-        paragraph: require('../assets/images/icons/paragraph.svg').default,
-        weather_sm: require('../assets/images/icons/weather-sm.jpg'),
-        zip: require('../assets/images/icons/zip.png'),
+        arrowsH,
+        paragraph,
+        weather_sm,
 
         spotIllustrations: {
-            47: require('../assets/images/icons/spot-illustrations/47.png'),
-            auth_corner: require('../assets/images/icons/spot-illustrations/authentication-corner.png'),
-            bg_shape: require('../assets/images/icons/spot-illustrations/bg-shape.png'),
-            corner_1: require('../assets/images/icons/spot-illustrations/corner-1.png'),
-            corner_2: require('../assets/images/icons/spot-illustrations/corner-2.png'),
-            corner_3: require('../assets/images/icons/spot-illustrations/corner-3.png'),
-            corner_4: require('../assets/images/icons/spot-illustrations/corner-4.png'),
-            corner_5: require('../assets/images/icons/spot-illustrations/corner-5.png'),
-            falcon: require('../assets/images/icons/spot-illustrations/falcon.png'),
-            e_1: require('../assets/images/icons/spot-illustrations/shape-1.png'),
-            shape_1: require('../assets/images/icons/spot-illustrations/shape-1.png'),
+            auth_corner,
+            bg_shape,
+            corner_1,
+            corner_2,
+            corner_3,
+            corner_4,
+            corner_5,
+            shape_1,
         }
     },
     logos: {
-        oxford: require('../assets/images/logos/oxford.png'),
-        sidooh: require('../assets/images/logos/sidooh.png'),
-        sidooh_dark: require('../assets/images/logos/sidooh-dark.png'),
-    },
-    navIcons: {
-        github_light: require('../assets/images/nav-icons/github-light.png'),
-        google: require('../assets/images/nav-icons/google.png'),
-        slack: require('../assets/images/nav-icons/slack.png'),
-        trello: require('../assets/images/nav-icons/trello.png'),
-        click_up: require('../assets/images/nav-icons/click-up.jpeg'),
+        sidooh,
     },
     products: {
-        "3-thumb": require('../assets/images/products/3-thumb.png')
+        '3-thumb': threeThumb
     },
     team: {
-        1: require('../assets/images/team/1.jpg'),
-        2: require('../assets/images/team/2.jpg'),
-        3: require('../assets/images/team/3.jpg'),
-        10: require('../assets/images/team/10.jpg'),
-        "1-thumb": require('../assets/images/team/1-thumb.png'),
-        "2-thumb": require('../assets/images/team/2-thumb.png'),
-        "3-thumb": require('../assets/images/team/3-thumb.png'),
-    },
+        1: one,
+        2: two,
+        3: three,
+        10: ten,
+    }
 };

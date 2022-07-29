@@ -1,23 +1,24 @@
-FROM node:16.14.2 as build
+# build stage
+FROM node:lts-alpine as build-stage
 
 WORKDIR /app
 
-RUN yarn set version berry
-RUN yarn plugin import typescript
+COPY ["package.json", "yarn.lock", "./"]
 
-COPY package.json .
-COPY yarn.lock .
-COPY .yarnrc.yml .
-
-RUN yarn install
+RUN ["yarn", "install"]
 
 COPY . .
 
-RUN yarn run build
+RUN ["yarn", "run", "build"]
 
 
 
-FROM nginx
+# production stage
+FROM nginx:stable-alpine as production-stage
 
-COPY ./nginx/nginx.conf /etc/nginx/nginx.conf
-COPY --from=build /app/build /usr/share/nginx/html
+COPY --from=build-stage /app/dist /app
+COPY ["docker/nginx/nginx.conf", "/etc/nginx/nginx.conf"]
+
+EXPOSE 80
+
+CMD ["nginx", "-g", "daemon off;"]

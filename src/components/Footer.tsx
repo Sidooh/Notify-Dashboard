@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { Col, Row } from 'react-bootstrap';
-import { CONFIG } from '../env';
+import { CONFIG } from '../config';
 
 const Footer = () => {
     return (
