@@ -1,22 +1,19 @@
 export const CONFIG = {
     sidooh: {
-        "services": {
-            "accounts": {
-                "api": {
-                    "url": "https://accounts-7yvno4vidq-uc.a.run.app/api/v1"
+        services: {
+            accounts: {
+                api: {
+                    url: import.meta.env.VITE_ACCOUNTS_API_URL,
                 }
             },
-            "notify": {
-                "api": {
-                    "url": "https://notify-iw4itjwa5a-uc.a.run.app/api/v1"
-                },
-                "dashboard": {
-                    "url": "https://notify-dashboard-iw4itjwa5a-uc.a.run.app"
+            notify: {
+                api: {
+                    url: import.meta.env.VITE_NOTIFY_API_URL,
                 }
             },
-            "legacy": {
-                "dashboard": {
-                    "url": "https://sidooh-admin-dashboard-okctxaztla-uc.a.run.app/admin"
+            legacy: {
+                dashboard: {
+                    url: "https://sidooh-admin-dashboard-okctxaztla-uc.a.run.app/admin"
                 }
             }
         },
@@ -24,4 +21,4 @@ export const CONFIG = {
         tagline: 'Sidooh, Makes You Money with Every Purchase!',
         version: '2.0'
     }
-}
+};
