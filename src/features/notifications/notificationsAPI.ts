@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CONFIG } from 'config';
 import { NotificationType, SettingType } from 'utils/types';
-import { RootState } from '../../app/store';
+import { RootState } from 'app/store';
 
 export const notificationsApi = createApi({
     reducerPath: 'notificationsApi',

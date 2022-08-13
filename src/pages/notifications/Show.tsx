@@ -2,13 +2,10 @@ import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 import { IMAGES } from 'constants/images';
 import moment from 'moment';
-import JSONPretty from 'react-json-pretty';
-import 'react-json-pretty/themes/monikai.css';
-import { SectionLoader } from 'components/Loader';
 import { useNotificationQuery } from 'features/notifications/notificationsAPI';
-import { SectionError } from 'components/Error';
 import Destination from './Destination';
 import { Status } from 'utils/enums';
+import { PrettyJSON, SectionError, SectionLoader } from '@nabcellent/sui-react';
 
 const Show = () => {
     const {id} = useParams();
@@ -84,7 +81,7 @@ const Show = () => {
                                                     data.notifiables?.length ? data.notifiables.map((cb: any, i: number) => {
                                                         return (
                                                             <div key={`cb-${i}`}>
-                                                                <JSONPretty id="json-pretty" data={cb} theme={{
+                                                                <PrettyJSON id="json-pretty" data={cb} theme={{
                                                                     main: 'background-color:rgb(39, 46, 72);max-height:20rem',
                                                                     key: 'color:red',
                                                                     string: 'color: rgb(188, 208, 247);',
@@ -92,7 +89,7 @@ const Show = () => {
                                                                 }}/>
                                                             </div>
                                                         );
-                                                    }) : <JSONPretty id="json-pretty" data={{message: 'No callback :('}}
+                                                    }) : <PrettyJSON id="json-pretty" data={{message: 'No callback :('}}
                                                                      theme={{
                                                                          main: 'background-color:rgb(39, 46, 72);max-height:20rem',
                                                                          key: 'color:red',

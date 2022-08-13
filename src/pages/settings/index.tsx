@@ -1,11 +1,9 @@
-import { lazy, memo, useState } from 'react';
+import { memo, useState } from 'react';
 import { Delete, Edit, Save } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { Autocomplete, Button, IconButton, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { Modal } from 'react-bootstrap';
-import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
 import * as yup from 'yup';
 import {
     useDeleteSettingMutation,
@@ -13,13 +11,7 @@ import {
     useUpsertSettingMutation
 } from '../../features/notifications/notificationsAPI';
 import { SettingType } from 'utils/types';
-import { SectionLoader } from '../../components/Loader';
-import { toast } from 'utils/helpers';
-import { SectionError } from '../../components/Error';
-
-const DataTable = lazy(() => import('components/common/datatable'));
-
-const MySwal = withReactContent(Swal);
+import { DataTable, SectionError, SectionLoader, Sweet, toast } from '@nabcellent/sui-react';
 
 const settingOptions = [
     {
@@ -51,7 +43,7 @@ const validationSchema = yup.object({
     value: yup.string().required()
 });
 
-const Settings = () => {
+const Index = () => {
     const [settingValues, setSettingValues] = useState<string[]>([]);
     const [showModal, setShowModal] = useState(false);
 
@@ -68,11 +60,11 @@ const Settings = () => {
             setShowModal(false);
 
             if (setting?.id) toast({
-                msg: `Setting ${formik.dirty ? "Updated" : "Created"}!`,
-                type: "success"
+                text: `Setting ${formik.dirty ? "Updated" : "Created"}!`,
+                icon: "success"
             });
 
-            if (result.error) toast({msg: result.error.toString(), type: 'warning'});
+            if (result.error) toast({text: result.error.toString(), icon: 'warning'});
         },
     });
 
@@ -91,7 +83,7 @@ const Settings = () => {
 
     const handleDelete = (setting: SettingType) => {
         if (setting) {
-            MySwal.fire({
+            Sweet.fire({
                 title: 'Are you sure?',
                 text: "You won't be able to revert this!",
                 icon: 'warning',
@@ -100,7 +92,7 @@ const Settings = () => {
                 cancelButtonColor: '#d33',
                 confirmButtonText: 'Yes, delete it!',
                 showLoaderOnConfirm: true
-            }).then(async result => {
+            }).then(async (result: any) => {
                 if (result.isConfirmed) await deleteSetting(String(setting.id));
             });
         }
@@ -113,7 +105,7 @@ const Settings = () => {
                 !isLoading && isSuccess && settings
                     ? <div className="row g-3 mb-3">
                         <div className="col-xxl-12 col-md-12">
-                            <DataTable perPage={5} columns={[
+                            <DataTable columns={[
                                 {
                                     accessorKey: 'type',
                                     header: 'Name',
@@ -214,4 +206,4 @@ const Settings = () => {
     );
 };
 
-export default memo(Settings);
+export default memo(Index);

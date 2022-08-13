@@ -1,12 +1,20 @@
-import { memo, useEffect } from 'react';
+import { lazy, memo, useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Middleware } from '../middleware';
-import { Auth, Dashboards, Notifications, Settings } from '../pages';
 import MainLayout from './MainLayout';
 import GuestLayout from './GuestLayout';
-import { is } from 'utils/helpers';
+import { is } from '@nabcellent/sui-react';
 import SettingsToggle from 'components/settings-panel/SettingsToggle';
 import SettingsPanel from 'components/settings-panel/SettingsPanel';
+
+const Dashboard = lazy(() => import('../pages/dashboards/default/Dashboard'));
+const Analytics = lazy(() => import('../pages/dashboards/analytics'));
+const Login = lazy(() => import('../pages/auth/Login'));
+const SMS = lazy(() => import('../pages/notifications/SMS'));
+const Mails = lazy(() => import('../pages/notifications/Mails'));
+const CreateNotification = lazy(() => import('../pages/notifications/Create'));
+const ShowNotification = lazy(() => import('../pages/notifications/Show'));
+const Settings = lazy(() => import('../pages/settings'));
 
 const Layout = () => {
     const HTMLClassList = document.getElementsByTagName('html')[0].classList;
@@ -21,19 +29,19 @@ const Layout = () => {
         <>
             <Routes>
                 <Route element={<GuestLayout/>}>
-                    <Route path={'/login'} element={<Middleware.Guest component={<Auth.Login/>}/>}/>
+                    <Route path={'/login'} element={<Middleware.Guest component={<Login/>}/>}/>
                 </Route>
 
                 <Route element={<Middleware.Auth component={<MainLayout/>}/>}>
-                    <Route index element={<Dashboards.Default/>}/>
-                    <Route path={'/dashboard'} element={<Dashboards.Default/>}/>
-                    <Route path={'/dashboard/analytics'} element={<Dashboards.Analytics/>}/>
-                    <Route path={'/notifications/sms'} element={<Notifications.Sms/>}/>
-                    <Route path={'/notifications/mail'} element={<Notifications.Mail/>}/>
-                    <Route path={'/notifications/create'} element={<Notifications.Create/>}/>
-                    <Route path={'/notifications/:id'} element={<Notifications.Show/>}/>
+                    <Route index element={<Dashboard/>}/>
+                    <Route path={'/dashboard'} element={<Dashboard/>}/>
+                    <Route path={'/dashboard/analytics'} element={<Analytics/>}/>
+                    <Route path={'/notifications/sms'} element={<SMS/>}/>
+                    <Route path={'/notifications/mail'} element={<Mails/>}/>
+                    <Route path={'/notifications/create'} element={<CreateNotification/>}/>
+                    <Route path={'/notifications/:id'} element={<ShowNotification/>}/>
                     <Route path={'/settings'} element={<Settings/>}/>
-                    <Route path={'*'} element={<Dashboards.Default/>}/>
+                    <Route path={'*'} element={<Dashboard/>}/>
                 </Route>
             </Routes>
             <SettingsToggle/>

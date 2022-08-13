@@ -1,13 +1,11 @@
 import { lazy, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card } from 'react-bootstrap';
-import Flex from 'components/common/Flex';
-import { getColor } from 'utils/helpers';
+import { Flex, getColor, Badge } from '@nabcellent/sui-react';
 import * as echarts from 'echarts/core';
 import { BarChart } from 'echarts/charts';
 import { GridComponent, TitleComponent, TooltipComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import SoftBadge from 'components/common/SoftBadge';
 import classNames from 'classnames';
 import { IMAGES } from 'constants/images';
 import sum from 'lodash.sum';
@@ -112,9 +110,9 @@ const WeeklyNotifications = ({data, width, amountClassName}: WeeklyNotifications
                     >
                         <CountUp end={sum(data?.datasets)}/>
                     </h2>
-                    <SoftBadge pill bg="success" className="me-2 fs--2">
+                    <Badge soft pill bg="success" className="me-2 fs--2">
                         +3.5%
-                    </SoftBadge>
+                    </Badge>
                 </div>
                 {
                     data && <BasicECharts

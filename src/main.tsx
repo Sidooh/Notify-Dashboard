@@ -4,7 +4,6 @@ import { Provider } from 'react-redux';
 import { store } from 'app/store';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
-import 'toastify-js/src/toastify.css';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);

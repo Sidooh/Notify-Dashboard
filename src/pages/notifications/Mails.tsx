@@ -1,6 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 
-const Mail = () => {
+const Mails = () => {
     return (
         <Row className={'g-3 mb-3'}>
             <Col>
@@ -10,4 +10,4 @@ const Mail = () => {
     );
 };
 
-export default Mail;
+export default Mails;

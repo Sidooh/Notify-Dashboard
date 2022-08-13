@@ -1,10 +1,8 @@
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { ErrorFallback } from './components/Error';
-import { ErrorBoundary } from 'react-error-boundary';
 import Layout from './layouts/Layout';
 import { useAppSelector } from './app/hooks';
 import useToggleStyle from './hooks/useToggleStyle';
-import { getColor } from 'utils/helpers';
+import { getColor, ErrorBoundary, ErrorFallback } from '@nabcellent/sui-react';
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faQuestionCircle, fas } from '@fortawesome/free-solid-svg-icons'
 import { far } from '@fortawesome/free-regular-svg-icons'
@@ -48,11 +46,7 @@ function App() {
     }
 
     return (
-        <ThemeProvider theme={theme}>
-            <ErrorBoundary FallbackComponent={ErrorFallback} onReset={() => window.location.reload()}>
-                <Layout/>
-            </ErrorBoundary>
-        </ThemeProvider>
+        <ThemeProvider theme={theme}><Layout/></ThemeProvider>
     );
 }
 

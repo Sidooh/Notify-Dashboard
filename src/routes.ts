@@ -1,23 +1,4 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-
-export type RouteChildType = {
-    name: string
-    active: boolean
-    icon?: IconProp
-    to?: string
-    exact?: boolean
-    badge?: {
-        text?: string
-        type?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'light' | 'dark',
-    }
-    children?: RouteChildType[]
-}
-
-export type RouteType = {
-    label: string
-    labelDisable?: boolean
-    children: RouteChildType[]
-}
+import { RouteType } from '@nabcellent/sui-react';
 
 export const dashboardRoutes: RouteType = {
     label: 'Dashboard',

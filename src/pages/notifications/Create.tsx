@@ -4,11 +4,11 @@ import { LoadingButton } from '@mui/lab';
 import { useFormik } from 'formik';
 import TomSelect from 'tom-select';
 import * as yup from 'yup';
-import AlertError from '../../components/AlertError';
+import AlertError from 'components/AlertError';
 import { IMAGES } from 'constants/images';
-import { useStoreNotificationMutation } from '../../features/notifications/notificationsAPI';
-import { useGetAllAccountsQuery, useGetAllUsersQuery } from '../../app/services/accountsAPI';
-import { toast } from 'utils/helpers';
+import { useStoreNotificationMutation } from 'features/notifications/notificationsAPI';
+import { useGetAllAccountsQuery, useGetAllUsersQuery } from 'app/services/accountsAPI';
+import { toast } from '@nabcellent/sui-react';
 import sortBy from 'lodash.sortby';
 
 type DestinationOptionsType = { value: string, text: string }

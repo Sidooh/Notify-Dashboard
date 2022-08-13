@@ -6,11 +6,12 @@ import { Col, Row } from 'react-bootstrap';
 import { useGetDashboardQuery } from 'features/notifications/notificationsAPI';
 import { lazy } from 'react';
 
-const WeeklyNotifications = lazy(() => import('./WeeklyNotifications'))
-const RecentNotifications = lazy(() => import('./RecentNotifications'))
+const WeeklyNotifications = lazy(() => import('./WeeklyNotifications'));
+const RecentNotifications = lazy(() => import('./RecentNotifications'));
 
 const Dashboard = () => {
     const {data} = useGetDashboardQuery();
+    console.log(data);
 
     return (
         <>

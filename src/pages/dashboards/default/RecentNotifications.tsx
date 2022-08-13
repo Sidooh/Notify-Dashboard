@@ -5,14 +5,12 @@ import { Link, useNavigate } from 'react-router-dom';
 import { NotificationType } from 'utils/types';
 import { ReadMore } from '@mui/icons-material';
 import { isToday, isYesterday } from 'utils/helpers';
-import DataTable from '../../../components/common/datatable';
-import { SectionLoader } from '../../../components/Loader';
 import { Card } from 'react-bootstrap';
 import Destination from '../../notifications/Destination';
+import { DataTable, SectionLoader } from '@nabcellent/sui-react';
 
 const RecentNotifications = ({notifications}: { notifications: NotificationType[] }) => {
     const navigate = useNavigate();
-    console.log(notifications);
 
     if (!notifications) return <SectionLoader/>;
 
@@ -81,4 +79,4 @@ const RecentNotifications = ({notifications}: { notifications: NotificationType[
     );
 };
 
-export default memo(RecentNotifications);
+export default RecentNotifications;

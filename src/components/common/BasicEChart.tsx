@@ -1,6 +1,6 @@
 import { CSSProperties, memo } from 'react';
 import _ from 'lodash';
-import { getColor } from 'utils/helpers';
+import { getColor } from '@nabcellent/sui-react';
 import ECharts from '../ECharts';
 
 const getOption = () => ({

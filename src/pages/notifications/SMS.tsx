@@ -1,17 +1,14 @@
-import { memo } from 'react';
 import { Typography } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
 import { ReadMore } from '@mui/icons-material';
 import moment from 'moment';
 import { isToday, isYesterday } from 'utils/helpers';
-import { useNotificationsQuery } from '../../features/notifications/notificationsAPI';
-import { SectionLoader } from '../../components/Loader';
+import { useNotificationsQuery } from 'features/notifications/notificationsAPI';
 import { Card } from 'react-bootstrap';
-import DataTable from '../../components/common/datatable';
-import { SectionError } from '../../components/Error';
 import Destination from './Destination';
+import { DataTable, SectionError, SectionLoader } from '@nabcellent/sui-react';
 
-const Sms = () => {
+const SMS = () => {
     const navigate = useNavigate();
 
     let {data: notifications, isLoading, isSuccess, isError, error} = useNotificationsQuery();
@@ -83,4 +80,4 @@ const Sms = () => {
     );
 };
 
-export default memo(Sms);
+export default SMS;

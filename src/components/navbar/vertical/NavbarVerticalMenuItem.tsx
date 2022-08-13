@@ -1,8 +1,6 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Flex from 'components/common/Flex';
-import SoftBadge from 'components/common/SoftBadge';
-import { RouteChildType } from '../../../routes';
+import { Badge, RouteChildType, Flex } from '@nabcellent/sui-react';
 
 export type NavbarVerticalMenuItemType = {
     route: RouteChildType
@@ -18,9 +16,7 @@ const NavbarVerticalMenuItem = ({route}: NavbarVerticalMenuItemType) => {
             )}
             <span className="nav-link-text ps-1">{route.name}</span>
             {route.badge && (
-                <SoftBadge pill bg={route.badge.type} className="ms-2">
-                    {route.badge.text}
-                </SoftBadge>
+                <Badge pill bg={route.badge.type} className="ms-2">{route.badge.text}</Badge>
             )}
         </Flex>
     );
