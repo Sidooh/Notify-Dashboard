@@ -1,18 +1,24 @@
-import { memo } from 'react';
 import { Tooltip, Typography } from '@mui/material';
 import moment from 'moment';
 import { Link, useNavigate } from 'react-router-dom';
-import { NotificationType } from 'utils/types';
 import { ReadMore } from '@mui/icons-material';
 import { isToday, isYesterday } from 'utils/helpers';
 import { Card } from 'react-bootstrap';
 import Destination from '../../notifications/Destination';
-import { DataTable, SectionLoader } from '@nabcellent/sui-react';
+import { ComponentLoader, DataTable, SectionError } from '@nabcellent/sui-react';
+import { useGetRecentNotificationsQuery } from 'features/dashboard/dashboardApi';
 
-const RecentNotifications = ({notifications}: { notifications: NotificationType[] }) => {
+const RecentNotifications = () => {
     const navigate = useNavigate();
 
-    if (!notifications) return <SectionLoader/>;
+    let {data: notifications, isLoading, isSuccess, isError, error} = useGetRecentNotificationsQuery();
+
+    if (isError) return <SectionError error={error}/>;
+    if (isLoading || !isSuccess || !notifications) return <ComponentLoader/>;
+
+    console.log(notifications);
+
+    if (!notifications) return <ComponentLoader/>;
 
     return (
         <Card>
@@ -25,11 +31,11 @@ const RecentNotifications = ({notifications}: { notifications: NotificationType[
                         cell: ({row}: any) => <Destination notification={row.original}/>
                     },
                     {
-                        accessorKey: 'message',
+                        accessorKey: 'content',
                         header: 'Message',
                         cell: ({row}: any) => {
                             return (
-                                <Tooltip title={row.original.message}>
+                                <Tooltip title={row.original.content}>
                                     <Typography variant={"body2"} style={{
                                         display: "-webkit-box",
                                         overflow: "hidden",
@@ -37,7 +43,7 @@ const RecentNotifications = ({notifications}: { notifications: NotificationType[
                                         WebkitLineClamp: 2,
                                         cursor: "context-menu",
                                         maxWidth: '30rem'
-                                    }}>{row.original.message}</Typography>
+                                    }}>{row.original.content}</Typography>
                                 </Tooltip>
                             );
                         }
@@ -70,10 +76,7 @@ const RecentNotifications = ({notifications}: { notifications: NotificationType[
                             return <Link to={`/notifications/${id}`}><ReadMore fontSize={'small'}/></Link>;
                         }
                     }
-                ]} data={notifications.map(notification => ({
-                    ...notification,
-                    message: notification.content,
-                }))}/>
+                ]} data={notifications}/>
             </Card.Body>
         </Card>
     );

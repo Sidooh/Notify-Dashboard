@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CONFIG } from 'config';
-import { NotificationType, SettingType } from 'utils/types';
+import { Notification, Setting } from 'utils/types';
 import { RootState } from 'app/store';
+import { ApiResponse } from '@nabcellent/sui-react';
 
 export const notificationsApi = createApi({
     reducerPath: 'notificationsApi',
@@ -24,15 +25,17 @@ export const notificationsApi = createApi({
         }),
 
         //  Notification Endpoints
-        notifications: builder.query<NotificationType[], void>({
+        notifications: builder.query<Notification[], void>({
             query: () => '/notifications',
-            providesTags: ['Notification']
+            providesTags: ['Notification'],
+            transformResponse: (response: ApiResponse<Notification[]>) => response.data,
         }),
-        notification: builder.query<NotificationType, string>({
+        notification: builder.query<Notification, string>({
             query: id => `/notifications/${id}?with_notifiables=true`,
-            providesTags: ['Notification']
+            providesTags: ['Notification'],
+            transformResponse: (response: ApiResponse<Notification>) => response.data,
         }),
-        storeNotification: builder.mutation<NotificationType, {
+        storeNotification: builder.mutation<Notification, {
             channel: string, event_type: string; destination: string[], content: string
         }>({
             query: notification => ({
@@ -43,11 +46,12 @@ export const notificationsApi = createApi({
         }),
 
         //  Settings Endpoints
-        settings: builder.query<SettingType[], void>({
+        settings: builder.query<Setting[], void>({
             query: () => '/settings',
-            providesTags: ['Setting']
+            providesTags: ['Setting'],
+            transformResponse: (response: ApiResponse<Setting[]>) => response.data,
         }),
-        upsertSetting: builder.mutation<SettingType, SettingType>({
+        upsertSetting: builder.mutation<Setting, Setting>({
             query: setting => ({
                 url: '/settings',
                 method: 'POST',

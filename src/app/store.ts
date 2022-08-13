@@ -3,6 +3,7 @@ import authReducer from '../features/auth/authSlice';
 import themeReducer from '../features/theme/themeSlice';
 import { accountsApi } from './services/accountsAPI';
 import { notificationsApi } from '../features/notifications/notificationsAPI';
+import { dashboardApi } from '../features/dashboard/dashboardApi';
 
 export const store = configureStore({
     reducer: {
@@ -10,10 +11,11 @@ export const store = configureStore({
         theme: themeReducer,
 
         [accountsApi.reducerPath]: accountsApi.reducer,
+        [dashboardApi.reducerPath]: dashboardApi.reducer,
         [notificationsApi.reducerPath]: notificationsApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-        .concat(accountsApi.middleware, notificationsApi.middleware)
+        .concat(accountsApi.middleware, dashboardApi.middleware, notificationsApi.middleware)
 });
 
 export type AppDispatch = typeof store.dispatch;

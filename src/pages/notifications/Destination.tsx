@@ -1,24 +1,22 @@
-import { NotificationType } from 'utils/types';
-import { Mail, Telegram } from '@mui/icons-material';
-import { Status } from 'utils/enums';
+import { Notification } from 'utils/types';
+import { Badge, Status } from '@nabcellent/sui-react';
 
-export const Destination = ({notification}: { notification: NotificationType }) => {
-    let icon: JSX.Element
+export const Destination = ({notification}: { notification: Notification }) => {
+    let icon: string;
 
-    if (notification.channel === "mail") {
-        icon = <Mail fontSize={"small"} className={'pe-2'}/>;
-    } else if (notification.channel === "sms") {
-        icon = <Telegram fontSize={"small"} className={'pe-2'}/>;
+    if (notification.channel === "MAIL") {
+        icon = "far fa-paper-plane";
+    } else if (notification.channel === "SMS") {
+        icon = "fas fa-paper-plane";
     } else {
-        icon = <i className={'fab fa-slack pe-2'}/>;
+        icon = "fab fa-slack";
     }
 
     return (
-        <span className={`badge badge rounded-pill badge-soft-${notification.status === Status.COMPLETED ? "success" : "danger"}`}>
-                                        {icon}{notification.destination}
-            {<span className={`ms-1 fas fa-${notification.status === Status.COMPLETED ? "check" : "xmark"}`}/>}
-                                    </span>
+        <Badge soft pill bg={notification.status === Status.COMPLETED ? "success" : "danger"}>
+            <i className={icon}/> {notification.destination}
+        </Badge>
     );
-}
+};
 
 export default Destination;

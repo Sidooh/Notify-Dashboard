@@ -27,18 +27,18 @@ const SMS = () => {
                                    cell: (rowData: any) => <Destination notification={rowData.row.original}/>
                                },
                                {
-                                   accessorKey: 'message',
+                                   accessorKey: 'content',
                                    header: 'Message',
                                    cell: (rowData: any) => {
-                                       const {message} = rowData.row.original;
-                                       return <Typography variant={"body2"} title={message} style={{
+                                       const {content} = rowData.row.original;
+                                       return <Typography variant={"body2"} title={content} style={{
                                            display: "-webkit-box",
                                            overflow: "hidden",
                                            WebkitBoxOrient: "vertical",
                                            WebkitLineClamp: 2,
                                            cursor: "context-menu",
                                            maxWidth: '30rem'
-                                       }}>{message}</Typography>;
+                                       }}>{content}</Typography>;
                                    }
                                },
                                {
@@ -69,12 +69,7 @@ const SMS = () => {
                                            fontSize={'small'}/></Link>;
                                    }
                                }
-                           ]} data={notifications.map(notification => {
-                    return {
-                        ...notification,
-                        message: notification.content,
-                    };
-                })}/>
+                           ]} data={notifications}/>
             </Card.Body>
         </Card>
     );

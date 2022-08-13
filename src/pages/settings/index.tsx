@@ -47,7 +47,7 @@ const Index = () => {
     const [settingValues, setSettingValues] = useState<string[]>([]);
     const [showModal, setShowModal] = useState(false);
 
-    let {data: settings, error, isLoading, isSuccess} = useSettingsQuery();
+    let {data: settings, error, isLoading, isSuccess, isError} = useSettingsQuery();
     const [upsertSetting, result] = useUpsertSettingMutation();
     const [deleteSetting] = useDeleteSettingMutation();
 
@@ -98,51 +98,49 @@ const Index = () => {
         }
     };
 
+    if (isError) return <SectionError error={error}/>;
+    if (isLoading || !isSuccess || !settings) return <SectionLoader/>;
+
     return (
         <>
-            {error && <SectionError error={error}/>}
-            {
-                !isLoading && isSuccess && settings
-                    ? <div className="row g-3 mb-3">
-                        <div className="col-xxl-12 col-md-12">
-                            <DataTable columns={[
-                                {
-                                    accessorKey: 'type',
-                                    header: 'Name',
-                                    cell: (rowData: any) => {
-                                        const {type} = rowData.row.original;
+            <div className="row g-3 mb-3">
+                <div className="col-xxl-12 col-md-12">
+                    <DataTable columns={[
+                        {
+                            accessorKey: 'key',
+                            header: 'Name',
+                            cell: (rowData: any) => {
+                                const {key} = rowData.row.original;
 
-                                        return <span>{(type.replaceAll('_', ' ')).toUpperCase()}</span>;
-                                    }
-                                },
-                                {
-                                    accessorKey: 'value',
-                                    header: 'Value'
-                                },
-                                {
-                                    id: 'actions',
-                                    cell: (rowData: any) => {
-                                        return (
-                                            <div className={'text-end'}>
-                                                <IconButton onClick={() => handleUpdate(rowData.row.original)}
-                                                            size={"small"}
-                                                            color={"primary"}>
-                                                    <Edit fontSize={'small'}/>
-                                                </IconButton>
-                                                <IconButton onClick={() => handleDelete(rowData.row.original)}
-                                                            size={"small"}
-                                                            color={"error"}>
-                                                    <Delete fontSize={'small'}/>
-                                                </IconButton>
-                                            </div>
-                                        );
-                                    }
-                                }
-                            ]} data={settings.map(setting => setting)} title={'Settings'} onCreateRow={handleCreate}/>
-                        </div>
-                    </div>
-                    : <SectionLoader/>
-            }
+                                return <span>{(key.replaceAll('_', ' ')).toUpperCase()}</span>;
+                            }
+                        },
+                        {
+                            accessorKey: 'value',
+                            header: 'Value'
+                        },
+                        {
+                            id: 'actions',
+                            cell: (rowData: any) => {
+                                return (
+                                    <div className={'text-end'}>
+                                        <IconButton onClick={() => handleUpdate(rowData.row.original)}
+                                                    size={"small"}
+                                                    color={"primary"}>
+                                            <Edit fontSize={'small'}/>
+                                        </IconButton>
+                                        <IconButton onClick={() => handleDelete(rowData.row.original)}
+                                                    size={"small"}
+                                                    color={"error"}>
+                                            <Delete fontSize={'small'}/>
+                                        </IconButton>
+                                    </div>
+                                );
+                            }
+                        }
+                    ]} data={settings.map(s => s)} title={'Settings'} onCreateRow={handleCreate}/>
+                </div>
+            </div>
 
             <Modal show={showModal} onHide={() => setShowModal(false)} contentClassName={'position-relative'}>
                 <div className="position-absolute top-0 end-0 mt-2 me-2 z-index-1">
