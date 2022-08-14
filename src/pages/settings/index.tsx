@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo, ReactNode, useState } from 'react';
 import { Delete, Edit, Save } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { Autocomplete, Button, IconButton, TextField } from '@mui/material';
@@ -187,7 +187,7 @@ const Index = () => {
                                     />
                                 </div>
                                 <div className="mb-3">
-                                    <Autocomplete options={settingValues} freeSolo value={formik.values.value}
+                                    <Autocomplete options={settingValues} freeSolo
                                                   onChange={(...args) => {
                                                       formik.setFieldValue("value", args[1], true);
                                                   }}
@@ -196,7 +196,7 @@ const Index = () => {
                                                                 placeholder="Setting value..."
                                                                 value={formik.values.value}
                                                                 error={formik.touched.value && Boolean(formik.errors.value)}
-                                                                helperText={formik.touched.value && formik.errors.value}/>
+                                                                helperText={(formik.touched.value && formik.errors.value) as ReactNode}/>
                                                   )}
                                     />
                                 </div>
