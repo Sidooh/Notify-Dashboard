@@ -2561,6 +2561,7 @@ __metadata:
     react-bootstrap: ^2.3.0
     react-countup: ^6.2.0
     react-dom: ^18.0.0
+    react-json-pretty: ^2.2.0
     react-redux: ^8.0.1
     react-router-dom: ^6.3.0
     size-sensor: ^1.0.1
@@ -2790,6 +2791,18 @@ __metadata:
   version: 18.0.0
   resolution: "react-is@npm:18.0.0"
   checksum: d38f6afee4d8d791cdd69c715841c01a503c9b06da6158e0893447cea6ba50cd262dca9bde84127720cf44fd05c58185eafc32accace4bb2deb03b3cdbeb6b6b
+  languageName: node
+  linkType: hard
+
+"react-json-pretty@npm:^2.2.0":
+  version: 2.2.0
+  resolution: "react-json-pretty@npm:2.2.0"
+  dependencies:
+    prop-types: ^15.6.2
+  peerDependencies:
+    react: ">=15.0"
+    react-dom: ">=15.0"
+  checksum: 9a3a316d46c7333f650cb37b0e71b121405c863ff5007d1bd0f4af0254d89560c49b153ffeedf7c2ffd5ad7d0adcccb7180b7ce23486d2df51bb1f98e543214c
   languageName: node
   linkType: hard
 

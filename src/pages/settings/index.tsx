@@ -3,15 +3,17 @@ import { Delete, Edit, Save } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { Autocomplete, Button, IconButton, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import { Modal } from 'react-bootstrap';
+import { Card, Col, Modal, Row } from 'react-bootstrap';
 import * as yup from 'yup';
 import {
     useDeleteSettingMutation,
     useSettingsQuery,
     useUpsertSettingMutation
-} from '../../features/notifications/notificationsAPI';
-import { SettingType } from 'utils/types';
-import { DataTable, SectionError, SectionLoader, Sweet, toast } from '@nabcellent/sui-react';
+} from '../../features/settings/settingsApi';
+import { Setting } from 'utils/types';
+import { DataTable, Flex, PrettyJSON, SectionError, SectionLoader, Sweet, toast } from '@nabcellent/sui-react';
+import JSONPretty from 'react-json-pretty';
+import 'react-json-pretty/themes/monikai.css';
 
 const settingOptions = [
     {
@@ -52,7 +54,7 @@ const Index = () => {
     const [deleteSetting] = useDeleteSettingMutation();
 
     const formik = useFormik({
-        initialValues: {type: "", value: ""},
+        initialValues: {key: "", value: {data: ""}},
         validationSchema: validationSchema,
         onSubmit: async values => {
             const setting = await upsertSetting(values).unwrap();
@@ -74,14 +76,14 @@ const Index = () => {
         setShowModal(true);
     };
 
-    const handleUpdate = (setting: SettingType) => {
-        setSettingValues(getSettingValuesByName(setting.type));
+    const handleUpdate = (setting: Setting) => {
+        setSettingValues(getSettingValuesByName(setting.key));
         formik.setValues(setting, true);
 
         setShowModal(true);
     };
 
-    const handleDelete = (setting: SettingType) => {
+    const handleDelete = (setting: Setting) => {
         if (setting) {
             Sweet.fire({
                 title: 'Are you sure?',
@@ -101,10 +103,12 @@ const Index = () => {
     if (isError) return <SectionError error={error}/>;
     if (isLoading || !isSuccess || !settings) return <SectionLoader/>;
 
+    console.log(settings);
+
     return (
-        <>
-            <div className="row g-3 mb-3">
-                <div className="col-xxl-12 col-md-12">
+        <Row>
+            <Card>
+                <Card.Body>
                     <DataTable columns={[
                         {
                             accessorKey: 'key',
@@ -117,7 +121,17 @@ const Index = () => {
                         },
                         {
                             accessorKey: 'value',
-                            header: 'Value'
+                            header: 'Value',
+                            cell: (rowData: any) => {
+                                return <JSONPretty json={rowData.row.original.value} theme={{
+                                    main: 'background-color:rgb(39, 46, 72);max-height:20rem',
+                                    error: 'color:var(--sidooh-danger)',
+                                    key: 'color:var(--sidooh-success)',
+                                    string: 'color: rgb(188, 208, 247);',
+                                    value: 'color:var(--sidooh-info);',
+                                    boolean: 'color:var(--sidooh-warning);',
+                                }}/>
+                            }
                         },
                         {
                             id: 'actions',
@@ -139,68 +153,69 @@ const Index = () => {
                             }
                         }
                     ]} data={settings.map(s => s)} title={'Settings'} onCreateRow={handleCreate}/>
-                </div>
-            </div>
+                </Card.Body>
 
-            <Modal show={showModal} onHide={() => setShowModal(false)} contentClassName={'position-relative'}>
-                <div className="position-absolute top-0 end-0 mt-2 me-2 z-index-1">
-                    <button className="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
-                            data-bs-dismiss="modal" aria-label="Close" onClick={() => setShowModal(false)}/>
-                </div>
-                <Modal.Body className={'modal-body p-0'}>
-                    <div className="rounded-top-lg py-3 ps-4 pe-6 bg-light">
-                        <h4 className="mb-1" id="modalExampleDemoLabel">
-                            {(formik.dirty ? "Update" : "New") + " Setting"}
-                        </h4>
+                <Modal show={showModal} onHide={() => setShowModal(false)} contentClassName={'position-relative'}>
+                    <div className="position-absolute top-0 end-0 mt-2 me-2 z-index-1">
+                        <button className="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
+                                data-bs-dismiss="modal" aria-label="Close" onClick={() => setShowModal(false)}/>
                     </div>
+                    <Modal.Body className={'modal-body p-0'}>
+                        <div className="rounded-top-lg py-3 ps-4 pe-6 bg-light">
+                            <h4 className="mb-1" id="modalExampleDemoLabel">
+                                {(formik.dirty ? "Update" : "New") + " Setting"}
+                            </h4>
+                        </div>
 
-                    <div className="p-4 pb-0">
-                        <form onSubmit={formik.handleSubmit}>
-                            <div>{JSON.stringify(result.error)}</div>
-                            <div className="mb-3">
-                                <Autocomplete options={settingOptions.map(opt => opt.type)} freeSolo
-                                              value={formik.values.type}
-                                              onChange={(...args) => {
-                                                  const settingValues = getSettingValuesByName(String(args[1]));
-                                                  setSettingValues(settingValues);
-                                                  formik.setFieldValue("type", args[1], true);
-                                              }}
-                                              renderInput={(params) => (
-                                                  <TextField{...params} size={"small"} label="Type"
-                                                            placeholder="Setting type..." value={formik.values.type}
-                                                            error={formik.touched.type && Boolean(formik.errors.type)}
-                                                            helperText={formik.touched.type && formik.errors.type}/>
-                                              )}
-                                />
-                            </div>
-                            <div className="mb-3">
-                                <Autocomplete options={settingValues} freeSolo value={formik.values.value}
-                                              onChange={(...args) => {
-                                                  formik.setFieldValue("value", args[1], true);
-                                              }}
-                                              renderInput={(params) => (
-                                                  <TextField{...params} size={"small"} label="Value"
-                                                            placeholder="Setting value..."
-                                                            value={formik.values.value}
-                                                            error={formik.touched.value && Boolean(formik.errors.value)}
-                                                            helperText={formik.touched.value && formik.errors.value}/>
-                                              )}
-                                />
-                            </div>
-                        </form>
-                    </div>
-                </Modal.Body>
-                <Modal.Footer>
-                    <Button size={'small'} variant={'outlined'} onClick={() => setShowModal(false)} color={'inherit'}
-                            data-bs-dismiss="modal">Cancel</Button>
-                    <LoadingButton size="small" color="primary" loading={result.isLoading} loadingPosition="end"
-                                   onClick={() => formik.submitForm()}
-                                   endIcon={<Save/>} variant="contained">
-                        {formik.dirty ? "Update" : "Create"}
-                    </LoadingButton>
-                </Modal.Footer>
-            </Modal>
-        </>
+                        <div className="p-4 pb-0">
+                            <form onSubmit={formik.handleSubmit}>
+                                <div>{JSON.stringify(result.error)}</div>
+                                <div className="mb-3">
+                                    <Autocomplete options={settingOptions.map(opt => opt.type)} freeSolo
+                                                  value={formik.values.key}
+                                                  onChange={(...args) => {
+                                                      const settingValues = getSettingValuesByName(String(args[1]));
+                                                      setSettingValues(settingValues);
+                                                      formik.setFieldValue("type", args[1], true);
+                                                  }}
+                                                  renderInput={(params) => (
+                                                      <TextField{...params} size={"small"} label="Type"
+                                                                placeholder="Setting type..." value={formik.values.key}
+                                                                error={formik.touched.key && Boolean(formik.errors.key)}
+                                                                helperText={formik.touched.key && formik.errors.key}/>
+                                                  )}
+                                    />
+                                </div>
+                                <div className="mb-3">
+                                    <Autocomplete options={settingValues} freeSolo value={formik.values.value}
+                                                  onChange={(...args) => {
+                                                      formik.setFieldValue("value", args[1], true);
+                                                  }}
+                                                  renderInput={(params) => (
+                                                      <TextField{...params} size={"small"} label="Value"
+                                                                placeholder="Setting value..."
+                                                                value={formik.values.value}
+                                                                error={formik.touched.value && Boolean(formik.errors.value)}
+                                                                helperText={formik.touched.value && formik.errors.value}/>
+                                                  )}
+                                    />
+                                </div>
+                            </form>
+                        </div>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button size={'small'} variant={'outlined'} onClick={() => setShowModal(false)}
+                                color={'inherit'}
+                                data-bs-dismiss="modal">Cancel</Button>
+                        <LoadingButton size="small" color="primary" loading={result.isLoading} loadingPosition="end"
+                                       onClick={() => formik.submitForm()}
+                                       endIcon={<Save/>} variant="contained">
+                            {formik.dirty ? "Update" : "Create"}
+                        </LoadingButton>
+                    </Modal.Footer>
+                </Modal>
+            </Card>
+        </Row>
     );
 };
 

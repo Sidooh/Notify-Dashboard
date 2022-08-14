@@ -6,6 +6,7 @@ import { useNotificationQuery } from 'features/notifications/notificationsAPI';
 import Destination from './Destination';
 import { PrettyJSON, SectionError, SectionLoader, Status } from '@nabcellent/sui-react';
 
+
 const Show = () => {
     const {id} = useParams();
 

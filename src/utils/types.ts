@@ -1,5 +1,5 @@
 import { Model } from '@nabcellent/sui-react';
-import {ReactNode} from 'react';
+import { ReactNode } from 'react';
 
 export type Children = {
     children: ReactNode
@@ -25,5 +25,5 @@ export type Notification = Model & {
 
 export type Setting = Model & {
     key: string
-    value: string
+    value: { data: any }
 }

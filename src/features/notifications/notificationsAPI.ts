@@ -21,7 +21,7 @@ export const notificationsApi = createApi({
     endpoints: (builder) => ({
         //  Dashboard Endpoints
         getDashboard: builder.query<any, void>({
-            query:() => '/dashboard',
+            query: () => '/dashboard',
         }),
 
         //  Notification Endpoints
@@ -44,28 +44,6 @@ export const notificationsApi = createApi({
                 body: notification
             })
         }),
-
-        //  Settings Endpoints
-        settings: builder.query<Setting[], void>({
-            query: () => '/settings',
-            providesTags: ['Setting'],
-            transformResponse: (response: ApiResponse<Setting[]>) => response.data,
-        }),
-        upsertSetting: builder.mutation<Setting, Setting>({
-            query: setting => ({
-                url: '/settings',
-                method: 'POST',
-                body: setting
-            }),
-            invalidatesTags: ['Setting']
-        }),
-        deleteSetting: builder.mutation<void, string>({
-            query: id => ({
-                url: `/settings/${id}`,
-                method: 'DELETE'
-            }),
-            invalidatesTags: ['Setting']
-        })
     })
 });
 
@@ -75,8 +53,4 @@ export const {
     useNotificationsQuery,
     useNotificationQuery,
     useStoreNotificationMutation,
-
-    useSettingsQuery,
-    useUpsertSettingMutation,
-    useDeleteSettingMutation
 } = notificationsApi;
