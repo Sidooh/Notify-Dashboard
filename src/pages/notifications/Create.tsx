@@ -13,7 +13,7 @@ import sortBy from 'lodash.sortby';
 
 type DestinationOptionsType = { value: string, text: string }
 
-const CHANNELS = ['slack', 'sms', 'mail', 'app'];
+const CHANNELS = ['SLACK', 'SMS', 'MAIL', 'APP'];
 
 const EVENT_TYPES = [
     'AIRTIME_PURCHASE', 'AIRTIME_PURCHASE_FAILURE',
@@ -85,7 +85,7 @@ const Create = () => {
 
     const formik = useFormik({
         initialValues: {
-            channel: "sms",
+            channel: "SMS",
             event_type: "DEFAULT",
             destination: [],
             content: "",
