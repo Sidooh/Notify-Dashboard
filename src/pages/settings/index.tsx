@@ -1,51 +1,38 @@
-import { memo, ReactNode, useState } from 'react';
+import { memo, useState } from 'react';
 import { Delete, Edit, Save } from '@mui/icons-material';
 import { LoadingButton } from '@mui/lab';
 import { Autocomplete, Button, IconButton, TextField } from '@mui/material';
 import { useFormik } from 'formik';
-import { Card, Col, Modal, Row } from 'react-bootstrap';
+import { Card, Modal } from 'react-bootstrap';
 import * as yup from 'yup';
-import {
-    useDeleteSettingMutation,
-    useSettingsQuery,
-    useUpsertSettingMutation
-} from '../../features/settings/settingsApi';
+import { useDeleteSettingMutation, useSettingsQuery, useUpsertSettingMutation } from 'features/settings/settingsApi';
 import { Setting } from 'utils/types';
-import { DataTable, Flex, PrettyJSON, SectionError, SectionLoader, Sweet, toast } from '@nabcellent/sui-react';
-import JSONPretty from 'react-json-pretty';
-import 'react-json-pretty/themes/monikai.css';
+import { ComponentLoader, DataTable, SectionError, Sweet, toast } from '@nabcellent/sui-react';
+import { MailProvider, SMSProvider } from 'utils/enums';
 
 const settingOptions = [
     {
-        type: 'default_sms_provider',
-        values: ['africastalking', 'websms']
+        key: 'default_sms_provider',
+        values: Object.values(SMSProvider)
     },
     {
-        type: 'default_mail_provider',
-        values: ['gmail', 'yahoo', 'mailgun', 'postmark', 'sendgrid']
-    },
-    {
-        type: 'websms_env',
-        values: ["development", "production"]
-    },
-    {
-        type: 'africastalking_env',
-        values: ["development", "production"]
+        key: 'default_mail_provider',
+        values: Object.values(MailProvider)
     }
 ];
 
 const getSettingValuesByName = (type: string) => {
-    let setting = settingOptions.filter(a => a.type === type);
+    let setting = settingOptions.filter(a => a.key === type);
 
     return setting[0].values ?? [];
 };
 
 const validationSchema = yup.object({
-    type: yup.string().required(),
+    key: yup.string().oneOf(settingOptions.map(s => s.key), 'Invalid key.').required('Required.'),
     value: yup.string().required()
 });
 
-const Index = () => {
+const Settings = () => {
     const [settingValues, setSettingValues] = useState<string[]>([]);
     const [showModal, setShowModal] = useState(false);
 
@@ -54,7 +41,7 @@ const Index = () => {
     const [deleteSetting] = useDeleteSettingMutation();
 
     const formik = useFormik({
-        initialValues: {key: "", value: {data: ""}},
+        initialValues: {key: "", value: ""},
         validationSchema: validationSchema,
         onSubmit: async values => {
             const setting = await upsertSetting(values).unwrap();
@@ -62,11 +49,11 @@ const Index = () => {
             setShowModal(false);
 
             if (setting?.id) toast({
-                text: `Setting ${formik.dirty ? "Updated" : "Created"}!`,
-                icon: "success"
+                msg: `Setting ${formik.dirty ? "Updated" : "Created"}!`,
+                type: "success"
             });
 
-            if (result.error) toast({text: result.error.toString(), icon: 'warning'});
+            if (result.error) toast({msg: result.error.toString(), type: 'warning'});
         },
     });
 
@@ -101,61 +88,51 @@ const Index = () => {
     };
 
     if (isError) return <SectionError error={error}/>;
-    if (isLoading || !isSuccess || !settings) return <SectionLoader/>;
+    if (isLoading || !isSuccess || !settings) return <ComponentLoader/>;
 
     console.log(settings);
 
     return (
-        <Row>
-            <Card>
-                <Card.Body>
-                    <DataTable columns={[
-                        {
-                            accessorKey: 'key',
-                            header: 'Name',
-                            cell: (rowData: any) => {
-                                const {key} = rowData.row.original;
+        <Card className="mb-3">
+            <Card.Body>
+                <DataTable columns={[
+                    {
+                        accessorKey: 'key',
+                        header: 'Name',
+                        cell: (rowData: any) => {
+                            const {key} = rowData.row.original;
 
-                                return <span>{(key.replaceAll('_', ' ')).toUpperCase()}</span>;
-                            }
-                        },
-                        {
-                            accessorKey: 'value',
-                            header: 'Value',
-                            cell: (rowData: any) => {
-                                return <JSONPretty json={rowData.row.original.value} theme={{
-                                    main: 'background-color:rgb(39, 46, 72);max-height:20rem',
-                                    error: 'color:var(--sidooh-danger)',
-                                    key: 'color:var(--sidooh-success)',
-                                    string: 'color: rgb(188, 208, 247);',
-                                    value: 'color:var(--sidooh-info);',
-                                    boolean: 'color:var(--sidooh-warning);',
-                                }}/>
-                            }
-                        },
-                        {
-                            id: 'actions',
-                            cell: (rowData: any) => {
-                                return (
-                                    <div className={'text-end'}>
-                                        <IconButton onClick={() => handleUpdate(rowData.row.original)}
-                                                    size={"small"}
-                                                    color={"primary"}>
-                                            <Edit fontSize={'small'}/>
-                                        </IconButton>
-                                        <IconButton onClick={() => handleDelete(rowData.row.original)}
-                                                    size={"small"}
-                                                    color={"error"}>
-                                            <Delete fontSize={'small'}/>
-                                        </IconButton>
-                                    </div>
-                                );
-                            }
+                            return <span>{(key.replaceAll('_', ' ')).toUpperCase()}</span>;
                         }
-                    ]} data={settings.map(s => s)} title={'Settings'} onCreateRow={handleCreate}/>
-                </Card.Body>
+                    },
+                    {
+                        accessorKey: 'value',
+                        header: 'Value'
+                    },
+                    {
+                        id: 'actions',
+                        cell: (rowData: any) => {
+                            return (
+                                <div className={'text-end'}>
+                                    <IconButton onClick={() => handleUpdate(rowData.row.original)}
+                                                size={"small"}
+                                                color={"primary"}>
+                                        <Edit fontSize={'small'}/>
+                                    </IconButton>
+                                    <IconButton onClick={() => handleDelete(rowData.row.original)}
+                                                size={"small"}
+                                                color={"error"}>
+                                        <Delete fontSize={'small'}/>
+                                    </IconButton>
+                                </div>
+                            );
+                        }
+                    }
+                ]} data={settings.map(setting => setting)} title={'Settings'} onCreateRow={handleCreate}/>
+            </Card.Body>
 
-                <Modal show={showModal} onHide={() => setShowModal(false)} contentClassName={'position-relative'}>
+            <Modal show={showModal} onHide={() => setShowModal(false)} contentClassName={'position-relative'}>
+                <form onSubmit={formik.handleSubmit}>
                     <div className="position-absolute top-0 end-0 mt-2 me-2 z-index-1">
                         <button className="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
                                 data-bs-dismiss="modal" aria-label="Close" onClick={() => setShowModal(false)}/>
@@ -168,55 +145,50 @@ const Index = () => {
                         </div>
 
                         <div className="p-4 pb-0">
-                            <form onSubmit={formik.handleSubmit}>
-                                <div>{JSON.stringify(result.error)}</div>
-                                <div className="mb-3">
-                                    <Autocomplete options={settingOptions.map(opt => opt.type)} freeSolo
-                                                  value={formik.values.key}
-                                                  onChange={(...args) => {
-                                                      const settingValues = getSettingValuesByName(String(args[1]));
-                                                      setSettingValues(settingValues);
-                                                      formik.setFieldValue("type", args[1], true);
-                                                  }}
-                                                  renderInput={(params) => (
-                                                      <TextField{...params} size={"small"} label="Type"
-                                                                placeholder="Setting type..." value={formik.values.key}
-                                                                error={formik.touched.key && Boolean(formik.errors.key)}
-                                                                helperText={formik.touched.key && formik.errors.key}/>
-                                                  )}
-                                    />
-                                </div>
-                                <div className="mb-3">
-                                    <Autocomplete options={settingValues} freeSolo
-                                                  onChange={(...args) => {
-                                                      formik.setFieldValue("value", args[1], true);
-                                                  }}
-                                                  renderInput={(params) => (
-                                                      <TextField{...params} size={"small"} label="Value"
-                                                                placeholder="Setting value..."
-                                                                value={formik.values.value}
-                                                                error={formik.touched.value && Boolean(formik.errors.value)}
-                                                                helperText={(formik.touched.value && formik.errors.value) as ReactNode}/>
-                                                  )}
-                                    />
-                                </div>
-                            </form>
+                            <div>{JSON.stringify(result.error)}</div>
+                            <div className="mb-3">
+                                <Autocomplete options={settingOptions.map(opt => opt.key)} freeSolo
+                                              value={formik.values.key}
+                                              onChange={(...args) => {
+                                                  const settingValues = getSettingValuesByName(String(args[1]));
+                                                  setSettingValues(settingValues);
+                                                  formik.setFieldValue("key", args[1], true);
+                                              }}
+                                              renderInput={(params) => (
+                                                  <TextField{...params} size={"small"} label="Key" name={'key'}
+                                                            placeholder="Setting key..." value={formik.values.key}
+                                                            error={formik.touched.key && Boolean(formik.errors.key)}
+                                                            helperText={formik.touched.key && formik.errors.key}/>
+                                              )}
+                                />
+                            </div>
+                            <div className="mb-3">
+                                <Autocomplete options={settingValues} freeSolo value={formik.values.value}
+                                              onChange={(...args) => {
+                                                  formik.setFieldValue("value", args[1], true);
+                                              }}
+                                              renderInput={(params) => (
+                                                  <TextField{...params} size={"small"} label="Value" name={'value'}
+                                                            placeholder="Setting value..." value={formik.values.value}
+                                                            error={formik.touched.value && Boolean(formik.errors.value)}
+                                                            helperText={formik.touched.value && formik.errors.value}/>
+                                              )}
+                                />
+                            </div>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button size={'small'} variant={'outlined'} onClick={() => setShowModal(false)}
-                                color={'inherit'}
+                        <Button size={'small'} variant={'outlined'} onClick={() => setShowModal(false)} color={'inherit'}
                                 data-bs-dismiss="modal">Cancel</Button>
-                        <LoadingButton size="small" color="primary" loading={result.isLoading} loadingPosition="end"
-                                       onClick={() => formik.submitForm()}
-                                       endIcon={<Save/>} variant="contained">
+                        <LoadingButton disabled={!formik.dirty} size="small" color="primary" loading={result.isLoading}
+                                       loadingPosition="end" type={'submit'} endIcon={<Save/>} variant="contained">
                             {formik.dirty ? "Update" : "Create"}
                         </LoadingButton>
                     </Modal.Footer>
-                </Modal>
-            </Card>
-        </Row>
+                </form>
+            </Modal>
+        </Card>
     );
 };
 
-export default memo(Index);
+export default memo(Settings);

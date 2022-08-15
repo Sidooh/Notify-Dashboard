@@ -25,5 +25,5 @@ export type Notification = Model & {
 
 export type Setting = Model & {
     key: string
-    value: { data: any }
+    value: string
 }

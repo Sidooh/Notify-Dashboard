@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CONFIG } from 'config';
 import {RootState} from '../store';
-import { AccountType, UserType } from 'utils/types';
+import { Account, User } from '@nabcellent/sui-react';
 
 export const accountsApi = createApi({
     reducerPath: 'accountsApi',
@@ -17,10 +17,10 @@ export const accountsApi = createApi({
         },
     }),
     endpoints: (builder) => ({
-        getAllAccounts: builder.query<AccountType[], void>({
+        getAllAccounts: builder.query<Account[], void>({
             query: () => '/accounts'
         }),
-        getAllUsers: builder.query<UserType[], void>({
+        getAllUsers: builder.query<User[], void>({
             query: () => '/users'
         })
     })
