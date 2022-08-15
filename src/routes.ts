@@ -15,26 +15,6 @@ export const dashboardRoutes: RouteType = {
                     exact: true,
                     active: true
                 },
-                /*{
-                    name: 'Analytics',
-                    to: '/dashboard/analytics',
-                    active: true
-                },
-                {
-                    name: 'CRM',
-                    to: '/dashboard/crm',
-                    active: true
-                },
-                {
-                    name: 'E Commerce',
-                    to: '/dashboard/e-commerce',
-                    active: true
-                },
-                {
-                    name: 'Management',
-                    to: '/dashboard/project-management',
-                    active: true
-                },*/
             ]
         }
     ]
@@ -51,7 +31,7 @@ export const notificationRoutes: RouteType = {
         },
         {
             name: 'SMS',
-            icon: 'comments',
+            icon: 'comment-sms',
             active: true,
             children: [
                 {
@@ -79,6 +59,12 @@ export const notificationRoutes: RouteType = {
 export const appRoutes: RouteType = {
     label: 'App',
     children: [
+        {
+            name: 'SMS Providers',
+            icon: 'comments',
+            to: '/sms/providers',
+            active: true
+        },
         {
             name: 'Settings',
             icon: 'wrench',

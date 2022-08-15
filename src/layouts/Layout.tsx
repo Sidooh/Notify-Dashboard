@@ -14,6 +14,7 @@ const SMS = lazy(() => import('../pages/notifications/SMS'));
 const Mails = lazy(() => import('../pages/notifications/Mails'));
 const CreateNotification = lazy(() => import('../pages/notifications/Create'));
 const ShowNotification = lazy(() => import('../pages/notifications/Show'));
+const SMSProviders = lazy(() => import('../pages/sms-providers'));
 const Settings = lazy(() => import('../pages/settings'));
 
 const Layout = () => {
@@ -36,10 +37,13 @@ const Layout = () => {
                     <Route index element={<Dashboard/>}/>
                     <Route path={'/dashboard'} element={<Dashboard/>}/>
                     <Route path={'/dashboard/analytics'} element={<Analytics/>}/>
+
                     <Route path={'/notifications/sms'} element={<SMS/>}/>
                     <Route path={'/notifications/mail'} element={<Mails/>}/>
                     <Route path={'/notifications/create'} element={<CreateNotification/>}/>
                     <Route path={'/notifications/:id'} element={<ShowNotification/>}/>
+
+                    <Route path={'/sms/providers'} element={<SMSProviders/>}/>
                     <Route path={'/settings'} element={<Settings/>}/>
                     <Route path={'*'} element={<Dashboard/>}/>
                 </Route>

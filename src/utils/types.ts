@@ -1,5 +1,6 @@
-import { Model } from '@nabcellent/sui-react';
+import { Model, Status } from '@nabcellent/sui-react';
 import { ReactNode } from 'react';
+import { Environment } from './enums';
 
 export type Children = {
     children: ReactNode
@@ -26,4 +27,11 @@ export type Notification = Model & {
 export type Setting = Model & {
     key: string
     value: string
+}
+
+export type SMSProvider = Model & {
+    name: string
+    environment: Environment
+    priority: number
+    status: Status
 }

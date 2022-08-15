@@ -6,3 +6,8 @@ export enum SMSProvider {
 export enum MailProvider {
     GMAIL = 'GMAIL',
 }
+
+export enum Environment {
+    PRODUCTION = 'production',
+    DEVELOPMENT = 'development'
+}

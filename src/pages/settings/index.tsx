@@ -128,7 +128,7 @@ const Settings = () => {
                             );
                         }
                     }
-                ]} data={settings.map(setting => setting)} title={'Settings'} onCreateRow={handleCreate}/>
+                ]} data={settings} title={'Settings'} onCreateRow={handleCreate}/>
             </Card.Body>
 
             <Modal show={showModal} onHide={() => setShowModal(false)} contentClassName={'position-relative'}>
