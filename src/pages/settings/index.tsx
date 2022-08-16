@@ -1,13 +1,12 @@
 import { memo, useState } from 'react';
 import { Delete, Edit, Save } from '@mui/icons-material';
-import { LoadingButton } from '@mui/lab';
 import { Autocomplete, Button, IconButton, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { Card, Modal } from 'react-bootstrap';
 import * as yup from 'yup';
 import { useDeleteSettingMutation, useSettingsQuery, useUpsertSettingMutation } from 'features/settings/settingsApi';
 import { Setting } from 'utils/types';
-import { ComponentLoader, DataTable, SectionError, Sweet, toast } from '@nabcellent/sui-react';
+import { ComponentLoader, DataTable, LoadingButton, SectionError, Sweet, toast } from '@nabcellent/sui-react';
 import { MailProvider, SMSProvider } from 'utils/enums';
 
 const settingOptions = [
@@ -180,8 +179,8 @@ const Settings = () => {
                     <Modal.Footer>
                         <Button size={'small'} variant={'outlined'} onClick={() => setShowModal(false)} color={'inherit'}
                                 data-bs-dismiss="modal">Cancel</Button>
-                        <LoadingButton disabled={!formik.dirty} size="small" color="primary" loading={result.isLoading}
-                                       loadingPosition="end" type={'submit'} endIcon={<Save/>} variant="contained">
+                        <LoadingButton disabled={!formik.dirty} size="sm" color="primary" loading={result.isLoading}
+                                       loadingPosition="end" type={'submit'} endIcon={<Save/>}>
                             {formik.dirty ? "Update" : "Create"}
                         </LoadingButton>
                     </Modal.Footer>
