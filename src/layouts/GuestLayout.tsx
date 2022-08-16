@@ -7,7 +7,7 @@ import { Logo, PageLoader } from '@nabcellent/sui-react';
 const GuestLayout = () => {
     return (
         <section className="py-0">
-            <Row className="flex-center min-vh-100 py-6">
+            <Row className="flex-center min-vh-100 g-0">
                 <Col sm={10} md={8} lg={6} xl={4} xxl={3} className="position-relative">
                     <img className="bg-auth-circle-shape" src={IMAGES.icons.spotIllustrations.bg_shape} alt=""
                          width="250"/>
