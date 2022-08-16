@@ -1,6 +1,5 @@
 import { ChangeEvent, memo, useEffect, useState } from 'react';
 import { Telegram } from '@mui/icons-material';
-import { LoadingButton } from '@mui/lab';
 import { useFormik } from 'formik';
 import TomSelect from 'tom-select';
 import * as yup from 'yup';
@@ -8,8 +7,9 @@ import AlertError from 'components/AlertError';
 import { IMAGES } from 'constants/images';
 import { useStoreNotificationMutation } from 'features/notifications/notificationsAPI';
 import { useGetAllAccountsQuery, useGetAllUsersQuery } from 'app/services/accountsAPI';
-import { toast } from '@nabcellent/sui-react';
+import { LoadingButton, toast } from '@nabcellent/sui-react';
 import sortBy from 'lodash.sortby';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 type DestinationOptionsType = { value: string, text: string }
 
@@ -192,10 +192,9 @@ const Create = () => {
                         </div>
 
                         <div className="text-end">
-                            <LoadingButton size="small" color="primary" loading={result.isLoading}
-                                           loadingPosition="end"
+                            <LoadingButton size="sm" loading={result.isLoading} loadingPosition="end"
                                            onClick={() => formik.submitForm()}
-                                           endIcon={<Telegram/>} variant="contained">Send</LoadingButton>
+                                           endIcon={<FontAwesomeIcon icon={'paper-plane'}/>}>Send</LoadingButton>
                         </div>
                     </div>
                 </div>

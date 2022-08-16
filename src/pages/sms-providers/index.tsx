@@ -1,12 +1,21 @@
 import { useState } from 'react';
 import { Delete, Edit, Save } from '@mui/icons-material';
-import { LoadingButton } from '@mui/lab';
 import { Button, IconButton } from '@mui/material';
 import { useFormik } from 'formik';
 import { Card, Form, Modal } from 'react-bootstrap';
 import * as yup from 'yup';
 import { SMSProvider } from 'utils/types';
-import { ComponentLoader, DataTable, SectionError, Status, StatusChip, Str, Sweet, toast } from '@nabcellent/sui-react';
+import {
+    ComponentLoader,
+    DataTable,
+    LoadingButton,
+    SectionError,
+    Status,
+    StatusChip,
+    Str,
+    Sweet,
+    toast
+} from '@nabcellent/sui-react';
 import { Environment, SMSProvider as SMSProviderEnum } from 'utils/enums';
 import {
     useDeleteSMSProviderMutation,
@@ -15,6 +24,7 @@ import {
     useUpdateSMSProviderMutation
 } from 'features/sms-providers/smsProviderApi';
 import ValidationErrors from 'components/ValidationErrors';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const validationSchema = yup.object({
     name: yup.string().oneOf(Object.values(SMSProviderEnum), 'Invalid name.').required('Name is required.'),
@@ -189,9 +199,9 @@ const SMSProviders = () => {
                     <Modal.Footer>
                         <Button size={'small'} variant={'outlined'} onClick={() => setShowModal(false)}
                                 color={'inherit'} data-bs-dismiss="modal">Cancel</Button>
-                        <LoadingButton disabled={!formik.dirty} size="small" color="primary"
+                        <LoadingButton disabled={!formik.dirty} size="sm" loadingPosition="end" type={'submit'}
                                        loading={storeResult.isLoading || updateResult.isLoading}
-                                       loadingPosition="end" type={'submit'} endIcon={<Save/>} variant="contained">
+                                       endIcon={<FontAwesomeIcon icon={'floppy-disk'}/>}>
                             {formAction === 'update' ? "Update" : "Create"}
                         </LoadingButton>
                     </Modal.Footer>

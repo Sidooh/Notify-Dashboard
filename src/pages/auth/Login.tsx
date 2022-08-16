@@ -5,10 +5,9 @@ import { useAuth } from 'hooks/useAuth';
 import { useAppDispatch } from 'app/hooks';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { toast, TextField } from '@nabcellent/sui-react';
+import { toast, TextField, LoadingButton } from '@nabcellent/sui-react';
 import { CONFIG } from 'config';
 
-const LoadingButton = lazy(() => import('@mui/lab/LoadingButton'));
 const LoginSharp = lazy(() => import('@mui/icons-material/LoginSharp'));
 
 const validationSchema = yup.object({
@@ -57,9 +56,9 @@ const Login = () => {
                     </div>
                 </div>
                 <div className="mb-3">
-                    <LoadingButton size="small" color="primary" loading={isLoading} type={'submit'}
+                    <LoadingButton size="sm" loading={isLoading} type={'submit'}
                                    loadingPosition="end" className="w-100 mt-3" onClick={() => formik.submitForm()}
-                                   endIcon={<LoginSharp/>} variant="contained">
+                                   endIcon={<LoginSharp/>}>
                         Sign In
                     </LoadingButton>
                 </div>
