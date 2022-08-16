@@ -33,25 +33,13 @@ export const notificationRoutes: RouteType = {
             name: 'SMS',
             icon: 'comment-sms',
             active: true,
-            children: [
-                {
-                    name: 'List',
-                    to: '/notifications/sms',
-                    active: true
-                }
-            ]
+            to: '/notifications/sms',
         },
         {
             name: 'Mail',
             icon: 'envelope',
             active: true,
-            children: [
-                {
-                    name: 'List',
-                    to: '/notifications/mail',
-                    active: true
-                }
-            ]
+            to: '/notifications/mail',
         }
     ]
 };
