@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { useRetryNotificationMutation } from 'features/notifications/notificationsAPI';
+import moment from 'moment';
 
 type NotificationTableProps = { title: string, notifications: Notification[] }
 
@@ -59,6 +60,7 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
                                {
                                    accessorKey: 'date',
                                    header: 'Date',
+                                   accessorFn: (row: Notification) => moment(row.created_at).calendar(),
                                    cell: ({ row }: any) => <TableDate date={row.original.created_at}/>
                                },
                                {
