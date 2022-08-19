@@ -17,6 +17,10 @@ const NotificationTable = ({ notifications }: { notifications: Notification[] })
                 <DataTable onCreateRow={() => navigate('/notifications/create')} title={'SMS Notifications'}
                            columns={[
                                {
+                                   accessorKey: 'channel',
+                                   header: 'Channel'
+                               },
+                               {
                                    accessorKey: 'destination',
                                    header: 'Destination',
                                    cell: ({ row }: any) => {
