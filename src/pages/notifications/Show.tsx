@@ -1,32 +1,39 @@
 import { memo } from 'react';
 import { useParams } from 'react-router-dom';
-import { IMAGES } from 'constants/images';
 import moment from 'moment';
-import { useNotificationQuery } from 'features/notifications/notificationsAPI';
-import Destination from './Destination';
-import { PrettyJSON, SectionError, SectionLoader, Status } from '@nabcellent/sui-react';
+import { useNotificationQuery, useRetryNotificationMutation } from 'features/notifications/notificationsAPI';
+import { IconButton, SectionError, SectionLoader, Status, StatusChip } from '@nabcellent/sui-react';
+import CardBgCorner from '../../components/CardBgCorner';
+import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Spinner } from 'react-bootstrap';
+import JSONPretty from 'react-json-pretty';
 
 
 const Show = () => {
-    const {id} = useParams();
+    const { id } = useParams();
 
-    const {data: notification, error, isLoading, isSuccess, isError} = useNotificationQuery(String(id));
+    const { data: notification, error, isLoading, isSuccess, isError } = useNotificationQuery(String(id));
+    const [retryNotification, result] = useRetryNotificationMutation();
 
     if (isError) return <SectionError error={error}/>;
     if (isLoading || !isSuccess || !notification) return <SectionLoader/>;
 
-    let hasError = notification.status !== Status.COMPLETED;
-
     console.log(notification);
+
+    let destinationIcon;
+    if (notification.channel === "MAIL") {
+        destinationIcon = "far fa-paper-plane";
+    } else if (notification.channel === "SMS") {
+        destinationIcon = "fas fa-paper-plane";
+    } else {
+        destinationIcon = "fab fa-slack";
+    }
 
     return (
         <>
             <div className="card mb-3">
-                <div className="bg-holder d-none d-lg-block bg-card"
-                     style={{
-                         backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_4})`,
-                         opacity: 0.7
-                     }}/>
+                <CardBgCorner corner={4}/>
                 <div className="card-body position-relative">
                     <div className="d-flex justify-content-between align-items-center">
                         <h5 className={'m-0'}>Notification Details: #{notification?.id}</h5>
@@ -35,15 +42,16 @@ const Show = () => {
                             <h4 className={'m-0'}>{notification?.channel.toUpperCase()}</h4>
                         </div>
                     </div>
-                    <p className="fs--1">{moment(notification?.created_at)
-                        .format("MMMM Do YYYY, h:mm A")}</p>
-                    <div><strong className="me-2">Status: </strong>
-                        <div className={`badge rounded-pill badge-soft-${hasError ? 'danger'
-                            : 'success'} fs--2`}>
-                            {notification?.status || 'failed'}
-                            <span className={`fas fa-${hasError ? "xmark" : "check"} ms-1`}
-                                  data-fa-transform="shrink-2"/>
-                        </div>
+                    <p className="fs--1">{moment(notification?.created_at).format("MMMM Do YYYY, h:mm A")}</p>
+                    <div className="d-flex align-items-center justify-content-between">
+                        <StatusChip status={notification?.status}/>
+                        {notification?.status === Status.FAILED && (
+                            <IconButton>
+                                {result.isLoading ? <Spinner animation={'border'} size={'sm'}/> :
+                                    <FontAwesomeIcon className={'cursor-pointer'} icon={faRotateRight}
+                                                     onClick={() => retryNotification(notification.id)}/>}
+                            </IconButton>
+                        )}
                     </div>
                 </div>
             </div>
@@ -54,7 +62,7 @@ const Show = () => {
                             <div className="row">
                                 <div className="col-6 mb-4">
                                     <h5 className="mb-3 fs-0">Destination</h5>
-                                    <Destination notification={notification}/>
+                                    <b><i className={destinationIcon}/> {notification.destination}</b>
                                 </div>
                                 <div className="col-6 mb-4">
                                     <h5 className="mb-3 fs-0">Event Type</h5>
@@ -80,7 +88,7 @@ const Show = () => {
                                         notification.notifiables?.length ? notification.notifiables.map((cb: any, i: number) => {
                                             return (
                                                 <div key={`cb-${i}`}>
-                                                    <PrettyJSON id="json-pretty" data={cb} theme={{
+                                                    <JSONPretty id="json-pretty" data={cb} theme={{
                                                         main: 'background-color:rgb(39, 46, 72);max-height:20rem',
                                                         key: 'color:red',
                                                         string: 'color: rgb(188, 208, 247);',
@@ -88,7 +96,7 @@ const Show = () => {
                                                     }}/>
                                                 </div>
                                             );
-                                        }) : <PrettyJSON id="json-pretty" data={{message: 'No callback :('}}
+                                        }) : <JSONPretty id="json-pretty" data={{ message: 'No callback :(' }}
                                                          theme={{
                                                              main: 'background-color:rgb(39, 46, 72);max-height:20rem',
                                                              key: 'color:red',

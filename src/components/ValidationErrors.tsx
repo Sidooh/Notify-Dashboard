@@ -11,14 +11,11 @@ export default function ValidationErrors({errors}: { errors: any }) {
     console.log(errors);
     return (
         !errors ? (<></>) : (
-            <div className="mb-4">
+            <div className="mb-3">
                 <div className="text-danger">Whoops! Something is invalid.🌚</div>
 
                 <ul className="text-sm text-danger">
                     {errors}
-                    {/*{Object.keys(errors).map(function (key, index) {
-                        return <li key={index} className={'small'}>{errors[key]}</li>;
-                    })}*/}
                 </ul>
             </div>
         )

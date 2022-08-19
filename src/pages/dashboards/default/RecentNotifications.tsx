@@ -12,7 +12,7 @@ const RecentNotifications = () => {
 
     if (!notifications) return <ComponentLoader/>;
 
-    return <NotificationTable notifications={notifications}/>
+    return <NotificationTable title={'Recent Notifications'} notifications={notifications}/>
 };
 
 export default RecentNotifications;
