@@ -10,10 +10,10 @@ type IconButtonType = {
     variant?: ButtonVariant;
     size?: 'sm' | 'lg';
     icon: IconProp,
-    children: ReactNode,
+    children?: ReactNode,
     iconAlign?: 'left' | 'right',
     iconClassName?: string,
-    transform: string
+    transform?: string
     className?: string
     onClick?: any
 };

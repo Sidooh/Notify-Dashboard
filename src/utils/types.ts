@@ -17,10 +17,10 @@ export type Notifiable = Model & {
 
 export type Notification = Model & {
     channel: string;
-    destination: string;
+    destination: string | string[];
     content: string;
     event_type: string,
-    status: string
+    status: Status
     notifiables: Notifiable[]
 }
 

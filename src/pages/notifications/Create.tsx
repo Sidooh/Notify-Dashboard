@@ -10,6 +10,9 @@ import { useGetAllAccountsQuery, useGetAllUsersQuery } from 'app/services/accoun
 import { LoadingButton, toast } from '@nabcellent/sui-react';
 import sortBy from 'lodash.sortby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Notification } from '../../utils/types';
+import ValidationErrors from 'components/ValidationErrors';
+import { Card } from 'react-bootstrap';
 
 type DestinationOptionsType = { value: string, text: string }
 
@@ -47,8 +50,8 @@ const Create = () => {
     const [destinationSelectEl, setDestinationSelectEl] = useState<any>(null);
     const [isTomSelectInstance, setIsTomSelectInstance] = useState(false);
 
-    const {data: accounts, isSuccess: accIsSuccess} = useGetAllAccountsQuery();
-    const {data: users, isSuccess: usersIsSuccess} = useGetAllUsersQuery();
+    const { data: accounts, isSuccess: accIsSuccess } = useGetAllAccountsQuery();
+    const { data: users, isSuccess: usersIsSuccess } = useGetAllUsersQuery();
 
     const [storeNotification, result] = useStoreNotificationMutation();
 
@@ -57,33 +60,41 @@ const Create = () => {
             if (!isTomSelectInstance) {
                 new TomSelect(destinationSelectEl, {
                     options: [
-                        {value: '254714611696', text: '254714611696'},
-                        {value: '254780611696', text: '254780611696'},
-                        {value: '254711414987', text: '254711414987'},
-                        {value: '254733643843', text: '254733643843'},
-                        {value: '254721309253', text: '254721309253'},
-                        {value: '254110039317', text: '254110039317'},
-                        {value: '254736388405', text: '254736388405'},
+                        { value: '254714611696', text: '254714611696' },
+                        { value: '254780611696', text: '254780611696' },
+                        { value: '254711414987', text: '254711414987' },
+                        { value: '254733643843', text: '254733643843' },
+                        { value: '254721309253', text: '254721309253' },
+                        { value: '254110039317', text: '254110039317' },
+                        { value: '254736388405', text: '254736388405' },
                     ],
                     persist: true,
                     create: true,
                     createOnBlur: true,
                     selectOnTab: true,
                     placeholder: 'Select destination...',
-                    plugins: {remove_button: {title: 'Remove this destination',}},
+                    plugins: { remove_button: { title: 'Remove this destination', } },
                     onInitialize: () => setIsTomSelectInstance(true),
                 });
-            } else if (accIsSuccess && accounts) {
+            } else if (accIsSuccess && accounts && destinationSelectEl?.tomselect) {
                 const instance = destinationSelectEl.tomselect;
 
                 instance.clear();
                 instance.clearOptions();
-                instance.addOptions(accounts.map(account => ({value: account.phone, text: account.phone})));
+                instance.addOptions(accounts.map(account => ({ value: account.phone, text: account.phone })));
             }
         }
-    }, [accIsSuccess, accounts, destinationSelectEl, isTomSelectInstance]);
 
-    const formik = useFormik({
+        if (result.isSuccess) {
+            formik.resetForm();
+
+            if (destinationSelectEl) destinationSelectEl.tomselect.clear();
+
+            toast({ titleText: `Notification sent!`, icon: "success" });
+        }
+    }, [accIsSuccess, accounts, result, destinationSelectEl, isTomSelectInstance]);
+
+    const formik = useFormik<Partial<Notification>>({
         initialValues: {
             channel: "SMS",
             event_type: "DEFAULT",
@@ -92,15 +103,7 @@ const Create = () => {
         },
         validationSchema: validationSchema,
         onSubmit: async values => {
-            const notification = await storeNotification(values).unwrap();
-
-            if (result.isSuccess) {
-                formik.resetForm();
-
-                if (destinationSelectEl) destinationSelectEl.tomselect.clear();
-
-                toast({msg: `${notification.channel.toUpperCase()} notification sent!`, type: "success"});
-            }
+            await storeNotification(values).unwrap();
         },
     });
 
@@ -115,11 +118,11 @@ const Create = () => {
 
         if (formik.values.channel === 'sms') {
             if (accIsSuccess && accounts) {
-                updateDestinationsOptions(accounts.map(account => ({value: account.phone, text: account.phone})));
+                updateDestinationsOptions(accounts.map(account => ({ value: account.phone, text: account.phone })));
             }
         } else {
             if (usersIsSuccess && users) {
-                updateDestinationsOptions(users.map(user => ({value: user.email, text: user.email})));
+                updateDestinationsOptions(users.map(user => ({ value: user.email, text: user.email })));
             }
         }
     };
@@ -132,13 +135,13 @@ const Create = () => {
 
     return (
         <form onSubmit={formik.handleSubmit} className="row g-3 mb-3 justify-content-center">
-
-            {result.isError && <AlertError error={result.error}/>}
-
             <div className="col-md-5 ps-lg-2">
+                <Card>
+                    <ValidationErrors errors={result.error}/>
+                </Card>
                 <div className="card h-lg-100">
                     <div className="bg-holder bg-card"
-                         style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})`}}/>
+                         style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})` }}/>
                     <div className="card-body position-relative">
                         <label className="form-label" htmlFor="exampleFormControlInput1">Channel</label>
                         <select className="form-select" name={'channel'} value={formik.values.channel}
@@ -155,7 +158,7 @@ const Create = () => {
             <div className="col-md-5 ps-lg-2">
                 <div className="card h-lg-100">
                     <div className="bg-holder bg-card"
-                         style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})`}}/>
+                         style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})` }}/>
                     <div className="card-body position-relative">
                         <label className="form-label" htmlFor="exampleFormControlInput1">Event Type</label>
                         <select className="form-select" value={formik.values.event_type} name={'event_type'}
@@ -171,7 +174,7 @@ const Create = () => {
             <div className="col-md-10 mb-3 ps-lg-2">
                 <div className="card h-lg-100">
                     <div className="bg-holder bg-card"
-                         style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_1})`}}/>
+                         style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_1})` }}/>
                     <div className="card-body position-relative">
                         <div className="mb-3">
                             <label className="form-label" htmlFor="exampleFormControlInput1">Destination(s)</label>

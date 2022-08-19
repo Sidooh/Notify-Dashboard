@@ -40,14 +40,16 @@ export const notificationsApi = createApi({
                 url: '/notifications',
                 method: 'POST',
                 body: notification
-            })
+            }),
+            transformResponse: (response: ApiResponse<Notification>) => response.data,
         }),
         retryNotification: builder.mutation<Notification, number>({
             query: id => ({
                 url: `/notifications/${id}/retry`,
                 method: 'POST'
             }),
-            invalidatesTags: ['Notification']
+            invalidatesTags: ['Notification'],
+            transformResponse: (response: ApiResponse<Notification>) => response.data,
         })
     })
 });
