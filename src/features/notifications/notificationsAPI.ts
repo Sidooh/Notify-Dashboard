@@ -10,7 +10,7 @@ export const notificationsApi = createApi({
     tagTypes: ['Notification', 'Setting'],
     baseQuery: fetchBaseQuery({
         baseUrl: `${CONFIG.sidooh.services.notify.api.url}`,
-        prepareHeaders: (headers, {getState}) => {
+        prepareHeaders: (headers, { getState }) => {
             const token = (getState() as RootState).auth.auth?.token;
 
             if (token) headers.set('authorization', `Bearer ${token}`);
@@ -35,15 +35,20 @@ export const notificationsApi = createApi({
             providesTags: ['Notification'],
             transformResponse: (response: ApiResponse<Notification>) => response.data,
         }),
-        storeNotification: builder.mutation<Notification, {
-            channel: string, event_type: string; destination: string[], content: string
-        }>({
+        storeNotification: builder.mutation<Notification, Partial<Notification>>({
             query: notification => ({
                 url: '/notifications',
                 method: 'POST',
                 body: notification
             })
         }),
+        retryNotification: builder.mutation<Notification, number>({
+            query: id => ({
+                url: `/notifications/${id}/retry`,
+                method: 'POST'
+            }),
+            invalidatesTags: ['Notification']
+        })
     })
 });
 
@@ -53,4 +58,6 @@ export const {
     useNotificationsQuery,
     useNotificationQuery,
     useStoreNotificationMutation,
+
+    useRetryNotificationMutation
 } = notificationsApi;

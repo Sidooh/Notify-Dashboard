@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom';
 import { IMAGES } from 'constants/images';
 import moment from 'moment';
 import { useNotificationQuery } from 'features/notifications/notificationsAPI';
-import Destination from './Destination';
 import { PrettyJSON, SectionError, SectionLoader, Status } from '@nabcellent/sui-react';
 
 
@@ -18,6 +17,16 @@ const Show = () => {
     let hasError = notification.status !== Status.COMPLETED;
 
     console.log(notification);
+
+    let destinationIcon;
+
+    if (notification.channel === "MAIL") {
+        destinationIcon = "far fa-paper-plane";
+    } else if (notification.channel === "SMS") {
+        destinationIcon = "fas fa-paper-plane";
+    } else {
+        destinationIcon = "fab fa-slack";
+    }
 
     return (
         <>
@@ -54,7 +63,7 @@ const Show = () => {
                             <div className="row">
                                 <div className="col-6 mb-4">
                                     <h5 className="mb-3 fs-0">Destination</h5>
-                                    <Destination notification={notification}/>
+                                    <b><i className={destinationIcon}/> {notification.destination}</b>
                                 </div>
                                 <div className="col-6 mb-4">
                                     <h5 className="mb-3 fs-0">Event Type</h5>

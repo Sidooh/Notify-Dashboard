@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CONFIG } from 'config';
-import { Notification } from '../../utils/types';
+import { Notification } from 'utils/types';
 
 type DashboardSummariesData = {
     default_sms_provider: string
