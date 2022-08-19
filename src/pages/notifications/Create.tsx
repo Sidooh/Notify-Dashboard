@@ -1,9 +1,7 @@
 import { ChangeEvent, memo, useEffect, useState } from 'react';
-import { Telegram } from '@mui/icons-material';
 import { useFormik } from 'formik';
 import TomSelect from 'tom-select';
 import * as yup from 'yup';
-import AlertError from 'components/AlertError';
 import { IMAGES } from 'constants/images';
 import { useStoreNotificationMutation } from 'features/notifications/notificationsAPI';
 import { useGetAllAccountsQuery, useGetAllUsersQuery } from 'app/services/accountsAPI';
@@ -12,7 +10,7 @@ import sortBy from 'lodash.sortby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Notification } from '../../utils/types';
 import ValidationErrors from 'components/ValidationErrors';
-import { Card } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 
 type DestinationOptionsType = { value: string, text: string }
 
@@ -135,10 +133,14 @@ const Create = () => {
 
     return (
         <form onSubmit={formik.handleSubmit} className="row g-3 mb-3 justify-content-center">
+            {result.isError && <Col md={12}>
+                <Row className={'justify-content-center'}>
+                    <Col md={10}>
+                        <Card><Card.Body><ValidationErrors errors={result.error}/></Card.Body></Card>
+                    </Col>
+                </Row>
+            </Col>}
             <div className="col-md-5 ps-lg-2">
-                <Card>
-                    <ValidationErrors errors={result.error}/>
-                </Card>
                 <div className="card h-lg-100">
                     <div className="bg-holder bg-card"
                          style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_5})` }}/>
