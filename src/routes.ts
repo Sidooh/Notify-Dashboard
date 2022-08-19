@@ -36,7 +36,7 @@ export const notificationRoutes: RouteType = {
             to: '/notifications/sms',
         },
         {
-            name: 'Mail',
+            name: 'Mails',
             icon: 'envelope',
             active: true,
             to: '/notifications/mail',
