@@ -8,18 +8,16 @@ import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { useRetryNotificationMutation } from 'features/notifications/notificationsAPI';
 
-const NotificationTable = ({ notifications }: { notifications: Notification[] }) => {
+type NotificationTableProps = { title: string, notifications: Notification[] }
+
+const NotificationTable = ({ title, notifications }: NotificationTableProps) => {
     const navigate = useNavigate();
 
     return (
         <Card>
             <Card.Body>
-                <DataTable onCreateRow={() => navigate('/notifications/create')} title={'SMS Notifications'}
+                <DataTable onCreateRow={() => navigate('/notifications/create')} title={title}
                            columns={[
-                               {
-                                   accessorKey: 'channel',
-                                   header: 'Channel'
-                               },
                                {
                                    accessorKey: 'destination',
                                    header: 'Destination',

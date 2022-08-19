@@ -22,7 +22,6 @@ const Show = () => {
     console.log(notification);
 
     let destinationIcon;
-
     if (notification.channel === "MAIL") {
         destinationIcon = "far fa-paper-plane";
     } else if (notification.channel === "SMS") {
