@@ -27,7 +27,7 @@
     "formik": "^2.2.9",
     "fuse.js": "^6.6.2",
     "lodash.sortby": "^4.7.0",
-    "moment": "^2.29.3",
+    "moment": "^2.29.4",
     "react": "^18.0.0",
     "react-bootstrap": "^2.3.0",
     "react-countup": "^6.2.0",
