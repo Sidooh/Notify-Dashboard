@@ -3,9 +3,9 @@ import { appRoutes, dashboardRoutes } from 'routes';
 import { Dropdown } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import NavbarDropdownApp from './NavbarDropdownApp';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { RootState } from '../../../app/store';
-import { setTheme } from '../../../features/theme/themeSlice';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { RootState } from 'app/store';
+import { setTheme } from 'features/theme/themeSlice';
 
 const NavbarTopDropDownMenus = () => {
     const dispatch = useAppDispatch()

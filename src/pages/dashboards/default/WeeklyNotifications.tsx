@@ -1,18 +1,14 @@
 import { lazy, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card } from 'react-bootstrap';
-import Flex from 'components/common/Flex';
-import { getColor } from 'utils/helpers';
+import { ComponentLoader, getColor, SectionError } from '@nabcellent/sui-react';
 import * as echarts from 'echarts/core';
 import { BarChart } from 'echarts/charts';
 import { GridComponent, TitleComponent, TooltipComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import SoftBadge from 'components/common/SoftBadge';
-import classNames from 'classnames';
-import { IMAGES } from 'constants/images';
-import sum from 'lodash.sum';
-import CountUp from 'react-countup';
 import { Tooltip } from '@mui/material';
+import { useGetDashboardChartDataQuery } from '../../../features/dashboard/dashboardApi';
+import CardBgCorner from 'components/CardBgCorner';
 
 const BasicECharts = lazy(() => import('components/common/BasicEChart'))
 
@@ -30,10 +26,6 @@ type ChartOptionsType = {
 }
 
 type WeeklyNotificationsType = {
-    data: {
-        labels: string[]
-        datasets: number[]
-    }
     width?: string,
     amountClassName?: string
 };
@@ -76,7 +68,7 @@ const getOptions = (data: ChartOptionsType) => ({
             barWidth: '5px',
             itemStyle: {
                 borderRadius: 10,
-                color: getColor('primary')
+                color: '#0f1b4c'
             },
             data: data.datasets,
             z: 10
@@ -85,11 +77,17 @@ const getOptions = (data: ChartOptionsType) => ({
     grid: {right: 5, left: 10, top: 0, bottom: 0}
 });
 
-const WeeklyNotifications = ({data, width, amountClassName}: WeeklyNotificationsType) => {
+const WeeklyNotifications = ({width, amountClassName}: WeeklyNotificationsType) => {
+    const {data, isError, error, isLoading, isSuccess} = useGetDashboardChartDataQuery();
+
+    if (isError) return <SectionError error={error}/>;
+    if (isLoading || !isSuccess || !data) return <ComponentLoader/>;
+
+    console.log(data);
+
     return (
-        <Card className="h-md-100">
-            <div className="bg-holder bg-card"
-                 style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_1})`}}/>
+        <Card className="mb-3">
+            <CardBgCorner/>
             <Card.Header className="pb-0 position-relative">
                 <h6 className="mb-0 mt-2">
                     Weekly Notifications
@@ -102,27 +100,8 @@ const WeeklyNotifications = ({data, width, amountClassName}: WeeklyNotifications
                 </h6>
             </Card.Header>
 
-            <Card.Body as={Flex} alignItems="end" justifyContent="between">
-                <div>
-                    <h2
-                        className={classNames(
-                            amountClassName,
-                            'mb-1 text-700 fw-normal lh-1'
-                        )}
-                    >
-                        <CountUp end={sum(data?.datasets)}/>
-                    </h2>
-                    <SoftBadge pill bg="success" className="me-2 fs--2">
-                        +3.5%
-                    </SoftBadge>
-                </div>
-                {
-                    data && <BasicECharts
-                        echarts={echarts}
-                        options={getOptions(data)}
-                        style={{width: width || '8.5rem', height: 60}}
-                    />
-                }
+            <Card.Body>
+                <BasicECharts echarts={echarts} options={getOptions(data)} style={{height: 100}}/>
             </Card.Body>
         </Card>
     );

@@ -3,9 +3,9 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Collapse, Nav } from 'react-bootstrap';
 import NavbarVerticalMenuItem from './NavbarVerticalMenuItem';
 import classNames from 'classnames';
-import { RouteChildType } from 'routes';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { setTheme } from '../../../features/theme/themeSlice';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { setTheme } from 'features/theme/themeSlice';
+import { RouteChildType } from '@nabcellent/sui-react';
 
 type CollapseItemsType = {
     route: RouteChildType

@@ -1,41 +1,37 @@
-import {ReactNode} from 'react';
+import { Model, Status } from '@nabcellent/sui-react';
+import { ReactNode } from 'react';
+import { Environment } from './enums';
 
 export type Children = {
     children: ReactNode
 }
 
-export type NotificationType = {
-    id?: string;
-    channel: string;
-    destination: string;
-    content: string;
-    event_type: string,
+export type Notifiable = Model & {
+    message_id: string,
+    phone: string,
+    description: string,
+    status_code: Number,
     status: string
-    created_at: string;
-    notifiables: {
-        message_id: string,
-        phone: string,
-        description: string,
-        status_code: Number,
-        status: string
-        provider: string
-    }[]
+    provider: string
 }
 
-export type SettingType = {
-    id?: number|string
-    type: string
+export type Notification = Model & {
+    channel: string;
+    destination: string | string[];
+    content: string;
+    event_type: string,
+    status: Status
+    notifiables: Notifiable[]
+}
+
+export type Setting = Model & {
+    key: string
     value: string
 }
 
-export type AccountType = {
-    id: number
-    phone: string
-    active: boolean
-}
-
-export type UserType = {
-    id: number
-    email: string
+export type SMSProvider = Model & {
     name: string
+    environment: Environment
+    priority: number
+    status: Status
 }

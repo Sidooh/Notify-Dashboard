@@ -1,8 +1,8 @@
+import { RouteChildType } from '@nabcellent/sui-react';
 import { memo } from 'react';
 import { Col, Nav, Row } from 'react-bootstrap';
 import { getFlatRoutes } from 'utils/helpers';
 import NavbarNavLink from './NavbarNavLink';
-import { RouteChildType } from 'routes';
 
 type NavbarDropdownAppType = {
     items: RouteChildType[]

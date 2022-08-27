@@ -1,17 +1,15 @@
 import { Fragment, useEffect } from 'react';
 import classNames from 'classnames';
 import { Col, Nav, Navbar, Row } from 'react-bootstrap';
-import Flex from 'components/common/Flex';
-import Logo from 'components/common/Logo';
 import NavbarVerticalMenu from './NavbarVerticalMenu';
 import ToggleButton from './ToggleButton';
 import routes from 'routes';
-import { capitalize } from 'utils/helpers';
+import { capitalize, Logo, Flex } from '@nabcellent/sui-react';
 import NavbarTopDropDownMenus from 'components/navbar/top/NavbarTopDropDownMenus';
 import { IMAGES } from 'constants/images';
 import { useAppSelector } from 'app/hooks';
 import { RootState } from 'app/store';
-import { navbarBreakPoint, topNavbarBreakpoint } from '../../../constants/breakpoints';
+import { navbarBreakPoint, topNavbarBreakpoint } from 'constants/breakpoints';
 
 const NavbarVertical = () => {
     const {
@@ -69,7 +67,7 @@ const NavbarVertical = () => {
             })} variant="light">
             <Flex alignItems="center">
                 <ToggleButton/>
-                <Logo at="navbar-vertical" width={70}/>
+                <Logo src={IMAGES.logos.sidooh} at="navbar-vertical" width={70}/>
             </Flex>
             <Navbar.Collapse in={showBurgerMenu} onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}
                 style={{

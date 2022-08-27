@@ -1,23 +1,4 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-
-export type RouteChildType = {
-    name: string
-    active: boolean
-    icon?: IconProp
-    to?: string
-    exact?: boolean
-    badge?: {
-        text?: string
-        type?: 'primary' | 'secondary' | 'success' | 'info' | 'warning' | 'danger' | 'light' | 'dark',
-    }
-    children?: RouteChildType[]
-}
-
-export type RouteType = {
-    label: string
-    labelDisable?: boolean
-    children: RouteChildType[]
-}
+import { RouteType } from '@nabcellent/sui-react';
 
 export const dashboardRoutes: RouteType = {
     label: 'Dashboard',
@@ -34,26 +15,6 @@ export const dashboardRoutes: RouteType = {
                     exact: true,
                     active: true
                 },
-                /*{
-                    name: 'Analytics',
-                    to: '/dashboard/analytics',
-                    active: true
-                },
-                {
-                    name: 'CRM',
-                    to: '/dashboard/crm',
-                    active: true
-                },
-                {
-                    name: 'E Commerce',
-                    to: '/dashboard/e-commerce',
-                    active: true
-                },
-                {
-                    name: 'Management',
-                    to: '/dashboard/project-management',
-                    active: true
-                },*/
             ]
         }
     ]
@@ -63,34 +24,22 @@ export const notificationRoutes: RouteType = {
     label: 'Notifications',
     children: [
         {
-            name: 'Send',
+            name: 'Send Notification',
             icon: 'paper-plane',
             to: '/notifications/create',
             active: true,
         },
         {
-            name: 'SMS',
-            icon: 'comments',
+            name: 'SMS Notifications',
+            icon: 'comment-sms',
             active: true,
-            children: [
-                {
-                    name: 'List',
-                    to: '/notifications/sms',
-                    active: true
-                }
-            ]
+            to: '/notifications/sms',
         },
         {
-            name: 'Mail',
+            name: 'Mail Notifications',
             icon: 'envelope',
             active: true,
-            children: [
-                {
-                    name: 'List',
-                    to: '/notifications/mail',
-                    active: true
-                }
-            ]
+            to: '/notifications/mail',
         }
     ]
 };
@@ -98,6 +47,12 @@ export const notificationRoutes: RouteType = {
 export const appRoutes: RouteType = {
     label: 'App',
     children: [
+        {
+            name: 'SMS Providers',
+            icon: 'comments',
+            to: '/sms/providers',
+            active: true
+        },
         {
             name: 'Settings',
             icon: 'wrench',

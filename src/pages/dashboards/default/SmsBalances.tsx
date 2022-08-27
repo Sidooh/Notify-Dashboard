@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import CountUp from 'react-countup';
-import {IMAGES} from 'constants/images';
+import { IMAGES } from 'constants/images';
 
 type SmsBalancesType = {
     credits: { africastalking: number, websms: number },
@@ -9,7 +9,7 @@ type SmsBalancesType = {
 
 const SmsBalances = ({credits, default_sms_provider}: SmsBalancesType) => {
     return (
-        <div className="card h-md-100">
+        <div className="card">
             <div className="bg-holder bg-card"
                  style={{backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_3})`}}/>
             <div className="card-body position-relative">
@@ -28,7 +28,7 @@ const SmsBalances = ({credits, default_sms_provider}: SmsBalancesType) => {
                                     </div>
                                     <div className="d-flex flex-between-center mb-1">
                                         <div className="d-flex align-items-center fs--2">
-                                            <span className={`dot bg-${default_sms_provider === 'websms'
+                                            <span className={`dot bg-${default_sms_provider === 'WEBSMS'
                                                 ? 'primary' : '300'}`}/>
                                             <span className="fw-semi-bold">WEBSMS</span>
                                         </div>
@@ -44,9 +44,8 @@ const SmsBalances = ({credits, default_sms_provider}: SmsBalancesType) => {
                                     </div>
                                     <div className="d-flex flex-between-center mb-1">
                                         <div className="d-flex align-items-center fs--2">
-                                                        <span
-                                                            className={`dot bg-${default_sms_provider === 'africastalking'
-                                                                ? 'primary' : '300'}`}/>
+                                            <span className={`dot bg-${default_sms_provider === 'AFRICASTALKING'
+                                                ? 'primary' : '300'}`}/>
                                             <span className="fw-semi-bold">AFRICASTALKING</span>
                                         </div>
                                     </div>

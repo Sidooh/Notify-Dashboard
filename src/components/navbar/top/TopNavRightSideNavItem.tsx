@@ -1,11 +1,11 @@
 import { Nav, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import ProfileDropdown from 'components/navbar/top/ProfileDropdown';
-import NotificationDropdown from 'components/navbar/top/NotificationDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import Waffle from 'components/common/Waffle';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { setTheme } from '../../../features/theme/themeSlice';
-import { RootState } from '../../../app/store';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { setTheme } from 'features/theme/themeSlice';
+import { RootState } from 'app/store';
+import { Waffle } from '@nabcellent/sui-react';
+import { CONFIG } from 'config';
 
 const TopNavRightSideNavItem = () => {
     const dispatch = useAppDispatch();
@@ -29,8 +29,62 @@ const TopNavRightSideNavItem = () => {
                 </Nav.Link>
             </Nav.Item>
 
-            <NotificationDropdown/>
-            <Waffle/>
+            <Waffle links={[
+                {
+                    avatarText: 'A',
+                    title: 'Accounts',
+                    link: CONFIG.sidooh.services.accounts.dashboard.url,
+                    contentClass: 'bg-soft-primary text-primary',
+                    enabled: true
+                },
+                {
+                    avatarText: 'E',
+                    title: 'Enterprise',
+                    link: `/events/event-detail`,
+                    contentClass: 'bg-soft-primary text-primary',
+                    enabled: false
+                },
+                {
+                    avatarText: 'N',
+                    title: 'Notify',
+                    link: CONFIG.sidooh.services.notify.dashboard.url,
+                    contentClass: 'bg-soft-primary text-primary',
+                    enabled: true
+                },
+                {
+                    avatarText: 'p',
+                    title: 'Payments',
+                    link: CONFIG.sidooh.services.payments.dashboard.url,
+                    contentClass: 'bg-soft-primary text-primary',
+                    enabled: true
+                },
+                {
+                    avatarText: 'P',
+                    title: 'Products',
+                    link: CONFIG.sidooh.services.products.dashboard.url,
+                    contentClass: 'bg-soft-primary text-primary',
+                    enabled: true
+                },
+                {
+                    avatarText: 'S',
+                    title: 'Savings',
+                    link: CONFIG.sidooh.services.savings.dashboard.url,
+                    contentClass: 'bg-soft-primary text-primary',
+                    enabled: true
+                },
+                {
+                    avatarText: 'U',
+                    title: 'USSD',
+                    link: CONFIG.sidooh.services.ussd.dashboard.url,
+                    contentClass: 'bg-soft-primary text-primary',
+                    enabled: true
+                },
+                /*{
+                    avatar: account,
+                    title: 'Account',
+                    link: `/user/profile`
+                },*/
+            ]}/>
             <ProfileDropdown/>
         </Nav>
     );

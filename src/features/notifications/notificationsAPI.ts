@@ -1,7 +1,8 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CONFIG } from 'config';
-import { NotificationType, SettingType } from 'utils/types';
-import { RootState } from '../../app/store';
+import { Notification, Setting } from 'utils/types';
+import { RootState } from 'app/store';
+import { ApiResponse } from '@nabcellent/sui-react';
 
 export const notificationsApi = createApi({
     reducerPath: 'notificationsApi',
@@ -9,7 +10,7 @@ export const notificationsApi = createApi({
     tagTypes: ['Notification', 'Setting'],
     baseQuery: fetchBaseQuery({
         baseUrl: `${CONFIG.sidooh.services.notify.api.url}`,
-        prepareHeaders: (headers, {getState}) => {
+        prepareHeaders: (headers, { getState }) => {
             const token = (getState() as RootState).auth.auth?.token;
 
             if (token) headers.set('authorization', `Bearer ${token}`);
@@ -20,47 +21,35 @@ export const notificationsApi = createApi({
     endpoints: (builder) => ({
         //  Dashboard Endpoints
         getDashboard: builder.query<any, void>({
-            query:() => '/dashboard',
+            query: () => '/dashboard',
         }),
 
         //  Notification Endpoints
-        notifications: builder.query<NotificationType[], void>({
+        notifications: builder.query<Notification[], void>({
             query: () => '/notifications',
-            providesTags: ['Notification']
+            providesTags: ['Notification'],
+            transformResponse: (response: ApiResponse<Notification[]>) => response.data,
         }),
-        notification: builder.query<NotificationType, string>({
+        notification: builder.query<Notification, string>({
             query: id => `/notifications/${id}?with_notifiables=true`,
-            providesTags: ['Notification']
+            providesTags: ['Notification'],
+            transformResponse: (response: ApiResponse<Notification>) => response.data,
         }),
-        storeNotification: builder.mutation<NotificationType, {
-            channel: string, event_type: string; destination: string[], content: string
-        }>({
+        storeNotification: builder.mutation<Notification, Partial<Notification>>({
             query: notification => ({
                 url: '/notifications',
                 method: 'POST',
                 body: notification
-            })
-        }),
-
-        //  Settings Endpoints
-        settings: builder.query<SettingType[], void>({
-            query: () => '/settings',
-            providesTags: ['Setting']
-        }),
-        upsertSetting: builder.mutation<SettingType, SettingType>({
-            query: setting => ({
-                url: '/settings',
-                method: 'POST',
-                body: setting
             }),
-            invalidatesTags: ['Setting']
+            transformResponse: (response: ApiResponse<Notification>) => response.data,
         }),
-        deleteSetting: builder.mutation<void, string>({
+        retryNotification: builder.mutation<Notification, number>({
             query: id => ({
-                url: `/settings/${id}`,
-                method: 'DELETE'
+                url: `/notifications/${id}/retry`,
+                method: 'POST'
             }),
-            invalidatesTags: ['Setting']
+            invalidatesTags: ['Notification'],
+            transformResponse: (response: ApiResponse<Notification>) => response.data,
         })
     })
 });
@@ -72,7 +61,5 @@ export const {
     useNotificationQuery,
     useStoreNotificationMutation,
 
-    useSettingsQuery,
-    useUpsertSettingMutation,
-    useDeleteSettingMutation
+    useRetryNotificationMutation
 } = notificationsApi;

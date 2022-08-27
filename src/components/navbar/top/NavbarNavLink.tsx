@@ -2,10 +2,10 @@ import { memo } from 'react';
 import { Nav } from 'react-bootstrap';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { RouteChildType } from '../../../routes';
-import { useAppDispatch, useAppSelector } from '../../../app/hooks';
-import { RootState } from '../../../app/store';
-import { setTheme } from '../../../features/theme/themeSlice';
+import { useAppDispatch, useAppSelector } from 'app/hooks';
+import { RootState } from 'app/store';
+import { setTheme } from 'features/theme/themeSlice';
+import { RouteChildType } from '@nabcellent/sui-react';
 
 type NavbarNavLinkType = {
     title?: string,

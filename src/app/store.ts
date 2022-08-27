@@ -1,8 +1,13 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
-import authReducer from '../features/auth/authSlice';
-import themeReducer from '../features/theme/themeSlice';
+import authReducer from 'features/auth/authSlice';
+import themeReducer from 'features/theme/themeSlice';
 import { accountsApi } from './services/accountsAPI';
-import { notificationsApi } from '../features/notifications/notificationsAPI';
+import { notificationsApi } from 'features/notifications/notificationsAPI';
+import { dashboardApi } from 'features/dashboard/dashboardApi';
+import { settingsApi } from 'features/settings/settingsApi';
+import { smsProvidersApi } from 'features/sms-providers/smsProviderApi';
+import { smsNotificationsApi } from '../features/sms-notifications/smsNotificationsApi';
+import { mailsApi } from '../features/mails/mailsApi';
 
 export const store = configureStore({
     reducer: {
@@ -10,10 +15,23 @@ export const store = configureStore({
         theme: themeReducer,
 
         [accountsApi.reducerPath]: accountsApi.reducer,
+        [dashboardApi.reducerPath]: dashboardApi.reducer,
         [notificationsApi.reducerPath]: notificationsApi.reducer,
+        [smsProvidersApi.reducerPath]: smsProvidersApi.reducer,
+        [settingsApi.reducerPath]: settingsApi.reducer,
+        [smsNotificationsApi.reducerPath]: smsNotificationsApi.reducer,
+        [mailsApi.reducerPath]: mailsApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-        .concat(accountsApi.middleware, notificationsApi.middleware)
+        .concat(
+            accountsApi.middleware,
+            dashboardApi.middleware,
+            notificationsApi.middleware,
+            settingsApi.middleware,
+            smsProvidersApi.middleware,
+            smsNotificationsApi.middleware,
+            mailsApi.middleware,
+        )
 });
 
 export type AppDispatch = typeof store.dispatch;

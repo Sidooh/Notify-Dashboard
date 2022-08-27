@@ -1,14 +1,13 @@
 import { lazy, memo, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { login, reset } from '../../features/auth/authSlice';
-import { useAuth } from '../../hooks/useAuth';
-import { useAppDispatch } from '../../app/hooks';
+import { login, reset } from 'features/auth/authSlice';
+import { useAuth } from 'hooks/useAuth';
+import { useAppDispatch } from 'app/hooks';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { toast } from 'utils/helpers';
+import { toast, TextField, LoadingButton } from '@nabcellent/sui-react';
 import { CONFIG } from 'config';
 
-const LoadingButton = lazy(() => import('@mui/lab/LoadingButton'));
 const LoginSharp = lazy(() => import('@mui/icons-material/LoginSharp'));
 
 const validationSchema = yup.object({
@@ -29,7 +28,7 @@ const Login = () => {
     });
 
     useEffect(() => {
-        if (isError) toast({msg: message, type: 'danger'});
+        if (isError) toast({titleText: message, icon: 'error'});
         if (isSuccess || auth) navigate('/');
 
         dispatch(reset());
@@ -42,37 +41,24 @@ const Login = () => {
             </div>
             <form onSubmit={formik.handleSubmit}>
                 <div className="mb-3">
-                    <input className="form-control" type="email" value={formik.values.email}
-                           name={'email'} autoFocus required
-                           placeholder="Email address" onChange={formik.handleChange}/>
-                    <small
-                        className={'text-danger'}>{formik.touched.email && formik.errors.email}</small>
+                    <TextField label="Email address" type={'email'} name={'email'} required autoComplete="username"
+                               value={formik.values.email} autoFocus onChange={formik.handleChange}
+                               error={Boolean(formik.errors.email)} errorMsg={formik.errors.email}/>
                 </div>
                 <div className="mb-3">
-                    <input className="form-control" type="password" value={formik.values.password}
-                           name={'password'} onChange={formik.handleChange} placeholder="Password"
-                           required/>
-                    <small
-                        className={'text-danger'}>{formik.touched.password && formik.errors.password}</small>
+                    <TextField label="Password" type={'password'} name={'password'} required autoComplete="username"
+                               value={formik.values.password} onChange={formik.handleChange}
+                               error={Boolean(formik.errors.password)} errorMsg={formik.errors.password}/>
                 </div>
-                <div className="row flex-between-center">
-                    <div className="col-auto">
-                        <div className="form-check mb-0">
-                            <input className="form-check-input" type="checkbox"
-                                   id="basic-checkbox" defaultChecked={true}/>
-                            <label className="form-check-label mb-0" htmlFor="basic-checkbox">
-                                Remember me
-                            </label>
-                        </div>
-                    </div>
+                <div className="row justify-content-end">
                     <div className="col-auto">
                         <Link className="fs--1" to="/login">Forgot Password?</Link>
                     </div>
                 </div>
                 <div className="mb-3">
-                    <LoadingButton size="small" color="primary" loading={isLoading} type={'submit'}
+                    <LoadingButton size="sm" loading={isLoading} type={'submit'}
                                    loadingPosition="end" className="w-100 mt-3" onClick={() => formik.submitForm()}
-                                   endIcon={<LoginSharp/>} variant="contained">
+                                   endIcon={<LoginSharp/>}>
                         Sign In
                     </LoadingButton>
                 </div>

@@ -3,12 +3,10 @@ import { Dropdown, Form } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Fuse from 'fuse.js';
 import { Link } from 'react-router-dom';
-import Avatar from 'components/common/Avatar';
 import { isIterableArray } from 'utils/helpers';
-import Flex from 'components/common/Flex';
 import FalconCloseButton from 'components/common/FalconCloseButton';
-import SoftBadge from 'components/common/SoftBadge';
-import { AutoCompleteItem } from '../../../constants/autocomplete';
+import { AutoCompleteItem } from 'constants/autocomplete';
+import { Avatar, Badge, Flex } from '@nabcellent/sui-react';
 
 type MediaSearchContentType = {
     item: AutoCompleteItem
@@ -173,12 +171,9 @@ const SearchBox = ({autoCompleteItems}: SearchBoxType) => {
                                     key={item.id}
                                 >
                                     <Flex alignItems="center">
-                                        <SoftBadge
-                                            bg={item.type}
-                                            className="fw-medium text-decoration-none me-2"
-                                        >
+                                        <Badge soft bg={item.type} className="fw-medium text-decoration-none me-2">
                                             {item.key}:{' '}
-                                        </SoftBadge>
+                                        </Badge>
                                         <div className="flex-1 fs--1">{item.text}</div>
                                     </Flex>
                                 </Dropdown.Item>
