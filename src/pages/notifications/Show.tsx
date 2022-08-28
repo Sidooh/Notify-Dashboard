@@ -23,9 +23,9 @@ const Show = () => {
 
     let destinationIcon;
     if (notification.channel === "MAIL") {
-        destinationIcon = "far fa-paper-plane";
+        destinationIcon = "far fa-envelope";
     } else if (notification.channel === "SMS") {
-        destinationIcon = "fas fa-paper-plane";
+        destinationIcon = "fas fa-comment-sms";
     } else {
         destinationIcon = "fab fa-slack";
     }

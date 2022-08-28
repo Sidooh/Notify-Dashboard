@@ -45,13 +45,6 @@ const TopNavRightSideNavItem = () => {
                     enabled: false
                 },
                 {
-                    avatarText: 'N',
-                    title: 'Notify',
-                    link: CONFIG.sidooh.services.notify.dashboard.url,
-                    contentClass: 'bg-soft-primary text-primary',
-                    enabled: true
-                },
-                {
                     avatarText: 'p',
                     title: 'Payments',
                     link: CONFIG.sidooh.services.payments.dashboard.url,
