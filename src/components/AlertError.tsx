@@ -1,5 +1,5 @@
 export default function AlertError({ error }: any) {
-    console.log(error)
+    logger.log(error)
     
     return (
         <div className="alert alert-danger border-2 d-flex align-items-center justify-content-between py-1"

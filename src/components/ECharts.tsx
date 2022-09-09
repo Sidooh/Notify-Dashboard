@@ -3,6 +3,7 @@ import { bind, clear } from 'size-sensor';
 import * as echarts from 'echarts';
 import { EChartsType } from 'echarts/types/dist/echarts';
 import { isFunction } from 'utils/helpers';
+import { logger } from 'utils/logger';
 
 const ECharts = ({
                     options,
@@ -101,7 +102,7 @@ const ECharts = ({
                     height: 'auto',
                 });
             } catch (e) {
-                console.warn(e);
+                logger.warn(e);
             }
         }
 
@@ -139,7 +140,7 @@ const ECharts = ({
                 try {
                     clear(htmlElement);
                 } catch (e) {
-                    console.warn(e);
+                    logger.warn(e);
                 }
 
                 // dispose echarts instance

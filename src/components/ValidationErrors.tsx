@@ -8,7 +8,7 @@ export default function ValidationErrors({errors}: { errors: any }) {
         ));
     }
 
-    console.log(errors);
+    logger.log(errors);
     return (
         !errors ? (<></>) : (
             <div className="mb-3">
