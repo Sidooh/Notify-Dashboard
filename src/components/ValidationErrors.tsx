@@ -1,4 +1,5 @@
 import React from 'react';
+import { logger } from 'utils/logger';
 
 export default function ValidationErrors({errors}: { errors: any }) {
     if (errors?.data?.message) errors = <li className={'small'}>{errors.data.message}</li>;
@@ -9,6 +10,7 @@ export default function ValidationErrors({errors}: { errors: any }) {
     }
 
     logger.log(errors);
+
     return (
         !errors ? (<></>) : (
             <div className="mb-3">
