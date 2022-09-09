@@ -6,7 +6,6 @@ import { IMAGES } from 'constants/images';
 import { useStoreNotificationMutation } from 'features/notifications/notificationsAPI';
 import { useGetAllAccountsQuery, useGetAllUsersQuery } from 'app/services/accountsAPI';
 import { LoadingButton, toast } from '@nabcellent/sui-react';
-import sortBy from 'lodash.sortby';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Notification } from '../../utils/types';
 import ValidationErrors from 'components/ValidationErrors';
@@ -148,7 +147,7 @@ const Create = () => {
                         <label className="form-label" htmlFor="exampleFormControlInput1">Channel</label>
                         <select className="form-select" name={'channel'} value={formik.values.channel}
                                 onChange={handleChannelChange}>
-                            {sortBy(CHANNELS).map((channel, i) => (
+                            {CHANNELS.sort().map((channel, i) => (
                                 <option key={i} value={String(channel)}>{channel.toUpperCase()}</option>)
                             )}
                         </select>
@@ -165,7 +164,7 @@ const Create = () => {
                         <label className="form-label" htmlFor="exampleFormControlInput1">Event Type</label>
                         <select className="form-select" value={formik.values.event_type} name={'event_type'}
                                 onChange={formik.handleChange}>
-                            {sortBy(EVENT_TYPES)
+                            {EVENT_TYPES.sort()
                                 .map((type, i) => <option key={i} value={String(type)}>{type}</option>)}
                         </select>
                         <small
@@ -198,7 +197,7 @@ const Create = () => {
 
                         <div className="text-end">
                             <LoadingButton size="sm" loading={result.isLoading} loadingPosition="end"
-                                           onClick={() => formik.submitForm()}
+                                           onClick={() => formik.submitForm()} disabled={!formik.dirty}
                                            endIcon={<FontAwesomeIcon icon={'paper-plane'}/>}>Send</LoadingButton>
                         </div>
                     </div>

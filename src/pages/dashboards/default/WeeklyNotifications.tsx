@@ -1,14 +1,14 @@
 import { lazy, memo } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Card } from 'react-bootstrap';
-import { ComponentLoader, getColor, SectionError } from '@nabcellent/sui-react';
+import { ComponentLoader, getColor, SectionError, Tooltip } from '@nabcellent/sui-react';
 import * as echarts from 'echarts/core';
 import { BarChart } from 'echarts/charts';
 import { GridComponent, TitleComponent, TooltipComponent } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
-import { Tooltip } from '@mui/material';
-import { useGetDashboardChartDataQuery } from '../../../features/dashboard/dashboardApi';
+import { useGetDashboardChartDataQuery } from 'features/dashboard/dashboardApi';
 import CardBgCorner from 'components/CardBgCorner';
+import { logger } from 'utils/logger';
 
 const BasicECharts = lazy(() => import('components/common/BasicEChart'))
 
@@ -83,7 +83,7 @@ const WeeklyNotifications = ({width, amountClassName}: WeeklyNotificationsType) 
     if (isError) return <SectionError error={error}/>;
     if (isLoading || !isSuccess || !data) return <ComponentLoader/>;
 
-    console.log(data);
+    logger.log(data);
 
     return (
         <Card className="mb-3">

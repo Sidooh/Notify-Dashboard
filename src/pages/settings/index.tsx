@@ -1,13 +1,16 @@
 import { memo, useState } from 'react';
-import { Delete, Edit, Save } from '@mui/icons-material';
-import { Autocomplete, Button, IconButton, TextField } from '@mui/material';
+import { Autocomplete, TextField } from '@mui/material';
 import { useFormik } from 'formik';
 import { Card, Modal } from 'react-bootstrap';
 import * as yup from 'yup';
 import { useDeleteSettingMutation, useSettingsQuery, useUpsertSettingMutation } from 'features/settings/settingsApi';
 import { Setting } from 'utils/types';
-import { ComponentLoader, DataTable, LoadingButton, SectionError, Sweet, toast } from '@nabcellent/sui-react';
+import { ComponentLoader, DataTable, LoadingButton, SectionError, Sweet, toast, IconButton, Button } from '@nabcellent/sui-react';
 import { MailProvider, SMSProvider } from 'utils/enums';
+import { logger } from 'utils/logger';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSave } from '@fortawesome/free-regular-svg-icons';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const settingOptions = [
     {
@@ -35,12 +38,12 @@ const Settings = () => {
     const [settingValues, setSettingValues] = useState<string[]>([]);
     const [showModal, setShowModal] = useState(false);
 
-    let {data: settings, error, isLoading, isSuccess, isError} = useSettingsQuery();
+    let { data: settings, error, isLoading, isSuccess, isError } = useSettingsQuery();
     const [upsertSetting, result] = useUpsertSettingMutation();
     const [deleteSetting] = useDeleteSettingMutation();
 
     const formik = useFormik({
-        initialValues: {key: "", value: ""},
+        initialValues: { key: "", value: "" },
         validationSchema: validationSchema,
         onSubmit: async values => {
             const setting = await upsertSetting(values).unwrap();
@@ -52,7 +55,7 @@ const Settings = () => {
                 type: "success"
             });
 
-            if (result.error) toast({msg: result.error.toString(), type: 'warning'});
+            if (result.error) toast({ msg: result.error.toString(), type: 'warning' });
         },
     });
 
@@ -89,7 +92,7 @@ const Settings = () => {
     if (isError) return <SectionError error={error}/>;
     if (isLoading || !isSuccess || !settings) return <ComponentLoader/>;
 
-    console.log(settings);
+    logger.log(settings);
 
     return (
         <Card className="mb-3">
@@ -99,7 +102,7 @@ const Settings = () => {
                         accessorKey: 'key',
                         header: 'Name',
                         cell: (rowData: any) => {
-                            const {key} = rowData.row.original;
+                            const { key } = rowData.row.original;
 
                             return <span>{(key.replaceAll('_', ' ')).toUpperCase()}</span>;
                         }
@@ -110,18 +113,14 @@ const Settings = () => {
                     },
                     {
                         id: 'actions',
-                        cell: (rowData: any) => {
+                        cell: ({ row }: any) => {
                             return (
                                 <div className={'text-end'}>
-                                    <IconButton onClick={() => handleUpdate(rowData.row.original)}
-                                                size={"small"}
-                                                color={"primary"}>
-                                        <Edit fontSize={'small'}/>
+                                    <IconButton onClick={() => handleUpdate(row.original)} size={"sm"}>
+                                        <FontAwesomeIcon icon={faPen} className={'cursor-pointer'}/>
                                     </IconButton>
-                                    <IconButton onClick={() => handleDelete(rowData.row.original)}
-                                                size={"small"}
-                                                color={"error"}>
-                                        <Delete fontSize={'small'}/>
+                                    <IconButton onClick={() => handleDelete(row.original)} size={"sm"} color={"danger"}>
+                                        <FontAwesomeIcon icon={faTrash}/>
                                     </IconButton>
                                 </div>
                             );
@@ -158,29 +157,25 @@ const Settings = () => {
                                                             placeholder="Setting key..." value={formik.values.key}
                                                             error={formik.touched.key && Boolean(formik.errors.key)}
                                                             helperText={formik.touched.key && formik.errors.key}/>
-                                              )}
-                                />
+                                              )}/>
                             </div>
                             <div className="mb-3">
                                 <Autocomplete options={settingValues} freeSolo value={formik.values.value}
-                                              onChange={(...args) => {
-                                                  formik.setFieldValue("value", args[1], true);
-                                              }}
+                                              onChange={(...args) => formik.setFieldValue("value", args[1], true)}
                                               renderInput={(params) => (
                                                   <TextField{...params} size={"small"} label="Value" name={'value'}
                                                             placeholder="Setting value..." value={formik.values.value}
                                                             error={formik.touched.value && Boolean(formik.errors.value)}
                                                             helperText={formik.touched.value && formik.errors.value}/>
-                                              )}
-                                />
+                                              )}/>
                             </div>
                         </div>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button size={'small'} variant={'outlined'} onClick={() => setShowModal(false)} color={'inherit'}
-                                data-bs-dismiss="modal">Cancel</Button>
+                        <Button size={'sm'} variant={'outlined'} onClick={() => setShowModal(false)}
+                                color={'inherit'} data-bs-dismiss="modal">Cancel</Button>
                         <LoadingButton disabled={!formik.dirty} size="sm" color="primary" loading={result.isLoading}
-                                       loadingPosition="end" type={'submit'} endIcon={<Save/>}>
+                                       loadingPosition="end" type={'submit'} endIcon={<FontAwesomeIcon icon={faSave}/>}>
                             {formik.dirty ? "Update" : "Create"}
                         </LoadingButton>
                     </Modal.Footer>

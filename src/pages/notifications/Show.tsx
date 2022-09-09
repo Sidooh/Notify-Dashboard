@@ -3,12 +3,12 @@ import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import { useNotificationQuery, useRetryNotificationMutation } from 'features/notifications/notificationsAPI';
 import { IconButton, SectionError, SectionLoader, Status, StatusChip } from '@nabcellent/sui-react';
-import CardBgCorner from '../../components/CardBgCorner';
+import CardBgCorner from 'components/CardBgCorner';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Spinner } from 'react-bootstrap';
 import JSONPretty from 'react-json-pretty';
-
+import { logger } from 'utils/logger';
 
 const Show = () => {
     const { id } = useParams();
@@ -19,7 +19,7 @@ const Show = () => {
     if (isError) return <SectionError error={error}/>;
     if (isLoading || !isSuccess || !notification) return <SectionLoader/>;
 
-    console.log(notification);
+    logger.log(notification);
 
     let destinationIcon;
     if (notification.channel === "MAIL") {

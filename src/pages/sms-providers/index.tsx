@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { Delete, Edit, Save } from '@mui/icons-material';
-import { Button, IconButton } from '@mui/material';
 import { useFormik } from 'formik';
 import { Card, Form, Modal } from 'react-bootstrap';
 import * as yup from 'yup';
 import { SMSProvider } from 'utils/types';
 import {
+    Button,
     ComponentLoader,
     DataTable,
+    IconButton,
     LoadingButton,
     SectionError,
     Status,
@@ -25,6 +25,8 @@ import {
 } from 'features/sms-providers/smsProviderApi';
 import ValidationErrors from 'components/ValidationErrors';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { logger } from 'utils/logger';
+import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const validationSchema = yup.object({
     name: yup.string().oneOf(Object.values(SMSProviderEnum), 'Invalid name.').required('Name is required.'),
@@ -38,7 +40,7 @@ const SMSProviders = () => {
     const [formAction, setFormAction] = useState<'create' | 'update'>('create');
     const [showModal, setShowModal] = useState(false);
 
-    let {data: providers, error, isLoading, isSuccess, isError} = useGetSMSProvidersQuery();
+    let { data: providers, error, isLoading, isSuccess, isError } = useGetSMSProvidersQuery();
     const [storeProvider, storeResult] = useStoreSMSProviderMutation();
     const [updateProvider, updateResult] = useUpdateSMSProviderMutation();
     const [deleteProvider] = useDeleteSMSProviderMutation();
@@ -55,7 +57,7 @@ const SMSProviders = () => {
             const send = formAction === 'create' ? storeProvider : updateProvider;
             const provider = await send(values).unwrap();
 
-            console.log(provider);
+            logger.log(provider);
 
             setShowModal(false);
 
@@ -119,20 +121,18 @@ const SMSProviders = () => {
                     {
                         accessorKey: 'status',
                         header: 'Status',
-                        cell: ({row}: any) => <StatusChip status={row.original.status ?? Status.INACTIVE}/>
+                        cell: ({ row }: any) => <StatusChip status={row.original.status ?? Status.INACTIVE}/>
                     },
                     {
                         id: 'actions',
-                        cell: ({row}: any) => {
+                        cell: ({ row }: any) => {
                             return (
                                 <div className={'text-end'}>
-                                    <IconButton onClick={() => handleUpdate(row.original)} size={"small"}
-                                                color={"primary"}>
-                                        <Edit fontSize={'small'}/>
+                                    <IconButton onClick={() => handleUpdate(row.original)} size={"sm"}>
+                                        <FontAwesomeIcon icon={faPen} className={'cursor-pointer'}/>
                                     </IconButton>
-                                    <IconButton onClick={() => handleDelete(row.original)} size={"small"}
-                                                color={"error"}>
-                                        <Delete fontSize={'small'}/>
+                                    <IconButton onClick={() => handleDelete(row.original)} size={"sm"} color={"danger"}>
+                                        <FontAwesomeIcon icon={faTrash}/>
                                     </IconButton>
                                 </div>
                             );
@@ -195,9 +195,10 @@ const SMSProviders = () => {
                                 <small className={'error'}>{formik.errors.status}</small>
                             </div>
                         </div>
+
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button size={'small'} variant={'outlined'} onClick={() => setShowModal(false)}
+                        <Button size={'sm'} variant={'outlined'} onClick={() => setShowModal(false)}
                                 color={'inherit'} data-bs-dismiss="modal">Cancel</Button>
                         <LoadingButton disabled={!formik.dirty} size="sm" loadingPosition="end" type={'submit'}
                                        loading={storeResult.isLoading || updateResult.isLoading}

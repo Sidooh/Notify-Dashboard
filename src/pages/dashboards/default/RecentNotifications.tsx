@@ -1,6 +1,7 @@
 import { ComponentLoader, SectionError } from '@nabcellent/sui-react';
 import { useGetRecentNotificationsQuery } from 'features/dashboard/dashboardApi';
 import NotificationTable from 'components/tables/NotificationTable';
+import { logger } from 'utils/logger';
 
 const RecentNotifications = () => {
     let {data: notifications, isLoading, isSuccess, isError, error} = useGetRecentNotificationsQuery();
@@ -8,7 +9,7 @@ const RecentNotifications = () => {
     if (isError) return <SectionError error={error}/>;
     if (isLoading || !isSuccess || !notifications) return <ComponentLoader/>;
 
-    console.log(notifications);
+    logger.log(notifications);
 
     if (!notifications) return <ComponentLoader/>;
 
