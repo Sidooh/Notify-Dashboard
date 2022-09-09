@@ -8,7 +8,10 @@ import MainLayout from './layouts/MainLayout';
 import SettingsToggle from 'components/settings-panel/SettingsToggle';
 import SettingsPanel from 'components/settings-panel/SettingsPanel';
 import { lazy, useEffect } from 'react';
-import { is } from '@nabcellent/sui-react';
+import { is, PageLoader } from '@nabcellent/sui-react';
+import useTheme from './hooks/useTheme';
+import { RootState } from 'app/store';
+import { useAppSelector } from './app/hooks';
 
 library.add(fas, far, faQuestionCircle);
 
@@ -30,6 +33,11 @@ function App() {
         if (is.chrome()) HTMLClassList.add('chrome');
         if (is.firefox()) HTMLClassList.add('firefox');
     }, [HTMLClassList]);
+
+    const { isDark } = useAppSelector((state: RootState) => state.theme);
+    const { isLoaded } = useTheme(isDark);
+
+    if (!isLoaded) return <PageLoader isDark={isDark}/>;
 
     return (
         <>
