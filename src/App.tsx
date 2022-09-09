@@ -5,8 +5,8 @@ import { Route, Routes } from 'react-router-dom';
 import GuestLayout from './layouts/GuestLayout';
 import { Middleware } from './middleware';
 import MainLayout from './layouts/MainLayout';
-import SettingsToggle from './components/settings-panel/SettingsToggle';
-import SettingsPanel from './components/settings-panel/SettingsPanel';
+import SettingsToggle from 'components/settings-panel/SettingsToggle';
+import SettingsPanel from 'components/settings-panel/SettingsPanel';
 import { lazy, useEffect } from 'react';
 import { is } from '@nabcellent/sui-react';
 

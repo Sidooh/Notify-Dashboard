@@ -1,5 +1,5 @@
 import { CONFIG } from 'config';
-import { logger } from '../../utils/logger';
+import { logger } from 'utils/logger';
 
 const API_URL = `${ CONFIG.sidooh.services.accounts.api.url }/users/signin`;
 
