@@ -1,6 +1,5 @@
 import { Card, Spinner } from 'react-bootstrap';
-import { DataTable, Status, StatusChip, TableDate } from '@nabcellent/sui-react';
-import { Typography } from '@mui/material';
+import { DataTable, Status, StatusChip, TableDate, Tooltip } from '@nabcellent/sui-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Notification } from '../../utils/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -42,14 +41,18 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
                                    header: 'Message',
                                    cell: (rowData: any) => {
                                        const { content } = rowData.row.original;
-                                       return <Typography variant={"body2"} title={content} style={{
-                                           display: "-webkit-box",
-                                           overflow: "hidden",
-                                           WebkitBoxOrient: "vertical",
-                                           WebkitLineClamp: 2,
-                                           cursor: "context-menu",
-                                           maxWidth: '25rem'
-                                       }}>{content}</Typography>;
+                                       return (
+                                           <Tooltip title={content}>
+                                               <p style={{
+                                                   display: "-webkit-box",
+                                                   overflow: "hidden",
+                                                   WebkitBoxOrient: "vertical",
+                                                   WebkitLineClamp: 2,
+                                                   cursor: "context-menu",
+                                                   maxWidth: '25rem'
+                                               }}>{content}</p>
+                                           </Tooltip>
+                                       );
                                    }
                                },
                                {

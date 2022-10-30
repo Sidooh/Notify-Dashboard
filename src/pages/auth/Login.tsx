@@ -1,14 +1,14 @@
-import { lazy, memo, useEffect } from 'react';
+import { memo, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { login, reset } from 'features/auth/authSlice';
 import { useAuth } from 'hooks/useAuth';
 import { useAppDispatch } from 'app/hooks';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
-import { toast, TextField, LoadingButton } from '@nabcellent/sui-react';
+import { LoadingButton, TextField, toast } from '@nabcellent/sui-react';
 import { CONFIG } from 'config';
-
-const LoginSharp = lazy(() => import('@mui/icons-material/LoginSharp'));
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUnlockKeyhole } from '@fortawesome/free-solid-svg-icons';
 
 const validationSchema = yup.object({
     email: yup.string().email('Must be a valid email').max(100).required('Email is required.'),
@@ -58,7 +58,7 @@ const Login = () => {
                 <div className="mb-3">
                     <LoadingButton size="sm" loading={isLoading} type={'submit'}
                                    loadingPosition="end" className="w-100 mt-3" onClick={() => formik.submitForm()}
-                                   endIcon={<LoginSharp/>}>
+                                   endIcon={<FontAwesomeIcon icon={faUnlockKeyhole}/>}>
                         Sign In
                     </LoadingButton>
                 </div>
