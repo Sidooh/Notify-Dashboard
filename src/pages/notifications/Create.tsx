@@ -56,15 +56,6 @@ const Create = () => {
         if (destinationSelectEl) {
             if (!isTomSelectInstance) {
                 new TomSelect(destinationSelectEl, {
-                    options: [
-                        // { value: '254714611696', text: '254714611696' },
-                        // { value: '254780611696', text: '254780611696' },
-                        // { value: '254711414987', text: '254711414987' },
-                        // { value: '254733643843', text: '254733643843' },
-                        // { value: '254721309253', text: '254721309253' },
-                        // { value: '254110039317', text: '254110039317' },
-                        // { value: '254736388405', text: '254736388405' },
-                    ],
                     persist: true,
                     create: true,
                     createOnBlur: true,
