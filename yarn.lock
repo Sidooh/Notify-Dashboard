@@ -901,13 +901,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nabcellent/sui-react@npm:^2.5.6":
-  version: 2.5.6
-  resolution: "@nabcellent/sui-react@npm:2.5.6"
+"@nabcellent/sui-react@npm:^2.6.3":
+  version: 2.6.3
+  resolution: "@nabcellent/sui-react@npm:2.6.3"
   peerDependencies:
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: b29cb4836f4e2e791df250d54d7f1398ea9765f4f52b4a4e587f3f97ed488e4abfe38993a44e666d594d2ea7d68d4e68db98bb191b0d460a58a6db05af4bf372
+  checksum: 36be0310d50e22d0bde02010c30f41cfec735d8d70822b4769de6f5a9150287b4527bf044d81928ba76e52628fcc6d8ae1e6a323e56969a4d90708cc2466f322
   languageName: node
   linkType: hard
 
@@ -1102,12 +1102,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-dom@npm:^18.0.8":
-  version: 18.0.8
-  resolution: "@types/react-dom@npm:18.0.8"
+"@types/react-dom@npm:^18.0.9":
+  version: 18.0.9
+  resolution: "@types/react-dom@npm:18.0.9"
   dependencies:
     "@types/react": "*"
-  checksum: 522e5e949d05f35c6037a2290838c9c7ff92a9d06f7d96b993c7c3f5a86d8f3a6337e059c94e6fb0920227f445e5d1ce10fbfe3d9bbd95fb82a5539249d90646
+  checksum: e744e3feba25fc43733289d4df4d9c0e59fcca7f34e8c89d75f81a339accb2bd70236d69382d47d2c0ad06a1529b2e56aa6171fe175854d60e07156ddceedfcb
   languageName: node
   linkType: hard
 
@@ -1182,14 +1182,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react@npm:^18.0.24":
-  version: 18.0.24
-  resolution: "@types/react@npm:18.0.24"
+"@types/react@npm:^18.0.25":
+  version: 18.0.25
+  resolution: "@types/react@npm:18.0.25"
   dependencies:
     "@types/prop-types": "*"
     "@types/scheduler": "*"
     csstype: ^3.0.2
-  checksum: 7d06125bac61e1c6661e5dfbeeeb56d5b6d1d4c743292faebaa6b0f30f8414c7af3cadf674923fd86e4ca14e82566ff9156cd40c56786be024600c31b97d6c03
+  checksum: 231d658c45abdef044a716b4502774f1585d8336d73b2f5bd68f181acbfc874b7a457686ecd29b415b43ed0922c309bab7e2cf96832d188a3f4f1b02f2af760a
   languageName: node
   linkType: hard
 
@@ -2466,12 +2466,12 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": ^6.2.0
     "@fortawesome/react-fontawesome": latest
     "@mui/material": ^5.10.11
-    "@nabcellent/sui-react": ^2.5.6
+    "@nabcellent/sui-react": ^2.6.3
     "@reduxjs/toolkit": ^1.8.6
     "@types/echarts": ^4.9.16
     "@types/node": ^18.11.7
-    "@types/react": ^18.0.24
-    "@types/react-dom": ^18.0.8
+    "@types/react": ^18.0.25
+    "@types/react-dom": ^18.0.9
     "@types/react-redux": ^7.1.24
     "@types/react-router-dom": ^5.3.3
     "@types/yup": ^0.29.13
@@ -2489,8 +2489,8 @@ __metadata:
     react-router-dom: ^6.4.2
     size-sensor: ^1.0.1
     tom-select: ^2.2.2
-    typescript: ^4.8.4
-    vite: ^3.2.1
+    typescript: ^4.9.3
+    vite: ^3.2.4
     yup: ^0.32.11
   languageName: unknown
   linkType: soft
@@ -3200,23 +3200,23 @@ __metadata:
   languageName: node
   linkType: hard
 
-"typescript@npm:^4.8.4":
-  version: 4.8.4
-  resolution: "typescript@npm:4.8.4"
+"typescript@npm:^4.9.3":
+  version: 4.9.3
+  resolution: "typescript@npm:4.9.3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 3e4f061658e0c8f36c820802fa809e0fd812b85687a9a2f5430bc3d0368e37d1c9605c3ce9b39df9a05af2ece67b1d844f9f6ea8ff42819f13bcb80f85629af0
+  checksum: 17b8f816050b412403e38d48eef0e893deb6be522d6dc7caf105e54a72e34daf6835c447735fd2b28b66784e72bfbf87f627abb4818a8e43d1fa8106396128dc
   languageName: node
   linkType: hard
 
-"typescript@patch:typescript@^4.8.4#~builtin<compat/typescript>":
-  version: 4.8.4
-  resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=f456af"
+"typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>":
+  version: 4.9.3
+  resolution: "typescript@patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=701156"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 563a0ef47abae6df27a9a3ab38f75fc681f633ccf1a3502b1108e252e187787893de689220f4544aaf95a371a4eb3141e4a337deb9895de5ac3c1ca76430e5f0
+  checksum: ef65c22622d864497d0a0c5db693523329b3284c15fe632e93ad9aa059e8dc38ef3bd767d6f26b1e5ecf9446f49bd0f6c4e5714a2eeaf352805dc002479843d1
   languageName: node
   linkType: hard
 
@@ -3282,9 +3282,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"vite@npm:^3.2.1":
-  version: 3.2.1
-  resolution: "vite@npm:3.2.1"
+"vite@npm:^3.2.4":
+  version: 3.2.4
+  resolution: "vite@npm:3.2.4"
   dependencies:
     esbuild: ^0.15.9
     fsevents: ~2.3.2
@@ -3292,6 +3292,7 @@ __metadata:
     resolve: ^1.22.1
     rollup: ^2.79.1
   peerDependencies:
+    "@types/node": ">= 14"
     less: "*"
     sass: "*"
     stylus: "*"
@@ -3301,6 +3302,8 @@ __metadata:
     fsevents:
       optional: true
   peerDependenciesMeta:
+    "@types/node":
+      optional: true
     less:
       optional: true
     sass:
@@ -3313,7 +3316,7 @@ __metadata:
       optional: true
   bin:
     vite: bin/vite.js
-  checksum: d33f6f4c80f85f327cf74c56d2189f1ba1d808987501eae9455c65bbb1ba5ea96af0f68647e18fe0c61e82126ea91f10480c1e80964a6836a751502647a42f2b
+  checksum: 0f3e8f89c15809bd6bd8dec54b04b7c9b87374314d00928035f9d70190b4b220e8206b5d77a1e4097a5019cebf7862df4fbc11fbbb35c4f75f359999123d2c25
   languageName: node
   linkType: hard
 
