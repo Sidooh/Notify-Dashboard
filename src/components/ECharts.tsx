@@ -6,13 +6,13 @@ import { isFunction } from 'utils/helpers';
 import { logger } from 'utils/logger';
 
 const ECharts = ({
-                    options,
-                    notMerge = false,
-                    lazyUpdate = false,
-                    showLoading, loadingOption = undefined,
-                    onEvents, onChartReady,
-                    theme, className, style
-                }: any) => {
+                     options,
+                     notMerge = false,
+                     lazyUpdate = false,
+                     showLoading, loadingOption = undefined,
+                     onEvents, onChartReady,
+                     theme, className, style
+                 }: any) => {
     const [htmlElement, setHtmlElement] = useState<HTMLDivElement>(null!);
     const [isInitialResize, setIsInitialResize] = useState(true);
 
@@ -149,7 +149,7 @@ const ECharts = ({
         };
     }, [htmlElement, renderNewEcharts]);
 
-    const newStyle = {height: 300, ...style};
+    const newStyle = { height: 300, ...style };
 
     return (
         <div
