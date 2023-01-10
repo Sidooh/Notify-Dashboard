@@ -33,7 +33,7 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
                                            icon = "fab fa-slack";
                                        }
 
-                                       return <b><i className={icon}/> {destination}</b>;
+                                       return <b className={'text-nowrap'}><i className={icon}/> {destination}</b>;
                                    }
                                },
                                {

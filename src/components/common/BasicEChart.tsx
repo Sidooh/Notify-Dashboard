@@ -13,7 +13,7 @@ const getOption = () => ({
         padding: [7, 10],
         backgroundColor: getColor('100'),
         borderColor: getColor('100'),
-        textStyle: {color: getColor('dark')},
+        textStyle: { color: getColor('dark') },
         borderWidth: 1,
         transitionDuration: 0
     },
@@ -33,7 +33,7 @@ const getOption = () => ({
             symbol: 'none'
         }
     ],
-    grid: {right: '0', left: '0', bottom: '0', top: '0'}
+    grid: { right: '0', left: '0', bottom: '0', top: '0' }
 });
 
 type BasicEChartsType = {
@@ -42,7 +42,7 @@ type BasicEChartsType = {
     style: CSSProperties
 };
 
-const BasicECharts = ({echarts, options, ...rest}: BasicEChartsType) => {
+const BasicECharts = memo(({ echarts, options, ...rest }: BasicEChartsType) => {
     return (
         <ECharts
             echarts={echarts}
@@ -50,6 +50,6 @@ const BasicECharts = ({echarts, options, ...rest}: BasicEChartsType) => {
             {...rest}
         />
     );
-};
+});
 
-export default memo(BasicECharts);
+export default BasicECharts;

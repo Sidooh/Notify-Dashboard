@@ -1,18 +1,18 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { bind, clear } from 'size-sensor';
 import * as echarts from 'echarts';
 import { EChartsType } from 'echarts/types/dist/echarts';
 import { isFunction } from 'utils/helpers';
 import { logger } from 'utils/logger';
 
-const ECharts = ({
-                    options,
-                    notMerge = false,
-                    lazyUpdate = false,
-                    showLoading, loadingOption = undefined,
-                    onEvents, onChartReady,
-                    theme, className, style
-                }: any) => {
+const ECharts = memo(({
+                     options,
+                     notMerge = false,
+                     lazyUpdate = false,
+                     showLoading, loadingOption = undefined,
+                     onEvents, onChartReady,
+                     theme, className, style
+                 }: any) => {
     const [htmlElement, setHtmlElement] = useState<HTMLDivElement>(null!);
     const [isInitialResize, setIsInitialResize] = useState(true);
 
@@ -149,7 +149,7 @@ const ECharts = ({
         };
     }, [htmlElement, renderNewEcharts]);
 
-    const newStyle = {height: 300, ...style};
+    const newStyle = { height: 300, ...style };
 
     return (
         <div
@@ -158,6 +158,6 @@ const ECharts = ({
             className={`echarts-for-react ${className}`}
         />
     );
-};
+});
 
 export default ECharts;

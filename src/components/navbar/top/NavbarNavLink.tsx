@@ -13,14 +13,14 @@ type NavbarNavLinkType = {
     route?: RouteChildType
 };
 
-const NavbarNavLink = ({title, route}: NavbarNavLinkType) => {
+const NavbarNavLink = memo(({ title, route }: NavbarNavLinkType) => {
     const dispatch = useAppDispatch()
 
-    const {navbarCollapsed, showBurgerMenu} = useAppSelector((state: RootState) => state.theme);
+    const { navbarCollapsed, showBurgerMenu } = useAppSelector((state: RootState) => state.theme);
 
     const handleClick = () => {
-        if (navbarCollapsed) dispatch(setTheme({key: 'navbarCollapsed', value: !navbarCollapsed}));
-        if (showBurgerMenu) dispatch(setTheme({key: 'showBurgerMenu', value: !showBurgerMenu}));
+        if (navbarCollapsed) dispatch(setTheme({ key: 'navbarCollapsed', value: !navbarCollapsed }));
+        if (showBurgerMenu) dispatch(setTheme({ key: 'showBurgerMenu', value: !showBurgerMenu }));
     };
 
     return (
@@ -38,6 +38,6 @@ const NavbarNavLink = ({title, route}: NavbarNavLinkType) => {
             {title ? title : route?.name}
         </Nav.Link>
     );
-};
+});
 
-export default memo(NavbarNavLink);
+export default NavbarNavLink;

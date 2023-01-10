@@ -11,15 +11,15 @@ type FalconCloseButtonType = {
     className?: string
 };
 
-const FalconCloseButton = ({
-                               size,
-                               onClick,
-                               noOutline,
-                               variant,
-                               className,
-                               ...rest
-                           }: FalconCloseButtonType) => {
-    const {isDark} = useAppSelector(state => state.theme)
+const FalconCloseButton = memo(({
+    size,
+    onClick,
+    noOutline,
+    variant,
+    className,
+    ...rest
+}: FalconCloseButtonType) => {
+    const { isDark } = useAppSelector(state => state.theme)
 
     return (
         <CloseButton
@@ -32,6 +32,6 @@ const FalconCloseButton = ({
             {...rest}
         />
     );
-};
+});
 
-export default memo(FalconCloseButton);
+export default FalconCloseButton;
