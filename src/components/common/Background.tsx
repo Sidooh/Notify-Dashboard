@@ -13,8 +13,8 @@ type BackgroundType = {
     style?: CSSProperties
 };
 
-const Background = ({image, overlay, position, video, className, style}: BackgroundType) => {
-    const bgStyle = {backgroundImage: `url(${image})`, ...style};
+const Background = memo(({ image, overlay, position, video, className, style }: BackgroundType) => {
+    const bgStyle = { backgroundImage: `url(${image})`, ...style };
 
     if (typeof position === 'string') {
         bgStyle.backgroundPosition = position;
@@ -48,6 +48,6 @@ const Background = ({image, overlay, position, video, className, style}: Backgro
             )}
         </div>
     );
-};
+});
 
-export default memo(Background);
+export default Background;

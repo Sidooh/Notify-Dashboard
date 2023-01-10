@@ -42,7 +42,7 @@ type BasicEChartsType = {
     style: CSSProperties
 };
 
-const BasicECharts = ({ echarts, options, ...rest }: BasicEChartsType) => {
+const BasicECharts = memo(({ echarts, options, ...rest }: BasicEChartsType) => {
     return (
         <ECharts
             echarts={echarts}
@@ -50,6 +50,6 @@ const BasicECharts = ({ echarts, options, ...rest }: BasicEChartsType) => {
             {...rest}
         />
     );
-};
+});
 
-export default memo(BasicECharts);
+export default BasicECharts;

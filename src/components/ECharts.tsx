@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { bind, clear } from 'size-sensor';
 import * as echarts from 'echarts';
 import { EChartsType } from 'echarts/types/dist/echarts';
 import { isFunction } from 'utils/helpers';
 import { logger } from 'utils/logger';
 
-const ECharts = ({
+const ECharts = memo(({
                      options,
                      notMerge = false,
                      lazyUpdate = false,
@@ -158,6 +158,6 @@ const ECharts = ({
             className={`echarts-for-react ${className}`}
         />
     );
-};
+});
 
 export default ECharts;

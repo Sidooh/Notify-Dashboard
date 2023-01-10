@@ -43,7 +43,7 @@ const validationSchema = yup.object({
     content: yup.string().required('Please provide a message!')
 });
 
-const Create = () => {
+const Create = memo(() => {
     const [destinationSelectEl, setDestinationSelectEl] = useState<any>(null);
     const [isTomSelectInstance, setIsTomSelectInstance] = useState(false);
 
@@ -196,6 +196,6 @@ const Create = () => {
             </div>
         </form>
     );
-};
+});
 
-export default memo(Create);
+export default Create;
