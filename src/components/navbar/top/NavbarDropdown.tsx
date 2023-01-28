@@ -11,7 +11,7 @@ type NavbarDropdownType = {
     children?: ReactNode
 };
 
-const NavbarDropdown = ({title, children}: NavbarDropdownType) => {
+const NavbarDropdown = memo(({ title, children }: NavbarDropdownType) => {
     const [dropdownOpen, setDropdownOpen] = useState(false);
 
     return (
@@ -58,6 +58,6 @@ const NavbarDropdown = ({title, children}: NavbarDropdownType) => {
             </Dropdown.Menu>
         </Dropdown>
     );
-};
+});
 
-export default memo(NavbarDropdown);
+export default NavbarDropdown;

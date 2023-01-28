@@ -77,7 +77,7 @@ const getOptions = (data: ChartOptionsType) => ({
     grid: {right: 5, left: 10, top: 0, bottom: 0}
 });
 
-const WeeklyNotifications = ({width, amountClassName}: WeeklyNotificationsType) => {
+const WeeklyNotifications = memo(({width, amountClassName}: WeeklyNotificationsType) => {
     const {data, isError, error, isLoading, isSuccess} = useGetDashboardChartDataQuery();
 
     if (isError) return <SectionError error={error}/>;
@@ -105,6 +105,6 @@ const WeeklyNotifications = ({width, amountClassName}: WeeklyNotificationsType) 
             </Card.Body>
         </Card>
     );
-};
+});
 
-export default memo(WeeklyNotifications);
+export default WeeklyNotifications;
