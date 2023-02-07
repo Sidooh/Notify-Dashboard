@@ -1003,13 +1003,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nabcellent/sui-react@npm:^3.1.1":
-  version: 3.1.1
-  resolution: "@nabcellent/sui-react@npm:3.1.1"
+"@nabcellent/sui-react@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "@nabcellent/sui-react@npm:3.4.0"
   peerDependencies:
     react: ^18.2.0
     react-dom: ^18.2.0
-  checksum: 34a631b48dba8eb3d20a56d67ca3044fb297d5cffe13d482f7a2b951fbb7cacc43f493c023cce8d15690e55ee3bda813eae337b450bff51a26c456a21411ca67
+  checksum: 3fca8370d175875e27695e6183a2c35a19c39ed790d18e71714015d4f4369784d75c0f5fef59d82e74b3a5cc70096085c1e2be08f48ebbe12c35f4311864dde6
   languageName: node
   linkType: hard
 
@@ -2484,7 +2484,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": ^6.2.1
     "@fortawesome/react-fontawesome": latest
     "@mui/material": ^5.10.16
-    "@nabcellent/sui-react": ^3.1.1
+    "@nabcellent/sui-react": ^3.4.0
     "@reduxjs/toolkit": ^1.9.1
     "@types/echarts": ^4.9.16
     "@types/node": ^18.11.18
@@ -3240,11 +3240,11 @@ __metadata:
 
 "typescript@patch:typescript@^4.9.3#~builtin<compat/typescript>":
   version: 4.9.3
-  resolution: "typescript@patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=d73830"
+  resolution: "typescript@patch:typescript@npm%3A4.9.3#~builtin<compat/typescript>::version=4.9.3&hash=a66ed4"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 67ca21a387c0572f1c04936e638dde7782c5aa520c3754aadc7cc9b7c915da9ebc3e27c601bfff4ccb7d7264e82dce6d277ada82ec09dc75024349e0ef64926d
+  checksum: d7bdcf5e18193f709339540d69577f7b0389000265db2bf10edfaa67336a29d6bcbee11828084150f7fdd110d605794cfa6df33bebc0a2e33daad2dbe2a7a59f
   languageName: node
   linkType: hard
 
