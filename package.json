@@ -1,6 +1,6 @@
 {
   "name": "notify-dashboard",
-  "packageManager": "yarn@3.3.1",
+  "packageManager": "yarn@3.4.1",
   "version": "0.1.0",
   "description": "Sidooh notification dashboard service",
   "repository": "https://github.com/sidooh/notify-dashboard",
