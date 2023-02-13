@@ -31,7 +31,7 @@ export const notificationsApi = createApi({
             transformResponse: (response: ApiResponse<Notification[]>) => response.data,
         }),
         notification: builder.query<Notification, string>({
-            query: id => `/notifications/${id}?with_notifiables=true`,
+            query: id => `/notifications/${id}?with=notifiables`,
             providesTags: ['Notification'],
             transformResponse: (response: ApiResponse<Notification>) => response.data,
         }),
