@@ -12,12 +12,12 @@ import { is, PageLoader } from '@nabcellent/sui-react';
 import useTheme from './hooks/useTheme';
 import { RootState } from 'app/store';
 import { useAppSelector } from './app/hooks';
+import Login from "./pages/auth/Login";
 
 library.add(fas, far, faQuestionCircle);
 
 const Dashboard = lazy(() => import('pages/dashboards/default/Dashboard'));
 const Analytics = lazy(() => import('pages/dashboards/analytics'));
-const Login = lazy(() => import('pages/auth/Login'));
 const SMSNotifications = lazy(() => import('pages/sms-notifications'));
 const Mails = lazy(() => import('pages/mails'));
 const CreateNotification = lazy(() => import('pages/notifications/Create'));
