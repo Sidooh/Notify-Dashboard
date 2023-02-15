@@ -9,7 +9,9 @@ import { LoadingButton, toast } from '@nabcellent/sui-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Notification } from '../../utils/types';
 import ValidationErrors from 'components/ValidationErrors';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Form, Row } from 'react-bootstrap';
+import ReactQuill from "react-quill";
+import 'react-quill/dist/quill.bubble.css';
 
 type DestinationOptionsType = { value: string, text: string }
 
@@ -46,6 +48,7 @@ const validationSchema = yup.object({
 const Create = memo(() => {
     const [destinationSelectEl, setDestinationSelectEl] = useState<any>(null);
     const [isTomSelectInstance, setIsTomSelectInstance] = useState(false);
+    const [content, setContent] = useState("")
 
     const { data: accounts, isSuccess: accIsSuccess } = useGetAllAccountsQuery();
     const { data: users, isSuccess: usersIsSuccess } = useGetAllUsersQuery();
@@ -91,6 +94,8 @@ const Create = memo(() => {
         },
         validationSchema: validationSchema,
         onSubmit: async values => {
+            console.log(values)
+            
             await storeNotification(values).unwrap();
         },
     });
@@ -99,7 +104,7 @@ const Create = memo(() => {
         const updateDestinationsOptions = (newOptions: DestinationOptionsType[]) => {
             const instance = destinationSelectEl.tomselect;
 
-            instance.clear();
+            instance.clear(true);
             instance.clearOptions();
             instance.addOptions(newOptions);
         };
@@ -120,6 +125,16 @@ const Create = memo(() => {
 
         if (destinationSelectEl && isTomSelectInstance) updateDestinations();
     };
+
+    const handleSelectAll = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.checked) {
+            Object.keys(destinationSelectEl.tomselect.options).forEach(opt => {
+                destinationSelectEl.tomselect.addItem(opt)
+            })
+        } else {
+            destinationSelectEl.tomselect.clear()
+        }
+    }
 
     return (
         <form onSubmit={formik.handleSubmit} className="row g-3 mb-3 justify-content-center">
@@ -169,6 +184,10 @@ const Create = memo(() => {
                          style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_1})` }}/>
                     <div className="card-body position-relative">
                         <div className="mb-3">
+                            <Form.Check type='switch' id='checkedSwitch' label='Send to all accounts'
+                                        onChange={handleSelectAll}/>
+                        </div>
+                        <div className="mb-3">
                             <label className="form-label" htmlFor="exampleFormControlInput1">Destination(s)</label>
                             <select className="form-select" multiple ref={el => setDestinationSelectEl(el)}
                                     size={1} name="destination"
@@ -178,16 +197,19 @@ const Create = memo(() => {
                         </div>
                         <div className="mb-3">
                             <label className="form-label" htmlFor="exampleFormControlInput1">Message</label>
-                            <textarea className={'form-control'} name="content" id="content" cols={30}
-                                      rows={10}
-                                      value={formik.values.content} placeholder={'Compose your message...'}
-                                      onChange={formik.handleChange}/>
-                            <small
-                                className={'text-danger'}>{formik.touched.content && formik.errors.content}</small>
+                            <ReactQuill theme="bubble" className={'form-control px-0'}
+                                        style={{ fontFamily: 'Avenir!important' }}
+                                        placeholder={'Compose your notification here...'}
+                                        value={content} onChange={(value, delta, source, editor) => {
+                                setContent(value)
+
+                                formik.setFieldValue("content", editor.getText())
+                            }}/>
+                            <small className={'text-danger'}>{formik.touched.content && formik.errors.content}</small>
                         </div>
 
                         <div className="text-end">
-                            <LoadingButton size="sm" loading={result.isLoading} loadingPosition="end"
+                            <LoadingButton type={'submit'} size="sm" loading={result.isLoading} loadingPosition="end"
                                            onClick={() => formik.submitForm()} disabled={!formik.dirty}
                                            endIcon={<FontAwesomeIcon icon={'paper-plane'}/>}>Send</LoadingButton>
                         </div>

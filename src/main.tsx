@@ -6,6 +6,7 @@ import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 
 import '@nabcellent/sui-react/dist/style.min.css';
+import './assets/css/style.css';
 
 const container = document.getElementById('root')!;
 const root = createRoot(container);
