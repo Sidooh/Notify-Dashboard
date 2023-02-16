@@ -11,6 +11,7 @@ import { Notification } from '../../utils/types';
 import ValidationErrors from 'components/ValidationErrors';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import ReactQuill from "react-quill";
+import JSONPretty from "react-json-pretty";
 import 'react-quill/dist/quill.bubble.css';
 
 type DestinationOptionsType = { value: string, text: string }
@@ -35,13 +36,17 @@ const EVENT_TYPES = [
 const validationSchema = yup.object({
     channel: yup.string().oneOf(CHANNELS).required(),
     event_type: yup.string().oneOf(EVENT_TYPES).required().default('DEFAULT'),
-    destination: yup.array().min(1).ensure().when('channel', {
+    send_to_all: yup.bool().oneOf([true, false]),
+    destination: yup.array().when('channel', {
         is: 'sms',
         then: schema => schema.of(yup.number()),
     }).when('channel', {
         is: 'mail',
-        then: schema => schema.of(yup.string().email('Kindly check that destinations are valid emails!'))
-    }).required(),
+        then: schema => schema.of(yup.string().email('Kindly check that all destinations are valid emails!'))
+    }).when('send_to_all', {
+        is: false,
+        then: schema => schema.min(1).ensure()
+    }),
     content: yup.string().required('Please provide a message!')
 });
 
@@ -85,17 +90,20 @@ const Create = memo(() => {
         }
     }, [accIsSuccess, accounts, result, destinationSelectEl, isTomSelectInstance]);
 
-    const formik = useFormik<Partial<Notification>>({
+    const formik = useFormik<Partial<Notification & { send_to_all: boolean }>>({
         initialValues: {
             channel: "SMS",
             event_type: "DEFAULT",
             destination: [],
             content: "",
+            send_to_all: false
         },
         validationSchema: validationSchema,
         onSubmit: async values => {
-            console.log(values)
-            
+            if (values.send_to_all) {
+                values.destination = Object.keys(destinationSelectEl.tomselect.options)
+            }
+
             await storeNotification(values).unwrap();
         },
     });
@@ -125,16 +133,6 @@ const Create = memo(() => {
 
         if (destinationSelectEl && isTomSelectInstance) updateDestinations();
     };
-
-    const handleSelectAll = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.target.checked) {
-            Object.keys(destinationSelectEl.tomselect.options).forEach(opt => {
-                destinationSelectEl.tomselect.addItem(opt)
-            })
-        } else {
-            destinationSelectEl.tomselect.clear()
-        }
-    }
 
     return (
         <form onSubmit={formik.handleSubmit} className="row g-3 mb-3 justify-content-center">
@@ -185,9 +183,22 @@ const Create = memo(() => {
                     <div className="card-body position-relative">
                         <div className="mb-3">
                             <Form.Check type='switch' id='checkedSwitch' label='Send to all accounts'
-                                        onChange={handleSelectAll}/>
+                                        name={'send_to_all'} onChange={formik.handleChange}
+                                        checked={formik.values.send_to_all}/>
+                            <small
+                                className={'text-danger'}>{formik.touched.send_to_all && formik.errors.send_to_all}</small>
                         </div>
-                        <div className="mb-3">
+                        {formik.values.send_to_all && (
+                            <JSONPretty id="json-pretty" className={'mb-3'}
+                                        data={Object.keys(destinationSelectEl.tomselect.options)}
+                                        theme={{
+                                            main: 'background-color:rgb(39, 46, 72);max-height:20rem',
+                                            key: 'color:red',
+                                            string: 'color: rgb(188, 208, 247);',
+                                            boolean: 'color:rgb(180, 200, 24);',
+                                        }}/>
+                        )}
+                        <div className={`mb-3 ${formik.values.send_to_all && 'collapse'}`}>
                             <label className="form-label" htmlFor="exampleFormControlInput1">Destination(s)</label>
                             <select className="form-select" multiple ref={el => setDestinationSelectEl(el)}
                                     size={1} name="destination"
@@ -198,7 +209,6 @@ const Create = memo(() => {
                         <div className="mb-3">
                             <label className="form-label" htmlFor="exampleFormControlInput1">Message</label>
                             <ReactQuill theme="bubble" className={'form-control px-0'}
-                                        style={{ fontFamily: 'Avenir!important' }}
                                         placeholder={'Compose your notification here...'}
                                         value={content} onChange={(value, delta, source, editor) => {
                                 setContent(value)
