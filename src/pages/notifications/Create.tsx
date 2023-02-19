@@ -117,7 +117,7 @@ const Create = memo(() => {
             instance.addOptions(newOptions);
         };
 
-        if (formik.values.channel === 'sms') {
+        if (formik.values.channel === 'SMS') {
             if (accIsSuccess && accounts) {
                 updateDestinationsOptions(accounts.map(account => ({ value: account.phone, text: account.phone })));
             }
@@ -152,8 +152,8 @@ const Create = memo(() => {
                         <select className="form-select" name={'channel'} value={formik.values.channel}
                                 onChange={handleChannelChange}>
                             {CHANNELS.sort().map((channel, i) => (
-                                <option key={i} value={String(channel)}>{channel.toUpperCase()}</option>)
-                            )}
+                                <option key={i} value={String(channel)}>{channel.toUpperCase()}</option>
+                            ))}
                         </select>
                         <small
                             className={'text-danger'}>{formik.touched.channel && formik.errors.channel}</small>
@@ -182,7 +182,10 @@ const Create = memo(() => {
                          style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_1})` }}/>
                     <div className="card-body position-relative">
                         <div className="mb-3">
-                            <Form.Check type='switch' id='checkedSwitch' label='Send to all accounts'
+                            <Form.Check type='switch' id='checkedSwitch'
+                                        label={(
+                                            <span>Send to all <b>{formik.values.channel === 'SMS' ? accounts?.length : users?.length}</b> accounts</span>
+                                        )}
                                         name={'send_to_all'} onChange={formik.handleChange}
                                         checked={formik.values.send_to_all}/>
                             <small
