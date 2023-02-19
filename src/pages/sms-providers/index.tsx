@@ -165,7 +165,7 @@ const SMSProviders = () => {
                             </div>
                             <div className="mb-3">
                                 <p className={'m-0'}>Priority</p>
-                                {[1, 2].map(p => {
+                                {[1, 2, 3].map(p => {
                                     return (
                                         <Form.Check key={p} inline label={p} name="priority" type={'radio'}
                                                     id={`priority-${p}`} value={p} className={'mb-0'}
