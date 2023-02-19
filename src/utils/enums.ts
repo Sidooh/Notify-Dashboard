@@ -1,5 +1,6 @@
 export enum SMSProvider {
     AT = 'AFRICASTALKING',
+    WAVESMS = 'WAVESMS',
     WEBSMS = 'WEBSMS'
 }
 

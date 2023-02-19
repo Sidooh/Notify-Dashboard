@@ -54,6 +54,7 @@ const Create = memo(() => {
     const [destinationSelectEl, setDestinationSelectEl] = useState<any>(null);
     const [isTomSelectInstance, setIsTomSelectInstance] = useState(false);
     const [content, setContent] = useState("")
+    const [channel, setChannel] = useState("SMS")
 
     const { data: accounts, isSuccess: accIsSuccess } = useGetAllAccountsQuery();
     const { data: users, isSuccess: usersIsSuccess } = useGetAllUsersQuery();
@@ -108,7 +109,7 @@ const Create = memo(() => {
         },
     });
 
-    const updateDestinations = () => {
+    const updateDestinations = (channel:string) => {
         const updateDestinationsOptions = (newOptions: DestinationOptionsType[]) => {
             const instance = destinationSelectEl.tomselect;
 
@@ -117,7 +118,7 @@ const Create = memo(() => {
             instance.addOptions(newOptions);
         };
 
-        if (formik.values.channel === 'sms') {
+        if (channel === 'SMS') {
             if (accIsSuccess && accounts) {
                 updateDestinationsOptions(accounts.map(account => ({ value: account.phone, text: account.phone })));
             }
@@ -126,12 +127,6 @@ const Create = memo(() => {
                 updateDestinationsOptions(users.map(user => ({ value: user.email, text: user.email })));
             }
         }
-    };
-
-    const handleChannelChange = (e: ChangeEvent<HTMLSelectElement>) => {
-        formik.setFieldValue("channel", e.target.value, true);
-
-        if (destinationSelectEl && isTomSelectInstance) updateDestinations();
     };
 
     return (
@@ -150,10 +145,14 @@ const Create = memo(() => {
                     <div className="card-body position-relative">
                         <label className="form-label" htmlFor="exampleFormControlInput1">Channel</label>
                         <select className="form-select" name={'channel'} value={formik.values.channel}
-                                onChange={handleChannelChange}>
+                                onChange={(e) => {
+                                    formik.setFieldValue("channel", e.target.value, true);
+
+                                    if (destinationSelectEl && isTomSelectInstance) updateDestinations(e.target.value);}
+                                }>
                             {CHANNELS.sort().map((channel, i) => (
-                                <option key={i} value={String(channel)}>{channel.toUpperCase()}</option>)
-                            )}
+                                <option key={i} value={String(channel)}>{channel.toUpperCase()}</option>
+                            ))}
                         </select>
                         <small
                             className={'text-danger'}>{formik.touched.channel && formik.errors.channel}</small>
@@ -182,7 +181,10 @@ const Create = memo(() => {
                          style={{ backgroundImage: `url(${IMAGES.icons.spotIllustrations.corner_1})` }}/>
                     <div className="card-body position-relative">
                         <div className="mb-3">
-                            <Form.Check type='switch' id='checkedSwitch' label='Send to all accounts'
+                            <Form.Check type='switch' id='checkedSwitch'
+                                        label={(
+                                            <span>Send to all <b>{formik.values.channel === 'SMS' ? accounts?.length : users?.length}</b> accounts</span>
+                                        )}
                                         name={'send_to_all'} onChange={formik.handleChange}
                                         checked={formik.values.send_to_all}/>
                             <small
@@ -200,9 +202,8 @@ const Create = memo(() => {
                         )}
                         <div className={`mb-3 ${formik.values.send_to_all && 'collapse'}`}>
                             <label className="form-label" htmlFor="exampleFormControlInput1">Destination(s)</label>
-                            <select className="form-select" multiple ref={el => setDestinationSelectEl(el)}
-                                    size={1} name="destination"
-                                    value={formik.values.destination} onChange={formik.handleChange}/>
+                            <select className="form-select" multiple ref={el => setDestinationSelectEl(el)} size={1}
+                                    name="destination" value={formik.values.destination} onChange={formik.handleChange}/>
                             <small
                                 className={'text-danger'}>{formik.touched.destination && formik.errors.destination}</small>
                         </div>

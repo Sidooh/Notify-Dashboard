@@ -5,6 +5,7 @@ import { Notification } from 'utils/types';
 type DashboardSummariesData = {
     default_sms_provider: string
     sms_credits: {
+        wavesms: number
         africastalking: number,
         websms: number
     }
