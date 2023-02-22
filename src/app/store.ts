@@ -6,7 +6,6 @@ import { notificationsApi } from 'features/notifications/notificationsAPI';
 import { dashboardApi } from 'features/dashboard/dashboardApi';
 import { settingsApi } from 'features/settings/settingsApi';
 import { smsProvidersApi } from 'features/sms-providers/smsProviderApi';
-import { smsNotificationsApi } from '../features/sms-notifications/smsNotificationsApi';
 import { mailsApi } from '../features/mails/mailsApi';
 
 export const store = configureStore({
@@ -19,7 +18,6 @@ export const store = configureStore({
         [notificationsApi.reducerPath]: notificationsApi.reducer,
         [smsProvidersApi.reducerPath]: smsProvidersApi.reducer,
         [settingsApi.reducerPath]: settingsApi.reducer,
-        [smsNotificationsApi.reducerPath]: smsNotificationsApi.reducer,
         [mailsApi.reducerPath]: mailsApi.reducer,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware()
@@ -29,7 +27,6 @@ export const store = configureStore({
             notificationsApi.middleware,
             settingsApi.middleware,
             smsProvidersApi.middleware,
-            smsNotificationsApi.middleware,
             mailsApi.middleware,
         )
 });

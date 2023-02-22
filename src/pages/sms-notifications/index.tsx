@@ -1,6 +1,6 @@
 import { SectionError, SectionLoader } from '@nabcellent/sui-react';
 import NotificationTable from 'components/tables/NotificationTable';
-import { useGetSMSNotificationsQuery } from 'features/sms-notifications/smsNotificationsApi';
+import { useGetSMSNotificationsQuery } from 'features/notifications/notificationsAPI';
 import { logger } from 'utils/logger';
 
 const Index = () => {

@@ -1,5 +1,5 @@
 import { ComponentLoader, SectionError } from '@nabcellent/sui-react';
-import { useGetRecentNotificationsQuery } from 'features/dashboard/dashboardApi';
+import { useGetRecentNotificationsQuery } from 'features/notifications/notificationsAPI';
 import NotificationTable from 'components/tables/NotificationTable';
 import { logger } from 'utils/logger';
 
