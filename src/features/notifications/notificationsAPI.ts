@@ -23,6 +23,11 @@ export const notificationsApi = createApi({
         getDashboard: builder.query<any, void>({
             query: () => '/dashboard',
         }),
+        getRecentNotifications: builder.query<Notification[], void>({
+            query: () => '/dashboard/recent-notifications',
+            transformResponse: (response: { data: Notification[] }) => response.data,
+            providesTags: ['Notification']
+        }),
 
         //  Notification Endpoints
         notifications: builder.query<Notification[], void>({
@@ -50,12 +55,19 @@ export const notificationsApi = createApi({
             }),
             invalidatesTags: ['Notification'],
             transformResponse: (response: ApiResponse<Notification>) => response.data,
-        })
+        }),
+
+        getSMSNotifications: builder.query<Notification[], void>({
+            query: () => '/sms',
+            providesTags:['Notification'],
+            transformResponse: (response: ApiResponse<Notification[]>) => response.data,
+        }),
     })
 });
 
 export const {
-    useGetDashboardQuery,
+    useGetRecentNotificationsQuery,
+    useGetSMSNotificationsQuery,
 
     useNotificationsQuery,
     useNotificationQuery,
