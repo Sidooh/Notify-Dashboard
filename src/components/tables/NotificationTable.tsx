@@ -1,5 +1,5 @@
 import { Card, Spinner } from 'react-bootstrap';
-import { DataTable, Status, StatusChip, TableDate, Tooltip } from '@nabcellent/sui-react';
+import { DataTable, PhoneChip, Status, StatusChip, TableDate, Tooltip } from '@nabcellent/sui-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Notification } from '../../utils/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,13 +22,14 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
                                    accessorKey: 'destination',
                                    header: 'Destination',
                                    cell: ({ row }: any) => {
-                                       const { channel, destination } = row.original;
-                                       let icon: string;
+                                       let { channel, destination } = row.original;
+                                       let icon: string, text;
 
                                        if (channel === "MAIL") {
                                            icon = "far fa-envelope";
                                        } else if (channel === "SMS") {
                                            icon = "fas fa-comment-sms";
+                                           destination = <PhoneChip phone={destination}/>
                                        } else {
                                            icon = "fab fa-slack";
                                        }
