@@ -81,7 +81,7 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
                                        const { id, status } = rowData.row.original;
 
                                        if (result.isSuccess && status === Status.COMPLETED) {
-                                           toast({ text: 'Notification Sent!' })
+                                           toast({ text: 'Notification Sent! ✔' })
                                        }
 
                                        return (
