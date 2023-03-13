@@ -10,7 +10,7 @@ export const smsProvidersApi = createApi({
         'SMSProvider'
     ],
     baseQuery: fetchBaseQuery({
-        baseUrl: `${CONFIG.sidooh.services.notify.api.url}/sms/providers`,
+        baseUrl: `${CONFIG.sidooh.services.notify.api.url}/sms-providers`,
         prepareHeaders: (headers) => {
             const auth = JSON.parse(localStorage.getItem('auth') || '{}');
 

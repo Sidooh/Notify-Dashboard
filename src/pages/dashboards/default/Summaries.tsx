@@ -4,15 +4,12 @@ import SmsBalances from './SmsBalances';
 import { Badge, ComponentLoader, SectionError } from '@nabcellent/sui-react';
 import { useGetDashboardSummariesQuery } from 'features/dashboard/dashboardApi';
 import CardBgCorner from 'components/CardBgCorner';
-import { logger } from 'utils/logger';
 
 const Summaries = () => {
     const {data: stats, isError, error, isLoading, isSuccess} = useGetDashboardSummariesQuery();
 
     if (isError) return <SectionError error={error}/>;
     if (isLoading || !isSuccess || !stats) return <ComponentLoader/>;
-
-    logger.log(stats);
 
     return (
         <Row className="g-3 mb-3">

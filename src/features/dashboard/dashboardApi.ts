@@ -1,6 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CONFIG } from 'config';
 import { Notification } from 'utils/types';
+import { RawAnalytics } from "@nabcellent/sui-react";
 
 type DashboardSummariesData = {
     default_sms_provider: string
@@ -11,10 +12,6 @@ type DashboardSummariesData = {
     }
     total_notifications: number
     total_notifications_today: number
-}
-type ChartData = {
-    labels: string[],
-    datasets: number[]
 }
 
 export const dashboardApi = createApi({
@@ -37,9 +34,9 @@ export const dashboardApi = createApi({
     }),
     endpoints: builder => ({
         //  Earning Endpoints
-        getDashboardChartData: builder.query<ChartData, void>({
+        getDashboardChartData: builder.query<RawAnalytics[], void>({
             query: () => '/chart',
-            transformResponse: (response: { data: ChartData }) => response.data,
+            transformResponse: (response: { data: RawAnalytics[] }) => response.data,
             providesTags: ['DashboardChart']
         }),
         getDashboardSummaries: builder.query<DashboardSummariesData, void>({

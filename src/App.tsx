@@ -18,8 +18,7 @@ library.add(fas, far, faQuestionCircle);
 
 const Dashboard = lazy(() => import('pages/dashboards/default/Dashboard'));
 const Analytics = lazy(() => import('pages/dashboards/analytics'));
-const SMSNotifications = lazy(() => import('pages/sms-notifications'));
-const Mails = lazy(() => import('pages/mails'));
+const Notifications = lazy(() => import('pages/notifications'));
 const CreateNotification = lazy(() => import('pages/notifications/Create'));
 const ShowNotification = lazy(() => import('pages/notifications/Show'));
 const SMSProviders = lazy(() => import('pages/sms-providers'));
@@ -51,12 +50,11 @@ function App() {
                     <Route path={'/dashboard'} element={<Dashboard/>}/>
                     <Route path={'/dashboard/analytics'} element={<Analytics/>}/>
 
-                    <Route path={'/notifications/sms'} element={<SMSNotifications/>}/>
-                    <Route path={'/notifications/mail'} element={<Mails/>}/>
+                    <Route path={'/notifications'} element={<Notifications/>}/>
                     <Route path={'/notifications/create'} element={<CreateNotification/>}/>
                     <Route path={'/notifications/:id'} element={<ShowNotification/>}/>
 
-                    <Route path={'/sms/providers'} element={<SMSProviders/>}/>
+                    <Route path={'/sms-providers'} element={<SMSProviders/>}/>
                     <Route path={'/settings'} element={<Settings/>}/>
                     <Route path={'*'} element={<Dashboard/>}/>
                 </Route>

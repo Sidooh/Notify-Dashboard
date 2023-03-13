@@ -1,5 +1,5 @@
 import { Card, Spinner } from 'react-bootstrap';
-import { DataTable, PhoneChip, Status, StatusChip, TableDate, Tooltip } from '@nabcellent/sui-react';
+import { DataTable, PhoneChip, Status, StatusChip, TableDate } from '@nabcellent/sui-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Notification } from '../../utils/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,7 @@ import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { useRetryNotificationMutation } from 'features/notifications/notificationsAPI';
 import moment from 'moment';
+import { Tooltip } from '@mui/material';
 
 type NotificationTableProps = { title: string, notifications: Notification[] }
 
@@ -18,6 +19,10 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
             <Card.Body>
                 <DataTable onCreateRow={() => navigate('/notifications/create')} title={title}
                            columns={[
+                               {
+                                   accessorKey: 'channel',
+                                   header: 'Channel'
+                               },
                                {
                                    accessorKey: 'destination',
                                    header: 'Destination',
@@ -34,7 +39,7 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
                                            icon = "fab fa-slack";
                                        }
 
-                                       return <b className={'text-nowrap'}><i className={icon}/> {destination}</b>;
+                                       return destination
                                    }
                                },
                                {
@@ -50,7 +55,8 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
                                                    WebkitBoxOrient: "vertical",
                                                    WebkitLineClamp: 2,
                                                    cursor: "context-menu",
-                                                   maxWidth: '25rem'
+                                                   maxWidth: '25rem',
+                                                   marginBottom: 0
                                                }}>{content}</p>
                                            </Tooltip>
                                        );
