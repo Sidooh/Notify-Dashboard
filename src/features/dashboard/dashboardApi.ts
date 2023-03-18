@@ -12,6 +12,8 @@ type DashboardSummariesData = {
     }
     total_notifications: number
     total_notifications_today: number
+    sms_costs: number
+    sms_costs_today: number
 }
 
 export const dashboardApi = createApi({
