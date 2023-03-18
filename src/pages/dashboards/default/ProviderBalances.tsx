@@ -11,7 +11,7 @@ const ProviderBalances = () => {
     if (isError) return <SectionError error={error}/>;
     if (isLoading || !isSuccess || !data) return <ComponentLoader/>;
 
-    const {wavesms_balance, websms_balance, africastalking_balance} = data
+    const { wavesms_balance, websms_balance, africastalking_balance } = data
 
     return (
         <Row className="g-3 h-100">
@@ -24,7 +24,7 @@ const ProviderBalances = () => {
                             <CountUp end={wavesms_balance} separator="," prefix={'KES '} decimals={2}/>
                         </h4>
                         <Tooltip className={'position-absolute top-0 end-0 m-3'}
-                            title={`${wavesms_balance} * 0.2 ≈ KSH${(wavesms_balance * .2).toFixed(2)}`}>
+                                 title={`${wavesms_balance} * 0.2 ≈ KSH${(wavesms_balance * .2).toFixed(2)}`}>
                             <span className="fas fa-info-circle fs-7 text-400 position-absolute"/>
                         </Tooltip>
                     </Card.Body>
