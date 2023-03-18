@@ -15,7 +15,7 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
     const navigate = useNavigate();
 
     return (
-        <Card>
+        <Card className={'mb-3'}>
             <Card.Body>
                 <DataTable onCreateRow={() => navigate('/notifications/create')} title={title}
                            columns={[

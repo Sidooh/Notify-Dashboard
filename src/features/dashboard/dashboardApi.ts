@@ -1,19 +1,19 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CONFIG } from 'config';
 import { Notification } from 'utils/types';
-import { RawAnalytics } from "@nabcellent/sui-react";
+import { ApiResponse, RawAnalytics } from "@nabcellent/sui-react";
 
 type DashboardSummariesData = {
     default_sms_provider: string
-    sms_credits: {
-        wavesms: number
-        africastalking: number,
-        websms: number
-    }
     total_notifications: number
     total_notifications_today: number
     sms_costs: number
     sms_costs_today: number
+}
+type ProvidersBalancesData = {
+    wavesms_balance: number
+    africastalking_balance: number,
+    websms_balance: number
 }
 
 export const dashboardApi = createApi({
@@ -50,6 +50,10 @@ export const dashboardApi = createApi({
             query: () => '/recent-notifications',
             transformResponse: (response: { data: Notification[] }) => response.data,
             providesTags: ['Notification']
+        }),
+        getProvidersBalances: builder.query<ProvidersBalancesData, void>({
+            query: () => '/providers/balances',
+            transformResponse: (response: ApiResponse<ProvidersBalancesData>) => response.data
         })
     })
 });
@@ -57,4 +61,5 @@ export const dashboardApi = createApi({
 export const {
     useGetDashboardChartDataQuery,
     useGetDashboardSummariesQuery,
+    useGetProvidersBalancesQuery
 } = dashboardApi;

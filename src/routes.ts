@@ -24,13 +24,13 @@ export const notificationRoutes: RouteType = {
     label: 'Notifications',
     children: [
         {
-            name: 'Notifications',
-            icon: 'comment-sms',
+            name: 'All Notifications',
+            icon: 'bell',
             active: true,
             to: '/notifications',
         },
         {
-            name: 'Create Notification',
+            name: 'Send Notification',
             icon: 'paper-plane',
             to: '/notifications/create',
             active: true,

@@ -1,9 +1,9 @@
 import { lazy, Suspense } from 'react';
 import { ComponentLoader } from '@nabcellent/sui-react';
-
-const Chart = lazy(() => import('./Chart'));
-const Summaries = lazy(() => import('./Summaries'));
-const RecentNotifications = lazy(() => import('./RecentNotifications'));
+import ProviderBalances from "./ProviderBalances";
+import Chart from "./Chart";
+import Summaries from "./Summaries";
+import RecentNotifications from "./RecentNotifications";
 
 const Dashboard = () => {
     return (
@@ -11,6 +11,7 @@ const Dashboard = () => {
             <Suspense fallback={<ComponentLoader/>}><Chart/></Suspense>
             <Suspense fallback={<ComponentLoader/>}><Summaries/></Suspense>
             <Suspense fallback={<ComponentLoader/>}><RecentNotifications/></Suspense>
+            <Suspense fallback={<ComponentLoader/>}><ProviderBalances/></Suspense>
         </>
     );
 };
