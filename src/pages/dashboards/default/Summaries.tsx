@@ -11,8 +11,8 @@ const Summaries = () => {
     if (isLoading || !isSuccess || !stats) return <ComponentLoader/>;
 
     return (
-        <Row className="g-3 mb-3">
-            <Col lg={6}>
+        <Row className="g-3 mb-3 h-100">
+            <Col lg={6} xxl={12}>
                 <Card className="h-md-100">
                     <CardBgCorner corner={3}/>
                     <Card.Body className={'position-relative d-flex flex-column justify-content-center'}>
@@ -28,7 +28,7 @@ const Summaries = () => {
                     </Card.Body>
                 </Card>
             </Col>
-            <Col lg={6}>
+            <Col lg={6} xxl={12}>
                 <Card className="h-md-100">
                     <CardBgCorner corner={2}/>
                     <Card.Body className={'position-relative d-flex flex-column justify-content-center'}>

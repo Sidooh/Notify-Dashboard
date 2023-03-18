@@ -123,7 +123,7 @@ const DashboardChart = memo(() => {
     };
 
     return (
-        <Card className="mb-3">
+        <Card className="mb-0 mb-xxl-3">
             <CardBgCorner/>
             <Card.Body className={'position-relative'}
                        style={{
