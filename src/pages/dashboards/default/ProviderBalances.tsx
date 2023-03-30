@@ -21,7 +21,7 @@ const ProviderBalances = () => {
                     <Card.Body className={'position-relative'}>
                         <h6 className="mb-md-0 mb-lg-2 text-light">WaveSMS Balance</h6>
                         <h4 className="m-0 fs-2 fw-normal text-white">
-                            <CountUp end={wavesms_balance} separator="," prefix={'KES '} decimals={2}/>
+                            <CountUp end={wavesms_balance} separator="," decimals={2}/>
                         </h4>
                         <Tooltip className={'position-absolute top-0 end-0 m-3'}
                                  title={`${wavesms_balance} * 0.2 ≈ KSH${(wavesms_balance * .2).toFixed(2)}`}>
@@ -36,7 +36,7 @@ const ProviderBalances = () => {
                     <Card.Body className={'position-relative'}>
                         <h6 className="mb-md-0 mb-lg-2 text-light">WebSMS Balance</h6>
                         <h4 className="m-0 fs-2 fw-normal text-white">
-                            <CountUp end={websms_balance} separator="," prefix={'KES '} decimals={2}/>
+                            <CountUp end={websms_balance} separator="," decimals={2}/>
                         </h4>
                         <Tooltip className={'position-absolute top-0 end-0 m-3'}
                                  title={`${websms_balance} * 0.3 ≈ KSH${(websms_balance * .3).toFixed(2)}`}>
@@ -51,7 +51,7 @@ const ProviderBalances = () => {
                     <Card.Body className={'position-relative'}>
                         <h6 className="mb-md-0 mb-lg-2 text-light">AT SMS Balance</h6>
                         <h4 className="m-0 fs-2 fw-normal text-white">
-                            <CountUp end={africastalking_balance} separator="," prefix={'KES '} decimals={2}/>
+                            <CountUp end={africastalking_balance} separator="," decimals={2}/>
                         </h4>
                         <Tooltip className={'position-absolute top-0 end-0 m-3'}
                                  title={`${africastalking_balance} * 0.8 ≈ KSH${(africastalking_balance * .8).toFixed(2)}`}>
