@@ -1,20 +1,35 @@
-import { memo } from 'react';
+import { Fragment, memo } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
-import { useNotificationQuery, useRetryNotificationMutation } from 'features/notifications/notificationsAPI';
-import { IconButton, PhoneChip, SectionError, SectionLoader, Status, StatusChip } from '@nabcellent/sui-react';
+import {
+    useCheckNotificationMutation,
+    useNotificationQuery,
+    useRetryNotificationMutation
+} from 'features/notifications/notificationsAPI';
+import {
+    IconButton,
+    PhoneChip,
+    SectionError,
+    SectionLoader,
+    Status,
+    StatusChip,
+    Sweet,
+    toast
+} from '@nabcellent/sui-react';
 import CardBgCorner from 'components/CardBgCorner';
-import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
+import { faArrowRotateRight, faArrowsRotate, faCrosshairs, faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Spinner } from 'react-bootstrap';
+import { Spinner, Dropdown, Row, Col } from 'react-bootstrap';
 import JSONPretty from 'react-json-pretty';
 import { logger } from 'utils/logger';
+import { FaArrowRight, GrRotateRight } from "react-icons/all";
 
 const Show = () => {
     const { id } = useParams();
 
     const { data: notification, error, isLoading, isSuccess, isError } = useNotificationQuery(String(id));
     const [retryNotification, result] = useRetryNotificationMutation();
+    const [checkNotification] = useCheckNotificationMutation();
 
     if (isError) return <SectionError error={error}/>;
     if (isLoading || !isSuccess || !notification) return <SectionLoader/>;
@@ -32,32 +47,102 @@ const Show = () => {
         destinationIcon = "fab fa-slack";
     }
 
-    console.log(notification.content.split('\n'))
+    const queryNotification = async (action: 'retry' | 'check-notification') => {
+        let options: any = {
+            backdrop: `rgba(0, 0, 150, 0.4)`,
+            showLoaderOnConfirm: true,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Proceed',
+            allowOutsideClick: () => !Sweet.isLoading()
+        };
+
+        const queryError = (res: any, titleText: string) => toast({
+            titleText,
+            text: res?.error?.data?.message || res?.error.error,
+            icon: 'error',
+            timer: 7
+        });
+
+        if (action === 'retry') {
+            options.title = 'Retry Transaction';
+            options.text = 'Are you sure you want to retry this transaction?';
+            options.preConfirm = async () => {
+                const res = await retryNotification(notification.id) as any;
+
+                if (res?.data?.id) toast({ titleText: 'Retry Successful!', icon: 'success' });
+                if (res?.error) await queryError(res, 'Retry Error');
+            };
+        }
+        if (action === 'check-notification') {
+            options.title = 'Check Notification';
+
+            if (notification?.id) {
+                options.text = 'Are you sure you want to check this notification?';
+            } else {
+                options.input = 'number';
+                options.inputAttributes = { placeholder: 'Notification ID' };
+            }
+
+            options.preConfirm = async () => {
+                const res = await checkNotification(notification.id) as any;
+
+                if (res?.data?.id) toast({ titleText: 'Check Notification Complete!', icon: 'success' });
+                if (res?.error) await queryError(res, 'Check Notification Error!');
+            };
+        }
+
+        await Sweet.fire(options);
+    };
+
+    const notificationDropdownItems = [];
+    if (notification.status === Status.FAILED) {
+        notificationDropdownItems.push(
+            <Dropdown.Item as="button" onClick={() => queryNotification('retry')}>
+                <GrRotateRight size={17}/>&nbsp; Retry
+            </Dropdown.Item>
+        );
+    }
+
+    if (notification.status === Status.PENDING) {
+        notificationDropdownItems.push(
+            <Dropdown.Item as="button" onClick={() => queryNotification('check-notification')}>
+                <FontAwesomeIcon icon={faArrowsRotate}/>&nbsp; Check Notification
+            </Dropdown.Item>
+        );
+    }
 
     return (
         <>
             <div className="card mb-3">
                 <CardBgCorner corner={4}/>
-                <div className="card-body position-relative">
-                    <div className="d-flex justify-content-between align-items-center">
+                <Row className="card-body position-relative">
+                    <Col className="d-flex flex-column justify-content-between">
                         <h5 className={'m-0'}>Notification Details: #{notification?.id}</h5>
-                        <div className={'text-end'}>
-                            <small>Channel</small>
-                            <h4 className={'m-0'}><i className={destinationIcon}/> {notification?.channel.toUpperCase()}</h4>
+                        <p className="fs--1">{moment(notification?.created_at).format("MMMM Do YYYY, h:mm A")}</p>
+                        <div className="d-flex align-items-center justify-content-between">
+                            <StatusChip status={notification?.status}/>
                         </div>
-                    </div>
-                    <p className="fs--1">{moment(notification?.created_at).format("MMMM Do YYYY, h:mm A")}</p>
-                    <div className="d-flex align-items-center justify-content-between">
-                        <StatusChip status={notification?.status}/>
-                        {notification?.status === Status.FAILED && (
-                            <IconButton>
-                                {result.isLoading ? <Spinner animation={'border'} size={'sm'}/> :
-                                    <FontAwesomeIcon className={'cursor-pointer'} icon={faRotateRight}
-                                                     onClick={() => retryNotification(notification.id)}/>}
-                            </IconButton>
+                    </Col>
+                    <Col className={'text-end'}>
+                        <small>Channel</small>
+                        <h4>
+                            <i className={destinationIcon}/> {notification?.channel.toUpperCase()}
+                        </h4>
+
+                        {notificationDropdownItems.length > 0 && (
+                            <Dropdown>
+                                <Dropdown.Toggle size={'sm'} as={'a'} className={'cursor-pointer'}>
+                                    <FontAwesomeIcon icon={faCrosshairs}
+                                                     className={'btn btn-danger p-1 rounded-circle'}/>
+                                </Dropdown.Toggle>
+                                <Dropdown.Menu>
+                                    {notificationDropdownItems.map((item, i) => <Fragment key={i}>{item}</Fragment>)}
+                                </Dropdown.Menu>
+                            </Dropdown>
                         )}
-                    </div>
-                </div>
+                    </Col>
+                </Row>
             </div>
             <div className="row g-3">
                 <div className="col-lg-7">
@@ -90,26 +175,25 @@ const Show = () => {
                             <div className="row">
                                 <div className="col-md-12 mb-4 mb-lg-0">
                                     <h5 className="mb-3 fs-0">Callbacks</h5>
-                                    {
-                                        notification.notifiables?.length ? notification.notifiables.map((cb: any, i: number) => {
-                                            return (
-                                                <div key={`cb-${i}`}>
-                                                    <JSONPretty id="json-pretty" data={cb} theme={{
-                                                        main: 'background-color:rgb(39, 46, 72);max-height:20rem',
-                                                        key: 'color:red',
-                                                        string: 'color: rgb(188, 208, 247);',
-                                                        boolean: 'color:rgb(180, 200, 24);',
-                                                    }}/>
-                                                </div>
-                                            );
-                                        }) : <JSONPretty id="json-pretty" data={{ message: 'No callback :(' }}
+                                    <div style={{ maxHeight: '25rem', overflowY:'auto' }}>
+                                        {notification.notifiables?.length ? notification.notifiables.map((cb: any, i: number) => (
+                                            <div key={`cb-${i}`}>
+                                                <JSONPretty id="json-pretty" data={cb} theme={{
+                                                    main: 'background-color:rgb(39, 46, 72);max-height:20rem',
+                                                    key: 'color:red',
+                                                    string: 'color: rgb(188, 208, 247);',
+                                                    boolean: 'color:rgb(180, 200, 24);',
+                                                }}/>
+                                            </div>
+                                        )) : <JSONPretty id="json-pretty" data={{ message: 'No callback :(' }}
                                                          theme={{
                                                              main: 'background-color:rgb(39, 46, 72);max-height:20rem',
                                                              key: 'color:red',
                                                              string: 'color: rgb(188, 208, 247);',
                                                              boolean: 'color:rgb(180, 200, 24);',
                                                          }}/>
-                                    }
+                                        }
+                                    </div>
                                 </div>
                             </div>
                         </div>

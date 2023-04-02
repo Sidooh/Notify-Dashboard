@@ -61,5 +61,6 @@ export const dashboardApi = createApi({
 export const {
     useGetDashboardChartDataQuery,
     useGetDashboardSummariesQuery,
+    useGetRecentNotificationsQuery,
     useGetProvidersBalancesQuery
 } = dashboardApi;

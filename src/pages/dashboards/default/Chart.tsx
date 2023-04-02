@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from 'react';
-import { Button, Card, Form } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 import {
     ChartAid,
     chartSelectOptions,
@@ -16,7 +16,8 @@ import { logger } from 'utils/logger';
 import { Line } from "react-chartjs-2";
 import {
     CategoryScale,
-    Chart, ChartData,
+    Chart,
+    ChartData,
     ChartOptions,
     Legend,
     LinearScale,
@@ -37,7 +38,7 @@ Chart.defaults.font.family = "'Avenir', sans-serif"
 const DashboardChart = memo(() => {
     const [chartTypeOpt, setChartTypeOpt] = useState<'time-series' | 'cumulative'>('time-series')
     const [chartFreqOpt, setChartFreqOpt] = useState(Frequency.HOURLY)
-    const [chartPeriodOpt, setChartPeriodOpt] = useState(Period.TODAY)
+    const [chartPeriodOpt, setChartPeriodOpt] = useState(Period.LAST_24_HOURS)
     const [labels, setLabels] = useState<string[]>([])
     const [dataset, setDataset] = useState<number[]>([])
 
@@ -45,7 +46,9 @@ const DashboardChart = memo(() => {
 
     useEffect(() => {
         if (data?.length) {
-            const aid = new ChartAid(chartPeriodOpt, chartFreqOpt, true)
+            const aid = new ChartAid(chartPeriodOpt, chartFreqOpt, )
+            aid.timeIsUTC = true
+
             let { labels, dataset } = aid.getDataset(data)
 
             setLabels(labels)

@@ -9,7 +9,7 @@ export const notificationsApi = createApi({
     keepUnusedDataFor: 60 * 5, // Five minutes
     tagTypes: ['Notification', 'Setting'],
     baseQuery: fetchBaseQuery({
-        baseUrl: `${CONFIG.sidooh.services.notify.api.url}`,
+        baseUrl: `${CONFIG.sidooh.services.notify.api.url}/notifications`,
         prepareHeaders: (headers, { getState }) => {
             const token = (getState() as RootState).auth.auth?.token;
 
@@ -19,30 +19,20 @@ export const notificationsApi = createApi({
         }
     }),
     endpoints: (builder) => ({
-        //  Dashboard Endpoints
-        getDashboard: builder.query<any, void>({
-            query: () => '/dashboard',
-        }),
-        getRecentNotifications: builder.query<Notification[], void>({
-            query: () => '/dashboard/recent-notifications',
-            transformResponse: (response: { data: Notification[] }) => response.data,
-            providesTags: ['Notification']
-        }),
-
         //  Notification Endpoints
         notifications: builder.query<Notification[], void>({
-            query: () => '/notifications',
+            query: () => '/',
             providesTags: ['Notification'],
             transformResponse: (response: ApiResponse<Notification[]>) => response.data,
         }),
         notification: builder.query<Notification, string>({
-            query: id => `/notifications/${id}?with=notifiables`,
+            query: id => `/${id}?with=notifiables`,
             providesTags: ['Notification'],
             transformResponse: (response: ApiResponse<Notification>) => response.data,
         }),
         storeNotification: builder.mutation<Notification, Partial<Notification>>({
             query: notification => ({
-                url: '/notifications',
+                url: '/',
                 method: 'POST',
                 body: notification
             }),
@@ -50,7 +40,15 @@ export const notificationsApi = createApi({
         }),
         retryNotification: builder.mutation<Notification, number>({
             query: id => ({
-                url: `/notifications/${id}/retry`,
+                url: `/${id}/retry`,
+                method: 'POST'
+            }),
+            invalidatesTags: ['Notification'],
+            transformResponse: (response: ApiResponse<Notification>) => response.data,
+        }),
+        checkNotification: builder.mutation<Notification, number>({
+            query: id => ({
+                url: `/${id}/check-notification`,
                 method: 'POST'
             }),
             invalidatesTags: ['Notification'],
@@ -60,11 +58,10 @@ export const notificationsApi = createApi({
 });
 
 export const {
-    useGetRecentNotificationsQuery,
-
     useNotificationsQuery,
     useNotificationQuery,
     useStoreNotificationMutation,
 
-    useRetryNotificationMutation
+    useRetryNotificationMutation,
+    useCheckNotificationMutation
 } = notificationsApi;
