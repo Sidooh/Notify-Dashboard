@@ -16,9 +16,7 @@ export default function ValidationErrors({errors}: { errors: any }) {
             <div className="mb-3">
                 <div className="text-danger">Whoops! Something is invalid.🌚</div>
 
-                <ul className="text-sm text-danger">
-                    {errors}
-                </ul>
+                <ul className="text-sm text-danger">{errors}</ul>
             </div>
         )
     );

@@ -1,5 +1,5 @@
 import { Card, Spinner } from 'react-bootstrap';
-import { DataTable, PhoneChip, Status, StatusChip, TableDate, Tooltip } from '@nabcellent/sui-react';
+import { DataTable, PhoneChip, Status, StatusChip, TableDate, toast } from '@nabcellent/sui-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Notification } from '../../utils/types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,6 +7,7 @@ import { faEye } from '@fortawesome/free-regular-svg-icons';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { useRetryNotificationMutation } from 'features/notifications/notificationsAPI';
 import moment from 'moment';
+import { Tooltip } from '@mui/material';
 
 type NotificationTableProps = { title: string, notifications: Notification[] }
 
@@ -14,10 +15,14 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
     const navigate = useNavigate();
 
     return (
-        <Card>
+        <Card className={'mb-3'}>
             <Card.Body>
                 <DataTable onCreateRow={() => navigate('/notifications/create')} title={title}
                            columns={[
+                               {
+                                   accessorKey: 'channel',
+                                   header: 'Channel'
+                               },
                                {
                                    accessorKey: 'destination',
                                    header: 'Destination',
@@ -34,7 +39,7 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
                                            icon = "fab fa-slack";
                                        }
 
-                                       return <b className={'text-nowrap'}><i className={icon}/> {destination}</b>;
+                                       return destination
                                    }
                                },
                                {
@@ -43,14 +48,15 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
                                    cell: (rowData: any) => {
                                        const { content } = rowData.row.original;
                                        return (
-                                           <Tooltip title={content}>
+                                           <Tooltip title={content} placement={'top'}>
                                                <p style={{
                                                    display: "-webkit-box",
                                                    overflow: "hidden",
                                                    WebkitBoxOrient: "vertical",
                                                    WebkitLineClamp: 2,
                                                    cursor: "context-menu",
-                                                   maxWidth: '25rem'
+                                                   maxWidth: '17rem',
+                                                   marginBottom: 0
                                                }}>{content}</p>
                                            </Tooltip>
                                        );
@@ -74,8 +80,12 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
 
                                        const { id, status } = rowData.row.original;
 
+                                       if (result.isSuccess && status === Status.COMPLETED) {
+                                           toast({ text: 'Notification Sent! ✔' })
+                                       }
+
                                        return (
-                                           <>
+                                           <div className={'text-nowrap'}>
                                                <Link to={`/notifications/${id}`} className={'me-2'}>
                                                    <FontAwesomeIcon icon={faEye}/>
                                                </Link>
@@ -83,13 +93,17 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
                                                    <>
                                                        {result.isLoading
                                                            ? <Spinner animation={'border'} size={'sm'}/> : (
-                                                               <FontAwesomeIcon className={'cursor-pointer'}
-                                                                                icon={faRotateRight}
-                                                                                onClick={() => retryNotification(id)}/>
+                                                               <Tooltip title={'Retry'} placement={'top'}>
+                                                                   <span>
+                                                                       <FontAwesomeIcon className={'cursor-pointer'}
+                                                                                        icon={faRotateRight}
+                                                                                        onClick={() => retryNotification(id)}/>
+                                                                   </span>
+                                                               </Tooltip>
                                                            )}
                                                    </>
                                                )}
-                                           </>
+                                           </div>
                                        );
                                    }
                                }

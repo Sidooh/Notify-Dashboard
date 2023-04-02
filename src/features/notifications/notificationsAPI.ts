@@ -56,18 +56,11 @@ export const notificationsApi = createApi({
             invalidatesTags: ['Notification'],
             transformResponse: (response: ApiResponse<Notification>) => response.data,
         }),
-
-        getSMSNotifications: builder.query<Notification[], void>({
-            query: () => '/sms',
-            providesTags:['Notification'],
-            transformResponse: (response: ApiResponse<Notification[]>) => response.data,
-        }),
     })
 });
 
 export const {
     useGetRecentNotificationsQuery,
-    useGetSMSNotificationsQuery,
 
     useNotificationsQuery,
     useNotificationQuery,

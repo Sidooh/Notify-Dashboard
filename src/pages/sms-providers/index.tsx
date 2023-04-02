@@ -30,7 +30,7 @@ import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const validationSchema = yup.object({
     name: yup.string().oneOf(Object.values(SMSProviderEnum), 'Invalid name.').required('Name is required.'),
-    priority: yup.number().oneOf([1, 2], 'Invalid priority.').required('Priority is required.'),
+    priority: yup.number().required('Priority is required.'),
     environment: yup.string().oneOf(Object.values(Environment), 'Invalid environment.')
         .required('Environment is required.'),
     status: yup.string().oneOf(Object.values(Status), 'Invalid status.'),
@@ -144,7 +144,8 @@ const SMSProviders = () => {
             <Modal show={showModal} onHide={() => setShowModal(false)} contentClassName={'position-relative'}>
                 <form onSubmit={formik.handleSubmit}>
                     <div className="position-absolute top-0 end-0 mt-2 me-2 z-index-1">
-                        <button className="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
+                        <button type={'button'}
+                                className="btn-close btn btn-sm btn-circle d-flex flex-center transition-base"
                                 data-bs-dismiss="modal" aria-label="Close" onClick={() => setShowModal(false)}/>
                     </div>
                     <Modal.Body className={'modal-body p-0'}>
@@ -198,7 +199,7 @@ const SMSProviders = () => {
 
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button size={'sm'} variant={'outlined'} onClick={() => setShowModal(false)}
+                        <Button type={'button'} size={'sm'} variant={'outlined'} onClick={() => setShowModal(false)}
                                 color={'inherit'} data-bs-dismiss="modal">Cancel</Button>
                         <LoadingButton disabled={!formik.dirty} size="sm" loadingPosition="end" type={'submit'}
                                        loading={storeResult.isLoading || updateResult.isLoading}

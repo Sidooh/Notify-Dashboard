@@ -2,7 +2,7 @@ import { memo } from 'react';
 import { useParams } from 'react-router-dom';
 import moment from 'moment';
 import { useNotificationQuery, useRetryNotificationMutation } from 'features/notifications/notificationsAPI';
-import { IconButton, SectionError, SectionLoader, Status, StatusChip } from '@nabcellent/sui-react';
+import { IconButton, PhoneChip, SectionError, SectionLoader, Status, StatusChip } from '@nabcellent/sui-react';
 import CardBgCorner from 'components/CardBgCorner';
 import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,14 +21,18 @@ const Show = () => {
 
     logger.log(notification);
 
-    let destinationIcon;
+    let destinationIcon, destination: any = notification.destination;
     if (notification.channel === "MAIL") {
         destinationIcon = "far fa-envelope";
+        destination = <a href={`mailto:${destination}`}>{destination}</a>
     } else if (notification.channel === "SMS") {
         destinationIcon = "fas fa-comment-sms";
+        destination = <PhoneChip phone={destination}/>
     } else {
         destinationIcon = "fab fa-slack";
     }
+
+    console.log(notification.content.split('\n'))
 
     return (
         <>
@@ -39,7 +43,7 @@ const Show = () => {
                         <h5 className={'m-0'}>Notification Details: #{notification?.id}</h5>
                         <div className={'text-end'}>
                             <small>Channel</small>
-                            <h4 className={'m-0'}>{notification?.channel.toUpperCase()}</h4>
+                            <h4 className={'m-0'}><i className={destinationIcon}/> {notification?.channel.toUpperCase()}</h4>
                         </div>
                     </div>
                     <p className="fs--1">{moment(notification?.created_at).format("MMMM Do YYYY, h:mm A")}</p>
@@ -62,7 +66,7 @@ const Show = () => {
                             <div className="row">
                                 <div className="col-6 mb-4">
                                     <h5 className="mb-3 fs-0">Destination</h5>
-                                    <b><i className={destinationIcon}/> {notification.destination}</b>
+                                    <b>{destination}</b>
                                 </div>
                                 <div className="col-6 mb-4">
                                     <h5 className="mb-3 fs-0">Event Type</h5>
@@ -72,7 +76,9 @@ const Show = () => {
                                 <div className="col-12 mb-4">
                                     <hr/>
                                     <h5 className="mb-3 fs-0">Message</h5>
-                                    <p className="mb-0 fs--1">{notification.content}</p>
+                                    <p className="mb-0 fs--1" style={{ whiteSpace: 'pre-line' }}>
+                                        {notification.content}
+                                    </p>
                                 </div>
                             </div>
                         </div>
