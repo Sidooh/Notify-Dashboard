@@ -24,9 +24,8 @@ import {
     useUpdateSMSProviderMutation
 } from 'features/sms-providers/smsProviderApi';
 import ValidationErrors from 'components/ValidationErrors';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { logger } from 'utils/logger';
-import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FaPen, FaSave, FaTrash } from "react-icons/all";
 
 const validationSchema = yup.object({
     name: yup.string().oneOf(Object.values(SMSProviderEnum), 'Invalid name.').required('Name is required.'),
@@ -129,10 +128,10 @@ const SMSProviders = () => {
                             return (
                                 <div className={'text-end'}>
                                     <IconButton onClick={() => handleUpdate(row.original)} size={"sm"}>
-                                        <FontAwesomeIcon icon={faPen} className={'cursor-pointer'}/>
+                                        <FaPen className={'cursor-pointer'}/>
                                     </IconButton>
                                     <IconButton onClick={() => handleDelete(row.original)} size={"sm"} color={"danger"}>
-                                        <FontAwesomeIcon icon={faTrash}/>
+                                        <FaTrash/>
                                     </IconButton>
                                 </div>
                             );
@@ -203,7 +202,7 @@ const SMSProviders = () => {
                                 color={'inherit'} data-bs-dismiss="modal">Cancel</Button>
                         <LoadingButton disabled={!formik.dirty} size="sm" loadingPosition="end" type={'submit'}
                                        loading={storeResult.isLoading || updateResult.isLoading}
-                                       endIcon={<FontAwesomeIcon icon={'floppy-disk'}/>}>
+                                       endIcon={<FaSave/>}>
                             {formAction === 'update' ? "Update" : "Create"}
                         </LoadingButton>
                     </Modal.Footer>

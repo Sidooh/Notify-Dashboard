@@ -1,4 +1,3 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
 import { Button, ButtonGroup, Col, Form, Offcanvas, Row } from 'react-bootstrap';
 import { IMAGES } from 'constants/images';
@@ -7,6 +6,7 @@ import { RootState } from 'app/store';
 import { resetTheme, setTheme } from 'features/theme/themeSlice';
 import { CONFIG } from 'config';
 import { Badge, Flex } from '@nabcellent/sui-react';
+import { FaPalette, FaPallet, FaRedoAlt } from "react-icons/all";
 
 const SettingsPanel = () => {
     const {
@@ -53,12 +53,12 @@ const SettingsPanel = () => {
                 <Offcanvas.Title as="div" className="py-1 z-index-1 light">
                     <div className="d-flex justify-content-between align-items-center mb-1">
                         <h5 className="text-white">
-                            <FontAwesomeIcon icon="palette" className="me-2 fs-0"/>
+                            <FaPalette className="me-2 fs-0"/>
                             Settings
                         </h5>
                         <Button variant="primary" size="sm" className="rounded-pill mt-0 mb-0"
                                 style={{fontSize: '12px'}} onClick={() => dispatch(resetTheme())}>
-                            <FontAwesomeIcon icon="redo-alt" style={{fontSize: '10px'}} className="me-1"/>
+                            <FaRedoAlt style={{fontSize: '10px'}} className="me-1"/>
                             Reset
                         </Button>
                     </div>

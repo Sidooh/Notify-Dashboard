@@ -1,11 +1,9 @@
 import { useGetVendorsSLOQuery } from "features/analytics/analyticsApi";
 import { Card, Col, Row } from "react-bootstrap";
 import { ComponentLoader, LoadingButton, SectionError, Str, Tooltip } from "@nabcellent/sui-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSync } from "@fortawesome/free-solid-svg-icons";
 import CardBgCorner from "components/CardBgCorner";
 import CountUp from "react-countup";
-import { FaPercentage } from "react-icons/all";
+import { FaPercentage, FaSync } from "react-icons/all";
 import { useState } from "react";
 
 const VendorsSLO = () => {
@@ -28,7 +26,7 @@ const VendorsSLO = () => {
 
                                 refetch()
                             }}>
-                                <FontAwesomeIcon icon={faSync}/>
+                                <FaSync size={10}/>
                             </LoadingButton>
                         </Tooltip>
                     </span>

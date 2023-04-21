@@ -27,8 +27,7 @@ import {
     Tooltip as ChartTooltip
 } from "chart.js";
 import Tooltip from "@mui/material/Tooltip";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSync } from "@fortawesome/free-solid-svg-icons";
+import { FaSync } from "react-icons/all";
 
 Chart.register(Title, ChartTooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
 Chart.defaults.color = '#0F1B4C'
@@ -46,14 +45,14 @@ const DashboardChart = memo(() => {
 
     useEffect(() => {
         if (data?.length) {
-            const aid = new ChartAid(chartPeriodOpt, chartFreqOpt, )
+            const aid = new ChartAid(chartPeriodOpt, chartFreqOpt,)
             aid.timeIsUTC = true
 
             let { labels, dataset } = aid.getDataset(data)
 
             setLabels(labels)
 
-            if(chartTypeOpt === 'cumulative') {
+            if (chartTypeOpt === 'cumulative') {
                 dataset = dataset.reduce((a: number[], b, i) => i === 0 ? [b] : [...a, b + a[i - 1]], [])
             }
             setDataset(dataset)
@@ -68,9 +67,9 @@ const DashboardChart = memo(() => {
     const options: ChartOptions<'line'> = {
         responsive: true,
         maintainAspectRatio: false,
-        layout:{
-            padding:{
-               top:10
+        layout: {
+            padding: {
+                top: 10
             }
         },
         interaction: {
@@ -139,7 +138,7 @@ const DashboardChart = memo(() => {
                             <span>
                                 <LoadingButton disabled={isFetching} loading={isFetching}
                                                spinner-position="replace" onClick={() => refetch()}>
-                                    <FontAwesomeIcon icon={faSync}/>
+                                    <FaSync size={10}/>
                                 </LoadingButton>
                             </span>
                         </Tooltip>

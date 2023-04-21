@@ -9,11 +9,10 @@ import {
     Status,
     Tooltip
 } from "@nabcellent/sui-react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPercent, faSync } from "@fortawesome/free-solid-svg-icons";
 import CardBgCorner from "components/CardBgCorner";
 import { Fragment, useState } from "react";
 import CountUp from "react-countup";
+import { FaPercentage, FaSync } from "react-icons/all";
 
 const NotificationsSLO = () => {
     const [bypassCache, setBypassCache] = useState(false)
@@ -38,7 +37,7 @@ const NotificationsSLO = () => {
 
                                 refetch()
                             }}>
-                                <FontAwesomeIcon icon={faSync}/>
+                                <FaSync size={10}/>
                             </LoadingButton>
                         </Tooltip>
                     </span>
@@ -67,7 +66,7 @@ const NotificationsSLO = () => {
                                                     className={`icon-circle icon-circle-${getStatusColor(slo.status)} text-${getStatusColor(slo.status)} fw-bold`}>
                                                     <CountUp end={Math.round((Number(slo.count) / total) * 100)}
                                                              className="me-1"/>
-                                                    <FontAwesomeIcon icon={faPercent}/>
+                                                    <FaPercentage/>
                                                 </div>
                                                 <h6 className={`mb-1 fw-bold text-${getStatusColor(slo.status)}`}>{slo.status}</h6>
                                             </div>

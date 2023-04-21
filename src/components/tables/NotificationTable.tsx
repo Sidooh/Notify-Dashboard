@@ -2,12 +2,10 @@ import { Card, Spinner } from 'react-bootstrap';
 import { DataTable, PhoneChip, Status, StatusChip, TableDate, toast } from '@nabcellent/sui-react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Notification } from '../../utils/types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-regular-svg-icons';
-import { faRotateRight } from '@fortawesome/free-solid-svg-icons';
 import { useRetryNotificationMutation } from 'features/notifications/notificationsAPI';
 import moment from 'moment';
 import { Tooltip } from '@mui/material';
+import { FaEye, GrRotateRight } from "react-icons/all";
 
 type NotificationTableProps = { title: string, notifications: Notification[] }
 
@@ -86,21 +84,18 @@ const NotificationTable = ({ title, notifications }: NotificationTableProps) => 
 
                                        return (
                                            <div className={'text-nowrap'}>
-                                               <Link to={`/notifications/${id}`} className={'me-2'}>
-                                                   <FontAwesomeIcon icon={faEye}/>
-                                               </Link>
+                                               <Link to={`/notifications/${id}`} className={'me-2'}><FaEye/></Link>
                                                {status === Status.FAILED && (
                                                    <>
                                                        {result.isLoading
-                                                           ? <Spinner animation={'border'} size={'sm'}/> : (
-                                                               <Tooltip title={'Retry'} placement={'top'}>
-                                                                   <span>
-                                                                       <FontAwesomeIcon className={'cursor-pointer'}
-                                                                                        icon={faRotateRight}
-                                                                                        onClick={() => retryNotification(id)}/>
-                                                                   </span>
-                                                               </Tooltip>
-                                                           )}
+                                                        ? <Spinner animation={'border'} size={'sm'}/> : (
+                                                            <Tooltip title={'Retry'} placement={'top'}>
+                                                               <span>
+                                                                   <GrRotateRight className={'cursor-pointer'}
+                                                                                  onClick={() => retryNotification(id)}/>
+                                                               </span>
+                                                            </Tooltip>
+                                                        )}
                                                    </>
                                                )}
                                            </div>

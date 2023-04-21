@@ -6,23 +6,12 @@ import {
     useNotificationQuery,
     useRetryNotificationMutation
 } from 'features/notifications/notificationsAPI';
-import {
-    IconButton,
-    PhoneChip,
-    SectionError,
-    SectionLoader,
-    Status,
-    StatusChip,
-    Sweet,
-    toast
-} from '@nabcellent/sui-react';
+import { PhoneChip, SectionError, SectionLoader, Status, StatusChip, Sweet, toast } from '@nabcellent/sui-react';
 import CardBgCorner from 'components/CardBgCorner';
-import { faArrowRotateRight, faArrowsRotate, faCrosshairs, faRotateRight } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Spinner, Dropdown, Row, Col } from 'react-bootstrap';
+import { Col, Dropdown, Row } from 'react-bootstrap';
 import JSONPretty from 'react-json-pretty';
 import { logger } from 'utils/logger';
-import { FaArrowRight, GrRotateRight } from "react-icons/all";
+import { FaCrosshairs, GrRotateLeft, GrRotateRight } from "react-icons/all";
 
 const Show = () => {
     const { id } = useParams();
@@ -107,7 +96,7 @@ const Show = () => {
     if (notification.status === Status.PENDING) {
         notificationDropdownItems.push(
             <Dropdown.Item as="button" onClick={() => queryNotification('check-notification')}>
-                <FontAwesomeIcon icon={faArrowsRotate}/>&nbsp; Check Notification
+                <GrRotateLeft/>&nbsp; Check Notification
             </Dropdown.Item>
         );
     }
@@ -133,8 +122,7 @@ const Show = () => {
                         {notificationDropdownItems.length > 0 && (
                             <Dropdown>
                                 <Dropdown.Toggle size={'sm'} as={'a'} className={'cursor-pointer'}>
-                                    <FontAwesomeIcon icon={faCrosshairs}
-                                                     className={'btn btn-danger p-1 rounded-circle'}/>
+                                    <FaCrosshairs className={'btn btn-danger p-1 rounded-circle'}/>
                                 </Dropdown.Toggle>
                                 <Dropdown.Menu>
                                     {notificationDropdownItems.map((item, i) => <Fragment key={i}>{item}</Fragment>)}
@@ -175,7 +163,7 @@ const Show = () => {
                             <div className="row">
                                 <div className="col-md-12 mb-4 mb-lg-0">
                                     <h5 className="mb-3 fs-0">Callbacks</h5>
-                                    <div style={{ maxHeight: '25rem', overflowY:'auto' }}>
+                                    <div style={{ maxHeight: '25rem', overflowY: 'auto' }}>
                                         {notification.notifiables?.length ? notification.notifiables.map((cb: any, i: number) => (
                                             <div key={`cb-${i}`}>
                                                 <JSONPretty id="json-pretty" data={cb} theme={{

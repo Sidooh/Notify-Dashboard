@@ -47,7 +47,7 @@ const LineChart = ({
                     <div className={'d-flex'}>
                         <LoadingButton loading={isFetching} className="btn btn-sm btn-light border-0 me-2"
                                        spinner-position="replace" onClick={() => refetch()}>
-                            <FaSync size={12}/>
+                            <FaSync size={10}/>
                         </LoadingButton>
                         <Form.Select className="px-2 me-2" value={chartTypeOpt} size={'sm'} onChange={e => {
                             setChartTypeOpt(e.target.value as 'time-series' | 'cumulative')
