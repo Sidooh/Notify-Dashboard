@@ -138,7 +138,7 @@ const DashboardChart = memo(() => {
                             <span>
                                 <LoadingButton disabled={isFetching} loading={isFetching}
                                                spinner-position="replace" onClick={() => refetch()}>
-                                    <FaSync size={10}/>
+                                    <FaSync size={13}/>
                                 </LoadingButton>
                             </span>
                         </Tooltip>
