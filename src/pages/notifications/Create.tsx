@@ -4,7 +4,7 @@ import TomSelect from 'tom-select';
 import * as yup from 'yup';
 import { IMAGES } from 'constants/images';
 import { useStoreNotificationMutation } from 'features/notifications/notificationsAPI';
-import { useGetAllAccountsQuery, useGetAllUsersQuery } from 'app/services/accountsAPI';
+import { useGetAllAccountsQuery, useGetAllUsersQuery } from 'features/accounts/accountsAPI';
 import { LoadingButton, toast } from '@nabcellent/sui-react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Notification } from '../../utils/types';

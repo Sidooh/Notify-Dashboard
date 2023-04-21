@@ -9,12 +9,8 @@ export const dashboardRoutes: RouteType = {
             active: true,
             icon: 'chart-pie',
             children: [
-                {
-                    name: 'Home',
-                    to: '/',
-                    exact: true,
-                    active: true
-                },
+                { name: 'Home', to: '/', exact: true },
+                { name: 'Analytics', to: '/dashboard/analytics', exact: true },
             ]
         }
     ]

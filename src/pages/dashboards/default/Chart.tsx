@@ -121,7 +121,7 @@ const DashboardChart = memo(() => {
             borderColor: ['rgba(255, 255, 255, 1)'],
             backgroundColor: '#0F1B4C',
             borderWidth: 2,
-            tension: 0.3,
+            tension: .3,
         }],
     };
 

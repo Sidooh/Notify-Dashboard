@@ -31,3 +31,10 @@ export type SMSProvider = Model & {
     priority: number
     status: Status
 }
+
+export type AnalyticsChartData = {
+    status: Status,
+    date: number
+    amount: number
+    count: number
+}
