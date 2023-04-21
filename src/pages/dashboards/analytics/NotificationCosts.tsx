@@ -16,11 +16,12 @@ import { useGetNotificationCostsQuery } from 'features/analytics/analyticsApi';
 import { defaultLineChartOptions, getSMSProviderColor } from "utils/helpers";
 import LineChart from "components/LineChart";
 import { SMSProvider } from "../../../utils/enums";
-import moment from 'moment';
 
 type Dataset = { provider: SMSProvider, dataset: number[], color: string | number[], hidden: boolean }
 
 const NotificationCosts = () => {
+    const [bypassCache, setBypassCache] = useState(false)
+
     const { data, isError, error, isLoading, isSuccess, refetch, isFetching } = useGetNotificationCostsQuery();
 
     const [txStatus, setTxStatus] = useState<Status | 'ALL'>(Status.COMPLETED);
@@ -128,7 +129,11 @@ const NotificationCosts = () => {
             <LineChart
                 data={chartData}
                 options={options}
-                refetch={refetch}
+                refetch={() => {
+                    if (!bypassCache) setBypassCache(true)
+
+                    refetch()
+                }}
                 isFetching={isFetching}
                 txStatus={txStatus} setTxStatus={setTxStatus}
                 chartTypeOpt={chartTypeOpt} setChartTypeOpt={setChartTypeOpt}

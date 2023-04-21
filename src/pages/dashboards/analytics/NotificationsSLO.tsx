@@ -12,11 +12,13 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPercent, faSync } from "@fortawesome/free-solid-svg-icons";
 import CardBgCorner from "components/CardBgCorner";
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import CountUp from "react-countup";
 
 const NotificationsSLO = () => {
-    const { data, isError, error, isLoading, isSuccess, refetch, isFetching } = useGetNotificationsSLOQuery()
+    const [bypassCache, setBypassCache] = useState(false)
+
+    const { data, isError, error, isLoading, isSuccess, refetch, isFetching } = useGetNotificationsSLOQuery(bypassCache)
 
     if (isError) return <SectionError error={error}/>;
     if (isLoading || !isSuccess || !data) return <ComponentLoader/>;
@@ -31,7 +33,11 @@ const NotificationsSLO = () => {
                         Notifications Success Rate
                         <Tooltip title="Refresh SLO" placement="left">
                             <LoadingButton loading={isFetching} className="btn btn-sm border-0 py-2"
-                                           spinner-position="replace" onClick={() => refetch()}>
+                                           spinner-position="replace" onClick={() => {
+                                if(!bypassCache) setBypassCache(true)
+
+                                refetch()
+                            }}>
                                 <FontAwesomeIcon icon={faSync}/>
                             </LoadingButton>
                         </Tooltip>
@@ -42,8 +48,7 @@ const NotificationsSLO = () => {
 
             <Card>
                 <CardBgCorner corner={5}/>
-                <Card.Body
-                >
+                <Card.Body className={'bg-dark'}>
                     {years.map((year, i) => {
                         const total = groupedSLOs[year].reduce((p, c) => p += Number(c.count), 0)
                         const data = groupedSLOs[year].sort((a, b) => b.count - a.count)
@@ -51,15 +56,17 @@ const NotificationsSLO = () => {
 
                         return (
                             <Fragment key={`year-${year}`}>
-                                <h5 className={'text-primary text-decoration-underline'}>{year}</h5>
+                                <div className={'d-flex'}>
+                                    <h5 className={'text-light border-bottom pe-lg-5'}>{year}</h5>
+                                </div>
                                 <Row className={`g-2 ${i + 1 < years.length && 'mb-5'}`}>
-                                    {data.map((slo, i) => (
-                                        <Col key={`slo-${year + i}`} lg={6} className={`text-center border-bottom`}>
+                                    {data.map((slo, j) => (
+                                        <Col key={`slo-${year + j}`} lg={6} className={`text-center`}>
                                             <div className="py-3">
                                                 <div
                                                     className={`icon-circle icon-circle-${getStatusColor(slo.status)} text-${getStatusColor(slo.status)} fw-bold`}>
                                                     <CountUp end={Math.round((Number(slo.count) / total) * 100)}
-                                                             className="me-1 fs-2"/>
+                                                             className="me-1"/>
                                                     <FontAwesomeIcon icon={faPercent}/>
                                                 </div>
                                                 <h6 className={`mb-1 fw-bold text-${getStatusColor(slo.status)}`}>{slo.status}</h6>

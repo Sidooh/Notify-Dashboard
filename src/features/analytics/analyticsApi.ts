@@ -37,20 +37,32 @@ export const analyticsApi = createApi({
         }
     }),
     endpoints: (builder) => ({
-        getNotificationsSLO: builder.query<NotificationsSLOResponse[], void>({
-            query: () => '/slo/notifications',
+        getNotificationsSLO: builder.query<NotificationsSLOResponse[], boolean>({
+            query: (bypass_cache) => ({
+                url: '/slo/notifications',
+                params: { bypass_cache }
+            }),
             transformResponse: (res: ApiResponse<NotificationsSLOResponse[]>) => res.data
         }),
-        getVendorsSLO: builder.query<VendorsSLOResponse, void>({
-            query: () => '/slo/vendors',
+        getVendorsSLO: builder.query<VendorsSLOResponse, boolean>({
+            query: (bypass_cache) => ({
+                url: '/slo/vendors',
+                params: { bypass_cache }
+            }),
             transformResponse: (res: ApiResponse<VendorsSLOResponse>) => res.data
         }),
-        getNotifications: builder.query<ChartData[], void>({
-            query: () => '/notifications',
+        getNotifications: builder.query<ChartData[], boolean>({
+            query: (bypass_cache) => ({
+                url: '/notifications',
+                params: { bypass_cache }
+            }),
             transformResponse: (res: ApiResponse<ChartData[]>) => res.data
         }),
         getNotificationCosts: builder.query<ChartData[], void>({
-            query: () => '/notification-costs',
+            query: (bypass_cache) => ({
+                url: '/notification-costs',
+                params: { bypass_cache }
+            }),
             transformResponse: (res: ApiResponse<ChartData[]>) => res.data
         }),
     })

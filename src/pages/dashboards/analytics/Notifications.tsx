@@ -17,7 +17,8 @@ import { defaultLineChartOptions } from "utils/helpers";
 import LineChart from "components/LineChart";
 
 const Notifications = () => {
-    const { data, isError, error, isLoading, isSuccess, refetch, isFetching } = useGetNotificationsQuery();
+    const [bypassCache, setBypassCache] = useState(false)
+    const { data, isError, error, isLoading, isSuccess, refetch, isFetching } = useGetNotificationsQuery(bypassCache);
 
     const [txStatus, setTxStatus] = useState<Status | 'ALL'>(Status.COMPLETED);
     const [chartTypeOpt, setChartTypeOpt] = useState<'time-series' | 'cumulative'>('time-series')
@@ -64,8 +65,7 @@ const Notifications = () => {
 
     const options: ChartOptions<'line'> = defaultLineChartOptions({
         plugins: {
-            title: {
-            },
+            title: {},
             tooltip: {
                 callbacks: {
                     label: (item: TooltipItem<'line'>) => `${item.formattedValue} Notifications`
@@ -93,13 +93,16 @@ const Notifications = () => {
             <LineChart
                 data={chartData}
                 options={options}
-                refetch={refetch}
+                refetch={() => {
+                    if(!bypassCache) setBypassCache(true)
+
+                    refetch()
+                }}
                 isFetching={isFetching}
                 txStatus={txStatus} setTxStatus={setTxStatus}
                 chartTypeOpt={chartTypeOpt} setChartTypeOpt={setChartTypeOpt}
                 chartPeriodOpt={chartPeriodOpt} setChartPeriodOpt={setChartPeriodOpt}
-                chartFreqOpt={chartFreqOpt} setChartFreqOpt={setChartFreqOpt}
-            />
+                chartFreqOpt={chartFreqOpt} setChartFreqOpt={setChartFreqOpt}/>
         </Col>
     );
 };

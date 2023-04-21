@@ -10,7 +10,7 @@ import CardBgCorner from "./CardBgCorner";
 type LineChartProps = {
     options: ChartOptions<'line'>
     data: ChartData<'line'>
-    refetch: () => QueryActionCreatorResult<any>,
+    refetch: () => QueryActionCreatorResult<any>|void,
     isFetching: boolean,
     chartTypeOpt: 'time-series' | 'cumulative'
     setChartTypeOpt: Dispatch<LineChartProps['chartTypeOpt']>
