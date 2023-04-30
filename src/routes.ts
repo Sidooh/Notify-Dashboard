@@ -1,4 +1,5 @@
 import { RouteType } from '@nabcellent/sui-react';
+import { FaBell, FaChartPie, FaComments, FaPaperPlane, FaWrench } from "react-icons/all";
 
 export const dashboardRoutes: RouteType = {
     label: 'Dashboard',
@@ -7,14 +8,10 @@ export const dashboardRoutes: RouteType = {
         {
             name: 'Dashboard',
             active: true,
-            icon: 'chart-pie',
+            icon: FaChartPie,
             children: [
-                {
-                    name: 'Home',
-                    to: '/',
-                    exact: true,
-                    active: true
-                },
+                { name: 'Home', to: '/', exact: true },
+                { name: 'Analytics', to: '/dashboard/analytics', exact: true },
             ]
         }
     ]
@@ -25,13 +22,13 @@ export const notificationRoutes: RouteType = {
     children: [
         {
             name: 'All Notifications',
-            icon: 'bell',
+            icon: FaBell,
             active: true,
             to: '/notifications',
         },
         {
             name: 'Send Notification',
-            icon: 'paper-plane',
+            icon: FaPaperPlane,
             to: '/notifications/create',
             active: true,
         },
@@ -43,13 +40,13 @@ export const appRoutes: RouteType = {
     children: [
         {
             name: 'SMS Providers',
-            icon: 'comments',
+            icon: FaComments,
             to: '/sms-providers',
             active: true
         },
         {
             name: 'Settings',
-            icon: 'wrench',
+            icon: FaWrench,
             to: '/settings',
             active: true
         },

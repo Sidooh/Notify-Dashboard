@@ -1,18 +1,18 @@
-import { ChangeEvent, memo, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import { useFormik } from 'formik';
 import TomSelect from 'tom-select';
 import * as yup from 'yup';
 import { IMAGES } from 'constants/images';
 import { useStoreNotificationMutation } from 'features/notifications/notificationsAPI';
-import { useGetAllAccountsQuery, useGetAllUsersQuery } from 'app/services/accountsAPI';
+import { useGetAllAccountsQuery, useGetAllUsersQuery } from 'features/accounts/accountsAPI';
 import { LoadingButton, toast } from '@nabcellent/sui-react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Notification } from '../../utils/types';
 import ValidationErrors from 'components/ValidationErrors';
 import { Card, Col, Form, Row } from 'react-bootstrap';
 import ReactQuill from "react-quill";
 import JSONPretty from "react-json-pretty";
 import 'react-quill/dist/quill.bubble.css';
+import { FaPaperPlane } from "react-icons/all";
 
 type DestinationOptionsType = { value: string, text: string }
 
@@ -222,7 +222,7 @@ const Create = memo(() => {
                         <div className="text-end">
                             <LoadingButton type={'submit'} size="sm" loading={result.isLoading} loadingPosition="end"
                                            onClick={() => formik.submitForm()} disabled={!formik.dirty}
-                                           endIcon={<FontAwesomeIcon icon={'paper-plane'}/>}>Send</LoadingButton>
+                                           endIcon={<FaPaperPlane/>}>Send</LoadingButton>
                         </div>
                     </div>
                 </div>

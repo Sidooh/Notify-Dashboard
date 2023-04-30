@@ -1,8 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { CONFIG } from 'config';
-import {RootState} from '../store';
+import { RootState } from '../../app/store';
 import { Account, ApiResponse, User } from '@nabcellent/sui-react';
-import { Notification } from '../../utils/types';
 
 export const accountsApi = createApi({
     reducerPath: 'accountsApi',
@@ -29,4 +28,7 @@ export const accountsApi = createApi({
     })
 });
 
-export const { useGetAllAccountsQuery, useGetAllUsersQuery, useLazyGetAllAccountsQuery, useLazyGetAllUsersQuery } = accountsApi;
+export const {
+    useGetAllAccountsQuery,
+    useGetAllUsersQuery,
+} = accountsApi;

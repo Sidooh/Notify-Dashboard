@@ -8,9 +8,7 @@ import { Setting } from 'utils/types';
 import { ComponentLoader, DataTable, LoadingButton, SectionError, Sweet, toast, IconButton, Button } from '@nabcellent/sui-react';
 import { MailProvider, SMSProvider } from 'utils/enums';
 import { logger } from 'utils/logger';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSave } from '@fortawesome/free-regular-svg-icons';
-import { faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { FaPen, FaSave, FaTrash } from "react-icons/all";
 
 const settingOptions = [
     {
@@ -117,10 +115,10 @@ const Settings = () => {
                             return (
                                 <div className={'text-end'}>
                                     <IconButton onClick={() => handleUpdate(row.original)} size={"sm"}>
-                                        <FontAwesomeIcon icon={faPen} className={'cursor-pointer'}/>
+                                        <FaPen className={'cursor-pointer'}/>
                                     </IconButton>
                                     <IconButton onClick={() => handleDelete(row.original)} size={"sm"} color={"danger"}>
-                                        <FontAwesomeIcon icon={faTrash}/>
+                                        <FaTrash/>
                                     </IconButton>
                                 </div>
                             );
@@ -175,7 +173,7 @@ const Settings = () => {
                         <Button size={'sm'} variant={'outlined'} onClick={() => setShowModal(false)}
                                 color={'inherit'} data-bs-dismiss="modal">Cancel</Button>
                         <LoadingButton disabled={!formik.dirty} size="sm" color="primary" loading={result.isLoading}
-                                       loadingPosition="end" type={'submit'} endIcon={<FontAwesomeIcon icon={faSave}/>}>
+                                       loadingPosition="end" type={'submit'} endIcon={<FaSave/>}>
                             {formik.dirty ? "Update" : "Create"}
                         </LoadingButton>
                     </Modal.Footer>

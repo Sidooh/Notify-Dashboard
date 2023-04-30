@@ -1,6 +1,3 @@
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faQuestionCircle, fas } from '@fortawesome/free-solid-svg-icons';
-import { far } from '@fortawesome/free-regular-svg-icons';
 import { Route, Routes } from 'react-router-dom';
 import GuestLayout from './layouts/GuestLayout';
 import { Middleware } from './middleware';
@@ -13,8 +10,6 @@ import useTheme from './hooks/useTheme';
 import { RootState } from 'app/store';
 import { useAppSelector } from './app/hooks';
 import Login from "./pages/auth/Login";
-
-library.add(fas, far, faQuestionCircle);
 
 const Dashboard = lazy(() => import('pages/dashboards/default/Dashboard'));
 const Analytics = lazy(() => import('pages/dashboards/analytics'));

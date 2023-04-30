@@ -1,9 +1,7 @@
 import { memo, useEffect, useState } from 'react';
 import { Nav, Navbar } from 'react-bootstrap';
 import classNames from 'classnames';
-import SearchBox from './SearchBox';
 import NavbarTopDropDownMenus from './NavbarTopDropDownMenus';
-import autoCompleteInitialItems from 'constants/autocomplete';
 import TopNavRightSideNavItem from './TopNavRightSideNavItem';
 import { useLocation } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
@@ -15,15 +13,15 @@ import { IMAGES } from 'constants/images';
 
 const NavbarTop = () => {
     const dispatch = useAppDispatch();
-    const {showBurgerMenu, navbarPosition, navbarCollapsed} = useAppSelector((state: RootState) => state.theme);
+    const { showBurgerMenu, navbarPosition, navbarCollapsed } = useAppSelector((state: RootState) => state.theme);
 
-    const {pathname} = useLocation();
+    const { pathname } = useLocation();
     const isChat = pathname.includes('chat');
 
     const [showDropShadow, setShowDropShadow] = useState(false);
 
     const handleBurgerMenu = () => {
-        navbarPosition === 'top' && dispatch(setTheme({key: 'navbarCollapsed', value: !navbarCollapsed}));
+        navbarPosition === 'top' && dispatch(setTheme({ key: 'navbarCollapsed', value: !navbarCollapsed }));
         (navbarPosition === 'vertical' || navbarPosition === 'combo') && dispatch(setTheme({
             key: 'showBurgerMenu',
             value: !showBurgerMenu
@@ -52,8 +50,8 @@ const NavbarTop = () => {
             })}
             expand={
                 navbarPosition === 'top' || navbarPosition === 'combo'
-                    ? topNavbarBreakpoint
-                    : true
+                ? topNavbarBreakpoint
+                : true
             }
         >
             <Navbar.Toggle
@@ -77,18 +75,12 @@ const NavbarTop = () => {
 
             <Logo src={IMAGES.logos.sidooh} at="navbar-top" width={40}/>
 
-            {navbarPosition === 'top' || navbarPosition === 'combo' ? (
+            {navbarPosition === 'top' || navbarPosition === 'combo' && (
                 <Navbar.Collapse in={navbarCollapsed} className="scrollbar pb-3 pb-lg-0">
                     <Nav navbar>
                         <NavbarTopDropDownMenus/>
                     </Nav>
                 </Navbar.Collapse>
-            ) : (
-                <Nav navbar className={`align-items-center d-none d-${topNavbarBreakpoint}-block`} as="ul">
-                    <Nav.Item as="li">
-                        <SearchBox autoCompleteItems={autoCompleteInitialItems}/>
-                    </Nav.Item>
-                </Nav>
             )}
 
             <TopNavRightSideNavItem/>

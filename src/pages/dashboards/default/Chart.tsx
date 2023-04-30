@@ -1,5 +1,5 @@
 import { memo, useEffect, useState } from 'react';
-import { Button, Card, Form } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 import {
     ChartAid,
     chartSelectOptions,
@@ -16,7 +16,8 @@ import { logger } from 'utils/logger';
 import { Line } from "react-chartjs-2";
 import {
     CategoryScale,
-    Chart, ChartData,
+    Chart,
+    ChartData,
     ChartOptions,
     Legend,
     LinearScale,
@@ -26,8 +27,7 @@ import {
     Tooltip as ChartTooltip
 } from "chart.js";
 import Tooltip from "@mui/material/Tooltip";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSync } from "@fortawesome/free-solid-svg-icons";
+import { FaSync } from "react-icons/all";
 
 Chart.register(Title, ChartTooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
 Chart.defaults.color = '#0F1B4C'
@@ -37,7 +37,7 @@ Chart.defaults.font.family = "'Avenir', sans-serif"
 const DashboardChart = memo(() => {
     const [chartTypeOpt, setChartTypeOpt] = useState<'time-series' | 'cumulative'>('time-series')
     const [chartFreqOpt, setChartFreqOpt] = useState(Frequency.HOURLY)
-    const [chartPeriodOpt, setChartPeriodOpt] = useState(Period.TODAY)
+    const [chartPeriodOpt, setChartPeriodOpt] = useState(Period.LAST_24_HOURS)
     const [labels, setLabels] = useState<string[]>([])
     const [dataset, setDataset] = useState<number[]>([])
 
@@ -45,12 +45,14 @@ const DashboardChart = memo(() => {
 
     useEffect(() => {
         if (data?.length) {
-            const aid = new ChartAid(chartPeriodOpt, chartFreqOpt, true)
+            const aid = new ChartAid(chartPeriodOpt, chartFreqOpt,)
+            aid.timeIsUTC = true
+
             let { labels, dataset } = aid.getDataset(data)
 
             setLabels(labels)
 
-            if(chartTypeOpt === 'cumulative') {
+            if (chartTypeOpt === 'cumulative') {
                 dataset = dataset.reduce((a: number[], b, i) => i === 0 ? [b] : [...a, b + a[i - 1]], [])
             }
             setDataset(dataset)
@@ -65,9 +67,9 @@ const DashboardChart = memo(() => {
     const options: ChartOptions<'line'> = {
         responsive: true,
         maintainAspectRatio: false,
-        layout:{
-            padding:{
-               top:10
+        layout: {
+            padding: {
+                top: 10
             }
         },
         interaction: {
@@ -118,7 +120,7 @@ const DashboardChart = memo(() => {
             borderColor: ['rgba(255, 255, 255, 1)'],
             backgroundColor: '#0F1B4C',
             borderWidth: 2,
-            tension: 0.3,
+            tension: .3,
         }],
     };
 
@@ -136,7 +138,7 @@ const DashboardChart = memo(() => {
                             <span>
                                 <LoadingButton disabled={isFetching} loading={isFetching}
                                                spinner-position="replace" onClick={() => refetch()}>
-                                    <FontAwesomeIcon icon={faSync}/>
+                                    <FaSync size={13}/>
                                 </LoadingButton>
                             </span>
                         </Tooltip>

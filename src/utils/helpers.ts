@@ -1,4 +1,8 @@
 import moment from 'moment';
+import { hexToRgb, rgbaColor } from "@nabcellent/sui-react";
+import { ChartOptions } from "chart.js";
+import { merge } from "chart.js/helpers";
+import { SMSProvider } from "./enums";
 
 export const camelize = (str: string) => {
     return str.replace(/^\w|[A-Z]|\b\w|\s+/g, function (match, index) {
@@ -45,7 +49,7 @@ export const getFlatRoutes = (children: any) => children.reduce(
             };
         }
     },
-    {unTitled: []}
+    { unTitled: [] }
 );
 
 
@@ -65,3 +69,92 @@ export const isTwoWeeksOrMore = (momentDate: any) => !isWithinAWeek(momentDate);
 export const isFunction = (v: any) => typeof v === 'function';
 
 export const createMarkup = (html: any) => ({ __html: html });
+
+export const defaultLineChartOptions = (options?: ChartOptions<'line'>): ChartOptions<'line'> => merge({
+    responsive: true,
+    maintainAspectRatio: false,
+    interaction: {
+        intersect: false,
+    },
+    scales: {
+        x: {
+            border: {
+                display: false
+            },
+            grid: {
+                color: 'rgba(250, 250, 250, .1)',
+            },
+            ticks: {
+                color: rgbaColor('#0F1B4C', 0.7),
+            }
+        },
+        y: {
+            grace: '5%',
+            border: {
+                display: false
+            },
+            beginAtZero: true,
+            grid: {
+                lineWidth: .3
+            },
+            ticks: {
+                color: rgbaColor('#648381', 1),
+                font: {
+                    weight: 600
+                },
+                callback: (val: number | string) => Intl.NumberFormat('en', { notation: 'compact' }).format(Number(val))
+            }
+        },
+    },
+    elements: {
+        line: {
+            borderWidth: 0,
+            tension: .3,
+            fill: true
+        },
+        point: {
+            pointStyle: 'star',
+            radius: 5,
+            hoverRadius: 10
+        }
+    },
+    plugins: {
+        title: {
+            padding: {
+                bottom: 20
+            },
+            display: true,
+            align: 'start',
+            font: {
+                size: 17
+            },
+            color: rgbaColor('#0F1B4C', 0.7),
+        },
+        legend: {
+            display: false,
+            labels: {
+                usePointStyle: true
+            }
+        },
+        tooltip: {
+            padding: {
+                x: 10,
+                y: 5
+            },
+            displayColors: false,
+        }
+    }
+}, options)
+
+export const getSMSProviderColor = (provider: SMSProvider, asRGB = false) => {
+    let color = '#648381'
+    if (provider === SMSProvider.WAVESMS) {
+        color = '#EE212E';
+    } else if (provider === SMSProvider.WEBSMS) {
+        color = '#182838';
+    } else if (provider === SMSProvider.AT) {
+        color = '#FC9206';
+    }
+
+    return asRGB ? hexToRgb(color) : color
+}
