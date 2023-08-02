@@ -12,7 +12,7 @@ ARG VITE_USSD_DASHBOARD_URL
 
 WORKDIR /app
 
-COPY ["package.json", "yarn.lock", ".yarnrc.yml", "vite.config.ts", "tsconfig.json", "tsconfig.node.json", "index.html", "./"]
+COPY ["package.json", "yarn.lock", ".yarnrc.yml", "vite.config.ts", "tsconfig.json", "tsconfig.node.json", "index.html", "public", "./"]
 COPY [".yarn/plugins/", "./.yarn/plugins/"]
 COPY [".yarn/releases/", "./.yarn/releases/"]
 COPY ["src/", "./src/"]
