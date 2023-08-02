@@ -57,8 +57,8 @@ node_modules/
 
 # yarn v2.yarn
 .yarn/*
-.yarn/cache
-.yarn/install-state.gz
+!.yarn/plugins
+!.yarn/releases
 
 y.hide
 build
