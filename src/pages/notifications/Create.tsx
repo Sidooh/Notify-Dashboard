@@ -12,7 +12,7 @@ import { Card, Col, Form, Row } from 'react-bootstrap';
 import ReactQuill from "react-quill";
 import JSONPretty from "react-json-pretty";
 import 'react-quill/dist/quill.bubble.css';
-import { FaPaperPlane } from "react-icons/all";
+import { FaPaperPlane } from "react-icons/fa6";
 
 type DestinationOptionsType = { value: string, text: string }
 

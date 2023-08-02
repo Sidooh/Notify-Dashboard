@@ -1,5 +1,5 @@
 import { RouteType } from '@nabcellent/sui-react';
-import { FaBell, FaChartPie, FaComments, FaPaperPlane, FaWrench } from "react-icons/all";
+import { FaBell, FaChartPie, FaComments, FaPaperPlane, FaWrench } from "react-icons/fa6";
 
 export const dashboardRoutes: RouteType = {
     label: 'Dashboard',

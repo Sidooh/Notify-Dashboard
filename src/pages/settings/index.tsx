@@ -8,7 +8,7 @@ import { Setting } from 'utils/types';
 import { ComponentLoader, DataTable, LoadingButton, SectionError, Sweet, toast, IconButton, Button } from '@nabcellent/sui-react';
 import { MailProvider, SMSProvider } from 'utils/enums';
 import { logger } from 'utils/logger';
-import { FaPen, FaSave, FaTrash } from "react-icons/all";
+import { FaPen, FaSave, FaTrash } from "react-icons/fa";
 
 const settingOptions = [
     {

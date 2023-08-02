@@ -1,11 +1,11 @@
-import { Nav, OverlayTrigger, Tooltip } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import ProfileDropdown from 'components/navbar/top/ProfileDropdown';
 import { useAppDispatch, useAppSelector } from 'app/hooks';
 import { setTheme } from 'features/theme/themeSlice';
 import { RootState } from 'app/store';
-import { Waffle } from '@nabcellent/sui-react';
+import { Tooltip, Waffle } from '@nabcellent/sui-react';
 import { CONFIG } from 'config';
-import { FaMoon, FaSun } from "react-icons/all";
+import { FaMoon, FaSun } from "react-icons/fa6";
 
 const TopNavRightSideNavItem = () => {
     const dispatch = useAppDispatch();
@@ -19,15 +19,11 @@ const TopNavRightSideNavItem = () => {
             <Nav.Item as={'li'}>
                 <Nav.Link className="px-2 theme-control-toggle"
                           onClick={() => dispatch(setTheme({ key: 'isDark', value: !isDark }))}>
-                    <OverlayTrigger key="left" placement={'left'} overlay={
-                        <Tooltip id="ThemeColor">
-                            {isDark ? 'Switch to light theme' : 'Switch to dark theme'}
-                        </Tooltip>
-                    }>
+                    <Tooltip placement={'start'} title={isDark ? 'Switch to light theme' : 'Switch to dark theme'}>
                         <div className="theme-control-toggle-label">
                             <ThemeIcon className="fs-0"/>
                         </div>
-                    </OverlayTrigger>
+                    </Tooltip>
                 </Nav.Link>
             </Nav.Item>
 

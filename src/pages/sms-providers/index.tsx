@@ -25,7 +25,8 @@ import {
 } from 'features/sms-providers/smsProviderApi';
 import ValidationErrors from 'components/ValidationErrors';
 import { logger } from 'utils/logger';
-import { FaPen, FaSave, FaTrash } from "react-icons/all";
+import { FaPen, FaTrash } from "react-icons/fa6";
+import { FaSave } from "react-icons/fa";
 
 const validationSchema = yup.object({
     name: yup.string().oneOf(Object.values(SMSProviderEnum), 'Invalid name.').required('Name is required.'),

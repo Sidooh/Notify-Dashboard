@@ -5,7 +5,8 @@ import { Notification } from '../../utils/types';
 import { useRetryNotificationMutation } from 'features/notifications/notificationsAPI';
 import moment from 'moment';
 import { Tooltip } from '@mui/material';
-import { FaEye, GrRotateRight } from "react-icons/all";
+import { FaEye } from "react-icons/fa6";
+import { GrRotateRight } from "react-icons/gr";
 
 type NotificationTableProps = { title: string, notifications: Notification[] }
 
