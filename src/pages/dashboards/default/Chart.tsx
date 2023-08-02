@@ -27,7 +27,7 @@ import {
     Tooltip as ChartTooltip
 } from "chart.js";
 import Tooltip from "@mui/material/Tooltip";
-import { FaSync } from "react-icons/all";
+import { FaSync } from "react-icons/fa";
 
 Chart.register(Title, ChartTooltip, Legend, LineElement, CategoryScale, LinearScale, PointElement)
 Chart.defaults.color = '#0F1B4C'

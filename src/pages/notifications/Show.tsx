@@ -11,7 +11,8 @@ import CardBgCorner from 'components/CardBgCorner';
 import { Col, Dropdown, Row } from 'react-bootstrap';
 import JSONPretty from 'react-json-pretty';
 import { logger } from 'utils/logger';
-import { FaCrosshairs, GrRotateLeft, GrRotateRight } from "react-icons/all";
+import { GrRotateLeft, GrRotateRight } from "react-icons/gr";
+import { FaCrosshairs } from "react-icons/fa6";
 
 const Show = () => {
     const { id } = useParams();

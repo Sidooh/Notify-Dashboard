@@ -12,7 +12,7 @@ import {
 import CardBgCorner from "components/CardBgCorner";
 import { Fragment, useState } from "react";
 import CountUp from "react-countup";
-import { FaPercentage, FaSync } from "react-icons/all";
+import { FaPercentage, FaSync } from "react-icons/fa";
 
 const NotificationsSLO = () => {
     const [bypassCache, setBypassCache] = useState(false)
@@ -30,7 +30,7 @@ const NotificationsSLO = () => {
             <h5 className="text-primary text-center position-relative">
                     <span className="bg-200 px-3">
                         Notifications Success Rate
-                        <Tooltip title="Refresh SLO" placement="left">
+                        <Tooltip title="Refresh SLO" placement="start">
                             <LoadingButton loading={isFetching} className="btn btn-sm border-0 py-2"
                                            spinner-position="replace" onClick={() => {
                                 if(!bypassCache) setBypassCache(true)

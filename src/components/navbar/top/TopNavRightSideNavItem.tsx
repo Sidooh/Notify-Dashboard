@@ -5,7 +5,7 @@ import { setTheme } from 'features/theme/themeSlice';
 import { RootState } from 'app/store';
 import { Waffle } from '@nabcellent/sui-react';
 import { CONFIG } from 'config';
-import { FaMoon, FaSun } from "react-icons/all";
+import { FaMoon, FaSun } from "react-icons/fa6";
 
 const TopNavRightSideNavItem = () => {
     const dispatch = useAppDispatch();
