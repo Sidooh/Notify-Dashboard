@@ -166,12 +166,12 @@ const SMSProviders = () => {
                             </div>
                             <div className="mb-3">
                                 <p className={'m-0'}>Priority</p>
-                                {[1, 2, 3].map(p => {
+                                {Object.values(SMSProviderEnum).map((p, i) => {
                                     return (
-                                        <Form.Check key={p} inline label={p} name="priority" type={'radio'}
-                                                    id={`priority-${p}`} value={p} className={'mb-0'}
+                                        <Form.Check key={p} inline label={i + 1} name="priority" type={'radio'}
+                                                    id={`priority-${p}`} value={i + 1} className={'mb-0'}
                                                     onChange={formik.handleChange}
-                                                    checked={formik.values.priority == p}/>
+                                                    checked={formik.values.priority == i + 1}/>
                                     );
                                 })}
                                 <div className={'error small'}>{formik.errors.priority}</div>
