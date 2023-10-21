@@ -90,8 +90,6 @@ const Settings = () => {
     if (isError) return <SectionError error={error}/>;
     if (isLoading || !isSuccess || !settings) return <ComponentLoader/>;
 
-    logger.log(settings);
-
     return (
         <Card className="mb-3">
             <Card.Body>
