@@ -38,12 +38,19 @@ const TopNavRightSideNavItem = () => {
                 {
                     avatarText: 'E',
                     title: 'Enterprise',
-                    link: `/events/event-detail`,
+                    link: ``,
                     contentClass: 'bg-soft-primary text-primary',
                     enabled: false
                 },
                 {
-                    avatarText: 'p',
+                    avatarText: 'M',
+                    title: 'Merchants',
+                    link: CONFIG.sidooh.services.merchants.dashboard.url,
+                    contentClass: 'bg-soft-primary text-primary',
+                    enabled: true
+                },
+                {
+                    avatarText: 'P',
                     title: 'Payments',
                     link: CONFIG.sidooh.services.payments.dashboard.url,
                     contentClass: 'bg-soft-primary text-primary',
