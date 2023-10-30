@@ -21,7 +21,7 @@ const ProviderBalances = () => {
                     <Card.Body className={'position-relative'}>
                         <h6 className="mb-md-0 mb-lg-2 text-light">Wasiliana Balance</h6>
                         <h4 className="m-0 fs-2 fw-normal text-white">
-                            <CountUp end={wasiliana_balance} separator=","/>
+                            {wasiliana_balance ? <CountUp end={wasiliana_balance} separator=","/> : 'N/A'}
                         </h4>
                         <Tooltip className={'position-absolute top-0 end-0 m-3'}
                                  title={`${wasiliana_balance} * 0.2 ≈ KSH${(wasiliana_balance * .2).toFixed(2)}`}>
