@@ -11,8 +11,8 @@ type DashboardSummariesData = {
     sms_costs_today: number
 }
 type ProvidersBalancesData = {
+    wasiliana_balance: number,
     wavesms_balance: number
-    africastalking_balance: number,
     websms_balance: number
 }
 
